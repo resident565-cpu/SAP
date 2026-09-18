@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>САП — СпецАгроПартнер Рязань | Комплектующие для агро и индустрии</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        :root {
+            --emerald: #0b6623;       
+            --light-grey: #f4f6f4;    
+            --dark: #111311;          
+            --orange: #ff9900;        
+            --white: #ffffff;
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+        body { font-family: 'Geologica', sans-serif; background-color: var(--light-grey); color: var(--dark); line-height: 1.6; overflow-x: hidden; letter-spacing: -0.2px; }
+        .container { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 4%; }
+        header { position: fixed; top: 0; left: 0; width: 100%; background-color: rgba(244, 246, 244, 0.75); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); z-index: 1000; border-bottom: 1px solid rgba(11, 102, 35, 0.08); }
+        .header-wrap { display: flex; justify-content: space-between; align-items: center; height: 95px; }
+        .logo-block { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
+        .gear-logo { width: 42px; height: 42px; border: 3.5px solid var(--emerald); border-radius: 50%; position: relative; animation: spinGear 22s linear infinite; flex-shrink: 0; }
+        .gear-logo::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; border: 2.5px solid var(--emerald); border-radius: 50%; }
+        .gear-logo-teeth { position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
+        .gear-tooth { position: absolute; background-color: var(--emerald); width: 5px; height: 7px; left: calc(50% - 2.5px); top: -5px; border-radius: 1.5px; transform-origin: 2.5px 26px; transition: var(--transition); }
+        .gear-tooth:nth-child(1) { transform: rotate(0deg); background-color: var(--orange); }
+        .gear-tooth:nth-child(2) { transform: rotate(45deg); }
+        .gear-tooth:nth-child(3) { transform: rotate(90deg); }
+        .gear-tooth:nth-child(4) { transform: rotate(135deg); }
+        .gear-tooth:nth-child(5) { transform: rotate(180deg); }
+        .gear-tooth:nth-child(6) { transform: rotate(225deg); }
+        .gear-tooth:nth-child(7) { transform: rotate(270deg); }
+        .gear-tooth:nth-child(8) { transform: rotate(315deg); }
+        @keyframes spinGear { 100% { transform: rotate(360deg); } }
+        .logo-text h1 { font-size: 26px; font-weight: 700; line-height: 0.9; }
+        .logo-text span { font-size: 13px; font-weight: 600; color: var(--emerald); margin-top: 3px; display: block; }
+        nav { display: flex; gap: 28px; }
+        nav a { text-decoration: none; color: var(--dark); font-weight: 500; font-size: 15px; position: relative; transition: var(--transition); }
+        nav a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background-color: var(--emerald); transition: var(--transition); }
+        nav a:hover::after { width: 100%; }
+        .header-contacts-group { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+        .header-email { font-size: 13.5px; font-weight: 600; color: var(--emerald); text-decoration: none; transition: var(--transition); }
+        .header-email:hover { color: var(--orange); }
+        .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 120px; background: radial-gradient(circle at 82% 25%, rgba(255, 153, 0, 0.16), transparent 45%), radial-gradient(circle at 18% 75%, rgba(11, 102, 35, 0.11), transparent 50%); }
+        .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: center; }
+        .hero-text h2 { font-size: clamp(34px, 4.2vw, 56px); font-weight: 700; line-height: 1.15; margin-bottom: 24px; }
+        .hero-text h2 span { color: var(--emerald); }
+        .hero-text p { font-size: clamp(16px, 1.4vw, 18px); color: #444; margin-bottom: 40px; max-width: 600px; font-weight: 300; }
+        .cta-button { display: inline-flex; background-color: var(--emerald); color: var(--white); padding: 16px 36px; border-radius: 30px; text-decoration: none; font-weight: 500; font-size: 15px; transition: var(--transition); box-shadow: 0 10px 25px rgba(11, 102, 35, 0.12); }
+        .cta-button:hover { background-color: var(--orange); transform: translateY(-2px); box-shadow: 0 12px 28px rgba(255, 153, 0, 0.2); }
+        .hero-visual { display: flex; justify-content: center; }
+        .abstract-shape { width: 100%; max-width: 370px; height: 370px; background: linear-gradient(135deg, var(--emerald) 0%, #053b13 100%); border-radius: 43% 57% 65% 35% / 40% 55% 60% 50%; animation: morphing 12s ease-in-out infinite alternate; position: relative; box-shadow: 0 25px 50px rgba(11, 102, 35, 0.15); }
+        .abstract-shape::after { content: ''; position: absolute; width: 85px; height: 85px; background: radial-gradient(circle, var(--orange) 0%, #e68a00 100%); border-radius: 50%; top: 25px; right: 25px; box-shadow: 0 0 35px rgba(255, 153, 0, 0.5); }
+        @keyframes morphing { 0% { border-radius: 43% 57% 65% 35% / 40% 55% 60% 50%; } 100% { border-radius: 65% 35% 55% 45% / 50% 65% 45% 55%; } }
+        .catalog { padding: 100px 0; background-color: var(--white); border-radius: 50px 50px 0 0; }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h3 { font-size: clamp(26px, 2.8vw, 38px); font-weight: 700; }
+        .section-title p { color: #666; margin-top: 8px; font-size: 15px; }
+        .catalog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .catalog-card { background-color: var(--light-grey); padding: 30px 25px; border-radius: 24px; transition: var(--transition); display: flex; flex-direction: column; justify-content: flex-start; }
+        .catalog-card:hover { transform: translateY(-5px); background-color: var(--white); box-shadow: 0 20px 45px rgba(0,0,0,0.03); }
+        .card-icon-wrap { width: 54px; height: 54px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; background-color: rgba(11, 102, 35, 0.04); border-radius: 14px; color: var(--emerald); }
+        .icon-gear { animation: spinGear 8s linear infinite; }
+        .icon-drop { animation: dropAnim 2.2s ease-in-out infinite; transform-origin: center bottom; }
+        .icon-bearing { animation: spinGear 12s linear infinite; transform-origin: center; }
+        .icon-belt { animation: beltMove 3s linear infinite; }
+        .icon-seal { animation: spinGear 15s linear infinite reverse; transform-origin: center; }
+        @keyframes dropAnim { 0%, 100% { transform: translateY(0) scaleY(1); opacity: 1; } 40% { transform: translateY(2px) scaleY(0.9); } 70% { transform: translateY(12px) scaleY(1.1); opacity: 0; } 71% { transform: translateY(-10px); opacity: 0; } }
+        @keyframes beltMove { 0% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 16; } }
+        .catalog-card h4 { font-size: 18px; font-weight: 600; margin-bottom: 12px; line-height: 1.3; }
+        .catalog-card p { font-size: 13.5px; color: #555; font-weight: 300; line-height: 1.5; }
+        .brands-section { padding: 90px 0; background-color: var(--light-grey); }
+        .brands-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 24px; margin-top: 40px; }
+        .brand-group-card { background: var(--white); padding: 30px; border-radius: 24px; }
+        .brand-group-card h5 { font-size: 17px; font-weight: 600; color: var(--emerald); margin-bottom: 16px; border-left: 3px solid var(--orange); padding-left: 10px; }
+        .brand-list { display: flex; flex-wrap: wrap; gap: 8px; }
+        .brand-badge { background-color: var(--light-grey); padding: 6px 14px; border-radius: 10px; font-size: 13px; font-weight: 500; color: #333; }
+        .about { padding: 100px 0; background-color: var(--white); }
+        .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: flex-start; }
+        .about-text h3 { font-size: 34px; font-weight: 700; margin-bottom: 24px; }
+        .about-text p { color: #444; font-weight: 300; font-size: 15px; margin-bottom: 18px; }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .stat-box { background-color: var(--light-grey); padding: 30px; border-radius: 20px; }
+        .stat-number { font-size: 34px; font-weight: 700; color: var(--emerald); display: block; }
+        .stat-box span { font-size: 13px; color: #555; }
+        .contacts { background-color: var(--dark); color: var(--white); padding: 90px 0 50px 0; border-radius: 50px 50px 0 0; position: relative; z-index: 10; display: block; }
+        .contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-bottom: 30px; }
+        .contacts-info h3 { font-size: 34px; font-weight: 700; margin-bottom: 24px; color: var(--white); }
+        .info-item { margin-bottom: 20px; }
+        .info-item label { display: block; font-size: 11px; text-transform: uppercase; color: #888; margin-bottom: 4px; letter-spacing: 0.5px; }
+        .info-item p, .info-item a { font-size: 17px; font-weight: 400; color: var(--white); text-decoration: none; }
+        .info-item a:hover { color: var(--orange); }
+        .contacts-phones { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; }
+        
+        /* СТИЛИ УМНОЙ ФОРМЫ */
+        .sap-form-wrap { background: #1a1d1a; padding: 30px; border-radius: 28px; border: 1px solid rgba(255,255,255,0.03); margin-bottom: 40px; }
+        .sap-form-wrap h4 { font-size: 20px; margin-bottom: 20px; color: var(--white); font-weight: 600; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-group label { font-size: 11px; text-transform: uppercase; color: #888; letter-spacing: 0.5px; }
+        .form-group input, .form-group textarea { background: #111311; border: 1px solid rgba(255,255,255,0.1); padding: 12px 16px; border-radius: 12px; color: var(--white); font-family: inherit; font-size: 14px; transition: var(--transition); }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--emerald); outline: none; }
+        .form-group textarea { resize: none; height: 90px; }
+        .form-submit-btn { background: var(--emerald); color: var(--white); border: none; padding: 14px 30px; border-radius: 14px; font-size: 15px; font-weight: 600; cursor: pointer; transition: var(--transition); width: 100%; margin-top: 5px; }
+        .form-submit-btn:hover:not(:disabled) { background: var(--orange); transform: translateY(-1px); }
+        .form-submit-btn:disabled { background: #333; color: #666; cursor: not-allowed; opacity: 0.6; }
+        .form-tip { font-size: 12px; color: #888; margin-top: 10px; text-align: center; }
+
+        /* ИСПРАВЛЕННЫЕ СТИЛИ КАРТЫ */
+        .map-container { border-radius: 28px; overflow: hidden; height: 380px; background-color: #161816; position: relative; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.04); box-shadow: 0 15px 35px rgba(0,0,0,0.3); perspective: 1000px; }
+        .css-map-scene { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .map-container:hover .css-map-scene { transform: rotateX(10deg) rotateY(-3deg); }
+        .css-main-highway { position: absolute; left: -5%; top: 20%; width: 110%; height: 32px; background-color: #2b332f; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); transform: rotate(4deg); z-index: 3; box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
+        .css-main-highway::after { content: ''; position: absolute; top: 50%; left: 0; width: 100%; height: 1px; border-top: 2px dashed rgba(255,255,255,0.2); }
+        .highway-label { position: absolute; color: #88948d; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; top: -20px; left: 5%; }
+        .css-railway { position: absolute; right: 10%; top: -10%; width: 18px; height: 120%; background-color: transparent; border-left: 2px dashed #3e4741; border-right: 2px dashed #3e4741; z-index: 1; transform: rotate(4deg); }
+        .css-railway::after { content: ''; position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: repeating-linear-gradient(to bottom, #111, #111 2px, transparent 2px, transparent 10px); }
+        .rail-label { position: absolute; color: #4e5751; font-size: 10px; font-weight: 700; text-transform: uppercase; top: 15px; right: 12%; z-index: 2; }
+        .css-map-exit-line { position: absolute; left: 10%; top: 26%; width: 33%; height: 85px; border-bottom: 14px solid #232a26; border-left: 14px solid #232a26; border-bottom-left-radius: 35px; z-index: 2; transform: rotate(4deg); filter: drop-shadow(0px 0px 5px rgba(11, 102, 35, 0.6)); }
+        
+        /* ПРЯМОУГОЛЬНИК БАЗЫ ИДЕАЛЬНО ПОДНЯТ НАВЕРХ НА 2/3 (ПОЛОЖЕНИЕ СМЕЩЕНО НАВЕРХ) */
+        .css-sap-yard { position: absolute; left: 41%; bottom: 38%; width: 170px; height: 110px; background-color: #1e221f; border: 1.5px solid rgba(11, 102, 35, 0.3); border-radius: 16px; z-index: 4; box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+        .css-sap-yard::before { content: 'СТОЯНКА АВТО'; position: absolute; right: 12px; top: 12px; color: #444; font-size: 9px; font-weight: 700; letter-spacing: 0.5px; }
+        
+        /* Логотип внутри прямоугольника возвращен на свое центрированное место */
+        .css-hq-positioner { position: absolute; left: 15px; bottom: 15px; z-index: 5; }
+        .css-hq-building-gear { width: 60px; height: 60px; border: 3px solid var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; background-color: var(--emerald); box-shadow: 0 4px 15px rgba(11, 102, 35, 0.4); }
+        .css-hq-building-gear-text { color: var(--white); font-size: 13px; font-weight: 700; letter-spacing: 0.5px; line-height: 1; }
+        .css-map-sun-brand { width: 14px; height: 14px; background-color: var(--orange); border-radius: 50%; position: absolute; top: -3px; right: -3px; z-index: 6; box-shadow: 0 0 14px var(--orange); animation: pulseSunBrand 2s infinite alternate; }
+        @keyframes pulseSunBrand { 0% { transform: scale(0.9); } 100% { transform: scale(1.2); box-shadow: 0 0 24px var(--orange); } }
+        .css-hq-building-gear-label { position: absolute; bottom: -22px; font-size: 11px; font-weight: 700; color: var(--orange); text-transform: uppercase; text-align: center; width: 100%; left: 0; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 35px; display: flex; justify-content: space-between; color: #888; font-size: 13px; width: 100%; }
+        @media (max-width: 1024px) { .hero-grid, .about-grid, .contacts-grid { grid-template-columns: 1fr; gap: 35px; } .hero { padding-top: 140px; text-align: center; } .hero-text p { margin-left: auto; margin-right: auto; } .hero-visual { order: -1; } nav, .header-contacts-group { display: none; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-wrap">
+                <a href="#" class="logo-block">
+                    <div class="gear-logo"><div class="gear-logo-teeth"><div class="gear-tooth"></div><div class="gear-tooth"></div><div class="gear-tooth"></div><div class="gear-tooth"></div><div class="gear-tooth"></div><div class="gear-tooth"></div><div class="gear-tooth"></div><div class="gear-tooth"></div></div></div>
+                    <div class="logo-text"><h1>САП</h1><span>СпецАгроПартнер</span></div>
+                </a>
+                <nav><a href="#catalog">Продукция</a><a href="#brands">Мировые бренды</a><a href="#about">О компании</a><a href="#contacts">Контакты</a></nav>
+                <div class="header-contacts-group"><a href="mailto:ooo-sap@list.ru" class="header-email">ooo-sap@list.ru</a><a href="mailto:sap_parts@mail.ru" class="header-email">sap_parts@mail.ru</a></div>
+            </div>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <h2>Комплектующие и масла для агробизнеса и индустрии <span>в Рязани</span></h2>
+                    <p>Профессиональные комплексные поставки оригинальных деталей, подшипниковых узлов, приводных ремней и смазочных материалов от ведущих мировых брендов.</p>
+                    <a href="#catalog" class="cta-button">Перейти к продукции</a>
+                </div>
+                <div class="hero-visual"><div class="abstract-shape"></div></div>
+            </div>
+        </div>
+    </section>
+    <section class="catalog" id="catalog">
+        <div class="container">
+            <div class="section-title"><h3>Категории комплектующих</h3><p>Продукция поставляется со строгим контролем износостойкости для высоких нагрузок</p></div>
+            <div class="catalog-grid">
+                <div class="catalog-card">
+                    <div class="card-icon-wrap"><svg class="icon-gear" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
+                    <h4>Запчасти для спецтехники</h4><p>Оригинальные комплектующие для ходовой, двигателей и рабочих органов импортных тракторов, комбайнов и автомобилей.</p>
+                </div>
+                <div class="catalog-card">
+                    <div class="card-icon-wrap"><svg width="24" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path class="icon-drop" d="M12 22a7 7 0 0 0 7-7c0-4.3-7-13-7-13S5 10.7 5 15a7 7 0 0 0 7 7z" fill="rgba(11, 102, 35, 0.08)"></path></svg></div>
+                    <h4>Масла и смазочные материалы</h4><p>Высокотехнологичные моторные, трансмиссионные и гидравлические масла, устойчивые к пиковым температурным режимам.</p>
+                </div>
+                <div class="catalog-card">
+                    <div class="card-icon-wrap"><svg class="icon-bearing" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="5" stroke-dasharray="2 2"></circle></svg></div>
+                    <h4>Подшипники и подшипниковые узлы</h4><p>Широкий спектр износостойких радиальных, упорных и корпусных подшипников для узлов вращения любой сложности.</p>
+                </div>
+                <div class="catalog-card">
+                    <div class="card-icon-wrap"><svg width="28" height="24" viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="12" r="4"></circle><circle cx="24" cy="12" r="4"></circle><path class="icon-belt" d="M8 7h16M8 17h16" stroke-dasharray="3 3"></path></svg></div>
+                    <h4>Приводные ремни</h4><p>Клиновые, поликлиновые, вариаторные и зубчатые ремни повышенной прочности для приводных механизмов.</p>
+                </div>
+                <div class="catalog-card">
+                    <div class="card-icon-wrap"><svg class="icon-seal" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="7" stroke-dasharray="4 2"></circle></svg></div>
+                    <h4>Сальники и манжеты</h4><p>Надежные элементы уплотнения, армированные манжеты и гидравлические уплотнители для защиты систем от утечек.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="brands-section" id="brands">
+        <div class="container">
+            <div class="section-title"><h3>Оригинальные комплектующие от лидеров рынка</h3><p>Надежные каналы поставок комплектующих, заслуживших доверие профессионалов</p></div>
+            <div class="brands-grid">
+                <div class="brand-group-card"><h5>Импортная техника</h5><div class="brand-list"><span class="brand-badge">John Deere</span><span class="brand-badge">Claas</span><span class="brand-badge">New Holland</span><span class="brand-badge">Case IH</span></div></div>
+                <div class="brand-group-card"><h5>Подшипниковая продукция</h5><div class="brand-list"><span class="brand-badge">SKF</span><span class="brand-badge">FAG</span><span class="brand-badge">NSK</span><span class="brand-badge">Timken</span><span class="brand-badge">Koyo</span></div></div>
+                <div class="brand-group-card"><h5>Ремни и уплотнения</h5><div class="brand-list"><span class="brand-badge">Gates</span><span class="brand-badge">Contitech</span><span class="brand-badge">Corteco</span><span class="brand-badge">NAK</span></div></div>
+            </div>
+        </div>
+    </section>
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h3>Комплексное снабжение агробизнеса и индустриального сектора</h3>
+                    <p>«СпецАгроПартнер» — стратегический партнер для сельскохозяйственных предприятий и промышленных производств Рязанской области. Мы обеспечиваем предприятия надежными комплектующими, минимизируя время простоя оборудования как в период сезонных полевых работ, так и на непрерывных заводских линиях.</p>
+                    <p>Особый упор в нашем ассортименте сделан на высококлассную подшипниковую продукцию и узлы вращения, способные выдерживать экстремальные механические нагрузки.</p>
+                    <p>Наш склад находится непосредственно на Окружной дороге Рязани. Это гарантирует сквозной и быстрый проезд для вашего транспорта, полностью исключая задержки в городских пробках.</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-box"><span class="stat-number">Agro & Industry</span><span>Обеспечение двух ключевых секторов экономики</span></div>
+                    <div class="stat-box"><span class="stat-number">198 км</span><span>Удобный логистический выезд на Окружную</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="contacts" id="contacts">
+        <div class="container">
+            <div class="contacts-grid">
+                <div class="contacts-info">
+                    <h3>Контакты компании</h3>
+                    <div class="info-item"><label>Email для спецификаций и заявок</label><a href="mailto:ooo-sap@list.ru">ooo-sap@list.ru</a><br><a href="mailto:sap_parts@mail.ru" style="display:inline-block; margin-top:5px;">sap_parts@mail.ru</a></div>
+                    <div class="info-item"><label>Отдел продаж и снабжения</label><div class="contacts-phones"><a href="tel:+79209680128">+7-920-968-01-28</a><a href="tel:+79106336705">+7-910-633-67-05</a><a href="tel:+79209552711">+7-920-955-27-11</a></div></div>
+                    <div class="info-item"><label>Склад и администрация</label><p>г. Рязань, 198 км (Окружная дорога), д. 6</p><p style="font-size:14px; color:#888; margin-top:4px;">Режим работы: Пн — Пт с 9:00 до 18:00</p></div>
+                </div>
+                <div class="map-container">
+                    <div class="css-map-scene">
+                        <div class="css-railway"></div><div class="rail-label">ж/д пути</div>
+                        <div class="css-main-highway"><div class="highway-label">198 км (Окружная дорога)</div></div>
+                        <div class="css-map-exit-line"></div>
+                        <div class="css-sap-yard"><div class="css-hq-positioner"><div class="css-hq-building-gear"><div class="css-hq-building-gear-text">САП</div><div class="css-map-sun-brand"></div><div class="css-hq-building-gear-label">д. 6</div></div></div></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sap-form-wrap">
+                <h4>Быстрая заявка на комплектующие</h4>
+                <form id="sapOrderForm" action="mailto:ooo-sap@list.ru" method="GET" enctype="text/plain">
+                    <div class="form-row">
+                        <div class="form-group"><label for="sapPhone">Телефон</label><input type="tel" id="sapPhone" placeholder="+7 (___) ___-__-__"></div>
+                        <div class="form-group"><label for="sapEmail">Email</label><input type="email" id="sapEmail" placeholder="example@mail.ru"></div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="sapMessage">Ваш запрос (Перечень деталей / масел / подшипников) *</label>
+                        <textarea id="sapMessage" placeholder="Введите наименования, артикулы или необходимый объем поставки..."></textarea>
+                    </div>
+                    <button type="submit" id="sapSubmitBtn" class="form-submit-btn" disabled>Отправить запрос</button>
+                    <p class="form-tip">Для активации кнопки заполните поле запроса и укажите хотя бы один способ связи (Телефон или Email).</p>
+                </form>
+            </div>
+            
+            <div class="footer-bottom"><p>&copy; 2026 ООО «СпецАгроПартнер» (САП). Все права защищены.</p><p>г. Рязань</p></div>
+        </div>
+    </section>
+
+    <script>
+        const phoneInput = document.getElementById('sapPhone');
+        const emailInput = document.getElementById('sapEmail');
+        const messageInput = document.getElementById('sapMessage');
+        const submitBtn = document.getElementById('sapSubmitBtn');
+        const form = document.getElementById('sapOrderForm');
+
+        function validateSapForm() {
+            const hasMessage = messageInput.value.trim().length > 0;
+            const hasPhone = phoneInput.value.trim().length > 0;
+            const hasEmail = emailInput.value.trim().length > 0;
+            submitBtn.disabled = !(hasMessage && (hasPhone || hasEmail));
+        }
+
+        phoneInput.addEventListener('input', validateSapForm);
+        emailInput.addEventListener('input', validateSapForm);
+        messageInput.addEventListener('input', validateSapForm);
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const contactInfo = `Тел: ${phoneInput.value || 'Не указан'}, Email: ${emailInput.value || 'Не указан'}`;
+            const bodyMessage = `Запрос комплектующих:\n${messageInput.value}\n\nКонтакты для связи: ${contactInfo}`;
+            window.location.href = `mailto:ooo-sap@list.ru?subject=${encodeURIComponent('Новая заявка с сайта САП')}&body=${encodeURIComponent(bodyMessage)}`;
+        });
+    </script>
+</body>
+</html>
