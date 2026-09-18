@@ -20,8 +20,8 @@
         body { font-family: 'Geologica', sans-serif; background-color: var(--light-grey); color: var(--dark); line-height: 1.6; overflow-x: hidden; letter-spacing: -0.2px; }
         .container { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 4%; }
         header { position: fixed; top: 0; left: 0; width: 100%; background-color: rgba(244, 246, 244, 0.75); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); z-index: 1000; border-bottom: 1px solid rgba(11, 102, 35, 0.08); }
-        .header-wrap { display: flex; justify-content: space-between; align-items: center; height: 95px; }
-        .logo-block { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
+        .header-wrap { display: flex; justify-content: space-between; align-items: center; height: 95px; position: relative; }
+        .logo-block { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; z-index: 1001; }
         .gear-logo { width: 42px; height: 42px; border: 3.5px solid var(--emerald); border-radius: 50%; position: relative; animation: spinGear 22s linear infinite; flex-shrink: 0; }
         .gear-logo::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; border: 2.5px solid var(--emerald); border-radius: 50%; }
         .gear-logo-teeth { position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
@@ -44,6 +44,12 @@
         .header-contacts-group { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
         .header-email { font-size: 13.5px; font-weight: 600; color: var(--emerald); text-decoration: none; transition: var(--transition); }
         .header-email:hover { color: var(--orange); }
+
+        .burger-menu-btn { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1005; padding: 10px; }
+        .burger-menu-btn span { display: block; width: 26px; height: 3px; background-color: var(--dark); border-radius: 2px; transition: var(--transition); }
+        .burger-menu-btn.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); background-color: var(--dark); }
+        .burger-menu-btn.active span:nth-child(2) { opacity: 0; }
+        .burger-menu-btn.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); background-color: var(--dark); }
         .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 120px; background: radial-gradient(circle at 82% 25%, rgba(255, 153, 0, 0.16), transparent 45%), radial-gradient(circle at 18% 75%, rgba(11, 102, 35, 0.11), transparent 50%); }
         .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: center; }
         .hero-text h2 { font-size: clamp(34px, 4.2vw, 56px); font-weight: 700; line-height: 1.15; margin-bottom: 24px; }
@@ -51,10 +57,14 @@
         .hero-text p { font-size: clamp(16px, 1.4vw, 18px); color: #444; margin-bottom: 40px; max-width: 600px; font-weight: 300; }
         .cta-button { display: inline-flex; background-color: var(--emerald); color: var(--white); padding: 16px 36px; border-radius: 30px; text-decoration: none; font-weight: 500; font-size: 15px; transition: var(--transition); box-shadow: 0 10px 25px rgba(11, 102, 35, 0.12); }
         .cta-button:hover { background-color: var(--orange); transform: translateY(-2px); box-shadow: 0 12px 28px rgba(255, 153, 0, 0.2); }
-        .hero-visual { display: flex; justify-content: center; }
-        .abstract-shape { width: 100%; max-width: 370px; height: 370px; background: linear-gradient(135deg, var(--emerald) 0%, #053b13 100%); border-radius: 43% 57% 65% 35% / 40% 55% 60% 50%; animation: morphing 12s ease-in-out infinite alternate; position: relative; box-shadow: 0 25px 50px rgba(11, 102, 35, 0.15); }
-        .abstract-shape::after { content: ''; position: absolute; width: 85px; height: 85px; background: radial-gradient(circle, var(--orange) 0%, #e68a00 100%); border-radius: 50%; top: 25px; right: 25px; box-shadow: 0 0 35px rgba(255, 153, 0, 0.5); }
+        
+        .hero-visual { display: flex; justify-content: center; perspective: 1000px; width: 100%; }
+        .abstract-shape { width: 100%; max-width: 370px; height: 370px; background: linear-gradient(135deg, var(--emerald) 0%, #053b13 100%); border-radius: 43% 57% 65% 35% / 40% 55% 60% 50%; animation: morphing 6s ease-in-out infinite alternate; position: relative; box-shadow: 0 25px 50px rgba(11, 102, 35, 0.15); transform-style: preserve-3d; transition: transform 0.15s ease-out; }
+        .abstract-shape::after { content: ''; position: absolute; width: 85px; height: 85px; background: radial-gradient(circle, var(--orange) 0%, #e68a00 100%); border-radius: 50%; top: 25px; right: 25px; box-shadow: 0 0 30px rgba(255, 153, 0, 0.4); animation: floatingSun 4s ease-in-out infinite alternate; transition: var(--transition); transform: translateZ(30px); }
+        .abstract-shape:hover::after { box-shadow: 0 0 50px rgba(255, 153, 0, 0.8); }
+        
         @keyframes morphing { 0% { border-radius: 43% 57% 65% 35% / 40% 55% 60% 50%; } 100% { border-radius: 65% 35% 55% 45% / 50% 65% 45% 55%; } }
+        @keyframes floatingSun { 0% { transform: translateZ(30px) translate(0, 0) scale(1); } 100% { transform: translateZ(30px) translate(-10px, 12px) scale(1.05); } }
         .catalog { padding: 100px 0; background-color: var(--white); border-radius: 50px 50px 0 0; }
         .section-title { text-align: center; margin-bottom: 60px; }
         .section-title h3 { font-size: clamp(26px, 2.8vw, 38px); font-weight: 700; }
@@ -62,30 +72,53 @@
         .catalog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
         .catalog-card { background-color: var(--light-grey); padding: 30px 25px; border-radius: 24px; transition: var(--transition); display: flex; flex-direction: column; justify-content: flex-start; }
         .catalog-card:hover { transform: translateY(-5px); background-color: var(--white); box-shadow: 0 20px 45px rgba(0,0,0,0.03); }
-        .card-icon-wrap { width: 54px; height: 54px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; background-color: rgba(11, 102, 35, 0.04); border-radius: 14px; color: var(--emerald); }
+        
+        .card-icon-wrap { width: 68px; height: 68px; margin-bottom: 22px; display: flex; align-items: center; justify-content: center; background-color: rgba(11, 102, 35, 0.04); border-radius: 18px; color: var(--emerald); position: relative; }
+        .card-icon-wrap svg { width: 36px; height: 36px; stroke-width: 2.2; }
+        
         .icon-gear { animation: spinGear 8s linear infinite; }
         .icon-drop { animation: dropAnim 2.2s ease-in-out infinite; transform-origin: center bottom; }
         .icon-bearing { animation: spinGear 12s linear infinite; transform-origin: center; }
         .icon-belt { animation: beltMove 3s linear infinite; }
         .icon-seal { animation: spinGear 15s linear infinite reverse; transform-origin: center; }
-        @keyframes dropAnim { 0%, 100% { transform: translateY(0) scaleY(1); opacity: 1; } 40% { transform: translateY(2px) scaleY(0.9); } 70% { transform: translateY(12px) scaleY(1.1); opacity: 0; } 71% { transform: translateY(-10px); opacity: 0; } }
+        @keyframes dropAnim { 0%, 100% { transform: translateY(0) scaleY(1); opacity: 1; } 40% { transform: translateY(2px) scaleY(0.9); } 70% { transform: translateY(14px) scaleY(1.1); opacity: 0; } 71% { transform: translateY(-10px); opacity: 0; } }
         @keyframes beltMove { 0% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 16; } }
         .catalog-card h4 { font-size: 18px; font-weight: 600; margin-bottom: 12px; line-height: 1.3; }
         .catalog-card p { font-size: 13.5px; color: #555; font-weight: 300; line-height: 1.5; }
         .brands-section { padding: 90px 0; background-color: var(--light-grey); }
-        .brands-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 24px; margin-top: 40px; }
-        .brand-group-card { background: var(--white); padding: 30px; border-radius: 24px; }
-        .brand-group-card h5 { font-size: 17px; font-weight: 600; color: var(--emerald); margin-bottom: 16px; border-left: 3px solid var(--orange); padding-left: 10px; }
-        .brand-list { display: flex; flex-wrap: wrap; gap: 8px; }
-        .brand-badge { background-color: var(--light-grey); padding: 6px 14px; border-radius: 10px; font-size: 13px; font-weight: 500; color: #333; }
+        .brands-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 40px; }
+        .brand-group-card { background: var(--white); padding: 35px; border-radius: 32px; display: flex; flex-direction: column; box-shadow: 0 10px 35px rgba(0,0,0,0.02); transition: var(--transition); }
+        .brand-group-card:hover { transform: translateY(-4px); box-shadow: 0 15px 45px rgba(0,0,0,0.05); }
+        .brand-group-card h5 { font-size: 19px; font-weight: 700; color: #111311; margin-bottom: 24px; border-left: 3.5px solid var(--orange); padding-left: 14px; line-height: 1.2; }
+        
+        .brand-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+        .brand-badge { background-color: #f4f6f4; padding: 10px 18px; border-radius: 12px; font-size: 14px; font-weight: 500; color: #444; border: 1px solid rgba(0,0,0,0.02); transition: var(--transition); }
+        .brand-group-card:hover .brand-badge { background-color: var(--white); border-color: rgba(11,102,35,0.15); color: var(--emerald); }
+
+        .promo-3d-stage { width: 90px; height: 90px; background: linear-gradient(145deg, #f0f2f0, #ffffff); border-radius: 24px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; position: relative; border: 1px solid rgba(0,0,0,0.03); box-shadow: inset 0 2px 5px rgba(255,255,255,0.7), 0 8px 20px rgba(0,0,0,0.03); perspective: 400px; }
+        .promo-3d-stage svg { width: 44px; height: 44px; filter: drop-shadow(0 6px 10px rgba(11,102,35,0.15)); }
+        
+        .icon-tractor { animation: tractorRide 0.4s linear infinite alternate; }
+        .smoke-puff { position: absolute; top: 22px; left: 48px; width: 6px; height: 6px; background-color: rgba(11, 102, 35, 0.3); border-radius: 50%; opacity: 0; pointer-events: none; }
+        .puff-1 { animation: smokeMove 1.2s ease-out infinite; }
+        .puff-2 { animation: smokeMove 1.2s ease-out infinite 0.4s; }
+        .puff-3 { animation: smokeMove 1.2s ease-out infinite 0.8s; }
+        @keyframes tractorRide { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(-2px) rotate(1deg); } }
+        @keyframes smokeMove { 0% { transform: translate(0, 0) scale(0.6); opacity: 0.6; } 100% { transform: translate(-14px, -16px) scale(2.5); opacity: 0; } }
+
+        .icon-live-bearing { transform-origin: 12px 12px; animation: spinGear 4s linear infinite; }
+        .icon-pulley-1 { animation: spinGear 1.5s linear infinite; transform-origin: 7px 12px; }
+        .icon-live-belt-pulley-2 { animation: spinGear 1.1s linear infinite; transform-origin: 17px 12px; }
+        .icon-live-belt-line { stroke-dasharray: 4 2; animation: beltMove 0.8s linear infinite; }
         .about { padding: 100px 0; background-color: var(--white); }
         .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: flex-start; }
         .about-text h3 { font-size: 34px; font-weight: 700; margin-bottom: 24px; }
         .about-text p { color: #444; font-weight: 300; font-size: 15px; margin-bottom: 18px; }
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .stats-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
         .stat-box { background-color: var(--light-grey); padding: 30px; border-radius: 20px; }
-        .stat-number { font-size: 34px; font-weight: 700; color: var(--emerald); display: block; }
-        .stat-box span { font-size: 13px; color: #555; }
+        .stat-number { font-size: 32px !important; font-weight: 700 !important; color: #0b6623 !important; display: block; margin-bottom: 8px; line-height: 1.2; }
+        .stat-box span { font-size: 13px; color: #555; font-weight: 400; }
+        
         .contacts { background-color: var(--dark); color: var(--white); padding: 90px 0 50px 0; border-radius: 50px 50px 0 0; position: relative; z-index: 10; display: block; }
         .contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-bottom: 30px; }
         .contacts-info h3 { font-size: 34px; font-weight: 700; margin-bottom: 24px; color: var(--white); }
@@ -94,8 +127,6 @@
         .info-item p, .info-item a { font-size: 17px; font-weight: 400; color: var(--white); text-decoration: none; }
         .info-item a:hover { color: var(--orange); }
         .contacts-phones { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; }
-        
-        /* СТИЛИ УМНОЙ ФОРМЫ */
         .sap-form-wrap { background: #1a1d1a; padding: 30px; border-radius: 28px; border: 1px solid rgba(255,255,255,0.03); margin-bottom: 40px; }
         .sap-form-wrap h4 { font-size: 20px; margin-bottom: 20px; color: var(--white); font-weight: 600; }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
@@ -108,8 +139,6 @@
         .form-submit-btn:hover:not(:disabled) { background: var(--orange); transform: translateY(-1px); }
         .form-submit-btn:disabled { background: #333; color: #666; cursor: not-allowed; opacity: 0.6; }
         .form-tip { font-size: 12px; color: #888; margin-top: 10px; text-align: center; }
-
-        /* ИСПРАВЛЕННЫЕ СТИЛИ КАРТЫ */
         .map-container { border-radius: 28px; overflow: hidden; height: 380px; background-color: #161816; position: relative; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.04); box-shadow: 0 15px 35px rgba(0,0,0,0.3); perspective: 1000px; }
         .css-map-scene { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
         .map-container:hover .css-map-scene { transform: rotateX(10deg) rotateY(-3deg); }
@@ -119,21 +148,53 @@
         .css-railway { position: absolute; right: 10%; top: -10%; width: 18px; height: 120%; background-color: transparent; border-left: 2px dashed #3e4741; border-right: 2px dashed #3e4741; z-index: 1; transform: rotate(4deg); }
         .css-railway::after { content: ''; position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: repeating-linear-gradient(to bottom, #111, #111 2px, transparent 2px, transparent 10px); }
         .rail-label { position: absolute; color: #4e5751; font-size: 10px; font-weight: 700; text-transform: uppercase; top: 15px; right: 12%; z-index: 2; }
-        .css-map-exit-line { position: absolute; left: 10%; top: 26%; width: 33%; height: 85px; border-bottom: 14px solid #232a26; border-left: 14px solid #232a26; border-bottom-left-radius: 35px; z-index: 2; transform: rotate(4deg); filter: drop-shadow(0px 0px 5px rgba(11, 102, 35, 0.6)); }
         
-        /* ПРЯМОУГОЛЬНИК БАЗЫ ИДЕАЛЬНО ПОДНЯТ НАВЕРХ НА 2/3 (ПОЛОЖЕНИЕ СМЕЩЕНО НАВЕРХ) */
-        .css-sap-yard { position: absolute; left: 41%; bottom: 38%; width: 170px; height: 110px; background-color: #1e221f; border: 1.5px solid rgba(11, 102, 35, 0.3); border-radius: 16px; z-index: 4; box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+        .sap-svg-route { position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
+        
+        /* ШИРИНА ЛУЧА УМЕНЬШЕНА ВДВОЕ (stroke-width: 7 вместо 14) */
+        .sap-route-line { stroke: #232a26; stroke-width: 7; stroke-linecap: round; fill: none; transition: stroke 0.4s; }
+        .sap-route-glow { stroke: var(--emerald); stroke-width: 7; stroke-linecap: round; fill: none; stroke-dasharray: 200; stroke-dashoffset: 200; }
+        
+        .map-container:hover .sap-route-line { stroke: #1e2521; }
+        .map-container:hover .sap-route-glow { animation: fluidLight 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        @keyframes fluidLight { 0% { stroke-dashoffset: 200; } 100% { stroke-dashoffset: 0; filter: drop-shadow(0 0 10px rgba(11,102,35,0.95)); } }
+        
+        /* СДВИГ ПРЯМОУГОЛЬНИКА ВПРАВО НА ПОЛОВИНУ ШИРИНЫ (left: 53.5% вместо 41%) */
+        .css-sap-yard { position: absolute; left: 53.5%; bottom: 38%; width: 170px; height: 110px; background-color: #1e221f; border: 1.5px solid rgba(11, 102, 35, 0.3); border-radius: 16px; z-index: 4; box-shadow: 0 10px 30px rgba(0,0,0,0.25); transition: border-color 0.4s ease, background-color 0.4s ease, box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        
+        /* СВЕЧЕНИЕ СДЕЛАНО МАКСИМАЛЬНО ЯРКИМ И НАСЫЩЕННЫМ В МОМЕНТ ЗАЖИГАНИЯ (box-shadow усилен) */
+        .map-container:hover .css-sap-yard { border-color: #2b683e; background-color: #152919; box-shadow: 0 0 45px rgba(11, 102, 35, 0.8), 0 0 20px rgba(11, 102, 35, 0.4), inset 0 0 20px rgba(11,102,35,0.35); transition-delay: 1.15s; }
         .css-sap-yard::before { content: 'СТОЯНКА АВТО'; position: absolute; right: 12px; top: 12px; color: #444; font-size: 9px; font-weight: 700; letter-spacing: 0.5px; }
-        
-        /* Логотип внутри прямоугольника возвращен на свое центрированное место */
         .css-hq-positioner { position: absolute; left: 15px; bottom: 15px; z-index: 5; }
         .css-hq-building-gear { width: 60px; height: 60px; border: 3px solid var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; background-color: var(--emerald); box-shadow: 0 4px 15px rgba(11, 102, 35, 0.4); }
         .css-hq-building-gear-text { color: var(--white); font-size: 13px; font-weight: 700; letter-spacing: 0.5px; line-height: 1; }
         .css-map-sun-brand { width: 14px; height: 14px; background-color: var(--orange); border-radius: 50%; position: absolute; top: -3px; right: -3px; z-index: 6; box-shadow: 0 0 14px var(--orange); animation: pulseSunBrand 2s infinite alternate; }
         @keyframes pulseSunBrand { 0% { transform: scale(0.9); } 100% { transform: scale(1.2); box-shadow: 0 0 24px var(--orange); } }
         .css-hq-building-gear-label { position: absolute; bottom: -22px; font-size: 11px; font-weight: 700; color: var(--orange); text-transform: uppercase; text-align: center; width: 100%; left: 0; }
-        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 35px; display: flex; justify-content: space-between; color: #888; font-size: 13px; width: 100%; }
-        @media (max-width: 1024px) { .hero-grid, .about-grid, .contacts-grid { grid-template-columns: 1fr; gap: 35px; } .hero { padding-top: 140px; text-align: center; } .hero-text p { margin-left: auto; margin-right: auto; } .hero-visual { order: -1; } nav, .header-contacts-group { display: none; } }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 35px; display: flex; justify-content: space-between; color: #888; font-size: 13px; width: 100%; flex-wrap: wrap; gap: 15px; }
+        
+        .messengers-trigger { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background-color: var(--emerald); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); cursor: pointer; z-index: 99999; box-shadow: 0 8px 25px rgba(11,102,35,0.4); transition: var(--transition); }
+        .messengers-trigger:hover { background-color: var(--orange); transform: scale(1.05); }
+        .messengers-trigger svg { width: 28px; height: 26px; fill: #fff !important; }
+        .messengers-list { position: fixed; bottom: 105px; right: 33px; display: flex; flex-direction: column; gap: 12px; pointer-events: none; opacity: 0; transform: translateY(20px); transition: var(--transition); z-index: 99998; }
+        .messengers-list.active { pointer-events: auto; opacity: 1; transform: translateY(0); }
+        .messenger-btn { width: 54px; height: 54px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white) !important; text-decoration: none; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: var(--transition); }
+        .messenger-btn:hover { transform: scale(1.1); }
+        .messenger-btn.wa { background-color: #25D366 !important; }
+        .messenger-btn.tg { background-color: #0088cc !important; }
+        .messenger-btn svg { width: 26px; height: 26px; fill: #fff !important; }
+
+        @media (max-width: 1024px) {
+            .burger-menu-btn { display: flex; }
+            nav { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background-color: var(--white); display: flex; flex-direction: column; padding: 130px 40px; gap: 30px; box-shadow: -10px 0 30px rgba(0,0,0,0.05); transition: var(--transition); z-index: 1000; }
+            nav.active { right: 0; }
+            .header-contacts-group { display: none; }
+            .hero-grid, .about-grid, .contacts-grid { grid-template-columns: 1fr; gap: 35px; }
+            .hero { padding-top: 140px; text-align: center; }
+            .hero-text p { margin-left: auto; margin-right: auto; }
+            .hero-visual { order: -1; }
+        }
+        @media (max-width: 600px) { .form-row { grid-template-columns: 1fr !important; gap: 15px; } .sap-form-wrap { padding: 20px; } .footer-bottom { flex-direction: column; text-align: center; align-items: center; } }
     </style>
 </head>
 <body>
@@ -144,12 +205,27 @@
                     <div class="gear-logo"><div class="gear-logo-teeth"><div class="gear-tooth"></div><div class="gear-tooth"></div><div class="gear-tooth"></div><div class="gear-tooth"></div><div class="gear-tooth"></div><div class="gear-tooth"></div><div class="gear-tooth"></div><div class="gear-tooth"></div></div></div>
                     <div class="logo-text"><h1>САП</h1><span>СпецАгроПартнер</span></div>
                 </a>
-                <nav><a href="#catalog">Продукция</a><a href="#brands">Мировые бренды</a><a href="#about">О компании</a><a href="#contacts">Контакты</a></nav>
-                <div class="header-contacts-group"><a href="mailto:ooo-sap@list.ru" class="header-email">ooo-sap@list.ru</a><a href="mailto:sap_parts@mail.ru" class="header-email">sap_parts@mail.ru</a></div>
+                
+                <button class="burger-menu-btn" id="sapBurgerBtn">
+                    <span></span><span></span><span></span>
+                </button>
+
+                <nav id="sapMobileNav">
+                    <a href="#catalog">Продукция</a>
+                    <a href="#brands">Мировые бренды</a>
+                    <a href="#about">О компании</a>
+                    <a href="#contacts">Контакты</a>
+                </nav>
+                
+                <div class="header-contacts-group">
+                    <a href="mailto:ooo-sap@list.ru" class="header-email">ooo-sap@list.ru</a>
+                    <a href="mailto:sap_parts@mail.ru" class="header-email">sap_parts@mail.ru</a>
+                </div>
             </div>
         </div>
     </header>
-    <section class="hero">
+    
+    <section class="hero" id="sapHeroBlock">
         <div class="container">
             <div class="hero-grid">
                 <div class="hero-text">
@@ -157,7 +233,9 @@
                     <p>Профессиональные комплексные поставки оригинальных деталей, подшипниковых узлов, приводных ремней и смазочных материалов от ведущих мировых брендов.</p>
                     <a href="#catalog" class="cta-button">Перейти к продукции</a>
                 </div>
-                <div class="hero-visual"><div class="abstract-shape"></div></div>
+                <div class="hero-visual">
+                    <div class="abstract-shape" id="sap3dDrop"></div>
+                </div>
             </div>
         </div>
     </section>
@@ -166,23 +244,23 @@
             <div class="section-title"><h3>Категории комплектующих</h3><p>Продукция поставляется со строгим контролем износостойкости для высоких нагрузок</p></div>
             <div class="catalog-grid">
                 <div class="catalog-card">
-                    <div class="card-icon-wrap"><svg class="icon-gear" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
+                    <div class="card-icon-wrap"><svg class="icon-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
                     <h4>Запчасти для спецтехники</h4><p>Оригинальные комплектующие для ходовой, двигателей и рабочих органов импортных тракторов, комбайнов и автомобилей.</p>
                 </div>
                 <div class="catalog-card">
-                    <div class="card-icon-wrap"><svg width="24" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path class="icon-drop" d="M12 22a7 7 0 0 0 7-7c0-4.3-7-13-7-13S5 10.7 5 15a7 7 0 0 0 7 7z" fill="rgba(11, 102, 35, 0.08)"></path></svg></div>
+                    <div class="card-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path class="icon-drop" d="M12 22a7 7 0 0 0 7-7c0-4.3-7-13-7-13S5 10.7 5 15a7 7 0 0 0 7 7z" fill="rgba(11, 102, 35, 0.08)"></path></svg></div>
                     <h4>Масла и смазочные материалы</h4><p>Высокотехнологичные моторные, трансмиссионные и гидравлические масла, устойчивые к пиковым температурным режимам.</p>
                 </div>
                 <div class="catalog-card">
-                    <div class="card-icon-wrap"><svg class="icon-bearing" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="5" stroke-dasharray="2 2"></circle></svg></div>
+                    <div class="card-icon-wrap"><svg class="icon-bearing" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="5" stroke-dasharray="2 2"></circle></svg></div>
                     <h4>Подшипники и подшипниковые узлы</h4><p>Широкий спектр износостойких радиальных, упорных и корпусных подшипников для узлов вращения любой сложности.</p>
                 </div>
                 <div class="catalog-card">
-                    <div class="card-icon-wrap"><svg width="28" height="24" viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="12" r="4"></circle><circle cx="24" cy="12" r="4"></circle><path class="icon-belt" d="M8 7h16M8 17h16" stroke-dasharray="3 3"></path></svg></div>
+                    <div class="card-icon-wrap"><svg viewBox="0 0 32 24" fill="none" stroke="currentColor"><circle cx="8" cy="12" r="4"></circle><circle cx="24" cy="12" r="4"></circle><path class="icon-belt" d="M8 7h16M8 17h16" stroke-dasharray="3 3"></path></svg></div>
                     <h4>Приводные ремни</h4><p>Клиновые, поликлиновые, вариаторные и зубчатые ремни повышенной прочности для приводных механизмов.</p>
                 </div>
                 <div class="catalog-card">
-                    <div class="card-icon-wrap"><svg class="icon-seal" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="7" stroke-dasharray="4 2"></circle></svg></div>
+                    <div class="card-icon-wrap"><svg class="icon-seal" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="7" stroke-dasharray="4 2"></circle></svg></div>
                     <h4>Сальники и манжеты</h4><p>Надежные элементы уплотнения, армированные манжеты и гидравлические уплотнители для защиты систем от утечек.</p>
                 </div>
             </div>
@@ -192,9 +270,48 @@
         <div class="container">
             <div class="section-title"><h3>Оригинальные комплектующие от лидеров рынка</h3><p>Надежные каналы поставок комплектующих, заслуживших доверие профессионалов</p></div>
             <div class="brands-grid">
-                <div class="brand-group-card"><h5>Импортная техника</h5><div class="brand-list"><span class="brand-badge">John Deere</span><span class="brand-badge">Claas</span><span class="brand-badge">New Holland</span><span class="brand-badge">Case IH</span></div></div>
-                <div class="brand-group-card"><h5>Подшипниковая продукция</h5><div class="brand-list"><span class="brand-badge">SKF</span><span class="brand-badge">FAG</span><span class="brand-badge">NSK</span><span class="brand-badge">Timken</span><span class="brand-badge">Koyo</span></div></div>
-                <div class="brand-group-card"><h5>Ремни и уплотнения</h5><div class="brand-list"><span class="brand-badge">Gates</span><span class="brand-badge">Contitech</span><span class="brand-badge">Corteco</span><span class="brand-badge">NAK</span></div></div>
+                
+                <div class="brand-group-card">
+                    <div class="promo-3d-stage">
+                        <svg class="icon-tractor" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)"><path d="M4 18a3 3 0 1 0 6 0 3 3 0 1 0-6 0zM15 17a4 4 0 1 0 8 0 4 4 0 1 0-8 0zM5 15h11M10 8h5l2 4h4v3h-2M2 11h4v4H2zM7 8V5h3v3"/></svg>
+                        <div class="smoke-puff puff-1"></div><div class="smoke-puff puff-2"></div><div class="smoke-puff puff-3"></div>
+                    </div>
+                    <h5>Импортная техника</h5>
+                    <div class="brand-list">
+                        <span class="brand-badge">John Deere</span>
+                        <span class="brand-badge">Claas</span>
+                        <span class="brand-badge">New Holland</span>
+                        <span class="brand-badge">Case IH</span>
+                    </div>
+                </div>
+                
+                <div class="brand-group-card">
+                    <div class="promo-3d-stage">
+                        <svg class="icon-live-bearing" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="5" r="1.5" fill="var(--emerald)"></circle><circle cx="12" cy="19" r="1.5" fill="var(--emerald)"></circle><circle cx="5" cy="12" r="1.5" fill="var(--emerald)"></circle><circle cx="19" cy="12" r="1.5" fill="var(--emerald)"></circle></svg>
+                    </div>
+                    <h5>Подшипниковая продукция</h5>
+                    <div class="brand-list">
+                        <span class="brand-badge">SKF</span>
+                        <span class="brand-badge">FAG</span>
+                        <span class="brand-badge">NSK</span>
+                        <span class="brand-badge">Timken</span>
+                        <span class="brand-badge">Koyo</span>
+                    </div>
+                </div>
+                
+                <div class="brand-group-card">
+                    <div class="promo-3d-stage">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--emerald)"><circle class="icon-pulley-1" cx="7" cy="12" r="3"></circle><circle class="icon-live-belt-pulley-2" cx="17" cy="12" r="4"></circle><path class="icon-live-belt-line" d="M7 9h10M7 15h10"/></svg>
+                    </div>
+                    <h5>Ремни и уплотнения</h5>
+                    <div class="brand-list">
+                        <span class="brand-badge">Gates</span>
+                        <span class="brand-badge">Contitech</span>
+                        <span class="brand-badge">Corteco</span>
+                        <span class="brand-badge">NAK</span>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </section>
@@ -208,8 +325,14 @@
                     <p>Наш склад находится непосредственно на Окружной дороге Рязани. Это гарантирует сквозной и быстрый проезд для вашего транспорта, полностью исключая задержки в городских пробках.</p>
                 </div>
                 <div class="stats-grid">
-                    <div class="stat-box"><span class="stat-number">Agro & Industry</span><span>Обеспечение двух ключевых секторов экономики</span></div>
-                    <div class="stat-box"><span class="stat-number">198 км</span><span>Удобный логистический выезд на Окружную</span></div>
+                    <div class="stat-box">
+                        <span class="stat-number">Agro & Industry</span>
+                        <span>Обеспечение двух ключевых секторов экономики</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">198 км окружной дороги М5</span>
+                        <span>Удобный логистический выезд на Окружную</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -227,7 +350,13 @@
                     <div class="css-map-scene">
                         <div class="css-railway"></div><div class="rail-label">ж/д пути</div>
                         <div class="css-main-highway"><div class="highway-label">198 км (Окружная дорога)</div></div>
-                        <div class="css-map-exit-line"></div>
+                        
+                        <!-- УДЛИНЕННАЯ ВПРАВО ТРАЕКТОРИЯ СУЖЕННОГО ВДВОЕ ЛУЧА (L 23,43 A 12,12 ... L 108,55) -->
+                        <svg class="sap-svg-route" viewBox="0 0 200 120">
+                            <path class="sap-route-line" d="M 23,26 L 23,43 A 12,12 0 0 0 35,55 L 108,55" />
+                            <path class="sap-route-glow" d="M 23,26 L 23,43 A 12,12 0 0 0 35,55 L 108,55" />
+                        </svg>
+                        
                         <div class="css-sap-yard"><div class="css-hq-positioner"><div class="css-hq-building-gear"><div class="css-hq-building-gear-text">САП</div><div class="css-map-sun-brand"></div><div class="css-hq-building-gear-label">д. 6</div></div></div></div>
                     </div>
                 </div>
@@ -253,21 +382,79 @@
         </div>
     </section>
 
+    <div class="messengers-trigger" id="sapMessengersBtn">
+        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+    </div>
+    <div class="messengers-list" id="sapMessengersList">
+        <a href="https://wa.me" target="_blank" class="messenger-btn wa" title="WhatsApp отдел продаж"><svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.006 5.256 5.263 0 11.716 0c3.126.001 6.066 1.217 8.273 3.427C22.197 5.637 23.41 8.58 23.41 11.7c-.006 6.459-5.262 11.715-11.717 11.715-2.006-.001-3.974-.515-5.714-1.492L0 24zm6.59-4.721c1.597.947 3.39 1.447 5.215 1.448 5.474 0 9.927-4.451 9.932-9.925.002-2.652-1.031-5.145-2.909-7.025C17.006 1.895 14.512 .862 11.86.862c-5.483 0-9.936 4.452-9.941 9.928-.002 1.956.51 3.864 1.482 5.545L2.463 21.49l4.184-1.097zM17.49 14.39c-.314-.157-1.858-.916-2.139-1.018-.281-.101-.486-.151-.689.157-.204.307-.787.989-.965 1.193-.178.204-.355.226-.669.07-1.121-.561-1.926-.979-2.69-2.287-.202-.346.202-.321.579-1.07.063-.125.031-.234-.016-.328-.047-.094-.411-1.01-.564-1.378-.149-.358-.299-.311-.412-.317-.106-.005-.228-.006-.35-.006-.122 0-.32.046-.488.234-.168.187-.641.626-.641 1.528 0 .902.656 1.773.748 1.898.091.125 1.29 1.969 3.125 2.762.436.189.777.301 1.042.385.439.14.839.12 1.155.074.352-.052 1.08-.442 1.232-.866.152-.424.152-.787.107-.866-.045-.08-.166-.126-.481-.283z"/></svg></a>
+        <a href="https://t.me" target="_blank" class="messenger-btn tg" title="Telegram отдел продаж"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.56 8.61l-1.91 9c-.14.63-.51.79-1.04.49l-2.91-2.15-1.4 1.35c-.15.15-.29.27-.59.27l.21-2.94 5.35-4.83c.23-.21-.05-.32-.36-.12L10.31 13l-2.85-.89c-.62-.19-.63-.62.13-.92l11.14-4.3c.51-.19.96.11.83.72z"/></svg></a>
+    </div>
     <script>
+        const burgerBtn = document.getElementById('sapBurgerBtn');
+        const mobileNav = document.getElementById('sapMobileNav');
+        
+        burgerBtn.addEventListener('click', () => {
+            burgerBtn.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+        });
+
+        document.querySelectorAll('#sapMobileNav a').forEach(link => {
+            link.addEventListener('click', () => {
+                burgerBtn.classList.remove('active');
+                mobileNav.classList.remove('active');
+            });
+        });
+
+        const msgBtn = document.getElementById('sapMessengersBtn');
+        const msgList = document.getElementById('sapMessengersList');
+        msgBtn.addEventListener('click', () => {
+            msgList.classList.toggle('active');
+        });
+
+        const heroBlock = document.getElementById('sapHeroBlock');
+        const drop3d = document.getElementById('sap3dDrop');
+
+        if(heroBlock && drop3d) {
+            heroBlock.addEventListener('mousemove', (e) => {
+                const rect = drop3d.getBoundingClientRect();
+                const dropX = rect.left + rect.width / 2;
+                const dropY = rect.top + rect.height / 2;
+                const angleX = (e.clientY - dropY) / 18;
+                const angleY = -(e.clientX - dropX) / 18;
+                drop3d.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+            });
+
+            heroBlock.addEventListener('mouseleave', () => {
+                drop3d.style.transform = 'rotateX(0deg) rotateY(0deg)';
+            });
+        }
+
         const phoneInput = document.getElementById('sapPhone');
         const emailInput = document.getElementById('sapEmail');
         const messageInput = document.getElementById('sapMessage');
         const submitBtn = document.getElementById('sapSubmitBtn');
         const form = document.getElementById('sapOrderForm');
 
+        phoneInput.addEventListener('input', function(e) {
+            let el = e.target, val = el.value.replace(/\D/g, '');
+            if(val.startsWith('7') || val.startsWith('8')) val = val.substring(1);
+            val = val.substring(0, 10);
+            let res = '+7 ';
+            if(val.length > 0) res += '(' + val.substring(0, 3);
+            if(val.length >= 3) res += ') ' + val.substring(3, 6);
+            if(val.length >= 6) res += '-' + val.substring(6, 8);
+            if(val.length >= 8) res += '-' + val.substring(8, 10);
+            el.value = res;
+            validateSapForm();
+        });
+
         function validateSapForm() {
             const hasMessage = messageInput.value.trim().length > 0;
-            const hasPhone = phoneInput.value.trim().length > 0;
+            const hasPhone = phoneInput.value.trim().length >= 18;
             const hasEmail = emailInput.value.trim().length > 0;
             submitBtn.disabled = !(hasMessage && (hasPhone || hasEmail));
         }
 
-        phoneInput.addEventListener('input', validateSapForm);
         emailInput.addEventListener('input', validateSapForm);
         messageInput.addEventListener('input', validateSapForm);
 
