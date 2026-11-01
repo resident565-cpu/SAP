@@ -767,9 +767,9 @@
             outline-offset: 3px;
         }
 
-        .map-container { border-radius: 28px; overflow: hidden; height: 380px; background-color: #161a22; position: relative; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.04); box-shadow: 0 15px 35px rgba(0,0,0,0.3); perspective: 1000px; }
-        .css-map-scene { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-        .map-container:hover .css-map-scene { transform: rotateX(10deg) rotateY(-3deg); }
+        .map-container { border-radius: 28px; overflow: hidden; height: 380px; background-color: #161a22; position: relative; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.04); box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
+        /* 3D-наклон убран: он растеризовал SVG-слой и размывал дороги/подписи */
+        .css-map-scene { width: 100%; height: 100%; position: relative; }
 
         /* ===== Схема проезда (единый SVG, координаты viewBox 480×380) =====
             Маршрут — синий цвет сайта (--blue) с белой окантовкой. При «проезде» он растёт слева направо вдоль съезда до территории,
@@ -833,6 +833,51 @@
         @keyframes mapTrain { to { transform: translateY(460px); } }
 
         @media (max-width: 600px) { .map-container { height: auto; aspect-ratio: 480 / 380; } }
+
+        /* ===== Hover-эффекты карты (без 3D и поворотов — SVG остаётся резким) =====
+           1) подъём карточки + тёплая рамка и глубокая тень
+           2) «фонарик»: мягкий свет и виньетка следуют за курсором (--mx/--my ставит скрипт)
+           4) фокус на маршруте: ж/д и сетка приглушаются
+           5) стеклянная плашка «Построить маршрут» */
+        .map-container { --mx: 50%; --my: 50%; transition: transform 0.55s var(--ease), box-shadow 0.55s var(--ease), border-color 0.55s var(--ease); }
+        .map-grid, .map-rail { transition: opacity 0.6s ease; }
+
+        .map-spot { position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0; transition: opacity 0.5s ease; border-radius: inherit; }
+        .map-spot::before { content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle 230px at var(--mx) var(--my), rgba(12, 15, 22, 0) 0%, rgba(12, 15, 22, 0.38) 100%); }
+        .map-spot::after { content: ''; position: absolute; inset: 0; mix-blend-mode: screen;
+            background: radial-gradient(circle 150px at var(--mx) var(--my), rgba(255, 176, 130, 0.17) 0%, rgba(255, 255, 255, 0.05) 45%, rgba(255, 255, 255, 0) 100%); }
+
+        .map-route { position: absolute; left: 14px; right: 14px; bottom: 14px; z-index: 3; display: flex; align-items: center; gap: 12px;
+            padding: 11px 14px 11px 12px; border-radius: 18px; color: #fff; text-decoration: none;
+            background: linear-gradient(135deg, rgba(30, 47, 79, 0.62), rgba(20, 28, 46, 0.62));
+            border: 1px solid rgba(255, 255, 255, 0.14); box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%);
+            opacity: 0; transform: translateY(14px); pointer-events: none;
+            transition: opacity 0.45s var(--ease), transform 0.55s var(--ease), border-color 0.3s ease, background 0.3s ease; }
+        .map-route-icon { flex: 0 0 auto; width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center; background: var(--orange); box-shadow: 0 6px 16px rgba(234, 88, 32, 0.45); }
+        .map-route-icon svg { width: 18px; height: 18px; display: block; }
+        .map-route-text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; line-height: 1.25; }
+        .map-route-text strong { font-size: 14px; font-weight: 700; letter-spacing: 0.1px; }
+        .map-route-text small { font-size: 12px; color: rgba(255, 255, 255, 0.62); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .map-route-arrow { flex: 0 0 auto; width: 18px; height: 18px; color: rgba(255, 255, 255, 0.7); transition: transform 0.4s var(--ease), color 0.3s ease; }
+        .map-route:hover { border-color: rgba(234, 88, 32, 0.6); background: linear-gradient(135deg, rgba(40, 60, 100, 0.7), rgba(24, 34, 56, 0.7)); }
+        .map-route:hover .map-route-arrow, .map-route:focus-visible .map-route-arrow { transform: translateX(4px); color: var(--orange); }
+        .map-route:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+
+        .map-container:hover .map-route, .map-container:focus-within .map-route { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+        @media (hover: hover) and (pointer: fine) {
+            .map-container:hover { transform: translateY(-4px); border-color: rgba(234, 88, 32, 0.38); box-shadow: 0 26px 52px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(234, 88, 32, 0.16); }
+            .map-container:hover .map-spot { opacity: 1; }
+        }
+        .map-container:hover .map-grid, .map-container.is-animated .map-grid { opacity: 0.45; }
+        .map-container:hover .map-rail, .map-container.is-animated .map-rail { opacity: 0.4; }
+
+        /* на телефоне наведения нет — плашка с маршрутом видна всегда */
+        @media (hover: none) { .map-route { opacity: 1; transform: none; pointer-events: auto; } }
+        @media (max-width: 600px) { .map-route { left: 10px; right: 10px; bottom: 10px; padding: 9px 12px 9px 10px; } .map-route-text small { font-size: 11px; } }
+        @media (prefers-reduced-motion: reduce) { .map-container:hover { transform: none; } .map-route { transform: none; } }
         @media (prefers-reduced-motion: reduce) {
             .map-container:hover .map-trail-halo, .map-container.is-animated .map-trail-halo,
             .map-container:hover .map-trail, .map-container.is-animated .map-trail { animation: none; stroke-dashoffset: 0; }
@@ -895,10 +940,7 @@
             .catalog-card:hover,
             .brand-group-card:hover,
             .stat-box:hover { transform: none; }
-            .map-container:hover .css-map-scene { transform: none; }
         }
-
-        .map-container.is-animated .css-map-scene { transform: rotateX(10deg) rotateY(-3deg); }
 
         @media (max-width: 1024px) {
             html { scroll-padding-top: 90px; }
@@ -1777,11 +1819,11 @@
                                 <path class="mt-1" d="M429.91,459.16c-156.64,0-188.35-6.92-221.34-24.47l60.12,5.32,115.99-10.64h92.58l174.52-5.85h98.43l70.23,5.85,137.27-8.51,57.46,13.83h38.31c-50.01,25.54-427.78,24.47-623.58,24.47Z"/>
                                 </symbol>
                             </defs>
-                            <rect x="-500" y="-400" width="1480" height="1180" fill="url(#mapGrid)"/>
+                            <rect class="map-grid" x="-500" y="-400" width="1480" height="1180" fill="url(#mapGrid)"/>
 
                             <g transform="translate(0 24)">
                                 <!-- железная дорога: щебень, шпалы, два рельса, поезд -->
-                                <g transform="translate(458 190) rotate(4)">
+                                <g class="map-rail" transform="translate(458 190) rotate(4)">
                                     <rect x="-17" y="-520" width="34" height="1040" fill="#1b1f28"/>
                                     <line x1="-17" y1="-520" x2="-17" y2="520" stroke="#2c323f" stroke-width="1"/><line x1="17" y1="-520" x2="17" y2="520" stroke="#2c323f" stroke-width="1"/>
                                     <line x1="0" y1="-520" x2="0" y2="520" stroke="#3d4452" stroke-width="22" stroke-dasharray="3 7.5"/>
@@ -1840,6 +1882,12 @@
                             </g>
                         </svg>
                     </div>
+                    <div class="map-spot" aria-hidden="true"></div>
+                    <a class="map-route" href="https://yandex.ru/navi/org/spetsagropartner/170029866035?si=juuyt96zy9j2rffc4z1135x3z4" target="_blank" rel="noopener" aria-label="Построить маршрут: СпецАгроПартнер, М-5 Урал, 198-й километр, 6">
+                        <span class="map-route-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+                        <span class="map-route-text"><strong>Построить маршрут</strong><small>СпецАгроПартнер · М-5 Урал, 198-й км, 6</small></span>
+                        <svg class="map-route-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                    </a>
                 </div>
             </div>
             <div class="sap-form-wrap reveal" id="sapFormWrap">
@@ -2496,6 +2544,27 @@
                 mapIO.observe(map);
             }
         });
+
+        /* «фонарик» карты: плавно следует за курсором (только мышь) */
+        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('.map-container').forEach(map => {
+                let tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
+                const tick = () => {
+                    cx += (tx - cx) * 0.2; cy += (ty - cy) * 0.2;
+                    map.style.setProperty('--mx', cx.toFixed(1) + 'px');
+                    map.style.setProperty('--my', cy.toFixed(1) + 'px');
+                    raf = (Math.abs(tx - cx) > 0.3 || Math.abs(ty - cy) > 0.3) ? requestAnimationFrame(tick) : 0;
+                };
+                const aim = (e, jump) => {
+                    const r = map.getBoundingClientRect();
+                    tx = e.clientX - r.left; ty = e.clientY - r.top;
+                    if (jump) { cx = tx; cy = ty; }
+                    if (!raf) raf = requestAnimationFrame(tick);
+                };
+                map.addEventListener('pointerenter', e => aim(e, true));
+                map.addEventListener('pointermove', e => aim(e, false));
+            });
+        }
 
         const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
         const statObserver = new IntersectionObserver((entries) => {
