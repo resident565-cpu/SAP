@@ -1841,7 +1841,9 @@
                                 <g class="map-hw" transform="translate(240 92) rotate(4)">
                                     <rect x="-520" y="-28" width="1040" height="56" fill="#2b303d"/>
                                     <line x1="-520" y1="-26" x2="520" y2="-26" stroke="#657088" stroke-width="1.4"/><line x1="-520" y1="26" x2="520" y2="26" stroke="#657088" stroke-width="1.4"/>
-                                    <line x1="-520" y1="-1.6" x2="520" y2="-1.6" stroke="#8d97ab" stroke-width="1.1" opacity="0.7"/><line x1="-520" y1="1.6" x2="520" y2="1.6" stroke="#8d97ab" stroke-width="1.1" opacity="0.7"/>
+                                    <!-- разделительная: двойная сплошная, а напротив съезда (x −182…−98) — прерывистая ось: поворот допустим и с попутной, и со встречной полосы -->
+                                    <g stroke="#8d97ab" stroke-width="1.1" opacity="0.7"><line x1="-520" y1="-1.6" x2="-182" y2="-1.6"/><line x1="-520" y1="1.6" x2="-182" y2="1.6"/><line x1="-98" y1="-1.6" x2="520" y2="-1.6"/><line x1="-98" y1="1.6" x2="520" y2="1.6"/></g>
+                                    <line class="map-median-gap" x1="-182" y1="0" x2="-98" y2="0" stroke="#8d97ab" stroke-width="1.3" stroke-dasharray="9 6" opacity="0.85"/>
                                     <line x1="-520" y1="-14" x2="520" y2="-14" stroke="#fff" stroke-opacity="0.26" stroke-width="1.2" stroke-dasharray="11 13"/><line x1="-520" y1="14" x2="520" y2="14" stroke="#fff" stroke-opacity="0.26" stroke-width="1.2" stroke-dasharray="11 13"/>
                                     <g fill="none" stroke="#fff" stroke-opacity="0.32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M-150,20 l7,0 m-3,-3 l3,3 l-3,3"/><path d="M60,8 l7,0 m-3,-3 l3,3 l-3,3"/><path d="M-60,-8 l-7,0 m3,-3 l-3,3 l3,3"/><path d="M170,-20 l-7,0 m3,-3 l-3,3 l3,3"/>
@@ -1870,7 +1872,6 @@
                                     <rect class="map-yard-box" x="250" y="146" width="170" height="120" rx="16"/>
                                     <rect class="map-yard-lit" x="250" y="146" width="170" height="120" rx="16"/>
                                     <rect class="map-yard-edge" x="250" y="146" width="170" height="120" rx="16"/>
-                                    <text class="map-yard-title" x="408" y="165" text-anchor="end">СТОЯНКА АВТО</text>
                                     <text class="map-yard-brand" x="409" y="255" text-anchor="end">САП</text>
                                 </g>
                                 <!-- финиш: трактор из логотипа вместо кружка -->
