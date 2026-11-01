@@ -181,14 +181,42 @@
         .hero-logo-wrap::before { content: ''; position: absolute; inset: -15%; background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 65%); z-index: -1; opacity: 0; transition: opacity 0.5s ease; filter: blur(25px); }
         .hero-logo-wrap:hover::before { opacity: 1; }
         .hero-logo-inner { animation: heroFloat 6s ease-in-out infinite; transform-style: preserve-3d; pointer-events: none; }
-        .hero-logo-svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 25px 45px rgba(30, 47, 79, 0.24)); transition: filter 0.4s ease; }
-        .hero-logo-wrap:hover .hero-logo-svg { filter: drop-shadow(0 25px 45px rgba(30, 47, 79, 0.24)) brightness(1.03) drop-shadow(0 0 15px rgba(255, 255, 255, 0.6)); }
+        .hero-logo-svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 25px 45px rgba(30, 47, 79, 0.24)) brightness(1) saturate(1) drop-shadow(0 0 15px rgba(255, 255, 255, 0)); transition: filter 0.4s ease; }
+        .hero-logo-wrap:hover .hero-logo-svg { filter: drop-shadow(0 25px 45px rgba(30, 47, 79, 0.24)) brightness(1.03) saturate(1) drop-shadow(0 0 15px rgba(255, 255, 255, 0.6)); }
         .hero-logo-svg svg { width: 100%; height: auto; display: block; }
         .hero-logo-svg .cls-1 { fill: #ea5820; }
         .hero-logo-svg .cls-2 { fill: #ffffff; }
         .hero-logo-svg .cls-3 { fill: #1e2f4f; }
         .hero-logo-svg .cls-4 { fill: #202020; }
         .hero-logo-svg .cls-5 { fill: none; stroke: #1e2f4f; stroke-width: 14.98px; }
+
+        /* ===== Логотип в hero: отклик на нажатие (мышь / тач) =====
+           Без заливки оранжевым: по гербу скользит блик (только по самим деталям логотипа, как свет по эмали),
+           позади вспыхивает тёплая аура, по контуру — тонкая янтарная кромка, сам знак чуть «вжимается». */
+        .hero-logo-wrap { -webkit-tap-highlight-color: transparent; touch-action: manipulation; -webkit-user-select: none; user-select: none; }
+        .hero-logo-inner { position: relative; transition: scale 1.1s cubic-bezier(0.22, 1, 0.36, 1); }
+        .hero-logo-wrap.is-pressed .hero-logo-inner { scale: 0.99; transition-duration: 0.4s; transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1); }
+
+        .hero-logo-wrap::after { content: ''; position: absolute; inset: -18%; z-index: -1; pointer-events: none;
+            background: radial-gradient(circle, rgba(234, 88, 32, 0.03) 0%, rgba(234, 88, 32, 0.06) 34%, rgba(234, 88, 32, 0.21) 56%, rgba(255, 170, 110, 0.09) 68%, rgba(234, 88, 32, 0) 82%);
+            filter: blur(24px); opacity: 0; transition: opacity 2.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        .hero-logo-wrap.is-lit::after { opacity: 1; transition-duration: 0.7s; }
+        .hero-logo-wrap.is-lit .hero-logo-svg { filter: drop-shadow(0 25px 45px rgba(30, 47, 79, 0.24)) brightness(1.025) saturate(1.04) drop-shadow(0 0 16px rgba(234, 88, 32, 0.22)); transition: filter 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
+        .hero-logo-wrap.is-fading .hero-logo-svg { transition: filter 2s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        /* блик: белый силуэт логотипа (<use>), видимый только в движущейся наклонной полосе */
+        .sap-sheen { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0; filter: brightness(0) invert(1);
+            -webkit-mask-image: linear-gradient(112deg, transparent 36%, #000 50%, transparent 64%); mask-image: linear-gradient(112deg, transparent 36%, #000 50%, transparent 64%);
+            -webkit-mask-size: 250% 100%; mask-size: 250% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+            -webkit-mask-position: 100% 0; mask-position: 100% 0; }
+        .hero-logo-wrap.is-glint .sap-sheen { animation: sapSheen 1.8s cubic-bezier(0.4, 0, 0.2, 1) both; }
+        @keyframes sapSheen {
+            0%   { opacity: 0;    -webkit-mask-position: 100% 0; mask-position: 100% 0; }
+            30%  { opacity: 0.4; }
+            62%  { opacity: 0.4; }
+            100% { opacity: 0;    -webkit-mask-position: 0% 0;   mask-position: 0% 0; }
+        }
+        @media (prefers-reduced-motion: reduce) { .sap-sheen { display: none; } .hero-logo-wrap.is-pressed .hero-logo-inner { scale: 1; } }
         @keyframes heroFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
 
         .catalog { padding: 100px 0; background-color: var(--white); border-radius: 50px 50px 0 0; }
@@ -1264,6 +1292,7 @@
                         <div class="hero-logo-inner">
                             <div class="hero-logo-svg" aria-hidden="true">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1076.26 913.47">
+<g id="sapLogoArt">
                                     <path class="cls-1" d="M1002.05,548.41c16.54,0,29.96,13.41,29.96,29.96v153.76c0,16.55-13.41,29.96-29.96,29.96H168.98c-16.54,0-29.96-13.41-29.96-29.96v-153.76c0-16.54,13.41-29.96,29.96-29.96H1002.05Zm-819.25,26.71c-9.84,0-17.81,7.97-17.81,17.81v124.64c0,9.84,7.97,17.81,17.81,17.81H986.75c9.83,0,17.81-7.97,17.81-17.81v-124.64c0-9.84-7.97-17.81-17.81-17.81H182.8Z"/>
                                     <path class="cls-5" d="M283.12,752.29l304.07,152.79,299.58-152.79"/>
                                     <path class="cls-3" d="M589.22,878.11l-251.65-125.82h495.8l-244.16,125.82Z"/>
@@ -1303,8 +1332,10 @@
                                     <path class="cls-4" d="M894.59,419c-2.64,14.5-8.29,26.42-19.4,36.52l-1,.69c-5.02,3.47-11.74,6.94-22.9,8.53-8.38,.3-16.77,.53-25.16,.69l14.67-23.47s-.01,.04-.02,.05c14.32-4.92,25.15-23.71,21.7-37.84-.94-3.83-3.27-6.72-6.1-9.57v-.2s38.21,24.6,38.21,24.6Z"/>
                                     <path class="cls-4" d="M267.12,91.66c-4.61,8.07-11.93,29.12-15.81,41.03-.24-.15-.48-.3-.72-.44-2.28,5.76-4.57,11.52-6.83,17.29-3.91,9.95-7.75,19.94-11.73,29.87-1.2,3-.27,4.65,2.69,5.45,.78,.21,1.55,.51,2.35,.61,1.11,.13,2.28,.9,3.39,.96l-3.2,11.03-.35,.44c.05-.2,.11-.39,.16-.59,.6-2.2-.59-2.6-2.06-3.04-1.41-.42-2.91-1.12-3.55,1.11-4.19,14.85-8.41,29.69-12.62,44.53-.04,.13-.08,.26-.27,.86,.16,1.96,2.31,1.73,3.74,2.41,1.71,.81,2.45,.06,2.88-1.55,.15-.55,.29-1.11,.44-1.66l-3.06,12.96c-.12-1.51-1.47-1.87-3.02-2.47-2.92-1.12-2.71,1.1-3.13,2.67-1.89,7.03-3.59,14.12-5.71,21.08-.77,2.54-.55,3.79,1.25,3.9-6.1,.22-9.39,2.8-10.33,4.21l.2-.88c.14-.1,.28-.21,.43-.31,1.4-.97,2.42-1.95,2.89-3.67,2.38-8.77,4.87-17.5,7.28-26.26,.24-.87,.91-1.96,.17-2.72-2.31-2.36-1.01-4.73-.28-7.17,4.66-15.73,9.27-31.48,13.92-47.21,.47-1.61,.72-2.96-.55-4.49-2.78-3.34-2.84-7.12-1.35-11.11,9.27-24.76,19.15-49.27,29.38-73.65,2.4-5.72,7.34-10.34,13.32-13.18h.09Zm-53.61,186.33c.12,.05,.23,.08,.34,.12-.38-.02-.75-.02-1.12-.02,.24-.02,.5-.05,.77-.1h0Z"/>
                                     <path class="cls-4" d="M763.28,217.64c.6,.65,1.27,1.16,2.37,1.12,2.69-.11,4.96,1.21,7.25,2.39,28.7,14.74,57.39,29.5,86.09,44.23,1.4,.72,2.65,1.7,4.52,.9,.78-.34,1.55-.59,2.32-.77-4.93,2.5-14.03,9.81-10.52,21.53,.79,2.62,2.34,4.52,5.24,8.38,1.74,2.32,4.59,17.13,7.51,32.75-.74-2.55-2.21-4.27-4.52-5.84-28.7-19.49-57.32-39.09-85.95-58.66-2.56-1.74-5.08-3.52-8.33-5.78,.08,1.43,.17,2.82,.25,4.2l-2.71-33.17c-.6-4.52-1.38-8.16-3.52-11.25Zm11.77,13.35c-3.45-1.77-4.22-1.29-4.13,2.41v-.02c-.32,2.35,1.68,2.68,2.99,3.36,19.92,10.43,39.85,20.82,59.81,31.17,5.53,2.87,11.12,5.61,16.7,8.37,1.44,.72,2.86,2.27,4.13-.54,1.01-2.25,1.09-3.42-1.42-4.67-13.68-6.85-27.28-13.86-40.89-20.86-12.41-6.38-24.79-12.83-37.19-19.22Z"/>
-                                </svg>
+                                </g>
+</svg>
                             </div>
+                            <svg class="sap-sheen" viewBox="0 0 1076.26 913.47" aria-hidden="true" focusable="false"><use href="#sapLogoArt"/></svg>
                         </div>
                     </div>
                 </div>
@@ -2566,6 +2597,31 @@
                 map.addEventListener('pointermove', e => aim(e, false));
             });
         }
+
+        /* логотип в hero: нажатие мышью / тач → блик, тёплая аура, лёгкое «вжатие» */
+        (function () {
+            const logo = document.getElementById('sap3dDrop');
+            if (!logo) return;
+            let pressed = false, litTimer = 0, fadeTimer = 0;
+            const glint = () => { logo.classList.remove('is-glint'); void logo.offsetWidth; logo.classList.add('is-glint'); };
+            const sheen = logo.querySelector('.sap-sheen');
+            if (sheen) sheen.addEventListener('animationend', () => logo.classList.remove('is-glint'));
+            logo.addEventListener('pointerdown', (e) => {
+                if (e.button > 0) return;
+                pressed = true; clearTimeout(litTimer); clearTimeout(fadeTimer);
+                logo.classList.remove('is-fading'); logo.classList.add('is-pressed', 'is-lit'); glint();
+            });
+            const release = () => {
+                if (!pressed) return;
+                pressed = false; logo.classList.remove('is-pressed');
+                // подсветка держится ~1.4 с, затем очень плавно гаснет (is-fading задаёт длинные переходы)
+                litTimer = setTimeout(() => {
+                    logo.classList.add('is-fading'); logo.classList.remove('is-lit');
+                    fadeTimer = setTimeout(() => logo.classList.remove('is-fading'), 2400);
+                }, 1400);
+            };
+            ['pointerup', 'pointercancel', 'pointerleave'].forEach(t => logo.addEventListener(t, release));
+        })();
 
         const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
         const statObserver = new IntersectionObserver((entries) => {
