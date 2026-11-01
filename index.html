@@ -876,7 +876,7 @@
 
         /* на телефоне наведения нет — плашка с маршрутом видна всегда */
         @media (hover: none) { .map-route { opacity: 1; transform: none; pointer-events: auto; } }
-        @media (max-width: 600px) { .map-route { left: 10px; right: 10px; bottom: 10px; padding: 9px 12px 9px 10px; } .map-route-text small { font-size: 11px; } }
+        @media (max-width: 600px) { .map-route { left: 10px; right: 10px; bottom: 8px; padding: 7px 11px 7px 8px; gap: 10px; border-radius: 15px; } .map-route-icon { width: 28px; height: 28px; border-radius: 9px; } .map-route-icon svg { width: 15px; height: 15px; } .map-route-text strong { font-size: 13px; } .map-route-text small { font-size: 11px; } }
         @media (prefers-reduced-motion: reduce) { .map-container:hover { transform: none; } .map-route { transform: none; } }
         @media (prefers-reduced-motion: reduce) {
             .map-container:hover .map-trail-halo, .map-container.is-animated .map-trail-halo,
@@ -1231,7 +1231,7 @@
                             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
                         </svg>
                     </a>
-                    <button class="burger-menu-btn" id="sapBurgerBtn" aria-label="Открыть меню" aria-expanded="false" aria-controls="sapMobileNav"><span></span><span></span><span></span></button>
+                    <button type="button" class="burger-menu-btn" id="sapBurgerBtn" aria-label="Открыть меню" aria-expanded="false" aria-controls="sapMobileNav"><span></span><span></span><span></span></button>
                 </div>
             </div>
         </div>
@@ -2148,7 +2148,7 @@
         // Достаёт до 10 «значащих» цифр номера (без кода страны)
         function extractPhoneDigits(raw) {
             let d = raw.replace(/\D/g, '');
-            d = d.replace(/^7+/, '');                          // +7 / 7 в начале — код страны (кодов зон на 7 нет)
+            d = d.replace(/^7/, '');                           // +7 / 7 в начале — код страны (срезаем ровно одну 7: у казахстанских номеров +7 7xx зона тоже на 7)
             if (d[0] === '8' && (d.length >= 11 || d[1] === '9')) d = d.substring(1); // 8-900… / 89xx… → 9xx…
             return d.substring(0, 10);
         }
