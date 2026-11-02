@@ -153,6 +153,7 @@
         nav a { text-decoration: none; color: var(--dark); font-weight: 500; font-size: 15px; position: relative; transition: var(--transition); letter-spacing: -0.005em; }
         nav a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background-color: var(--blue); transition: var(--transition); }
         nav a:hover::after { width: 100%; }
+        .nav-info { display: none; }
         .header-contacts-group { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
         .header-email { font-size: 13.5px; font-weight: 600; color: var(--blue); text-decoration: none; transition: var(--transition); letter-spacing: -0.005em; }
         .header-email:hover { color: var(--orange); }
@@ -1165,6 +1166,12 @@
             nav a:hover, nav a:focus-visible, nav a:active { color: var(--orange); box-shadow: inset 0 1px 0 #ffffff, 0 8px 18px rgba(234, 88, 32, 0.18); }
             .logo-text { transition: transform 0.5s var(--ease); }
             body.nav-open .logo-text { transform: translateX(var(--logo-shift, 0px)); }
+
+            /* Адрес и режим работы: тихая подпись внизу шторки, без плитки — не спорит с пунктами меню */
+            nav a:last-of-type { margin-bottom: 10px; }
+            .nav-info { display: flex; flex-direction: column; gap: 9px; margin-top: auto; padding: 14px 14px 0; border-top: 1px solid rgba(30, 47, 79, 0.10); font-style: normal; font-size: 12.5px; line-height: 1.45; letter-spacing: -0.005em; color: #64748b; }
+            .nav-info-row { display: flex; align-items: flex-start; gap: 9px; }
+            .nav-info-row svg { flex: 0 0 14px; width: 14px; height: 14px; margin-top: 2px; color: var(--orange); opacity: 0.85; }
         }
 
         /* ===== Стеклянные плашки со значками (каталог, бренды, «о нас», экспертиза) =====
@@ -1301,6 +1308,16 @@
                     <a href="#cases">Кейсы</a>
                     <a href="#faq">FAQ</a>
                     <a href="#contacts">Контакты</a>
+                    <address class="nav-info">
+                        <div class="nav-info-row">
+                            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <span>г. Рязань, 198 км (Окружная дорога), д. 6</span>
+                        </div>
+                        <div class="nav-info-row">
+                            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            <span>Пн — Пт, 9:00 — 18:00</span>
+                        </div>
+                    </address>
                 </nav>
                 <div class="header-contacts-group">
                     <a href="mailto:ooo-sap@list.ru" class="header-email">ooo-sap@list.ru</a>
