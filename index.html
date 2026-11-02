@@ -636,21 +636,32 @@
         .faq-icon svg { display: block; width: 28px; height: 28px; }
         .faq-balls {
             transform-origin: 14px 14px;
-            transition: transform 0.7s cubic-bezier(.34, 1.56, .64, 1);
+        }
+        /* Раскрутка подшипника: резкий разгон до высоких оборотов (первые ~6% времени),
+           затем плавное торможение до полной остановки. 1440° = 4 оборота. */
+        @keyframes faqBearingSpin {
+            0%   { transform: rotate(0deg);    animation-timing-function: cubic-bezier(.4, 0, 1, 1); }
+            6%   { transform: rotate(120deg);  animation-timing-function: cubic-bezier(.25, .85, .3, 1); }
+            100% { transform: rotate(1440deg); }
         }
         .faq-bearing-in {
             fill: transparent;
             transition: fill 0.4s var(--ease);
         }
+        .faq-item.bearing-on .faq-icon,
         .faq-item[open]:not(.closing) .faq-icon {
             background: linear-gradient(180deg, #e3e8f0 0%, #f4f6fa 100%);
             color: var(--orange);
             box-shadow: inset 0 3px 6px rgba(30,47,79,.24), inset 0 -1px 0 #fff, 0 0 0 1px rgba(30,47,79,.10);
         }
-        .faq-item[open]:not(.closing) .faq-balls { transform: rotate(60deg); }
+        .faq-item.bearing-on .faq-balls,
+        .faq-item[open]:not(.closing) .faq-balls { animation: faqBearingSpin 2.4s linear both; }
+        .faq-item.bearing-on .faq-bearing-in,
         .faq-item[open]:not(.closing) .faq-bearing-in { fill: currentColor; }
         @media (prefers-reduced-motion: reduce) {
-            .faq-balls, .faq-bearing-in, .faq-icon { transition: none; }
+            .faq-bearing-in, .faq-icon { transition: none; }
+            .faq-item.bearing-on .faq-balls,
+            .faq-item[open]:not(.closing) .faq-balls { animation: none; }
         }
         .faq-a {
             padding: 18px 28px 24px 28px;
@@ -2648,10 +2659,27 @@
                 const answer = item.querySelector('.faq-a');
                 if (!summary || !answer) return;
                 let hAnim = null, aAnim = null;
+                const balls = item.querySelector('.faq-balls');
+                let spinning = false;   /* крутится ли подшипник прямо сейчас */
+
+                /* Иконка остаётся «включённой» (оранжевой) до полной остановки подшипника,
+                   даже если карточку уже закрыли. */
+                const bearingOn = () => {
+                    item.classList.remove('bearing-on');
+                    if (balls) void balls.getBoundingClientRect();   /* перезапуск анимации */
+                    item.classList.add('bearing-on');
+                    spinning = !!balls;
+                };
+                const bearingOff = () => { spinning = false; item.classList.remove('bearing-on'); };
+                if (balls) balls.addEventListener('animationend', e => {
+                    if (e.animationName !== 'faqBearingSpin') return;
+                    spinning = false;
+                    if (!item.open || item.classList.contains('closing')) item.classList.remove('bearing-on');
+                });
 
                 summary.addEventListener('click', e => {
                     e.preventDefault();
-                    if (reduce.matches) { item.open = !item.open; return; }
+                    if (reduce.matches) { item.open = !item.open; item.classList.toggle('bearing-on', item.open); return; }
 
                     const opening = !item.open || item.classList.contains('closing');
                     const startH = item.getBoundingClientRect().height;
@@ -2662,9 +2690,11 @@
                     if (opening) {
                         item.classList.remove('closing');
                         item.open = true;
+                        bearingOn();
                         endH = item.getBoundingClientRect().height;
                     } else {
                         item.classList.add('closing');
+                        if (!spinning) bearingOff();   /* уже остановился — гасим сразу, иначе дождёмся animationend */
                         endH = summary.getBoundingClientRect().height + (item.offsetHeight - item.clientHeight);
                     }
 
