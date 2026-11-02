@@ -974,7 +974,16 @@
             opacity: 0 !important; pointer-events: none !important; transform: scale(0.6) !important; visibility: hidden;
             transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), visibility 0s linear 0.3s;
         }
-        .messengers-trigger:hover { background-color: var(--orange); transform: scale(1.05); }
+        /* Открытое меню: кнопка оранжевая, при закрытии снова синяя */
+        .messengers-trigger.is-open { background-color: var(--orange); }
+        /* Hover только для мыши, иначе на телефоне после тапа кнопка «залипает» оранжевой */
+        @media (hover: hover) and (pointer: fine) {
+            .messengers-trigger:hover { background-color: var(--orange); transform: scale(1.05); }
+        }
+        /* На телефонах кнопка плавно гаснет во время скролла и возвращается, когда он остановился */
+        @media (max-width: 600px), (hover: none) and (pointer: coarse) {
+            body.is-scrolling .messengers-trigger { opacity: 0; pointer-events: none; transition: all 0.2s ease; }
+        }
         .messengers-trigger:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
         .messengers-trigger svg { width: 28px !important; height: 26px !important; fill: #fff !important; display: block !important; margin: 0 !important; }
 
@@ -2145,9 +2154,24 @@
         function setMessengers(open) {
             msgList.classList.toggle('active', open);
             msgList.inert = !open;
+            msgBtn.classList.toggle('is-open', open);
             msgBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            msgBtn.setAttribute('aria-label', open ? 'Закрыть мессенджеры' : 'Открыть мессенджеры');
         }
         msgBtn.addEventListener('click', () => setMessengers(!msgList.classList.contains('active')));
+
+        // Во время скролла на телефоне кнопка гаснет (и меню закрывается), через 250 мс после остановки возвращается
+        const msgScrollMq = window.matchMedia('(max-width: 600px), (hover: none) and (pointer: coarse)');
+        let msgScrollTimer;
+        window.addEventListener('scroll', () => {
+            if (!msgScrollMq.matches) return;
+            if (!document.body.classList.contains('is-scrolling')) {
+                document.body.classList.add('is-scrolling');
+                if (msgList.classList.contains('active')) setMessengers(false);
+            }
+            clearTimeout(msgScrollTimer);
+            msgScrollTimer = setTimeout(() => document.body.classList.remove('is-scrolling'), 250);
+        }, { passive: true });
 
         // Прячем кнопку чата, пока на экране форма заявки или подвал — чтобы не перекрывала поля
         const msgHideZones = [document.getElementById('sapOrderForm'), document.getElementById('sapFormSuccess'), document.querySelector('.footer-bottom')].filter(Boolean);
