@@ -1,0 +1,15 @@
+{
+  "name": "САП — СпецАгроПартнер",
+  "short_name": "САП",
+  "description": "Комплектующие, подшипники, приводные ремни и масла для агробизнеса и индустрии в Рязани.",
+  "lang": "ru",
+  "start_url": "./",
+  "scope": "./",
+  "display": "browser",
+  "background_color": "#f5f7fa",
+  "theme_color": "#1e2f4f",
+  "icons": [
+    { "src": "images/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "images/favicon-32x32.png", "sizes": "32x32", "type": "image/png" }
+  ]
+}
