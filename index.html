@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <script>document.documentElement.classList.add('js');</script>
     <title>САП — СпецАгроПартнер Рязань | Комплектующие для агро и индустрии</title>
 
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
@@ -103,13 +104,12 @@
             --orange: #ea5820;
             --orange-dark: #c44515;
             --white: #ffffff;
-            --max-color: #5B51FF;
             --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             --ease: cubic-bezier(.16,1,.3,1);
             --grain-card: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
-        html { scroll-padding-top: 100px; -webkit-tap-highlight-color: transparent; } /* убирает серый/синий квадрат при касании в Chrome и Safari */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; scroll-padding-top: 100px; -webkit-tap-highlight-color: transparent; } /* убирает серый/синий квадрат при касании в Chrome и Safari */
         body { font-family: 'Geologica Local', 'Geologica', 'Segoe UI', Arial, sans-serif; background-color: var(--light-grey); color: var(--dark); line-height: 1.55; overflow-x: hidden; letter-spacing: -0.005em; }
 
         .skip-link { position: absolute; left: -9999px; top: 0; z-index: 10001; padding: 12px 20px; background: var(--blue); color: #fff; text-decoration: none; border-radius: 0 0 12px 0; font-weight: 600; }
@@ -353,10 +353,8 @@
         .tractor-wheel-f { animation: none; transform-origin: 19.6px 18.6px; }
         .puff-1, .puff-2, .puff-3 { animation: none; }
 
-        @keyframes roadDash { to { stroke-dashoffset: -10; } }
         @keyframes spinGear { 100% { transform: rotate(360deg); } }
         @keyframes dropAnim { 0%, 100% { transform: translateY(0) scaleY(1); opacity: 1; } 40% { transform: translateY(2px) scaleY(0.9); } 70% { transform: translateY(14px) scaleY(1.1); opacity: 0; } 71% { transform: translateY(-10px); opacity: 0; } }
-        @keyframes beltMove { 0% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 16; } }
         @keyframes beltRun { 100% { stroke-dashoffset: -3; } }
         @keyframes serpRun { 100% { stroke-dashoffset: -2; } }
 
@@ -462,32 +460,11 @@
         .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: flex-start; }
         .about-text h2 { font-size: 34px; font-weight: 700; margin-bottom: 24px; letter-spacing: -0.025em; text-wrap: balance; }
         .about-text p { color: #444; font-weight: 400; font-size: 15px; margin-bottom: 18px; line-height: 1.65; letter-spacing: -0.005em; }
-        .stats-grid { display: flex; flex-direction: column; gap: 20px; }
-        .stat-box { padding: 25px 30px; display: flex; align-items: center; justify-content: space-between; gap: 25px; }
-        .stat-content { flex: 1; }
-        .stat-number { font-size: 28px !important; font-weight: 700 !important; color: var(--blue) !important; display: block; margin-bottom: 6px; line-height: 1.2; transition: var(--transition); letter-spacing: -0.02em; }
-        .stat-box:hover .stat-number { color: var(--orange) !important; }
-        .stat-box span { font-size: 13.5px; color: #555; font-weight: 400; line-height: 1.4; letter-spacing: -0.005em; }
-        .stat-box-icon { width: 68px; height: 68px; color: var(--blue); display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: #ffffff; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.02); transition: var(--transition); }
-        .stat-box:hover .stat-box-icon { background: rgba(30, 47, 79, 0.05); color: var(--orange); }
-        .stat-box-icon svg { width: 38px; height: 34px; stroke-width: 2.2; fill: none; }
-        .stats-image-card { padding: 0; overflow: hidden; display: block; line-height: 0; }
-        .stats-image-card img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; display: block; }
+        .about-media { display: flex; flex-direction: column; gap: 20px; }
+        .about-image-card { padding: 0; overflow: hidden; display: block; line-height: 0; }
+        .about-image-card img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; display: block; }
 
-        .stat-box .stat-box-icon {
-            background: linear-gradient(180deg, #ffffff 0%, #eef1f6 100%);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), inset 0 -2px 4px rgba(30, 47, 79, 0.06), 0 4px 10px rgba(30, 47, 79, 0.08);
-        }
-        .stat-box:hover .stat-box-icon {
-            color: var(--orange); transform: translateY(-2px);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), 0 10px 22px rgba(234, 88, 32, 0.22);
-        }
 
-        .icon-agro-leaf, .icon-agro-wrench { transform-box: fill-box; transform-origin: center center; }
-        .icon-agro-leaf { animation: agroLeafPulse 2.6s ease-in-out infinite; }
-        .icon-agro-wrench { animation: agroWrenchPulse 2.6s ease-in-out infinite; }
-        @keyframes agroLeafPulse { 0%, 100% { opacity: 0.35; transform: scale(0.88); } 25% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.88); } }
-        @keyframes agroWrenchPulse { 0%, 100% { opacity: 0.35; transform: scale(0.88); } 50% { opacity: 0.35; transform: scale(0.88); } 75% { opacity: 1; transform: scale(1); } }
 
         .expertise-grid {
             display: grid;
@@ -722,11 +699,12 @@
 
         
 
-        .contacts { background-color: var(--dark); color: var(--white); padding: 90px 0 50px 0; padding-bottom: calc(50px + env(safe-area-inset-bottom, 0px)); border-radius: 50px 50px 0 0; position: relative; z-index: 10; display: block; }
+        .contacts { background-color: var(--dark); color: var(--white); padding: 90px 0 0; border-radius: 50px 50px 0 0; position: relative; z-index: 10; display: flow-root; }
+        .site-footer { background-color: var(--dark); color: var(--white); padding-bottom: calc(50px + env(safe-area-inset-bottom, 0px)); position: relative; z-index: 10; }
         .contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-bottom: 30px; }
         .contacts-info h2 { font-size: 34px; font-weight: 700; margin-bottom: 24px; color: var(--white); letter-spacing: -0.025em; text-wrap: balance; }
         .info-item { margin-bottom: 20px; }
-        .info-item label { display: block; font-size: 11px; text-transform: uppercase; color: #94a3b8; margin-bottom: 4px; letter-spacing: 0.5px; font-weight: 500; }
+        .info-item .info-label { display: block; font-size: 11px; text-transform: uppercase; color: #94a3b8; margin-bottom: 4px; letter-spacing: 0.5px; font-weight: 500; }
         .info-item p, .info-item a { font-size: 17px; font-weight: 400; color: var(--white); text-decoration: none; letter-spacing: -0.005em; }
         .info-item a:hover { color: var(--orange); }
         .contacts-phones { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
@@ -867,7 +845,6 @@
         .map-yard-edge { fill: none; stroke: url(#mapEdge); stroke-width: 2.2; opacity: 0; transition: opacity 0.7s ease; }
         .map-yard-g { transition: filter 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
         .map-yard-brand { font-size: 24px; font-weight: 700; letter-spacing: 2px; fill: #6b7690; transition: fill 0.5s ease; }
-        .map-yard-title { font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px; fill: #5d6678; transition: fill 0.5s ease; }
         .map-hq-ring { fill: none; stroke: var(--map-orange); stroke-width: 3; opacity: 0; transform-box: fill-box; transform-origin: center; }
         /* трактор из логотипа (копия из шапки, классы mt-*): белая «наклейка»-обводка, чтобы тёмные детали не сливались с синей карточкой */
         .map-crest { filter: drop-shadow(0 0 1px #fff) drop-shadow(0 0 1px #fff) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.45)); }
@@ -894,7 +871,6 @@
         .map-container:hover .map-yard-box, .map-container.is-animated .map-yard-box { fill: var(--map-blue); transition-delay: calc(var(--map-t) * 0.85); }
         .map-container:hover .map-yard-edge, .map-container.is-animated .map-yard-edge { opacity: 1; transition-delay: calc(var(--map-t) * 0.85); }
         .map-container:hover .map-yard-lit, .map-container.is-animated .map-yard-lit { opacity: 1; transition-delay: calc(var(--map-t) * 0.85); }
-        .map-container:hover .map-yard-title, .map-container.is-animated .map-yard-title,
         .map-container:hover .map-yard-brand, .map-container.is-animated .map-yard-brand { fill: #fff; transition-delay: calc(var(--map-t) * 0.85); }
         .map-container:hover .map-yard-g, .map-container.is-animated .map-yard-g {
             filter: drop-shadow(0 0 9px rgba(234, 88, 32, 0.5)) drop-shadow(-7px -5px 22px rgba(30, 47, 79, 0.95)) drop-shadow(5px 6px 24px rgba(234, 88, 32, 0.3));
@@ -1003,8 +979,8 @@
         /* Та же тень, что у главной кнопки чата, но по форме самого значка (пропорционально размеру) */
         .messenger-btn svg { filter: drop-shadow(0 5px 8px rgba(30, 47, 79, 0.45)); }
 
-        .reveal { opacity: 0; translate: 0 26px; }
-        .reveal.visible {
+        html.js .reveal { opacity: 0; translate: 0 26px; }
+        html.js .reveal.visible {
             opacity: 1; translate: 0 0;
             animation-name: sapReveal; animation-duration: 0.9s; animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); animation-fill-mode: backwards;
         }
@@ -1013,15 +989,14 @@
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
             *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-            .reveal { opacity: 1; translate: 0 0; }
-            .reveal.visible { animation: none; }
-            .hero-logo-inner, .map-hq-dot, .icon-agro-leaf, .icon-agro-wrench { animation: none !important; }
+            html.js .reveal { opacity: 1; translate: 0 0; }
+            html.js .reveal.visible { animation: none; }
+            .hero-logo-inner { animation: none !important; }
         }
 
         @media (hover: none) {
             .catalog-card:hover,
-            .brand-group-card:hover,
-            .stat-box:hover { transform: none; }
+            .brand-group-card:hover { transform: none; }
         }
 
         @media (max-width: 1024px) {
@@ -1091,7 +1066,7 @@
             .cases-grid { grid-template-columns: 1fr; }
             .cases-section { padding: 70px 0; }
 
-            .contacts { padding-bottom: calc(140px + env(safe-area-inset-bottom, 0px)); }
+            .site-footer { padding-bottom: calc(140px + env(safe-area-inset-bottom, 0px)); }
 
             .messengers-trigger { width: 54px; height: 54px; bottom: calc(60px + env(safe-area-inset-bottom, 0px)); right: calc(20px + env(safe-area-inset-right, 0px)); }
             .messengers-list { right: calc(20px + env(safe-area-inset-right, 0px)); bottom: calc(126px + env(safe-area-inset-bottom, 0px)); }
@@ -1192,7 +1167,7 @@
                 0 1px 2px rgba(234, 88, 32, 0.14),
                 0 10px 22px -4px rgba(234, 88, 32, 0.34);
         }
-        .card-icon-wrap, .promo-3d-stage, .stat-box .stat-box-icon, .expertise-icon {
+        .card-icon-wrap, .promo-3d-stage, .expertise-icon {
             position: relative;
             background: linear-gradient(160deg, rgba(246, 249, 254, 0.92) 0%, rgba(222, 232, 246, 0.80) 100%);
             -webkit-backdrop-filter: blur(14px) saturate(1.5); backdrop-filter: blur(14px) saturate(1.5);
@@ -1200,26 +1175,24 @@
             box-shadow: var(--glass-shadow);
         }
         /* блик: верхняя половина светлее, с мягким «срезом» посередине — как у стеклянной кнопки */
-        .card-icon-wrap::before, .promo-3d-stage::before, .stat-box .stat-box-icon::before, .expertise-icon::before {
+        .card-icon-wrap::before, .promo-3d-stage::before, .expertise-icon::before {
             content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 1;
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.14) 48%, rgba(255, 255, 255, 0) 55%);
         }
         /* тёплый оттенок при наведении (плавно проявляется) */
-        .card-icon-wrap::after, .promo-3d-stage::after, .stat-box .stat-box-icon::after, .expertise-icon::after {
+        .card-icon-wrap::after, .promo-3d-stage::after, .expertise-icon::after {
             content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 0; opacity: 0;
             background: linear-gradient(160deg, rgba(255, 240, 229, 0.95) 0%, rgba(255, 198, 160, 0.55) 100%);
             transition: opacity 0.45s var(--ease);
         }
-        .card-icon-wrap > svg, .promo-3d-stage > svg, .stat-box .stat-box-icon > svg, .expertise-icon > svg { position: relative; z-index: 2; }
+        .card-icon-wrap > svg, .promo-3d-stage > svg, .expertise-icon > svg { position: relative; z-index: 2; }
         .promo-3d-stage .smoke-puff { z-index: 3; }
 
         .catalog-card:hover .card-icon-wrap,
         .brand-group-card:hover .promo-3d-stage, .brand-group-card.fog-on .promo-3d-stage,
-        .stat-box:hover .stat-box-icon,
         .expertise-card:hover .expertise-icon { box-shadow: var(--glass-shadow-hot); }
         .catalog-card:hover .card-icon-wrap::after,
         .brand-group-card:hover .promo-3d-stage::after, .brand-group-card.fog-on .promo-3d-stage::after,
-        .stat-box:hover .stat-box-icon::after,
         .expertise-card:hover .expertise-icon::after { opacity: 1; }
 
         /* ===== Наклон значков без размытия =====
@@ -1500,7 +1473,6 @@
                         <a class="brand-logo-item" href="#sapFormWrap" title="Case IH" aria-label="Запросить цену: Case IH" data-brand="Case IH" data-brand-request="parts">
                             <svg viewBox="-10.19 -10.79 740.98 219.58" preserveAspectRatio="xMidYMid meet" style="--logo-h:29.8" xmlns="http://www.w3.org/2000/svg"><g clip-rule="evenodd" fill-rule="evenodd"><path d="M628.989 33.37h-36.406l-25.282 97.077h36.407l7.077-27.302c1.012-6.065 6.065-5.056 6.065-5.056l8.089-32.359h-5.052zM683.596 33.37l-7.081 27.303c-1.012 6.067-6.065 5.057-6.065 5.057l-8.091 32.359h5.053l-9.097 32.359h36.402L720 33.37z" fill="#231f20"/><path d="M649.214 130.448l25.28-97.078h-36.406l-25.281 97.078zM675.504 28.313L683.596 0h-36.408L639.1 28.313zM44.496 145.619L0 198.204h702.809l14.157-52.585z" fill="#bf3627"/><g fill="#231f20"><path d="M130.449 75.843h38.426s12.135-47.53-50.561-47.53c-56.63 0-71.798 44.497-71.798 58.654-1.012 1.01-6.069 46.512 56.631 46.512 51.57 0 61.683-38.423 61.683-38.423h-40.447s-6.07 10.113-19.212 10.113c-12.138 0-20.228-9.103-16.183-23.26 4.044-12.134 16.183-22.248 29.325-22.248 12.136.001 13.148 11.125 12.136 16.182zM426.74 33.37h107.192l-7.077 27.304h-66.744l-2.02 9.102h66.74l-6.07 24.268H452.02l-2.02 8.093h65.729l-7.077 28.311H400.447zM196.18 130.448h-45.504l73.818-97.077h40.452l19.211 98.093h-44.495l-1.008-8.089h-36.408zm19.212-27.303h21.236l-2.025-27.302zM406.516 66.741l-40.447-1.01v-4.044c-2.023-4.045-5.057-6.07-12.138-6.07-10.11 0-13.148 2.025-13.148 5.057 0 2.023 2.025 4.045 8.091 6.067 6.069 2.023 25.285 5.057 35.394 9.102 12.134 4.044 17.191 10.111 16.179 21.237 0 0 1.012 17.186-18.199 27.301-20.224 10.114-41.465 9.099-41.465 9.099s-30.333-1.008-43.479-10.105c-13.148-11.131-11.122-28.318-12.134-28.318h42.471s-2.024 13.147 16.179 13.147c12.134 0 13.147-4.049 14.159-5.058 0-2.024 0-3.033-5.057-5.056-5.057-1.009-38.427-10.112-44.496-14.157-3.034-3.033-11.122-9.102-11.122-20.226 1.008-15.167 18.203-34.38 55.619-33.369 37.414 0 46.516 13.145 47.524 14.157 1.012 1.01 7.082 8.089 6.069 22.246z"/></g></g></svg>
                         </a>
-                        <!-- НОВЫЙ ЛОГОТИП JCB -->
                         <a class="brand-logo-item" href="#sapFormWrap" title="JCB" aria-label="Запросить цену: JCB" data-brand="JCB" data-brand-request="parts">
                             <svg viewBox="-7.50 -7.50 515.00 207.92" preserveAspectRatio="xMidYMid meet" style="--logo-h:34.8" xmlns="http://www.w3.org/2000/svg">
                                 <path d="m500 0.25h-500v192.5h500z" fill="#fcaf26"/>
@@ -1627,8 +1599,8 @@
                     <p>Склад компании расположен непосредственно на Окружной дороге Рязани. Такое размещение гарантирует удобный подъезд для любого грузового транспорта и исключает потерю времени в городских пробках.</p>
                     <p>Команда «СпецАгроПартнер» объединяет опытных специалистов по промышленному снабжению и экспертов в сфере агротехники. Синергия глубоких практических знаний и современных подходов позволяет нам выходить за рамки стандартных решений и эффективно закрывать самые сложные, нетиповые запросы вашего бизнеса.</p>
                 </div>
-                <div class="stats-grid">
-                    <div class="stats-image-card sap-card-base reveal">
+                <div class="about-media">
+                    <div class="about-image-card sap-card-base reveal">
                         <img src="images/o-kompanii.webp" alt="Промышленное предприятие и комбайн в пшеничном поле — САП работает и для индустрии, и для аграрного сектора" width="960" height="640" loading="lazy">
                     </div>
                 </div>
@@ -1841,9 +1813,9 @@
             <div class="contacts-grid">
                 <div class="contacts-info reveal">
                     <h2>Контакты компании</h2>
-                    <div class="info-item"><label>Email для спецификаций и заявок</label><a href="mailto:ooo-sap@list.ru">ooo-sap@list.ru</a><br><a href="mailto:sap_parts@mail.ru" style="display:inline-block; margin-top:5px;">sap_parts@mail.ru</a></div>
-                    <div class="info-item"><label>Отдел продаж и снабжения</label><div class="contacts-phones"><a href="tel:+79209680128">+7-920-968-01-28</a><a href="tel:+79106336705">+7-910-633-67-05</a><a href="tel:+79209552711">+7-920-955-27-11</a></div></div>
-                    <div class="info-item"><label>Мессенджеры</label>
+                    <div class="info-item"><div class="info-label">Email для спецификаций и заявок</div><a href="mailto:ooo-sap@list.ru">ooo-sap@list.ru</a><br><a href="mailto:sap_parts@mail.ru" style="display:inline-block; margin-top:5px;">sap_parts@mail.ru</a></div>
+                    <div class="info-item"><div class="info-label">Отдел продаж и снабжения</div><div class="contacts-phones"><a href="tel:+79209680128">+7-920-968-01-28</a><a href="tel:+79106336705">+7-910-633-67-05</a><a href="tel:+79209552711">+7-920-955-27-11</a></div></div>
+                    <div class="info-item"><div class="info-label">Мессенджеры</div>
                         <div class="contacts-messengers">
     <a href="https://wa.me/79209680128" target="_blank" rel="noopener" class="contact-messenger-link" title="WhatsApp">
         <svg viewBox="-0.003 -0.732 1172.923 1181.829" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M308.678 1021.49l19.153 9.576a499.739 499.739 0 0 0 258.244 70.227c279.729-.638 509.563-231.016 509.563-510.744 0-135.187-53.692-265.012-149.169-360.713-95.35-96.69-225.62-151.18-361.383-151.18-278.451 0-507.552 229.133-507.552 507.552 0 2.203 0 4.373.032 6.576a523.81 523.81 0 0 0 76.612 268.14l12.768 19.153-51.074 188.337 192.806-46.925z" fill="#00E676"/><path d="M1003.29 172.378C894.597 61.482 745.49-.732 590.225 0h-.99C269.479.001 6.35 263.131 6.35 582.888c0 1.5.032 2.969.032 4.47a616.759 616.759 0 0 0 76.612 290.485L-.003 1181.097l309.32-79.804a569.202 569.202 0 0 0 278.993 70.228c320.939-1.756 584.036-266.385 583.844-587.356.766-154.213-60.044-302.52-168.864-411.787m-413.065 900.186a473.935 473.935 0 0 1-245.476-67.035l-19.153-9.577-184.187 47.883 47.882-181.953-12.768-19.153a484.242 484.242 0 0 1-72.558-254.957c0-265.65 218.599-484.25 484.25-484.25 265.65 0 484.248 218.6 484.248 484.25 0 167.269-86.666 323.11-228.781 411.372a464.838 464.838 0 0 1-251.86 73.42m280.59-354.329l-35.114-15.96s-51.075-22.346-82.996-38.306c-3.192 0-6.384-3.192-9.577-3.192a46.308 46.308 0 0 0-22.345 6.384c-6.799 3.99-3.192 3.192-47.882 54.266-3.032 5.97-9.257 9.705-15.96 9.577h-3.193a24.328 24.328 0 0 1-12.768-6.384l-15.961-6.385a309.91 309.91 0 0 1-92.573-60.65c-6.384-6.385-15.96-12.77-22.345-19.154a357.13 357.13 0 0 1-60.65-76.611l-3.193-6.384a46.475 46.475 0 0 1-6.384-12.769 23.915 23.915 0 0 1 3.192-15.96c2.905-4.789 12.769-15.962 22.345-25.538 9.577-9.576 9.577-15.96 15.961-22.345a39.33 39.33 0 0 0 6.384-31.922 1246.398 1246.398 0 0 0-51.074-121.301 37.099 37.099 0 0 0-22.345-15.961H380.82c-6.384 0-12.768 3.192-19.153 3.192l-3.192 3.192c-6.384 3.192-12.768 9.577-19.153 12.769-6.384 3.192-9.576 12.769-15.96 19.153a162.752 162.752 0 0 0-35.114 98.956 189.029 189.029 0 0 0 15.96 73.42l3.193 9.576a532.111 532.111 0 0 0 118.11 162.8l12.768 12.769a193.037 193.037 0 0 1 25.537 25.537c66.141 57.554 144.7 99.052 229.516 121.302 9.576 3.192 22.345 3.192 31.921 6.384h31.922a118.126 118.126 0 0 0 47.882-12.769c7.82-3.543 15.29-7.82 22.345-12.768l6.384-6.385c6.385-6.384 12.769-9.576 19.153-15.96a84.393 84.393 0 0 0 15.961-19.153c6.129-14.301 10.438-29.304 12.769-44.69V724.62a40.107 40.107 0 0 0-9.577-6.385" fill="#fff"/></svg>
@@ -1883,7 +1855,7 @@
     </a>
 </div>
                     </div>
-                    <div class="info-item"><label>Склад и администрация</label><address style="font-style:normal;"><p>г. Рязань, 198 км (Окружная дорога), д. 6</p><p style="font-size:14px; color:#94a3b8; margin-top:4px;">Режим работы: Пн — Пт с 9:00 до 18:00</p></address></div>
+                    <div class="info-item"><div class="info-label">Склад и администрация</div><address style="font-style:normal;"><p>г. Рязань, 198 км (Окружная дорога), д. 6</p><p style="font-size:14px; color:#94a3b8; margin-top:4px;">Режим работы: Пн — Пт с 9:00 до 18:00</p></address></div>
                 </div>
                 <div class="map-container reveal">
                     <div class="css-map-scene">
@@ -2042,27 +2014,30 @@
                     <button type="button" id="sapAgainBtn" class="form-again-btn">Отправить ещё раз</button>
                 </div>
             </div>
+        </div>
+    </section>
+    </main>
+    <footer class="site-footer">
+        <div class="container">
             <div class="footer-bottom reveal">
                 <div class="footer-legal">
                     <p>&copy; 2026 ООО «СпецАгроПартнер» (САП). Все права защищены.</p>
                     <p class="footer-requisites">ИНН 6200010060 · КПП 620001001 · ОГРН 1246200008911</p>
-                    <p class="footer-address">Юридический адрес: 390011, Рязанская область, г.о. Рязань, г. Рязань, 198 км (Окружная дорога), д. 6</p>
+                    <p class="footer-address">Юридический адрес: 390011, Рязанская область, г. Рязань, 198 км (Окружная дорога), д. 6</p>
                     <p><a href="policy.html" class="footer-policy-link">Политика конфиденциальности</a></p>
                 </div>
-                <p>г. Рязань</p>
             </div>
         </div>
-    </section>
-    </main>
+    </footer>
     
     <button type="button" class="messengers-trigger" id="sapMessengersBtn" aria-label="Открыть мессенджеры" aria-expanded="false" aria-controls="sapMessengersList">
         <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
     </button>
     <div class="messengers-list" id="sapMessengersList" inert>
-    <a href="https://wa.me/79209680128" target="_blank" rel="noopener" class="messenger-btn wa" title="WhatsApp отдела продаж (+7-920-968-01-28)">
+    <a href="https://wa.me/79209680128" target="_blank" rel="noopener" class="messenger-btn" title="WhatsApp отдела продаж (+7-920-968-01-28)">
         <svg viewBox="-0.003 -0.732 1172.923 1181.829" xmlns="http://www.w3.org/2000/svg" width="32" height="32"><path d="M308.678 1021.49l19.153 9.576a499.739 499.739 0 0 0 258.244 70.227c279.729-.638 509.563-231.016 509.563-510.744 0-135.187-53.692-265.012-149.169-360.713-95.35-96.69-225.62-151.18-361.383-151.18-278.451 0-507.552 229.133-507.552 507.552 0 2.203 0 4.373.032 6.576a523.81 523.81 0 0 0 76.612 268.14l12.768 19.153-51.074 188.337 192.806-46.925z" fill="#00E676"/><path d="M1003.29 172.378C894.597 61.482 745.49-.732 590.225 0h-.99C269.479.001 6.35 263.131 6.35 582.888c0 1.5.032 2.969.032 4.47a616.759 616.759 0 0 0 76.612 290.485L-.003 1181.097l309.32-79.804a569.202 569.202 0 0 0 278.993 70.228c320.939-1.756 584.036-266.385 583.844-587.356.766-154.213-60.044-302.52-168.864-411.787m-413.065 900.186a473.935 473.935 0 0 1-245.476-67.035l-19.153-9.577-184.187 47.883 47.882-181.953-12.768-19.153a484.242 484.242 0 0 1-72.558-254.957c0-265.65 218.599-484.25 484.25-484.25 265.65 0 484.248 218.6 484.248 484.25 0 167.269-86.666 323.11-228.781 411.372a464.838 464.838 0 0 1-251.86 73.42m280.59-354.329l-35.114-15.96s-51.075-22.346-82.996-38.306c-3.192 0-6.384-3.192-9.577-3.192a46.308 46.308 0 0 0-22.345 6.384c-6.799 3.99-3.192 3.192-47.882 54.266-3.032 5.97-9.257 9.705-15.96 9.577h-3.193a24.328 24.328 0 0 1-12.768-6.384l-15.961-6.385a309.91 309.91 0 0 1-92.573-60.65c-6.384-6.385-15.96-12.77-22.345-19.154a357.13 357.13 0 0 1-60.65-76.611l-3.193-6.384a46.475 46.475 0 0 1-6.384-12.769 23.915 23.915 0 0 1 3.192-15.96c2.905-4.789 12.769-15.962 22.345-25.538 9.577-9.576 9.577-15.96 15.961-22.345a39.33 39.33 0 0 0 6.384-31.922 1246.398 1246.398 0 0 0-51.074-121.301 37.099 37.099 0 0 0-22.345-15.961H380.82c-6.384 0-12.768 3.192-19.153 3.192l-3.192 3.192c-6.384 3.192-12.768 9.577-19.153 12.769-6.384 3.192-9.576 12.769-15.96 19.153a162.752 162.752 0 0 0-35.114 98.956 189.029 189.029 0 0 0 15.96 73.42l3.193 9.576a532.111 532.111 0 0 0 118.11 162.8l12.768 12.769a193.037 193.037 0 0 1 25.537 25.537c66.141 57.554 144.7 99.052 229.516 121.302 9.576 3.192 22.345 3.192 31.921 6.384h31.922a118.126 118.126 0 0 0 47.882-12.769c7.82-3.543 15.29-7.82 22.345-12.768l6.384-6.385c6.385-6.384 12.769-9.576 19.153-15.96a84.393 84.393 0 0 0 15.961-19.153c6.129-14.301 10.438-29.304 12.769-44.69V724.62a40.107 40.107 0 0 0-9.577-6.385" fill="#fff"/></svg>
     </a>
-    <a href="https://t.me/+79209680128" target="_blank" rel="noopener" class="messenger-btn tg" title="Telegram отдела продаж (+7-920-968-01-28)">
+    <a href="https://t.me/+79209680128" target="_blank" rel="noopener" class="messenger-btn" title="Telegram отдела продаж (+7-920-968-01-28)">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240.1 240.1" width="32" height="32">
             <linearGradient id="tg-gradient-float" gradientUnits="userSpaceOnUse" x1="-838.041" y1="660.581" x2="-838.041" y2="660.3427" gradientTransform="matrix(1000 0 0 -1000 838161 660581)">
                 <stop offset="0" stop-color="#2AABEE"/>
@@ -2072,7 +2047,7 @@
             <path fill="#FFFFFF" d="M54.3,118.8c35-15.2,58.3-25.3,70-30.2 c33.3-13.9,40.3-16.3,44.8-16.4c1,0,3.2,0.2,4.7,1.4c1.2,1,1.5,2.3,1.7,3.3s0.4,3.1,0.2,4.7c-1.8,19-9.6,65.1-13.6,86.3 c-1.7,9-5,12-8.2,12.3c-7,0.6-12.3-4.6-19-9c-10.6-6.9-16.5-11.2-26.8-18c-11.9-7.8-4.2-12.1,2.6-19.1c1.8-1.8,32.5-29.8,33.1-32.3 c0.1-0.3,0.1-1.5-0.6-2.1c-0.7-0.6-1.7-0.4-2.5-0.2c-1.1,0.2-17.9,11.4-50.6,33.5c-4.8,3.3-9.1,4.9-13,4.8 c-4.3-0.1-12.5-2.4-18.7-4.4c-7.5-2.4-13.5-3.7-13-7.9C45.7,123.3,48.7,121.1,54.3,118.8z"/>
         </svg>
     </a>
-    <a href="https://max.ru/+79209680128" target="_blank" rel="noopener" class="messenger-btn max" title="MAX отдела продаж (+7-920-968-01-28)">
+    <a href="https://max.ru/+79209680128" target="_blank" rel="noopener" class="messenger-btn" title="MAX отдела продаж (+7-920-968-01-28)">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="32" height="32">
             <defs>
                 <linearGradient id="max-b-float">
@@ -2093,12 +2068,29 @@
         </svg>
     </a>
 </div>
-    <noscript>
-    <style>
-        .reveal { opacity: 1 !important; translate: 0 0 !important; animation: none !important; }
-    </style>
-</noscript>
     <script>
+        /* ===== Reveal-анимации =====
+           Идут первыми: класс .js на <html> прячет .reveal, поэтому, если что-то ниже в скрипте упадёт,
+           блоки уже будут показываться. Без IntersectionObserver просто снимаем класс .js. */
+        (function () {
+            if (!('IntersectionObserver' in window)) { document.documentElement.classList.remove('js'); return; }
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '0px 0px -60px 0px', threshold: 0.08 });
+
+            ['.catalog-grid', '.brands-grid', '.about-media', '.expertise-grid', '.scenarios-grid', '.how-grid', '.cases-grid', '.faq-grid'].forEach(sel => {
+                document.querySelectorAll(sel).forEach(grid => {
+                    grid.querySelectorAll(':scope > .reveal').forEach((el, i) => { el.style.animationDelay = (i * 0.09) + 's'; });
+                });
+            });
+            document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+        })();
+
         /* ===== Бургер-меню ===== */
         const burgerBtn = document.getElementById('sapBurgerBtn');
         const mobileNav = document.getElementById('sapMobileNav');
@@ -2439,24 +2431,6 @@
             phoneInput.focus();
         });
 
-        /* ===== Reveal-анимации ===== */
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    revealObserver.unobserve(entry.target);
-                }
-            });
-        }, { rootMargin: '0px 0px -60px 0px', threshold: 0.08 });
-
-        ['.catalog-grid', '.brands-grid', '.stats-grid', '.expertise-grid', '.scenarios-grid', '.how-grid', '.cases-grid', '.faq-grid'].forEach(sel => {
-            document.querySelectorAll(sel).forEach(grid => {
-                const items = grid.querySelectorAll(':scope > .reveal');
-                items.forEach((el, i) => { el.style.animationDelay = (i * 0.09) + 's'; });
-            });
-        });
-
-        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
         /* ===== Плавный запуск и остановка hover-эффектов (туман + иконки) =====
            Раньше анимации просто включались/выключались через :hover, поэтому при уходе курсора
@@ -2733,18 +2707,6 @@
             ['pointerup', 'pointercancel', 'pointerleave'].forEach(t => logo.addEventListener(t, release));
         })();
 
-        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
-        const statObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const roadLine = entry.target.querySelector('.road-line-anim');
-                if (entry.isIntersecting) {
-                    if (roadLine) roadLine.style.animation = 'roadDash 1.4s linear infinite';
-                } else {
-                    if (roadLine) roadLine.style.animation = 'none';
-                }
-            });
-        }, observerOptions);
-        document.querySelectorAll('.js-observe-stat').forEach(box => statObserver.observe(box));
 
         /* ===== FAQ: плавное раскрытие и закрытие =====
            <details> меняет высоту мгновенно, поэтому карточка «щёлкала», а всё, что ниже, прыгало.
@@ -2821,9 +2783,11 @@
             });
         })();
     
-        /* ===== Карточка каталога → форма заявки с выбранной категорией =====
-           Ссылка работает и без JS (просто переход к форме). Со скриптом: плавная прокрутка, категория выбирается,
-           подсказка в поле «Ваш запрос» подстраивается под категорию, в тему письма добавляется её название.
+        /* ===== Карточки каталога и бренды → форма заявки =====
+           Ссылки с data-request (карточки каталога) и data-brand-request (логотипы брендов, строки «Другая марка?»)
+           выбирают категорию в форме, подстраивают подсказку в поле «Ваш запрос», добавляют название категории
+           в тему письма и плавно ведут к форме; для бренда в запрос добавляется строка «Бренд: …».
+           Без JS это обычные якорные ссылки на форму.
            Ссылка вида  /?request=bearings#contacts  тоже выбирает категорию (ключи: parts, oils, bearings, belts, seals). */
         (function () {
             const form = document.getElementById('sapOrderForm');
@@ -2835,6 +2799,7 @@
             if (!form || !wrap || !sel || !msg || !subj) return;
             const DEFAULT_PH = msg.getAttribute('placeholder');
             const DEFAULT_SUBJ = subj.value;
+            let lastAuto = '';
 
             function apply() {
                 const opt = sel.options[sel.selectedIndex];
@@ -2848,65 +2813,41 @@
                 apply();
                 return true;
             }
+            function addBrand(brand) {
+                const line = 'Бренд: ' + brand + '. ';
+                const cur = msg.value;
+                if (!cur.trim() || cur === lastAuto) msg.value = line;
+                else if (cur.indexOf('Бренд: ' + brand) === -1) msg.value = cur.replace(/\s+$/, '') + '\n' + line;
+                lastAuto = msg.value === line ? line : '';
+                msg.dispatchEvent(new Event('input', { bubbles: true }));
+            }
+            function goToForm() {
+                const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                wrap.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'start' });
+                sel.classList.remove('is-flash'); void sel.offsetWidth; sel.classList.add('is-flash');
+                setTimeout(() => sel.classList.remove('is-flash'), 1900);
+                if (window.matchMedia('(pointer: fine)').matches) setTimeout(() => {
+                    msg.focus({ preventScroll: true });
+                    msg.setSelectionRange(msg.value.length, msg.value.length);
+                }, calm ? 0 : 750);
+            }
+
             sel.addEventListener('change', apply);
             form.addEventListener('reset', () => setTimeout(apply, 0));
 
-            document.querySelectorAll('[data-request]').forEach(link => {
+            document.querySelectorAll('[data-request], [data-brand-request]').forEach(link => {
                 link.addEventListener('click', e => {
                     if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey) return;
                     if (form.style.display === 'none' && again) again.click();   // после отправки снова показываем форму
-                    if (!choose(link.dataset.request)) return;                   // неизвестный ключ — обычный переход по якорю
+                    if (!choose(link.dataset.request || link.dataset.brandRequest)) return;   // неизвестный ключ — обычный переход по якорю
                     e.preventDefault();
-                    const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-                    wrap.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'start' });
-                    sel.classList.remove('is-flash'); void sel.offsetWidth; sel.classList.add('is-flash');
-                    setTimeout(() => sel.classList.remove('is-flash'), 1900);
-                    if (window.matchMedia('(pointer: fine)').matches) setTimeout(() => msg.focus({ preventScroll: true }), calm ? 0 : 750);
+                    if (link.dataset.brand) addBrand(link.dataset.brand);
+                    goToForm();
                 });
             });
 
             const q = new URLSearchParams(window.location.search).get('request');
             if (q) choose(q);
-        })();
-
-        /* ===== Бренды → форма заявки =====
-           Клик по логотипу (или по строке «Другая марка?») выбирает категорию, подставляет бренд в запрос
-           и плавно ведёт к форме. Без JS ссылки просто переходят к форме. */
-        (function () {
-            const form = document.getElementById('sapOrderForm');
-            const wrap = document.getElementById('sapFormWrap');
-            const sel = document.getElementById('sapCategory');
-            const msg = document.getElementById('sapMessage');
-            const again = document.getElementById('sapAgainBtn');
-            if (!form || !wrap || !sel || !msg) return;
-            let lastAuto = '';
-
-            document.querySelectorAll('[data-brand-request]').forEach(link => {
-                link.addEventListener('click', e => {
-                    if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey) return;
-                    e.preventDefault();
-                    if (form.style.display === 'none' && again) again.click();
-                    const opt = Array.prototype.find.call(sel.options, o => o.dataset.key === link.dataset.brandRequest);
-                    if (opt) { sel.value = opt.value; sel.dispatchEvent(new Event('change', { bubbles: true })); }
-                    const brand = link.dataset.brand;
-                    if (brand) {
-                        const line = 'Бренд: ' + brand + '. ';
-                        const cur = msg.value;
-                        if (!cur.trim() || cur === lastAuto) msg.value = line;
-                        else if (cur.indexOf('Бренд: ' + brand) === -1) msg.value = cur.replace(/\s+$/, '') + '\n' + line;
-                        lastAuto = msg.value === line ? line : '';
-                        msg.dispatchEvent(new Event('input', { bubbles: true }));
-                    }
-                    const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-                    wrap.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'start' });
-                    sel.classList.remove('is-flash'); void sel.offsetWidth; sel.classList.add('is-flash');
-                    setTimeout(() => sel.classList.remove('is-flash'), 1900);
-                    if (window.matchMedia('(pointer: fine)').matches) setTimeout(() => {
-                        msg.focus({ preventScroll: true });
-                        msg.setSelectionRange(msg.value.length, msg.value.length);
-                    }, calm ? 0 : 750);
-                });
-            });
         })();
         </script>
 </body>
