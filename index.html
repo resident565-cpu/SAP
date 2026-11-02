@@ -273,7 +273,10 @@
         }
         .sap-card-base::before { left: -12%; background: radial-gradient(circle, rgba(30, 47, 79, 0.45), transparent 62%); }
         .sap-card-base::after  { right: -12%; background: radial-gradient(circle, rgba(234, 88, 32, 0.38), transparent 62%); }
-        .sap-card-base:hover {
+        /* Подъём ставит скрипт классом .is-lift (а не :hover): при подъёме на 5px нижняя полоска карточки уходит
+           из-под курсора, :hover слетал, карточка опускалась — и так по кругу (дрожание у нижней границы). */
+        html:not(.fx-js) .sap-card-base:hover,
+        .sap-card-base.is-lift {
             transform: translateY(-5px);
             box-shadow: inset 0 2px 0 rgba(255, 255, 255, 1), inset 0 -4px 8px rgba(30, 47, 79, 0.08), 0 3px 0 rgba(30, 47, 79, 0.05), 0 14px 32px rgba(30, 47, 79, 0.14), 0 34px 60px -12px rgba(30, 47, 79, 0.22);
         }
@@ -2599,6 +2602,7 @@
 
                 function render() {
                     const on = st.hover || st.tap;
+                    card.classList.toggle('is-lift', on);
                     clearTimeout(st.fogTimer);
                     if (on) {
                         card.classList.add('fog-run', 'fog-on');
@@ -2610,8 +2614,32 @@
                 }
 
                 /* мышь/перо — по наведению; touch — по тапу (как и раньше, на 5 секунд) */
-                card.addEventListener('pointerenter', e => { if (e.pointerType === 'touch') return; st.hover = true; render(); });
-                card.addEventListener('pointerleave', e => { if (e.pointerType === 'touch') return; st.hover = false; render(); });
+                /* Пока карточка поднята, её нижняя полоса (LIFT px) уже не под курсором — это не «уход».
+                   Уходом считаем выход курсора за исходную (неподнятую) область карточки. */
+                const LIFT = 7;   /* 5px подъёма + запас на дробные значения во время transition */
+                const inStableRect = (x, y) => {
+                    const r = card.getBoundingClientRect();
+                    return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom + LIFT;
+                };
+                const onDocMove = e => {
+                    if (e.pointerType === 'touch') return;
+                    if (inStableRect(e.clientX, e.clientY)) return;
+                    stopWatch(); st.hover = false; render();
+                };
+                const stopWatch = () => document.removeEventListener('pointermove', onDocMove);
+
+                card.addEventListener('pointerenter', e => {
+                    if (e.pointerType === 'touch') return;
+                    stopWatch(); st.hover = true; render();
+                });
+                card.addEventListener('pointerleave', e => {
+                    if (e.pointerType === 'touch') return;
+                    if (st.hover && inStableRect(e.clientX, e.clientY)) {   /* курсор в «зазоре» под поднятой карточкой */
+                        document.addEventListener('pointermove', onDocMove);
+                        return;
+                    }
+                    stopWatch(); st.hover = false; render();
+                });
                 card.addEventListener('click', () => {
                     st.tap = true;
                     clearTimeout(st.tapTimer);
