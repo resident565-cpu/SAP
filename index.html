@@ -498,9 +498,7 @@
         .scenarios-section { padding: 100px 0; --ink: var(--blue); --grid: rgba(30, 47, 79, 0.055);
             background: linear-gradient(var(--grid) 1px, transparent 1px) 0 0 / 32px 32px, linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 32px 32px, var(--light-grey); }
         .scenarios-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 22px; margin-top: 20px; }
-        .scenario-card { display: flex; flex-direction: column; padding: 28px; --ps: paused; }
-        /* циклы иконок играют, пока карточка «в деле» (fog-run ставит контроллер hover-эффектов), без JS — по :hover */
-        .scenario-card.fog-run, html:not(.fx-js) .scenario-card:hover { --ps: running; }
+        .scenario-card { display: flex; flex-direction: column; padding: 28px; }
         .sc-urgent { grid-column: 1 / 4; grid-row: 1 / 3; }
         .sc-vin, .sc-analog { grid-column: 4 / 7; }
         .sc-bear, .sc-stock, .sc-non { grid-column: span 2; }
@@ -513,7 +511,7 @@
         .sc-art svg { display: block; width: 100%; height: auto; max-height: 158px; margin: 0 auto; overflow: visible; }
         .scenario-card h3 { font-size: 18px; font-weight: 700; color: var(--dark); line-height: 1.3; letter-spacing: -0.01em; margin-bottom: 10px; }
         .scenario-card p { font-size: 14px; color: #555; line-height: 1.6; letter-spacing: -0.005em; }
-        
+
         /* линии чертежа и анимации иконок (всё в области .scenarios-section, ключевые кадры с префиксом sc-) */
         .scenarios-section svg .l{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
         .scenarios-section svg .t{fill:none;stroke:var(--ink);stroke-width:.9;stroke-linecap:round;stroke-linejoin:round;opacity:.55}
@@ -531,28 +529,27 @@
         .scenarios-section .scenario-card.visible .draw{animation:sc-draw 1.4s var(--ease) forwards}
         @keyframes sc-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
         .scenarios-section .sp{transform-origin:0 0}
-.scenarios-section .sc-urgent .sp{animation:sc-rot var(--t,6s) linear infinite}
-                @keyframes sc-rot{to{transform:rotate(360deg)}}
+        .scenarios-section .sc-urgent .sp{animation:sc-rot var(--t,6s) linear infinite}
+        @keyframes sc-rot{to{transform:rotate(360deg)}}
         .scenarios-section .pulse{opacity:0}
-                .scenarios-section .sc-urgent .flow{animation:sc-flow 1s linear infinite}
+        .scenarios-section .sc-urgent .flow{animation:sc-flow 1s linear infinite}
         @keyframes sc-flow{to{stroke-dashoffset:-8}}
-                        .scenarios-section .pk{opacity:0;offset-distance:0}
-                .scenarios-section .scan{opacity:0}
-                                .scenarios-section .chip{opacity:0}
-                                                                                                .scenarios-section .sm{fill:#fff;opacity:0;animation:sc-sm 3s ease-out infinite}
+        .scenarios-section .pk{opacity:0;offset-distance:0}
+        .scenarios-section .scan{opacity:0}
+        .scenarios-section .chip{opacity:0}
+        .scenarios-section .sm{fill:#fff;opacity:0;animation:sc-sm 3s ease-out infinite}
         @keyframes sc-sm{0%{transform:none;opacity:.5}100%{transform:translate(8px,-22px) scale(2.6);opacity:0}}
-        .scenarios-section .ck,.scenarios-section .ac{stroke-dasharray:1;stroke-dashoffset:0}
-        .scenarios-section .rt{transform-origin:0 0;will-change:transform}
+        .scenarios-section .ac{stroke-dasharray:1;stroke-dashoffset:0}
+        .scenarios-section .rt{transform-origin:0 0}
         .scenarios-section .srch{opacity:0}
-        .scenarios-section .scenario-card.fog-run .ck{animation:sc-draw .6s var(--ease) .1s}
         .scenarios-section .tk{opacity:0;offset-rotate:auto;animation:sc-drive 8s ease-in-out infinite}
         .scenarios-section .tk2{animation-delay:2.6s}
         @keyframes sc-drive{0%{offset-distance:0;opacity:0}3%{opacity:1}58%{offset-distance:100%;opacity:1}62%,100%{offset-distance:100%;opacity:0}}
         .scenarios-section .arr{opacity:0;animation:sc-arr 8s ease-out infinite}
         @keyframes sc-arr{0%,57%{opacity:0;transform:scale(1)}59%{opacity:.8}75%,100%{opacity:0;transform:scale(3)}}
         .scenarios-section .br{opacity:0}
-.scenarios-section .br0{opacity:1}
-                                .scenarios-section .sc-urgent{--ps:running;background:linear-gradient(165deg,#1e2f4f,#0f1e35);border-color:rgba(255,255,255,.08);padding:36px;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 22px 50px -14px rgba(15,30,53,.55)}
+        .scenarios-section .br0{opacity:1}
+        .scenarios-section .sc-urgent{background:linear-gradient(165deg,#1e2f4f,#0f1e35);border-color:rgba(255,255,255,.08);padding:36px;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 22px 50px -14px rgba(15,30,53,.55)}
         .scenarios-section .sc-urgent .sc-tag{background:rgba(255,255,255,.1);color:#d5deee}
         .scenarios-section .sc-urgent .sc-art{flex:1;display:flex;align-items:center;margin:8px 0 24px}
         .scenarios-section .sc-urgent .sc-art svg{max-height:none}
@@ -579,11 +576,8 @@
         }
         @media (prefers-reduced-motion:reduce){.scenarios-section *{animation:none!important;transition:none!important}
         .scenarios-section .draw{stroke-dashoffset:0!important}
-        .scenarios-section .pk,.scenarios-section .sm{opacity:0}
         .scenarios-section .chip,.scenarios-section .tk{opacity:1}
         .scenarios-section .tk2{offset-distance:100%}
-        .scenarios-section .br{opacity:0}
-        .scenarios-section .br0{opacity:1}
         }
 
         .how-section { padding: 100px 0; background-color: var(--white); }
@@ -2769,8 +2763,8 @@
             ];
             /* ===== Иконки блока «Решаемые задачи» (кроме тёмной карточки: там цикл идёт всегда) =====
                Те же правила, что у остальных иконок: разгон с нуля; вращения при уходе плавно тормозят и замирают,
-               циклы (всплески, бегущие точки, смена маркировок, сканер) доигрывают проход и выключаются в исходном
-               состоянии. Кадры начинаются и заканчиваются в базовом состоянии, поэтому на обрыве нет скачка. */
+               циклы (всплески, бегущие точки, смена маркировок, сканер, сборка «аналога», дуга поиска) доигрывают проход
+               и выключаются в исходном состоянии. Кадры начинаются и заканчиваются в базовом состоянии, поэтому на обрыве нет скачка. */
             (function () {
                 let n = 0;
                 const num = (el, v, d) => { const x = parseFloat(el.style.getPropertyValue(v)); return isNaN(x) ? d : x; };
