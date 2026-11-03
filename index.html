@@ -980,8 +980,8 @@
         /* на телефоне наведения нет — плашка с маршрутом видна всегда */
         @media (hover: none) { .map-route { opacity: 1; transform: none; pointer-events: auto; } }
         @media (max-width: 600px) { .map-route { left: 10px; right: 10px; bottom: 8px; padding: 7px 11px 7px 8px; gap: 10px; border-radius: 15px; } .map-route-icon { width: 28px; height: 28px; border-radius: 9px; } .map-route-icon svg { width: 15px; height: 15px; } .map-route-text strong { font-size: 13px; } .map-route-text small { font-size: 11px; } }
-        @media (prefers-reduced-motion: reduce) { .map-container:hover { transform: none; } .map-route { transform: none; } }
         @media (prefers-reduced-motion: reduce) {
+            .map-container:hover { transform: none; } .map-route { transform: none; }
             .map-container:hover .map-trail-halo, .map-container.is-animated .map-trail-halo,
             .map-container:hover .map-trail, .map-container.is-animated .map-trail { animation: none; stroke-dashoffset: 0; }
             .map-container:hover .map-head, .map-container.is-animated .map-head, .map-container:hover .map-hq-ring, .map-container.is-animated .map-hq-ring,
