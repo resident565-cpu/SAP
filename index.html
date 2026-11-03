@@ -2000,7 +2000,7 @@
                         <label for="sapConsent">Я даю согласие на обработку моих персональных данных в соответствии с <a href="policy.html" target="_blank" rel="noopener">Политикой конфиденциальности</a></label>
                     </div>
 
-                    <p class="form-hint" id="sapFormHint" role="status" aria-live="polite"></p>
+                    <p class="form-hint" id="sapFormHint" role="status" aria-live="polite">Заполните запрос, укажите телефон или email и примите согласие.</p>
                     <a href="mailto:ooo-sap@list.ru" id="sapMailFallback" class="form-fallback-btn" hidden>Отправить запрос письмом</a>
                     <button type="submit" id="sapSubmitBtn" class="form-submit-btn" disabled>Отправить запрос</button>
                     <p class="form-tip">Резервный канал: <a href="mailto:ooo-sap@list.ru">ooo-sap@list.ru</a> или <a href="tel:+79209680128">+7-920-968-01-28</a>.</p>
@@ -2212,6 +2212,12 @@
                 setMessengers(false);
             }
         });
+        // выбрали мессенджер — список закрываем, чтобы после возврата из чата он не висел открытым
+        msgList.addEventListener('click', (e) => {
+            if (!e.target.closest('.messenger-btn')) return;
+            setMessengers(false);
+            if (e.detail === 0) msgBtn.focus();   // с клавиатуры: фокус на кнопку, а не в пустоту
+        });
 
         /* ===== 3D-эффект в hero ===== */
         const heroBlock = document.getElementById('sapHeroBlock');
@@ -2316,10 +2322,15 @@
                 const pos = atEnd ? out.length : caretAfterDigit(out, k);
                 el.setSelectionRange(pos, pos);
             }
-            validateSapForm();
+            touchForm();
         });
 
-        /* ===== Валидация ===== */
+        /* ===== Валидация =====
+           Предупреждения («Для отправки: …») показываем только после первого ввода пользователя;
+           до этого в подсказке нейтральный текст из HTML, а кнопка просто неактивна. */
+        const IDLE_HINT = formHint.textContent;
+        let formTouched = false;   // пользователь уже что-то вводил/отмечал
+        let sending = false;       // запрос уходит на сервер
         function validateSapForm() {
             const emailTrim = emailInput.value.trim();
             const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(emailTrim);
@@ -2337,6 +2348,9 @@
                 formHint.textContent = 'Всё готово — нажмите «Отправить запрос».';
                 formHint.classList.remove('is-warn');
                 formHint.classList.add('is-ok');
+            } else if (!formTouched) {
+                if (formHint.textContent !== IDLE_HINT) formHint.textContent = IDLE_HINT;   // не перезаписываем без нужды — это live-область
+                formHint.classList.remove('is-warn', 'is-ok');
             } else {
                 const parts = [];
                 if (!messageOk) parts.push('опишите запрос');
@@ -2351,11 +2365,13 @@
                 formHint.classList.remove('is-ok');
             }
 
-            submitBtn.disabled = !valid;
+            submitBtn.disabled = !valid || sending;
         }
-        emailInput.addEventListener('input', validateSapForm);
-        messageInput.addEventListener('input', validateSapForm);
-        consentCheckbox.addEventListener('change', validateSapForm);
+        function touchForm() { formTouched = true; validateSapForm(); }
+        emailInput.addEventListener('input', touchForm);
+        // программная подстановка (бренд из каталога) вводом пользователя не считается: isTrusted === false
+        messageInput.addEventListener('input', (e) => (e.isTrusted ? touchForm() : validateSapForm()));
+        consentCheckbox.addEventListener('change', touchForm);
 
         validateSapForm();
 
@@ -2379,7 +2395,11 @@
         /* ===== Отправка формы через Web3Forms ===== */
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            if (!consentCheckbox.checked) return;
+            if (sending) return;                 // уже отправляется
+            formTouched = true;
+            validateSapForm();
+            if (submitBtn.disabled) return;      // страховка: форма невалидна (Enter, программный submit) — не отправляем
+            sending = true;
             mailFallback.hidden = true;
 
             const originalHtml = submitBtn.innerHTML;
@@ -2406,11 +2426,14 @@
             } catch (err) {
                 submitBtn.classList.remove('is-loading');
                 submitBtn.innerHTML = originalHtml;
+                sending = false;
                 validateSapForm();
                 formHint.textContent = 'Не удалось отправить. Отправьте запрос письмом (кнопка ниже) или позвоните: +7-920-968-01-28.';
                 formHint.classList.add('is-warn');
                 formHint.classList.remove('is-ok');
                 mailFallback.hidden = false;
+            } finally {
+                sending = false;
             }
         });
 
@@ -2421,7 +2444,8 @@
             lastPhoneDigits = '';
             formSuccess.style.display = 'none';
             form.style.display = '';
-            formHint.textContent = '';
+            formTouched = false;
+            formHint.textContent = IDLE_HINT;
             formHint.classList.remove('is-warn', 'is-ok');
             submitBtn.classList.remove('is-loading');
             submitBtn.innerHTML = 'Отправить запрос';
