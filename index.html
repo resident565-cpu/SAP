@@ -107,11 +107,9 @@
             --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             --ease: cubic-bezier(.16,1,.3,1);
             --grain-card: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
-            --glass-shadow: inset 0 1px 0 #fff, inset 0 -2px 5px rgba(30,47,79,.06), inset 0 0 0 1px rgba(30,47,79,.07), 0 1px 2px rgba(30,47,79,.10), 0 8px 16px -5px rgba(30,47,79,.20);
-            --glass-shadow-hot: inset 0 1px 0 #fff, inset 0 -2px 5px rgba(234,88,32,.08), inset 0 0 0 1px rgba(234,88,32,.12), 0 1px 2px rgba(234,88,32,.14), 0 10px 22px -4px rgba(234,88,32,.34);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; scroll-padding-top: 100px; -webkit-tap-highlight-color: transparent; } /* убирает серый/синий квадрат при касании в Chrome и Safari */
+        html { scroll-behavior: smooth; scroll-padding-top: 100px; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Geologica Local', 'Geologica', 'Segoe UI', Arial, sans-serif; background-color: var(--light-grey); color: var(--dark); line-height: 1.55; overflow-x: hidden; letter-spacing: -0.005em; }
 
         .skip-link { position: absolute; left: -9999px; top: 0; z-index: 10001; padding: 12px 20px; background: var(--blue); color: #fff; text-decoration: none; border-radius: 0 0 12px 0; font-weight: 600; }
@@ -287,7 +285,7 @@
         .sap-card-base.fog-run::after  { animation: v4Rise 4.2s ease-in-out infinite .6s; }
         .sap-card-base.fog-on::before,
         .sap-card-base.fog-on::after   { filter: blur(28px) opacity(1); transition-duration: 1.1s; }
-        /* запасной вариант без JS (резкий, как раньше) */
+
         @media (hover: hover) {
             html:not(.fx-js) .sap-card-base:hover::before { animation: v4Rise 3.4s ease-in-out infinite; filter: blur(28px) opacity(1); }
             html:not(.fx-js) .sap-card-base:hover::after  { animation: v4Rise 4.2s ease-in-out infinite .6s; filter: blur(28px) opacity(1); }
@@ -308,7 +306,7 @@
         .catalog-card:nth-child(1) .card-icon-wrap svg { width: 46px; height: 46px; }
         .catalog-card:nth-child(n+2) { grid-column: span 2; grid-row: span 1; }
 
-        /* Отдельная кнопка заявки: карточка каталога сама по себе не является ссылкой */
+
         .catalog-card > .card-cta {
             position: relative; z-index: 4; align-self: flex-start; margin-top: auto;
             display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px;
@@ -421,7 +419,7 @@
         .brand-group-card.fog-on .promo-3d-stage svg { stroke: var(--orange); }
         .brand-group-card:hover .promo-3d-stage svg [fill="var(--blue)"],
         .brand-group-card.fog-on .promo-3d-stage svg [fill="var(--blue)"] { fill: var(--orange); }
-        .smoke-puff { position: absolute; top: 29px; left: 51px; width: 6px; height: 6px; background-color: rgba(234, 88, 32, 0.5); border-radius: 50%; opacity: 0; pointer-events: none; } /* дым оранжевый — в тон иконке трактора при наведении */
+        .smoke-puff { position: absolute; top: 29px; left: 51px; width: 6px; height: 6px; background-color: rgba(234, 88, 32, 0.5); border-radius: 50%; opacity: 0; pointer-events: none; }
         @keyframes tractorRide { 0% { transform: translateY(0); } 100% { transform: translateY(-2px); } }
         @keyframes smokeMove { 0% { transform: translate(0, 0) scale(0.6); opacity: 0; } 16% { opacity: 0.6; } 100% { transform: translate(-14px, -16px) scale(2.5); opacity: 0; } }
 
@@ -438,7 +436,7 @@
         .brand-logo-item svg { --logo-scale: 1; height: calc(var(--logo-h, 30) * var(--logo-scale) * 1px); width: auto; max-width: 92%; max-height: 100%; display: block; flex-shrink: 0; transition: transform 0.4s var(--ease); }
         .brand-logo-item:hover svg { transform: scale(1.08); }
 
-        /* Бренды → заявка: логотипы ведут к форме с выбранной категорией и брендом. */
+
         .brand-logo-item { text-decoration: none; color: inherit; cursor: pointer; }
         .brand-logo-item::after {
             content: ''; position: absolute; top: 7px; right: 7px; width: 11px; height: 11px;
@@ -506,7 +504,7 @@
         .expertise-card p { font-size: 14px; color: #555; line-height: 1.6; letter-spacing: -0.005em; }
         .expertise-card p strong { font-weight: 600; color: var(--blue); }
 
-        /* Индивидуальные CTA карточек решаемых задач */
+
         .scenario-cta {
             position: relative; z-index: 3; display: inline-flex; align-items: center; gap: 8px;
             padding: 11px 24px; margin-top: auto; align-self: flex-start; border-radius: 99px;
@@ -522,7 +520,7 @@
         .scenario-cta:hover svg { transform: translateX(4px); stroke: #ffffff; }
         .scenario-cta:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
 
-        /* Тёмная карточка срочной поставки */
+
         .sc-urgent { padding: 36px 34px 38px !important; }
         .sc-urgent p { margin-bottom: 24px; }
         .sc-urgent .scenario-cta {
@@ -531,11 +529,11 @@
         }
         .sc-urgent .scenario-cta:hover { background: var(--orange); border-color: var(--orange); color: #fff; box-shadow: 0 8px 24px rgba(234,88,32,.4); }
 
-        /* Выравнивание по вертикали карточек нижнего ряда (подшипники, склад, поиск) */
+
         .sc-bear, .sc-stock, .sc-non { display: flex; flex-direction: column; justify-content: flex-start; }
         .sc-bear .scenario-cta, .sc-stock .scenario-cta, .sc-non .scenario-cta { margin-top: auto; }
 
-        /* Карточки широкого формата (VIN, аналог) */
+
         .sc-txt { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
         .sc-txt p { margin-bottom: 22px; }
         .sc-txt .scenario-cta { margin-top: 0; }
@@ -826,7 +824,7 @@
         }
         .form-group input:focus, .form-group textarea:focus { border-color: var(--orange); outline: none; box-shadow: 0 0 0 3px rgba(234,88,32,0.15); }
         .form-group textarea { min-height: 90px; resize: vertical; }
-        /* выбор категории запроса (подставляется по клику на карточку каталога) */
+
         .form-group select {
             background: #111827 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 16px center / 14px;
             border: 1px solid rgba(255,255,255,0.1); padding: 12px 44px 12px 16px; border-radius: 12px; cursor: pointer;
@@ -913,7 +911,7 @@
            Иначе у нижней границы карта уходила из-под курсора, :hover слетал, карта опускалась — и так по кругу (мерцание). */
         .map-hover-zone { position: relative; }
         .map-container { border-radius: 28px; overflow: hidden; height: 380px; background-color: #161a22; position: relative; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.04); box-shadow: 0 15px 35px rgba(0,0,0,.3); --map-blue: var(--blue); --map-orange: var(--orange); --map-t: 2.2s; --map-hold: .45s; --map-out: 1.6s; --mx: 50%; --my: 50%; transition: transform .55s var(--ease), box-shadow .55s var(--ease), border-color .55s var(--ease); }
-        /* 3D-наклон убран: он растеризовал SVG-слой и размывал дороги/подписи */
+
         .css-map-scene { width: 100%; height: 100%; position: relative; }
 
         /* ===== Схема проезда (единый SVG, координаты viewBox 480×380) =====
@@ -1014,7 +1012,7 @@
         .map-hover-zone:hover .map-container .map-grid, .map-container.is-animated .map-grid { opacity: 0.45; }
         .map-hover-zone:hover .map-container .map-rail, .map-container.is-animated .map-rail { opacity: 0.4; }
 
-        /* на телефоне наведения нет — плашка с маршрутом видна всегда */
+
         @media (hover: none) { .map-route { opacity: 1; transform: none; pointer-events: auto; } }
         @media (max-width: 600px) { .map-route { left: 10px; right: 10px; bottom: 8px; padding: 7px 11px 7px 8px; gap: 10px; border-radius: 15px; } .map-route-icon { width: 28px; height: 28px; border-radius: 9px; } .map-route-icon svg { width: 15px; height: 15px; } .map-route-text strong { font-size: 13px; } .map-route-text small { font-size: 11px; } }
         @media (prefers-reduced-motion: reduce) {
@@ -1039,13 +1037,13 @@
             color: var(--white); cursor: pointer; z-index: 99999; box-shadow: 0 8px 25px rgba(30, 47, 79, 0.45); transition: var(--transition);
         }
         .nav-backdrop { display: none; }
-        /* Кнопка чата прячется, когда открыто меню или видна форма заявки */
+
         body.nav-open .messengers-trigger, body.nav-open .messengers-list,
         body.messengers-hidden .messengers-trigger, body.messengers-hidden .messengers-list {
             opacity: 0 !important; pointer-events: none !important; transform: scale(0.6) !important; visibility: hidden;
             transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), visibility 0s linear 0.3s;
         }
-        /* Открытое меню: кнопка оранжевая, при закрытии снова синяя */
+
         .messengers-trigger.is-open { background-color: var(--orange); }
         /* Hover только для мыши, иначе на телефоне после тапа кнопка «залипает» оранжевой */
         @media (hover: hover) and (pointer: fine) {
@@ -1259,12 +1257,12 @@
             border: 1px solid rgba(255, 255, 255, 0.92);
             box-shadow: var(--glass-shadow);
         }
-        /* блик: верхняя половина светлее, с мягким «срезом» посередине — как у стеклянной кнопки */
+
         .card-icon-wrap::before, .promo-3d-stage::before, .expertise-icon::before {
             content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 1;
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.14) 48%, rgba(255, 255, 255, 0) 55%);
         }
-        /* тёплый оттенок при наведении (плавно проявляется) */
+
         .card-icon-wrap::after, .promo-3d-stage::after, .expertise-icon::after {
             content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 0; opacity: 0;
             background: linear-gradient(160deg, rgba(255, 240, 229, 0.95) 0%, rgba(255, 198, 160, 0.55) 100%);
@@ -1699,7 +1697,7 @@
                 </div>
                 <div class="about-media">
                     <div class="about-image-card sap-card-base reveal">
-                        <img src="images/o-kompanii.webp" alt="Промышленное предприятие и комбайн в пшеничном поле — САП работает и для индустрии, и для аграрного сектора" width="960" height="640" loading="lazy">
+                        <img src="images/o-kompanii.webp" alt="Промышленное предприятие и комбайн в пшеничном поле — САП работает и для индустрии, и для аграрного сектора" width="960" height="640" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -2260,7 +2258,7 @@
             <div class="sap-form-wrap reveal" id="sapFormWrap">
                 <h3>Быстрая заявка на комплектующие</h3>
                 <form id="sapOrderForm" action="https://api.web3forms.com/submit" method="POST">
-                    <!-- Секретный ключ Web3Forms -->
+                    <!-- Публичный ключ Web3Forms (виден в коде страницы по замыслу сервиса; ограничьте его доменом в кабинете Web3Forms) -->
                     <input type="hidden" name="access_key" value="5a6aa010-7579-48d2-868b-90cb9150bf06">
                     <!-- Тема письма и отправитель -->
                     <input type="hidden" name="subject" value="Новая заявка с сайта САП">
@@ -2440,7 +2438,6 @@
             navRoot.style.setProperty('--nav-w', Math.round(width) + 'px');
             navRoot.style.setProperty('--logo-shift', navShift + 'px');
         }
-        layoutDrawer();
         window.addEventListener('resize', layoutDrawer);
         window.addEventListener('load', layoutDrawer);
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutDrawer);
@@ -3348,19 +3345,11 @@
                 apply();
                 return true;
             }
-            function addBrand(brand) {
-                const line = 'Бренд: ' + brand + '. ';
+            function addLine(label, value) {
+                const line = label + ': ' + value + '. ';
                 const cur = msg.value;
                 if (!cur.trim() || cur === lastAuto) msg.value = line;
-                else if (cur.indexOf('Бренд: ' + brand) === -1) msg.value = cur.replace(/\s+$/, '') + '\n' + line;
-                lastAuto = msg.value === line ? line : '';
-                msg.dispatchEvent(new Event('input', { bubbles: true }));
-            }
-            function addTask(task) {
-                const line = 'Задача: ' + task + '. ';
-                const cur = msg.value;
-                if (!cur.trim() || cur === lastAuto) msg.value = line;
-                else if (cur.indexOf('Задача: ' + task) === -1) msg.value = cur.replace(/\s+$/, '') + '\n' + line;
+                else if (cur.indexOf(label + ': ' + value) === -1) msg.value = cur.replace(/\s+$/, '') + '\n' + line;
                 lastAuto = msg.value === line ? line : '';
                 msg.dispatchEvent(new Event('input', { bubbles: true }));
             }
@@ -3385,8 +3374,8 @@
                     const req = link.dataset.request || link.dataset.brandRequest;
                     if (req && !choose(req)) return;
                     e.preventDefault();
-                    if (link.dataset.brand) addBrand(link.dataset.brand);
-                    if (link.dataset.task) addTask(link.dataset.task);
+                    if (link.dataset.brand) addLine('Бренд', link.dataset.brand);
+                    if (link.dataset.task) addLine('Задача', link.dataset.task);
                     goToForm();
                 });
             });
