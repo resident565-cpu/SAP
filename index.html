@@ -430,7 +430,7 @@
             position: relative; display: flex; align-items: center; justify-content: center; background: var(--white);
             border-radius: 14px; padding: 9px; height: 68px;
             border: 1px solid rgba(30, 47, 79, 0.06); box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-            transition: all 0.4s var(--ease); overflow: hidden;
+            transition: all 0.4s var(--ease);
         }
         .brand-group-card:hover .brand-logo-item {
             border-color: rgba(30, 47, 79, 0.15); box-shadow: 0 8px 20px rgba(30, 47, 79, 0.08); transform: translateY(-2px);
@@ -1311,6 +1311,19 @@
         .brand-group-card.fog-on .promo-3d-stage::after,
         .expertise-card:hover .expertise-icon::after,
         .hero-badge:hover .hero-badge-icon::after { transform: rotate(-4deg); }
+
+        /* Антимерцание hover: при подъёме на 2–3px нижний край элемента уходил из-под курсора, :hover слетал,
+           элемент опускался, и цикл повторялся. Невидимая «подложка» под нижней границей едет вместе
+           с элементом и удерживает :hover (появляется только пока элемент под курсором). */
+        .cta-button, .form-submit-btn, .contacts-messengers a { position: relative; }
+        .cta-button:hover::before,
+        .catalog-card > .card-cta:hover::before,
+        .scenario-cta:hover::before,
+        .brand-logo-item:hover::before,
+        .form-submit-btn:hover:not(:disabled)::before,
+        .contacts-messengers a:hover::before {
+            content: ''; position: absolute; left: 0; right: 0; top: 100%; height: 8px; background: transparent;
+        }
 </style>
 </head>
 <body>
