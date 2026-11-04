@@ -909,6 +909,9 @@
             outline-offset: 3px;
         }
 
+        /* Наведение ловим на неподвижной обёртке: сама карта приподнимается на 4px, а обёртка остаётся на месте.
+           Иначе у нижней границы карта уходила из-под курсора, :hover слетал, карта опускалась — и так по кругу (мерцание). */
+        .map-hover-zone { position: relative; }
         .map-container { border-radius: 28px; overflow: hidden; height: 380px; background-color: #161a22; position: relative; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.04); box-shadow: 0 15px 35px rgba(0,0,0,.3); --map-blue: var(--blue); --map-orange: var(--orange); --map-t: 2.2s; --map-hold: .45s; --map-out: 1.6s; --mx: 50%; --my: 50%; transition: transform .55s var(--ease), box-shadow .55s var(--ease), border-color .55s var(--ease); }
         /* 3D-наклон убран: он растеризовал SVG-слой и размывал дороги/подписи */
         .css-map-scene { width: 100%; height: 100%; position: relative; }
@@ -944,12 +947,12 @@
         .map-train-light { filter: drop-shadow(0 0 5px #ffe9a8); }
 
         /* 1) след растёт слева направо, 2) после паузы (карточка уже засветилась) гаснет слева направо */
-        .map-container:hover .map-trail-halo, .map-container.is-animated .map-trail-halo,
-        .map-container:hover .map-trail, .map-container.is-animated .map-trail {
+        .map-hover-zone:hover .map-container .map-trail-halo, .map-container.is-animated .map-trail-halo,
+        .map-hover-zone:hover .map-container .map-trail, .map-container.is-animated .map-trail {
             animation: mapTrailIn var(--map-t) cubic-bezier(0.45, 0.05, 0.35, 1) forwards,
                        mapTrailOut var(--map-out) cubic-bezier(0.55, 0, 0.35, 1) calc(var(--map-t) + var(--map-hold)) forwards;
         }
-        .map-container:hover .map-head, .map-container.is-animated .map-head {
+        .map-hover-zone:hover .map-container .map-head, .map-container.is-animated .map-head {
             animation: mapHead var(--map-t) cubic-bezier(0.45, 0.05, 0.35, 1) forwards, mapHeadFade var(--map-t) linear forwards;
         }
         @keyframes mapTrailIn { to { stroke-dashoffset: 0; } }
@@ -957,17 +960,17 @@
         @keyframes mapHead { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -100; } }
         @keyframes mapHeadFade { 0% { opacity: 0; } 4% { opacity: 1; } 94% { opacity: 1; } 100% { opacity: 0; } }
 
-        .map-container:hover .map-yard-box, .map-container.is-animated .map-yard-box { fill: var(--map-blue); transition-delay: calc(var(--map-t) * 0.85); }
-        .map-container:hover .map-yard-edge, .map-container.is-animated .map-yard-edge { opacity: 1; transition-delay: calc(var(--map-t) * 0.85); }
-        .map-container:hover .map-yard-lit, .map-container.is-animated .map-yard-lit { opacity: 1; transition-delay: calc(var(--map-t) * 0.85); }
-        .map-container:hover .map-yard-brand, .map-container.is-animated .map-yard-brand { fill: #fff; transition-delay: calc(var(--map-t) * 0.85); }
-        .map-container:hover .map-yard-g, .map-container.is-animated .map-yard-g {
+        .map-hover-zone:hover .map-container .map-yard-box, .map-container.is-animated .map-yard-box { fill: var(--map-blue); transition-delay: calc(var(--map-t) * 0.85); }
+        .map-hover-zone:hover .map-container .map-yard-edge, .map-container.is-animated .map-yard-edge { opacity: 1; transition-delay: calc(var(--map-t) * 0.85); }
+        .map-hover-zone:hover .map-container .map-yard-lit, .map-container.is-animated .map-yard-lit { opacity: 1; transition-delay: calc(var(--map-t) * 0.85); }
+        .map-hover-zone:hover .map-container .map-yard-brand, .map-container.is-animated .map-yard-brand { fill: #fff; transition-delay: calc(var(--map-t) * 0.85); }
+        .map-hover-zone:hover .map-container .map-yard-g, .map-container.is-animated .map-yard-g {
             filter: drop-shadow(0 0 9px rgba(234, 88, 32, 0.5)) drop-shadow(-7px -5px 22px rgba(30, 47, 79, 0.95)) drop-shadow(5px 6px 24px rgba(234, 88, 32, 0.3));
             transition-delay: calc(var(--map-t) * 0.85);
         }
-        .map-container:hover .map-hq-ring, .map-container.is-animated .map-hq-ring { animation: mapRing 1.3s ease-out calc(var(--map-t) * 0.9) forwards; }
+        .map-hover-zone:hover .map-container .map-hq-ring, .map-container.is-animated .map-hq-ring { animation: mapRing 1.3s ease-out calc(var(--map-t) * 0.9) forwards; }
         @keyframes mapRing { 0% { opacity: 0.9; transform: scale(1); } 100% { opacity: 0; transform: scale(2.3); } }
-        .map-container:hover .map-train, .map-container.is-animated .map-train { animation: mapTrain 6s linear 0.3s forwards; }
+        .map-hover-zone:hover .map-container .map-train, .map-container.is-animated .map-train { animation: mapTrain 6s linear 0.3s forwards; }
         @keyframes mapTrain { to { transform: translateY(460px); } }
 
         @media (max-width: 600px) { .map-container { height: auto; aspect-ratio: 480 / 380; } }
@@ -1002,25 +1005,25 @@
         .map-route:hover .map-route-arrow, .map-route:focus-visible .map-route-arrow { transform: translateX(4px); color: var(--orange); }
         .map-route:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
 
-        .map-container:hover .map-route, .map-container:focus-within .map-route { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .map-hover-zone:hover .map-container .map-route, .map-hover-zone:focus-within .map-route { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
         @media (hover: hover) and (pointer: fine) {
-            .map-container:hover { transform: translateY(-4px); border-color: rgba(234, 88, 32, 0.38); box-shadow: 0 26px 52px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(234, 88, 32, 0.16); }
-            .map-container:hover .map-spot { opacity: 1; }
+            .map-hover-zone:hover .map-container { transform: translateY(-4px); border-color: rgba(234, 88, 32, 0.38); box-shadow: 0 26px 52px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(234, 88, 32, 0.16); }
+            .map-hover-zone:hover .map-container .map-spot { opacity: 1; }
         }
-        .map-container:hover .map-grid, .map-container.is-animated .map-grid { opacity: 0.45; }
-        .map-container:hover .map-rail, .map-container.is-animated .map-rail { opacity: 0.4; }
+        .map-hover-zone:hover .map-container .map-grid, .map-container.is-animated .map-grid { opacity: 0.45; }
+        .map-hover-zone:hover .map-container .map-rail, .map-container.is-animated .map-rail { opacity: 0.4; }
 
         /* на телефоне наведения нет — плашка с маршрутом видна всегда */
         @media (hover: none) { .map-route { opacity: 1; transform: none; pointer-events: auto; } }
         @media (max-width: 600px) { .map-route { left: 10px; right: 10px; bottom: 8px; padding: 7px 11px 7px 8px; gap: 10px; border-radius: 15px; } .map-route-icon { width: 28px; height: 28px; border-radius: 9px; } .map-route-icon svg { width: 15px; height: 15px; } .map-route-text strong { font-size: 13px; } .map-route-text small { font-size: 11px; } }
         @media (prefers-reduced-motion: reduce) {
-            .map-container:hover { transform: none; } .map-route { transform: none; }
-            .map-container:hover .map-trail-halo, .map-container.is-animated .map-trail-halo,
-            .map-container:hover .map-trail, .map-container.is-animated .map-trail { animation: none; stroke-dashoffset: 0; }
-            .map-container:hover .map-head, .map-container.is-animated .map-head, .map-container:hover .map-hq-ring, .map-container.is-animated .map-hq-ring,
-            .map-container:hover .map-train, .map-container.is-animated .map-train { animation: none; }
-            .map-container:hover .map-yard-g, .map-container.is-animated .map-yard-g { transition-delay: 0s; }
+            .map-hover-zone:hover .map-container { transform: none; } .map-route { transform: none; }
+            .map-hover-zone:hover .map-container .map-trail-halo, .map-container.is-animated .map-trail-halo,
+            .map-hover-zone:hover .map-container .map-trail, .map-container.is-animated .map-trail { animation: none; stroke-dashoffset: 0; }
+            .map-hover-zone:hover .map-container .map-head, .map-container.is-animated .map-head, .map-hover-zone:hover .map-container .map-hq-ring, .map-container.is-animated .map-hq-ring,
+            .map-hover-zone:hover .map-container .map-train, .map-container.is-animated .map-train { animation: none; }
+            .map-hover-zone:hover .map-container .map-yard-g, .map-container.is-animated .map-yard-g { transition-delay: 0s; }
         }
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 35px; display: flex; justify-content: space-between; color: #94a3b8; font-size: 13px; width: 100%; flex-wrap: wrap; gap: 15px; letter-spacing: -0.005em; }
         .footer-legal { display: flex; flex-direction: column; gap: 6px; max-width: 640px; }
@@ -2147,7 +2150,7 @@
                     </div>
                     <div class="info-item"><div class="info-label">Склад и администрация</div><address style="font-style:normal;"><p>г. Рязань, 198 км (Окружная дорога), д. 6</p><p style="font-size:14px; color:#94a3b8; margin-top:4px;">Режим работы: Пн — Пт с 9:00 до 18:00</p></address></div>
                 </div>
-                <div class="map-container reveal">
+                <div class="map-hover-zone"><div class="map-container reveal">
                     <div class="css-map-scene">
                         <svg class="sap-map" viewBox="0 0 480 380" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Схема проезда: съезд с Окружной дороги (198 км) к складу по адресу Окружная дорога, д. 6">
                             <defs>
@@ -2252,7 +2255,7 @@
                         <span class="map-route-text"><strong>Построить маршрут</strong><small>СпецАгроПартнер · М-5 Урал, 198-й км, 6</small></span>
                         <svg class="map-route-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                     </a>
-                </div>
+                </div></div>
             </div>
             <div class="sap-form-wrap reveal" id="sapFormWrap">
                 <h3>Быстрая заявка на комплектующие</h3>
