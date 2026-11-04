@@ -107,6 +107,8 @@
             --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             --ease: cubic-bezier(.16,1,.3,1);
             --grain-card: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+            --glass-shadow: inset 0 1px 0 #fff, inset 0 -2px 5px rgba(30,47,79,.06), inset 0 0 0 1px rgba(30,47,79,.07), 0 1px 2px rgba(30,47,79,.10), 0 8px 16px -5px rgba(30,47,79,.20);
+            --glass-shadow-hot: inset 0 1px 0 #fff, inset 0 -2px 5px rgba(234,88,32,.08), inset 0 0 0 1px rgba(234,88,32,.12), 0 1px 2px rgba(234,88,32,.14), 0 10px 22px -4px rgba(234,88,32,.34);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; scroll-padding-top: 100px; -webkit-tap-highlight-color: transparent; } /* убирает серый/синий квадрат при касании в Chrome и Safari */
@@ -208,10 +210,10 @@
         }
 
         .hero-visual { display: flex; justify-content: center; perspective: 1000px; width: 100%; }
-        .hero-logo-wrap { width: 100%; max-width: 400px; position: relative; transition: transform 0.15s ease-out; transform-style: preserve-3d; }
-        .hero-logo-wrap::before { content: ''; position: absolute; inset: -15%; background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 65%); z-index: -1; opacity: 0; transition: opacity 0.5s ease; filter: blur(25px); }
+        .hero-logo-wrap { width: 100%; max-width: 400px; position: relative; transition: transform 0.15s ease-out; transform-style: preserve-3d; -webkit-tap-highlight-color: transparent; touch-action: manipulation; -webkit-user-select: none; user-select: none; }
+        .hero-logo-wrap::before { content: ''; position: absolute; inset: -15%; background: radial-gradient(circle, rgba(255,255,255,.95), rgba(255,255,255,0) 65%); z-index: -1; opacity: 0; transition: opacity .5s ease; filter: blur(25px); }
         .hero-logo-wrap:hover::before { opacity: 1; }
-        .hero-logo-inner { animation: heroFloat 6s ease-in-out infinite; transform-style: preserve-3d; pointer-events: none; }
+        .hero-logo-inner { position: relative; animation: heroFloat 6s ease-in-out infinite; transform-style: preserve-3d; pointer-events: none; transition: scale 1.1s cubic-bezier(.22,1,.36,1); }
         .hero-logo-svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 25px 45px rgba(30, 47, 79, 0.24)) brightness(1) saturate(1) drop-shadow(0 0 15px rgba(255, 255, 255, 0)); transition: filter 0.4s ease; }
         .hero-logo-wrap:hover .hero-logo-svg { filter: drop-shadow(0 25px 45px rgba(30, 47, 79, 0.24)) brightness(1.03) saturate(1) drop-shadow(0 0 15px rgba(255, 255, 255, 0.6)); }
         .hero-logo-svg svg { width: 100%; height: auto; display: block; }
@@ -224,8 +226,6 @@
         /* ===== Логотип в hero: отклик на нажатие (мышь / тач) =====
            Без заливки оранжевым: по гербу скользит блик (только по самим деталям логотипа, как свет по эмали),
            позади вспыхивает тёплая аура, по контуру — тонкая янтарная кромка, сам знак чуть «вжимается». */
-        .hero-logo-wrap { -webkit-tap-highlight-color: transparent; touch-action: manipulation; -webkit-user-select: none; user-select: none; }
-        .hero-logo-inner { position: relative; transition: scale 1.1s cubic-bezier(0.22, 1, 0.36, 1); }
         .hero-logo-wrap.is-pressed .hero-logo-inner { scale: 0.99; transition-duration: 0.4s; transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1); }
 
         .hero-logo-wrap::after { content: ''; position: absolute; inset: -18%; z-index: -1; pointer-events: none;
@@ -298,29 +298,33 @@
             100% { opacity: 0;    transform: translateY(-55%) scale(1.35); }
         }
 
-        .catalog-card { padding: 32px 26px; display: flex; flex-direction: column; justify-content: flex-start; }
-        .catalog-card:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+        .catalog-card { padding: 32px 28px 34px; display: flex; flex-direction: column; justify-content: flex-start; cursor: default; }
+        .catalog-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 12px; line-height: 1.3; letter-spacing: -0.01em; }
+        .catalog-card p { font-size: 13.5px; color: #555; font-weight: 400; line-height: 1.55; letter-spacing: -0.005em; margin-bottom: 24px; }
+        .catalog-card:nth-child(1) { grid-column: span 2; grid-row: span 2; padding: 36px 32px 38px; }
         .catalog-card:nth-child(1) h3 { font-size: 22px; }
         .catalog-card:nth-child(1) p  { font-size: 14.5px; }
         .catalog-card:nth-child(1) .card-icon-wrap { width: 88px; height: 88px; border-radius: 22px; }
         .catalog-card:nth-child(1) .card-icon-wrap svg { width: 46px; height: 46px; }
         .catalog-card:nth-child(n+2) { grid-column: span 2; grid-row: span 1; }
 
-        /* Карточки каталога ведут к форме заявки: вся карточка кликабельна (растянутая ссылка «Оставить заявку») */
-        .catalog-card { cursor: pointer; }
+        /* Отдельная кнопка заявки: карточка каталога сама по себе не является ссылкой */
         .catalog-card > .card-cta {
-            position: static; align-self: flex-start; margin-top: auto; padding-top: 18px;
-            display: inline-flex; align-items: center; gap: 8px;
-            font-size: 13.5px; font-weight: 600; color: var(--blue); text-decoration: none; letter-spacing: -0.005em;
-            transition: color 0.3s var(--ease), gap 0.45s var(--ease);
+            position: relative; z-index: 4; align-self: flex-start; margin-top: auto;
+            display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px;
+            border-radius: 99px; font-size: 13.5px; font-weight: 600; line-height: 1.25;
+            color: var(--blue); text-decoration: none; letter-spacing: -0.005em;
+            background: linear-gradient(180deg, #ffffff 0%, #f1f4f9 100%);
+            border: 1px solid rgba(30,47,79,.12);
+            box-shadow: 0 2px 6px rgba(30,47,79,.05), inset 0 1px 0 rgba(255,255,255,.95);
+            transition: background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease), transform .35s var(--ease);
+            cursor: pointer;
         }
-        .catalog-card:nth-child(1) > .card-cta { margin-top: 18px; padding-top: 0; }
-        .card-cta svg { width: 16px; height: 16px; flex-shrink: 0; transition: transform 0.45s var(--ease); }
-        .card-cta::after { content: ''; position: absolute; inset: 0; z-index: 3; }
-        .catalog-card:hover > .card-cta { color: var(--orange); }
-        .catalog-card:hover .card-cta svg { transform: translateX(4px); }
-        .card-cta:focus-visible { outline: none; }
-        .card-cta:focus-visible::after { outline: 3px solid var(--orange); outline-offset: -3px; border-radius: 28px; }
+        .catalog-card:nth-child(1) > .card-cta { margin-top: auto; }
+        .card-cta svg { width: 15px; height: 15px; flex-shrink: 0; stroke: currentColor; transition: transform .35s var(--ease); }
+        .catalog-card > .card-cta:hover { background: var(--orange); color: #fff; border-color: var(--orange); box-shadow: 0 8px 20px rgba(234,88,32,.28); transform: translateY(-2px); }
+        .catalog-card > .card-cta:hover svg { transform: translateX(4px); stroke: #ffffff; }
+        .card-cta:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
 
         .card-icon-wrap {
             width: 68px; height: 68px; margin-bottom: 22px; display: flex; align-items: center; justify-content: center;
@@ -334,7 +338,20 @@
         }
         .card-icon-wrap svg { width: 36px; height: 36px; stroke-width: 2.2; }
 
-        .icon-gear { animation: none; }
+        .card-icon-wrap svg,
+        .promo-3d-stage svg,
+        .expertise-icon svg,
+        .scenarios-section svg {
+            shape-rendering: geometricPrecision;
+            text-rendering: geometricPrecision;
+        }
+
+        .icon-gear, .icon-brg-cage, .icon-seal-shaft, .icon-belt-p1, .icon-belt-p2,
+        .icon-ucfl-inner, .icon-ucfl-cage, .icon-serp-p1, .icon-serp-p2, .icon-serp-p3, .icon-serp-idler,
+        .tractor-wheel-r, .tractor-wheel-f, .icon-tractor, .icon-drop {
+            transform-box: view-box;
+        }
+        .icon-gear { animation: none; transform-origin: 12px 12px; }
         .icon-drop { animation: none; transform-origin: center bottom; }
         .icon-brg-cage { animation: none; transform-origin: 12px 12px; }
         .icon-belt-loop { animation: none; }
@@ -342,7 +359,7 @@
         .icon-belt-p2 { animation: none; transform-origin: 24.5px 12px; }
         .card-icon-wrap svg.icon-belt-svg { width: 44px; height: 33px; }
         .icon-seal-shaft { animation: none; transform-origin: 12px 12px; }
-        .icon-tractor { animation: none !important; display: block !important; transform-origin: 12px 16px !important; }
+        .icon-tractor { animation: none !important; transform-origin: 12px 16px !important; }
         .icon-ucfl-inner, .icon-ucfl-cage { animation: none; transform-origin: 12px 12px; }
         .icon-serp-belt { animation: none; }
         .icon-serp-p1 { animation: none; transform-origin: 8.4px 15.8px; }
@@ -383,8 +400,6 @@
             html:not(.fx-js) .brand-group-card:hover .puff-3 { animation: smokeMove 1.2s ease-out infinite 0.8s; }
         }
 
-        .catalog-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 12px; line-height: 1.3; letter-spacing: -0.01em; }
-        .catalog-card p { font-size: 13.5px; color: #555; font-weight: 400; line-height: 1.55; letter-spacing: -0.005em; }
 
         .brands-section { padding: 90px 0; background-color: var(--light-grey); }
         .brands-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 30px; margin-top: 40px; }
@@ -392,12 +407,10 @@
         .brand-group-card { padding: 35px; display: flex; flex-direction: column; }
         .brand-group-card h3 { font-size: 19px; font-weight: 700; color: var(--dark); margin-bottom: 24px; border-left: 3.5px solid var(--orange); padding-left: 14px; line-height: 1.2; letter-spacing: -0.015em; }
 
-        .promo-3d-stage { width: 90px; height: 90px; background: linear-gradient(145deg, #eef1f6, #ffffff); border-radius: 24px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; position: relative; border: 1px solid rgba(0,0,0,0.03); box-shadow: inset 0 2px 5px rgba(255,255,255,0.7), 0 8px 20px rgba(0,0,0,0.03); perspective: 400px; }
-        .promo-3d-stage svg { width: 44px; height: 44px; } /* тень-фильтр убран: на Full HD он размывал мелкие линии при анимации */
+        .promo-3d-stage { width: 90px; height: 90px; background: linear-gradient(145deg, #eef1f6, #fff); border-radius: 24px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; position: relative; border: 1px solid rgba(0,0,0,.03); box-shadow: inset 0 2px 5px rgba(255,255,255,.7), 0 8px 20px rgba(0,0,0,.03); transition: var(--transition); }
+        .promo-3d-stage svg { width: 44px; height: 44px; stroke: var(--blue); transition: stroke .45s var(--ease); }
         /* Бренды: при наведении (и тапе — класс .fog-on ставит скрипт) иконка становится оранжевой, как в каталоге.
            Цвета в SVG заданы атрибутами var(--blue), CSS их перекрывает — сами иконки не меняются. */
-        .promo-3d-stage { transition: var(--transition); }
-        .promo-3d-stage svg { stroke: var(--blue); transition: stroke 0.45s var(--ease); }
         .promo-3d-stage svg [fill="var(--blue)"] { fill: var(--blue); transition: fill 0.45s var(--ease); }
         .brand-group-card:hover .promo-3d-stage,
         .brand-group-card.fog-on .promo-3d-stage {
@@ -414,7 +427,7 @@
 
         .brand-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 15px; }
         .brand-logo-item {
-            display: flex; align-items: center; justify-content: center; background: var(--white);
+            position: relative; display: flex; align-items: center; justify-content: center; background: var(--white);
             border-radius: 14px; padding: 9px; height: 68px;
             border: 1px solid rgba(30, 47, 79, 0.06); box-shadow: 0 2px 5px rgba(0,0,0,0.02);
             transition: all 0.4s var(--ease); overflow: hidden;
@@ -425,10 +438,8 @@
         .brand-logo-item svg { --logo-scale: 1; height: calc(var(--logo-h, 30) * var(--logo-scale) * 1px); width: auto; max-width: 92%; max-height: 100%; display: block; flex-shrink: 0; transition: transform 0.4s var(--ease); }
         .brand-logo-item:hover svg { transform: scale(1.08); }
 
-        /* Бренды → заявка. Вместо кнопки «Оставить заявку» (она уже есть в категориях) логотип сам становится ссылкой:
-           в углу плитки — стрелка ↗, по клику категория выбирается и бренд подставляется в запрос.
-           Внизу карточки — тихая строка-вопрос для тех, чьего бренда в списке нет. */
-        .brand-logo-item { position: relative; text-decoration: none; color: inherit; cursor: pointer; }
+        /* Бренды → заявка: логотипы ведут к форме с выбранной категорией и брендом. */
+        .brand-logo-item { text-decoration: none; color: inherit; cursor: pointer; }
         .brand-logo-item::after {
             content: ''; position: absolute; top: 7px; right: 7px; width: 11px; height: 11px;
             background-color: var(--blue); opacity: 0.3; pointer-events: none;
@@ -495,10 +506,45 @@
         .expertise-card p { font-size: 14px; color: #555; line-height: 1.6; letter-spacing: -0.005em; }
         .expertise-card p strong { font-weight: 600; color: var(--blue); }
 
+        /* Индивидуальные CTA карточек решаемых задач */
+        .scenario-cta {
+            position: relative; z-index: 3; display: inline-flex; align-items: center; gap: 8px;
+            padding: 11px 24px; margin-top: auto; align-self: flex-start; border-radius: 99px;
+            font-size: 13.5px; font-weight: 600; line-height: 1.25; color: var(--blue); text-decoration: none;
+            letter-spacing: -0.005em;
+            background: linear-gradient(180deg, #ffffff 0%, #f1f4f9 100%); border: 1px solid rgba(30,47,79,.12);
+            box-shadow: 0 2px 6px rgba(30,47,79,.05), inset 0 1px 0 rgba(255,255,255,.95);
+            transition: background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease), transform .35s var(--ease);
+            cursor: pointer;
+        }
+        .scenario-cta svg { width: 15px; height: 15px; flex-shrink: 0; stroke: currentColor; transition: transform .35s var(--ease); }
+        .scenario-cta:hover { background: var(--orange); color: #fff; border-color: var(--orange); box-shadow: 0 8px 20px rgba(234,88,32,.28); transform: translateY(-2px); }
+        .scenario-cta:hover svg { transform: translateX(4px); stroke: #ffffff; }
+        .scenario-cta:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+
+        /* Тёмная карточка срочной поставки */
+        .sc-urgent { padding: 36px 34px 38px !important; }
+        .sc-urgent p { margin-bottom: 24px; }
+        .sc-urgent .scenario-cta {
+            background: rgba(255,255,255,.12); color: #ffffff; border-color: rgba(255,255,255,.22);
+            box-shadow: 0 4px 14px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.2);
+        }
+        .sc-urgent .scenario-cta:hover { background: var(--orange); border-color: var(--orange); color: #fff; box-shadow: 0 8px 24px rgba(234,88,32,.4); }
+
+        /* Выравнивание по вертикали карточек нижнего ряда (подшипники, склад, поиск) */
+        .sc-bear, .sc-stock, .sc-non { display: flex; flex-direction: column; justify-content: flex-start; }
+        .sc-bear .scenario-cta, .sc-stock .scenario-cta, .sc-non .scenario-cta { margin-top: auto; }
+
+        /* Карточки широкого формата (VIN, аналог) */
+        .sc-txt { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
+        .sc-txt p { margin-bottom: 22px; }
+        .sc-txt .scenario-cta { margin-top: 0; }
+
         .scenarios-section { padding: 100px 0; --ink: var(--blue); --grid: rgba(30, 47, 79, 0.055);
             background: linear-gradient(var(--grid) 1px, transparent 1px) 0 0 / 32px 32px, linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 32px 32px, var(--light-grey); }
         .scenarios-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 22px; margin-top: 20px; }
         .scenario-card { display: flex; flex-direction: column; padding: 28px; }
+        .scenario-card p { font-size: 15px; text-wrap: pretty; color: #555; line-height: 1.6; letter-spacing: -0.005em; margin-bottom: 24px; }
         .sc-urgent { grid-column: 1 / 4; grid-row: 1 / 3; }
         .sc-vin, .sc-analog { grid-column: 4 / 7; }
         .sc-bear, .sc-stock, .sc-non { grid-column: span 2; }
@@ -510,7 +556,6 @@
         .sc-art { margin: 0 0 16px; }
         .sc-art svg { display: block; width: 100%; height: auto; max-height: 158px; margin: 0 auto; overflow: visible; }
         .scenario-card h3 { font-size: 19px; text-wrap: balance; font-weight: 700; color: var(--dark); line-height: 1.3; letter-spacing: -0.01em; margin-bottom: 10px; }
-        .scenario-card p { font-size: 15px; text-wrap: pretty; color: #555; line-height: 1.6; letter-spacing: -0.005em; }
 
         /* линии чертежа и анимации иконок (всё в области .scenarios-section, ключевые кадры с префиксом sc-) */
         .scenarios-section svg .l{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
@@ -543,7 +588,7 @@
         .scenarios-section .okc{stroke-dasharray:1;stroke-dashoffset:0}
         .scenarios-section .br{opacity:0}
         .scenarios-section .br0{opacity:1}
-        .scenarios-section .sc-urgent{background:linear-gradient(165deg,#1e2f4f,#0f1e35);border-color:rgba(255,255,255,.08);padding:36px;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 22px 50px -14px rgba(15,30,53,.55)}
+        .scenarios-section .sc-urgent{background:linear-gradient(165deg,#1e2f4f,#0f1e35);border-color:rgba(255,255,255,.08);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 22px 50px -14px rgba(15,30,53,.55)}
         .scenarios-section .sc-urgent .sc-tag{background:rgba(255,255,255,.1);color:#d5deee}
         .scenarios-section .sc-urgent .sc-art{flex:1;display:flex;align-items:center;margin:8px 0 24px}
         .scenarios-section .sc-urgent .sc-art svg{max-height:none}
@@ -769,7 +814,7 @@
 .contacts-messengers a:hover { color: var(--orange); transform: translateY(-2px); }
 .contacts-messengers a svg { width: 24px; height: 24px; display: block; flex-shrink: 0; }
 
-        .sap-form-wrap { background: #1a1f2a; padding: 30px; border-radius: 28px; border: 1px solid rgba(255,255,255,0.03); margin-bottom: 40px; }
+        .sap-form-wrap { background: #1a1f2a; padding: 30px; border-radius: 28px; border: 1px solid rgba(255,255,255,0.03); margin-bottom: 40px; scroll-margin-top: 20px; }
         .sap-form-wrap h3 { font-size: 20px; margin-bottom: 20px; color: var(--white); font-weight: 600; letter-spacing: -0.015em; }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
         .form-group { display: flex; flex-direction: column; gap: 6px; }
@@ -792,7 +837,6 @@
         .form-group select option { background: #111827; color: #fff; }
         .form-group select.is-flash { animation: catFlash 1.8s ease-out; }
         @keyframes catFlash { 0%, 40% { border-color: var(--orange); box-shadow: 0 0 0 4px rgba(234,88,32,0.35); } 100% { border-color: rgba(255,255,255,0.1); box-shadow: 0 0 0 0 rgba(234,88,32,0); } }
-        .sap-form-wrap { scroll-margin-top: 20px; }
         .form-submit-btn {
             background: var(--blue); color: var(--white); border: none; padding: 15px 30px; border-radius: 14px;
             font-size: 16px; font-weight: 600; cursor: pointer; transition: var(--transition); width: 100%; margin-top: 5px; letter-spacing: -0.005em; font-family: inherit;
@@ -865,7 +909,7 @@
             outline-offset: 3px;
         }
 
-        .map-container { border-radius: 28px; overflow: hidden; height: 380px; background-color: #161a22; position: relative; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.04); box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
+        .map-container { border-radius: 28px; overflow: hidden; height: 380px; background-color: #161a22; position: relative; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.04); box-shadow: 0 15px 35px rgba(0,0,0,.3); --map-blue: var(--blue); --map-orange: var(--orange); --map-t: 2.2s; --map-hold: .45s; --map-out: 1.6s; --mx: 50%; --my: 50%; transition: transform .55s var(--ease), box-shadow .55s var(--ease), border-color .55s var(--ease); }
         /* 3D-наклон убран: он растеризовал SVG-слой и размывал дороги/подписи */
         .css-map-scene { width: 100%; height: 100%; position: relative; }
 
@@ -873,7 +917,6 @@
             Маршрут — синий цвет сайта (--blue) с белой окантовкой. При «проезде» он растёт слева направо вдоль съезда до территории,
             карточка территории засвечивается, а затем след гаснет в том же направлении — слева направо.
             Вокруг герба на въезде расходится волна. Запуск: наведение, тап, либо один раз при появлении на экране. */
-        .map-container { --map-blue: var(--blue); --map-orange: var(--orange); --map-t: 2.2s; --map-hold: 0.45s; --map-out: 1.6s; }
         .sap-map { width: 100%; height: 100%; display: block; overflow: visible; }
         .sap-map text { font-family: inherit; }
         .map-label { font-size: 12.5px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase; fill: #9aa6bb; }
@@ -882,10 +925,9 @@
 
         .map-trail-halo, .map-trail, .map-head { fill: none; stroke-linejoin: round; }
         .map-trail-halo, .map-trail { stroke-linecap: butt; stroke-dasharray: 100 100; stroke-dashoffset: 100; }
-        .map-head { stroke-linecap: round; }
         .map-trail-halo { stroke: #fff; stroke-width: 23; filter: drop-shadow(0 0 6px rgba(234, 88, 32, 0.6)); }
         .map-trail { stroke: var(--map-blue); stroke-width: 19; }
-        .map-head { stroke: #ff8a4c; stroke-width: 12; stroke-dasharray: 0.001 200; stroke-dashoffset: 0; opacity: 0; filter: drop-shadow(0 0 5px #ff7a3d) drop-shadow(0 0 12px rgba(234, 88, 32, 0.85)); }
+        .map-head { stroke: #ff8a4c; stroke-width: 12; stroke-linecap: round; stroke-dasharray: 0.001 200; stroke-dashoffset: 0; opacity: 0; filter: drop-shadow(0 0 5px #ff7a3d) drop-shadow(0 0 12px rgba(234, 88, 32, 0.85)); }
 
         .map-yard-box { fill: #1c2130; stroke: rgba(255, 255, 255, 0.16); stroke-width: 1.5; transition: fill 0.5s ease, stroke 0.5s ease; }
         .map-yard-lit { fill: rgba(255, 255, 255, 0.06); opacity: 0; transition: opacity 0.7s ease; }
@@ -935,7 +977,6 @@
            2) «фонарик»: мягкий свет и виньетка следуют за курсором (--mx/--my ставит скрипт)
            4) фокус на маршруте: ж/д и сетка приглушаются
            5) стеклянная плашка «Построить маршрут» */
-        .map-container { --mx: 50%; --my: 50%; transition: transform 0.55s var(--ease), box-shadow 0.55s var(--ease), border-color 0.55s var(--ease); }
         .map-grid, .map-rail { transition: opacity 0.6s ease; }
 
         .map-spot { position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0; transition: opacity 0.5s ease; border-radius: inherit; }
@@ -1022,9 +1063,8 @@
         .messengers-list.active { pointer-events: auto; opacity: 1; transform: translateY(0); }
         .messenger-btn { width: 54px !important; height: 54px !important; border-radius: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; background: transparent !important; text-decoration: none !important; box-shadow: none !important; transition: transform 0.3s var(--ease) !important; }
 .messenger-btn:hover { transform: scale(1.1) !important; }
-.messenger-btn svg { width: 34px !important; height: 34px !important; display: block !important; margin: 0 !important; }
+.messenger-btn svg { width: 34px !important; height: 34px !important; display: block !important; margin: 0 !important; filter: drop-shadow(0 5px 8px rgba(30,47,79,.45)); }
         /* Та же тень, что у главной кнопки чата, но по форме самого значка (пропорционально размеру) */
-        .messenger-btn svg { filter: drop-shadow(0 5px 8px rgba(30, 47, 79, 0.45)); }
 
         html.js .reveal { opacity: 0; translate: 0 26px; }
         html.js .reveal.visible {
@@ -1433,7 +1473,7 @@
             <div class="catalog-grid">
                 <div class="catalog-card sap-card-base reveal">
                     <div class="card-media"><img src="images/zapchasti-sklad.webp" alt="Запчасти для тракторов и комбайнов на верстаке склада" width="800" height="800" loading="lazy" decoding="async"></div>
-                    <div class="card-icon-wrap"><svg class="icon-gear" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
+                    <div class="card-icon-wrap"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor"><g class="icon-gear"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></g></svg></div>
                     <h3>Запчасти для спецтехники</h3><p>Оригинальные комплектующие для ходовой, двигателей и рабочих органов импортных тракторов, комбайнов и автомобилей.</p>
                     <a class="card-cta" href="#sapFormWrap" data-request="parts" aria-label="Оставить заявку: Запчасти для спецтехники">Оставить заявку <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
                 </div>
@@ -1474,7 +1514,7 @@
                     <div class="card-media"><img src="images/kombain-noch.webp" alt="Комбайн ночью выгружает зерно в перегрузчик, трактор идёт параллельно" width="1200" height="480" loading="lazy" decoding="async"></div>
                     <div class="brand-group-head"><h3>Импортная техника</h3>
                     <div class="promo-3d-stage">
-                        <svg class="icon-tractor" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-linejoin="round" stroke-linecap="round"><path d="M11.2 10.6h7.4a1.6 1.6 0 0 1 1.4.8l1.5 2.6a1.6 1.6 0 0 1 .2.8v2.1a1 1 0 0 1-1 1h-9.5z" fill="var(--blue)" fill-opacity=".09" stroke-width="1.3"></path><path d="M3 11V5.4A1.6 1.6 0 0 1 4.6 3.8h5.2a1.6 1.6 0 0 1 1.6 1.6V11" stroke-width="1.3"></path><path d="M4.7 5.6h4.9v3.6H4.7z" fill="var(--blue)" fill-opacity=".14" stroke-width="1"></path><path d="M17.2 10.4V6.4M16.3 6.4h1.8" stroke-width="1.3"></path><circle cx="21.2" cy="13.3" r="0.55" fill="var(--blue)" stroke="none"></circle><g class="tractor-wheel-r"><circle cx="6.6" cy="16.4" r="5.3" stroke-width="1.3" fill="#f3f5f9"></circle><path d="M6.6 11.3L6.6 10.55M8.81 11.81L9.14 11.13M10.59 13.22L11.17 12.75M11.57 15.27L12.3 15.1M11.57 17.53L12.3 17.7M10.59 19.58L11.17 20.05M8.81 20.99L9.14 21.67M6.6 21.5L6.6 22.25M4.39 20.99L4.06 21.67M2.61 19.58L2.03 20.05M1.63 17.53L0.9 17.7M1.63 15.27L0.9 15.1M2.61 13.22L2.03 12.75M4.39 11.81L4.06 11.13" stroke-width="1.2" stroke-linecap="butt"></path><circle cx="6.6" cy="16.4" r="3" stroke-width="1"></circle><path d="M6.6 16.4L6.6 13.4M6.6 16.4L9.45 15.47M6.6 16.4L8.36 18.83M6.6 16.4L4.84 18.83M6.6 16.4L3.75 15.47" stroke-width="0.9" stroke-linecap="round"></path><circle cx="6.6" cy="16.4" r="0.9" fill="var(--blue)" stroke="none"></circle></g><g class="tractor-wheel-f"><circle cx="19.6" cy="18.6" r="3.1" stroke-width="1.3" fill="#f3f5f9"></circle><path d="M19.6 15.7L19.6 14.95M21.65 16.55L22.18 16.02M22.5 18.6L23.25 18.6M21.65 20.65L22.18 21.18M19.6 21.5L19.6 22.25M17.55 20.65L17.02 21.18M16.7 18.6L15.95 18.6M17.55 16.55L17.02 16.02" stroke-width="1.2" stroke-linecap="butt"></path><circle cx="19.6" cy="18.6" r="1.7" stroke-width="1"></circle><path d="M19.6 18.6L19.6 16.9M19.6 18.6L21.07 19.45M19.6 18.6L18.13 19.45" stroke-width="0.9" stroke-linecap="round"></path><circle cx="19.6" cy="18.6" r="0.9" fill="var(--blue)" stroke="none"></circle></g></svg>
+                        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-linejoin="round" stroke-linecap="round"><g class="icon-tractor"><path d="M11.2 10.6h7.4a1.6 1.6 0 0 1 1.4.8l1.5 2.6a1.6 1.6 0 0 1 .2.8v2.1a1 1 0 0 1-1 1h-9.5z" fill="var(--blue)" fill-opacity=".09" stroke-width="1.3"></path><path d="M3 11V5.4A1.6 1.6 0 0 1 4.6 3.8h5.2a1.6 1.6 0 0 1 1.6 1.6V11" stroke-width="1.3"></path><path d="M4.7 5.6h4.9v3.6H4.7z" fill="var(--blue)" fill-opacity=".14" stroke-width="1"></path><path d="M17.2 10.4V6.4M16.3 6.4h1.8" stroke-width="1.3"></path><circle cx="21.2" cy="13.3" r="0.55" fill="var(--blue)" stroke="none"></circle><g class="tractor-wheel-r"><circle cx="6.6" cy="16.4" r="5.3" stroke-width="1.3" fill="#f3f5f9"></circle><path d="M6.6 11.3L6.6 10.55M8.81 11.81L9.14 11.13M10.59 13.22L11.17 12.75M11.57 15.27L12.3 15.1M11.57 17.53L12.3 17.7M10.59 19.58L11.17 20.05M8.81 20.99L9.14 21.67M6.6 21.5L6.6 22.25M4.39 20.99L4.06 21.67M2.61 19.58L2.03 20.05M1.63 17.53L0.9 17.7M1.63 15.27L0.9 15.1M2.61 13.22L2.03 12.75M4.39 11.81L4.06 11.13" stroke-width="1.2" stroke-linecap="butt"></path><circle cx="6.6" cy="16.4" r="3" stroke-width="1"></circle><path d="M6.6 16.4L6.6 13.4M6.6 16.4L9.45 15.47M6.6 16.4L8.36 18.83M6.6 16.4L4.84 18.83M6.6 16.4L3.75 15.47" stroke-width="0.9" stroke-linecap="round"></path><circle cx="6.6" cy="16.4" r="0.9" fill="var(--blue)" stroke="none"></circle></g><g class="tractor-wheel-f"><circle cx="19.6" cy="18.6" r="3.1" stroke-width="1.3" fill="#f3f5f9"></circle><path d="M19.6 15.7L19.6 14.95M21.65 16.55L22.18 16.02M22.5 18.6L23.25 18.6M21.65 20.65L22.18 21.18M19.6 21.5L19.6 22.25M17.55 20.65L17.02 21.18M16.7 18.6L15.95 18.6M17.55 16.55L17.02 16.02" stroke-width="1.2" stroke-linecap="butt"></path><circle cx="19.6" cy="18.6" r="1.7" stroke-width="1"></circle><path d="M19.6 18.6L19.6 16.9M19.6 18.6L21.07 19.45M19.6 18.6L18.13 19.45" stroke-width="0.9" stroke-linecap="round"></path><circle cx="19.6" cy="18.6" r="0.9" fill="var(--blue)" stroke="none"></circle></g></g></svg>
                         <div class="smoke-puff puff-1"></div><div class="smoke-puff puff-2"></div><div class="smoke-puff puff-3"></div>
                     </div>
                     </div>
@@ -1725,6 +1765,7 @@
                 <div>
                  <h3>Срочная поставка в сезон</h3>
                  <p>Простой производства или поломка в поле стоят дорого. Мы минимизируем потери: оперативно доставим заказ до дверей вашего завода или прямо в поле.</p>
+                 <a class="scenario-cta" href="#sapFormWrap" data-task="Срочная поставка в сезон" aria-label="Запросить срочную доставку">Запросить срочную доставку <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
                 </div>
                </article>
 
@@ -1751,8 +1792,9 @@
                 </div>
                 <div class="sc-txt">
                  <span class="sc-tag"><i></i>Идентификация</span>
-                 <h3>Подобрать деталь по фото или VIN</h3>
-                 <p>Пришлите фотографию узла или VIN техники — идентифицируем деталь и предложим оптимальное решение с учётом качества и доступности.</p>
+                 <h3>Подобрать деталь по VIN</h3>
+                 <p>Укажите VIN техники или марку и модель — идентифицируем деталь и предложим оптимальное решение с учётом качества и доступности.</p>
+                 <a class="scenario-cta" href="#sapFormWrap" data-task="Подбор детали по VIN" aria-label="Подобрать деталь по VIN">Подобрать по VIN <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
                 </div>
                </article>
 
@@ -1786,6 +1828,7 @@
                  <span class="sc-tag"><i></i>Подбор</span>
                  <h3>Найти аналог снятой детали</h3>
                  <p>Оригинал снят с производства? Подберём совместимый аналог — с ресурсом, близким к оригиналу, и гарантией.</p>
+                 <a class="scenario-cta" href="#sapFormWrap" data-task="Поиск совместимого аналога снятой детали" aria-label="Подобрать надёжный аналог">Подобрать надёжный аналог <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
                 </div>
                </article>
 
@@ -1825,6 +1868,7 @@
                 </div>
                 <h3>Заменить подшипник</h3>
                 <p>Подберём точный типоразмер по маркировке и посадочным размерам — включая импортные аналоги SKF, FAG, NSK, NTN, SNR, Koyo.</p>
+                 <a class="scenario-cta" href="#sapFormWrap" data-request="bearings" data-task="Замена / подбор подшипника по маркировке" aria-label="Подобрать по маркировке">Подобрать по маркировке <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
                </article>
 
                <!-- СКЛАД -->
@@ -1858,6 +1902,7 @@
                 </div>
                 <h3>Укомплектовать склад расходников</h3>
                 <p>Сформируем сезонный запас фильтров, ремней, масел и мелких комплектующих под ваш парк техники.</p>
+                 <a class="scenario-cta" href="#sapFormWrap" data-task="Комплектация склада расходников" aria-label="Рассчитать складской запас">Рассчитать складской запас <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
                </article>
 
                <!-- НЕСТАНДАРТ -->
@@ -1901,6 +1946,7 @@
                 </div>
                 <h3>Нестандартный запрос</h3>
                 <p>Нет в каталоге? Найдём редкую позицию за 1–3 дня через партнёрскую сеть производителей и дилеров.</p>
+                 <a class="scenario-cta" href="#sapFormWrap" data-task="Нестандартный запрос / поиск редкой позиции" aria-label="Оставить заявку на поиск">Оставить заявку на поиск <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
                </article>
 
             </div>
@@ -3294,6 +3340,14 @@
                 lastAuto = msg.value === line ? line : '';
                 msg.dispatchEvent(new Event('input', { bubbles: true }));
             }
+            function addTask(task) {
+                const line = 'Задача: ' + task + '. ';
+                const cur = msg.value;
+                if (!cur.trim() || cur === lastAuto) msg.value = line;
+                else if (cur.indexOf('Задача: ' + task) === -1) msg.value = cur.replace(/\s+$/, '') + '\n' + line;
+                lastAuto = msg.value === line ? line : '';
+                msg.dispatchEvent(new Event('input', { bubbles: true }));
+            }
             function goToForm() {
                 const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                 wrap.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'start' });
@@ -3308,13 +3362,15 @@
             sel.addEventListener('change', apply);
             form.addEventListener('reset', () => setTimeout(apply, 0));
 
-            document.querySelectorAll('[data-request], [data-brand-request]').forEach(link => {
+            document.querySelectorAll('[data-request], [data-brand-request], [data-task]').forEach(link => {
                 link.addEventListener('click', e => {
                     if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey) return;
                     if (form.style.display === 'none' && again) again.click();   // после отправки снова показываем форму
-                    if (!choose(link.dataset.request || link.dataset.brandRequest)) return;   // неизвестный ключ — обычный переход по якорю
+                    const req = link.dataset.request || link.dataset.brandRequest;
+                    if (req && !choose(req)) return;
                     e.preventDefault();
                     if (link.dataset.brand) addBrand(link.dataset.brand);
+                    if (link.dataset.task) addTask(link.dataset.task);
                     goToForm();
                 });
             });
