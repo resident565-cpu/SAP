@@ -66,28 +66,8 @@
     <link rel="preload" href="fonts/geologica-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/geologica-cyrillic-400-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/geologica-cyrillic-700-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <script>
-    (function () {
-        function loadGoogle() {
-            if (document.getElementById('gf-fallback')) return;
-            var p1 = document.createElement('link'); p1.rel = 'preconnect'; p1.href = 'https://fonts.googleapis.com';
-            var p2 = document.createElement('link'); p2.rel = 'preconnect'; p2.href = 'https://fonts.gstatic.com'; p2.crossOrigin = '';
-            var l = document.createElement('link'); l.id = 'gf-fallback'; l.rel = 'stylesheet';
-            l.href = 'https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&display=swap';
-            document.head.append(p1, p2, l);
-        }
-        if (!document.fonts || !document.fonts.load) { loadGoogle(); return; }
-        Promise.all([
-            document.fonts.load('400 1em "Geologica Local"', 'Aa'),
-            document.fonts.load('400 1em "Geologica Local"', 'Яя')
-        ]).then(function (r) {
-            var ok = r.every(function (f) { return f.length && f.every(function (x) { return x.status === 'loaded'; }); });
-            if (!ok) loadGoogle();
-        }).catch(loadGoogle);
-    })();
-    </script>
     <style>
-        /* Geologica: файлы в /fonts (если не загрузятся, подключится Google Fonts, см. скрипт в <head>) */
+        /* Geologica: файлы в /fonts; если не загрузятся — запасные системные шрифты из font-family */
         @font-face { font-family: 'Geologica Local'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/geologica-cyrillic-400-normal.woff2') format('woff2'); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
         @font-face { font-family: 'Geologica Local'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/geologica-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
         @font-face { font-family: 'Geologica Local'; font-style: normal; font-weight: 500; font-display: swap; src: url('fonts/geologica-cyrillic-500-normal.woff2') format('woff2'); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
