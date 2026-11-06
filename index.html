@@ -165,16 +165,11 @@
         .hero-badge-icon {
             position: relative; width: 42px; height: 42px; flex-shrink: 0; border-radius: 13px;
             display: flex; align-items: center; justify-content: center; color: var(--blue);
-            background: linear-gradient(160deg, rgba(246, 249, 254, 0.92) 0%, rgba(222, 232, 246, 0.80) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.92); box-shadow: var(--glass-shadow);
             transition: var(--transition);
         }
-        .hero-badge-icon::before { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 1;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.14) 48%, rgba(255, 255, 255, 0) 55%); }
-        .hero-badge-icon::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 0; opacity: 0;
-            background: linear-gradient(160deg, rgba(255, 240, 229, 0.95) 0%, rgba(255, 198, 160, 0.55) 100%); transition: opacity 0.45s var(--ease); }
+        .hero-badge-icon::after { opacity: 0; transition: opacity 0.45s var(--ease); }
         .hero-badge-icon svg { position: relative; z-index: 2; width: 20px; height: 20px; stroke-width: 2.1; }
-        .hero-badge:hover .hero-badge-icon { color: var(--orange); box-shadow: var(--glass-shadow-hot); transform: translateY(-2px); }
+        .hero-badge:hover .hero-badge-icon { color: var(--orange); transform: translateY(-2px); }
         .hero-badge:hover .hero-badge-icon::after { opacity: 1; }
         .hero-badge strong { display: block; font-weight: 700; font-size: 14px; color: var(--blue); letter-spacing: -0.01em; transition: color 0.3s var(--ease); }
         .hero-badge:hover strong { color: var(--orange); }
@@ -304,20 +299,14 @@
         .catalog-card > .card-cta:hover svg { transform: translateX(4px); stroke: #ffffff; }
         .card-cta:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
 
-        .card-cta svg { width: 15px; height: 15px; flex-shrink: 0; stroke: currentColor; transition: transform .35s var(--ease); }
-        .catalog-card > .card-cta:hover { background: var(--orange); color: #fff; border-color: var(--orange); box-shadow: 0 8px 20px rgba(234,88,32,.28); transform: translateY(-2px); }
-        .catalog-card > .card-cta:hover svg { transform: translateX(4px); stroke: #ffffff; }
-        .card-cta:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
 
         .card-icon-wrap {
             width: 68px; height: 68px; margin-bottom: 22px; display: flex; align-items: center; justify-content: center;
-            background: linear-gradient(180deg, #ffffff 0%, #eef1f6 100%); border-radius: 18px; color: var(--blue); position: relative;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), inset 0 -2px 4px rgba(30, 47, 79, 0.06), 0 4px 10px rgba(30, 47, 79, 0.08);
+            border-radius: 18px; color: var(--blue); position: relative;
             transition: var(--transition);
         }
         .catalog-card:hover .card-icon-wrap {
             color: var(--orange); transform: translateY(-2px);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), 0 10px 22px rgba(234, 88, 32, 0.22);
         }
         .card-icon-wrap svg { width: 36px; height: 36px; stroke-width: 2.2; }
 
@@ -389,14 +378,13 @@
         .brand-group-card { padding: 35px; display: flex; flex-direction: column; }
         .brand-group-card h3 { font-size: 19px; font-weight: 700; color: var(--dark); margin-bottom: 24px; border-left: 3.5px solid var(--orange); padding-left: 14px; line-height: 1.2; letter-spacing: -0.015em; }
 
-        .promo-3d-stage { width: 90px; height: 90px; background: linear-gradient(145deg, #eef1f6, #fff); border-radius: 24px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; position: relative; border: 1px solid rgba(0,0,0,.03); box-shadow: inset 0 2px 5px rgba(255,255,255,.7), 0 8px 20px rgba(0,0,0,.03); transition: var(--transition); }
+        .promo-3d-stage { width: 90px; height: 90px; border-radius: 24px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; position: relative; transition: var(--transition); }
         .promo-3d-stage svg { width: 44px; height: 44px; stroke: var(--blue); transition: stroke .45s var(--ease); }
         /* Цвет SVG-иконок брендов меняется при наведении и тапе. */
         .promo-3d-stage svg [fill="var(--blue)"] { fill: var(--blue); transition: fill 0.45s var(--ease); }
         .brand-group-card:hover .promo-3d-stage,
         .brand-group-card.fog-on .promo-3d-stage {
             transform: translateY(-2px);
-            box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.7), 0 10px 22px rgba(234, 88, 32, 0.22);
         }
         .brand-group-card:hover .promo-3d-stage svg,
         .brand-group-card.fog-on .promo-3d-stage svg { stroke: var(--orange); }
@@ -467,15 +455,12 @@
         .expertise-icon {
             width: 64px; height: 64px; margin-bottom: 20px;
             display: flex; align-items: center; justify-content: center;
-            background: linear-gradient(180deg, #ffffff 0%, #eef1f6 100%);
             border-radius: 18px; color: var(--blue);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), inset 0 -2px 4px rgba(30, 47, 79, 0.06), 0 4px 10px rgba(30, 47, 79, 0.08);
             transition: var(--transition);
         }
         .expertise-icon svg { width: 34px; height: 34px; stroke-width: 2; }
         .expertise-card:hover .expertise-icon {
             color: var(--orange); transform: translateY(-2px);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), 0 10px 22px rgba(234, 88, 32, 0.22);
         }
         .expertise-card h3 {
             font-size: 18px; font-weight: 700; color: var(--dark);
@@ -498,19 +483,6 @@
         .scenario-cta:hover svg { transform: translateX(4px); stroke: #ffffff; }
         .scenario-cta:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
 
-.scenario-cta {
-            position: relative; z-index: 3; display: inline-flex; align-items: center; gap: 8px;
-            padding: 11px 24px; margin-top: auto; align-self: flex-start; border-radius: 99px;
-            font-size: 13.5px; font-weight: 600; line-height: 1.25; color: var(--blue); text-decoration: none;
-            letter-spacing: -0.005em;
-            background: linear-gradient(180deg, #ffffff 0%, #f1f4f9 100%); border: 1px solid rgba(30,47,79,.12);
-            box-shadow: 0 2px 6px rgba(30,47,79,.05), inset 0 1px 0 rgba(255,255,255,.95);
-            transition: background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease), transform .35s var(--ease);
-        }
-        .scenario-cta svg { width: 15px; height: 15px; flex-shrink: 0; stroke: currentColor; transition: transform .35s var(--ease); }
-        .scenario-cta:hover { background: var(--orange); color: #fff; border-color: var(--orange); box-shadow: 0 8px 20px rgba(234,88,32,.28); transform: translateY(-2px); }
-        .scenario-cta:hover svg { transform: translateX(4px); stroke: #ffffff; }
-        .scenario-cta:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
 
         .sc-urgent { padding: 36px 34px 38px !important; }
         .sc-urgent p { margin-bottom: 24px; }
@@ -1251,30 +1223,15 @@
                 0 1px 2px rgba(234, 88, 32, 0.14),
                 0 10px 22px -4px rgba(234, 88, 32, 0.34);
         }
-        .card-icon-wrap, .promo-3d-stage, .expertise-icon {
-            position: relative;
-            background: linear-gradient(160deg, rgba(246, 249, 254, 0.92) 0%, rgba(222, 232, 246, 0.80) 100%);
-            -webkit-backdrop-filter: blur(14px) saturate(1.5); backdrop-filter: blur(14px) saturate(1.5);
-            border: 1px solid rgba(255, 255, 255, 0.92);
-            box-shadow: var(--glass-shadow);
-        }
-
-        .card-icon-wrap::before, .promo-3d-stage::before, .expertise-icon::before {
-            content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 1;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.14) 48%, rgba(255, 255, 255, 0) 55%);
-        }
-
+        .card-icon-wrap, .promo-3d-stage, .expertise-icon { position: relative; }
         .card-icon-wrap::after, .promo-3d-stage::after, .expertise-icon::after {
-            content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 0; opacity: 0;
-            background: linear-gradient(160deg, rgba(255, 240, 229, 0.95) 0%, rgba(255, 198, 160, 0.55) 100%);
+            opacity: 0;
             transition: opacity 0.45s var(--ease);
         }
+
         .card-icon-wrap > svg, .promo-3d-stage > svg, .expertise-icon > svg { position: relative; z-index: 2; }
         .promo-3d-stage .smoke-puff { z-index: 3; }
 
-        .catalog-card:hover .card-icon-wrap,
-        .brand-group-card:hover .promo-3d-stage, .brand-group-card.fog-on .promo-3d-stage,
-        .expertise-card:hover .expertise-icon { box-shadow: var(--glass-shadow-hot); }
         .catalog-card:hover .card-icon-wrap::after,
         .brand-group-card:hover .promo-3d-stage::after, .brand-group-card.fog-on .promo-3d-stage::after,
         .expertise-card:hover .expertise-icon::after { opacity: 1; }
@@ -2761,8 +2718,7 @@
 
             /* ---- кадры (повторяют @keyframes из CSS) ---- */
             const spin = [{ transform: 'rotate(0deg)' }, { transform: 'rotate(360deg)' }];
-            /* сдвиг штриха кратен периоду узора (6), поэтому цикл без «скачка» */
-                        /* ремень на иконке: зубья идут по часовой стрелке вдоль замкнутого контура (период узора 3 из 60) */
+            /* Ремень на иконке: зубья идут по часовой стрелке вдоль замкнутого контура (период узора 3 из 60) */
             const beltRun = [{ strokeDashoffset: '0px' }, { strokeDashoffset: '-3px' }];
             /* серпентинный ремень на брендах: период узора 2 из 60 */
             const serpRun = [{ strokeDashoffset: '0px' }, { strokeDashoffset: '-2px' }];
@@ -3380,12 +3336,23 @@
                     e.preventDefault();
                     if (link.dataset.brand) addLine('Бренд', link.dataset.brand);
                     if (link.dataset.task) addLine('Задача', link.dataset.task);
+                    touchForm();
                     goToForm();
                 });
             });
 
             const q = new URLSearchParams(window.location.search).get('request');
-            if (q) choose(q);
+            if (q && choose(q)) {
+                touchForm();
+                // При наличии hash оставляем прокрутку браузеру (например, #contacts).
+                // Без hash после полной загрузки ведём к форме, чтобы не перебить
+                // нативную обработку якоря и дождаться окончательной раскладки страницы.
+                if (!window.location.hash) {
+                    const scrollToRequestForm = () => window.setTimeout(goToForm, 120);
+                    if (document.readyState === 'complete') scrollToRequestForm();
+                    else window.addEventListener('load', scrollToRequestForm, { once: true });
+                }
+            }
         })();
         </script>
 </body>
