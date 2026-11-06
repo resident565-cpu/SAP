@@ -890,7 +890,10 @@
         /* Наведение ловим на неподвижной обёртке: сама карта приподнимается на 4px, а обёртка остаётся на месте.
            Иначе у нижней границы карта уходила из-под курсора, :hover слетал, карта опускалась — и так по кругу (мерцание). */
         .map-hover-zone { position: relative; }
-        .map-container { border-radius: 28px; overflow: hidden; height: 380px; background-color: #161a22; position: relative; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.04); box-shadow: 0 15px 35px rgba(0,0,0,.3); --map-blue: var(--blue); --map-orange: var(--orange); --map-t: 2.2s; --map-hold: .45s; --map-out: 1.6s; --map-train: 6s; --map-train-delay: .3s; --map-glow: 3s; --mx: 50%; --my: 50%; transition: transform .55s var(--ease), box-shadow .55s var(--ease), border-color .55s var(--ease); }
+        .map-container { border-radius: 28px; overflow: hidden; height: 380px; background-color: #161a22; position: relative; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.04); box-shadow: 0 15px 35px rgba(0,0,0,.3); --map-blue: var(--blue); --map-orange: var(--orange); --mx: 50%; --my: 50%; transition: transform .55s var(--ease), box-shadow .55s var(--ease), border-color .55s var(--ease); }
+
+        /* Тайминги проезда: от них считаются все задержки, а скрипт берёт их же для таймера завершения */
+        .map-container { --map-t: 1.7s; --map-ease: cubic-bezier(0.3, 0, 0.15, 1); --map-hold: .45s; --map-out: 1.6s; --map-train: 6s; --map-train-delay: .3s; --map-glow: 3s; }
 
         .css-map-scene { width: 100%; height: 100%; position: relative; }
 
@@ -904,11 +907,19 @@
         .map-label-rail { font-size: 11px; fill: #667086; }
         .map-hw { filter: drop-shadow(0 7px 10px rgba(0, 0, 0, 0.5)); }
 
-        .map-trail-halo, .map-trail, .map-head { fill: none; stroke-linejoin: round; }
+        .map-trail-halo, .map-trail, .map-comet path { fill: none; stroke-linejoin: round; }
         .map-trail-halo, .map-trail { stroke-linecap: butt; stroke-dasharray: 100 100; stroke-dashoffset: 100; }
         .map-trail-halo { stroke: #fff; stroke-width: 23; filter: drop-shadow(0 0 6px rgba(234, 88, 32, 0.6)); }
         .map-trail { stroke: var(--map-blue); stroke-width: 19; }
-        .map-head { stroke: #ff8a4c; stroke-width: 12; stroke-linecap: round; stroke-dasharray: 0.001 200; stroke-dashoffset: 0; opacity: 0; filter: drop-shadow(0 0 5px #ff7a3d) drop-shadow(0 0 12px rgba(234, 88, 32, 0.85)); }
+        /* Комета: голова с белым ядром и шлейф из трёх отрезков. --l — длина отрезка, --e — конечное смещение штриха (передний край = голова) */
+        .map-comet { opacity: 0; filter: drop-shadow(0 0 5px #ff7a3d) drop-shadow(0 0 14px rgba(234, 88, 32, 0.9)); }
+        .map-comet path { stroke-linecap: round; stroke-dasharray: var(--l) 200; stroke-dashoffset: var(--l); }
+        .map-tail-a { --l: 30; --e: -70; stroke: #ea5820; stroke-width: 5; stroke-opacity: 0.35; }
+        .map-tail-b { --l: 18; --e: -82; stroke: #ff6a2b; stroke-width: 8; stroke-opacity: 0.5; }
+        .map-tail-c { --l: 8; --e: -92; stroke: #ff8a4c; stroke-width: 11; stroke-opacity: 0.75; }
+        .map-head, .map-core { --l: 0.001; --e: -100; }
+        .map-head { stroke: #ffa766; stroke-width: 13; }
+        .map-core { stroke: #fff4e4; stroke-width: 6; }
 
         .map-yard-box { fill: #1c2130; stroke: rgba(255, 255, 255, 0.16); stroke-width: 1.5; transition: fill 0.5s ease, stroke 0.5s ease; }
         .map-yard-lit { fill: rgba(255, 255, 255, 0.06); opacity: 0; transition: opacity 0.7s ease; }
@@ -927,16 +938,15 @@
         /* 1) след растёт слева направо, 2) после паузы (карточка уже засветилась) гаснет слева направо */
         .map-container.is-animated .map-trail-halo,
         .map-container.is-animated .map-trail {
-            animation: mapTrailIn var(--map-t) cubic-bezier(0.45, 0.05, 0.35, 1) forwards,
+            animation: mapTrailIn var(--map-t) var(--map-ease) forwards,
                        mapTrailOut var(--map-out) cubic-bezier(0.55, 0, 0.35, 1) calc(var(--map-t) + var(--map-hold)) forwards;
         }
-        .map-container.is-animated .map-head {
-            animation: mapHead var(--map-t) cubic-bezier(0.45, 0.05, 0.35, 1) forwards, mapHeadFade var(--map-t) linear forwards;
-        }
+        .map-container.is-animated .map-comet { animation: mapCometFade var(--map-t) linear forwards; }
+        .map-container.is-animated .map-comet path { animation: mapComet var(--map-t) var(--map-ease) forwards; }
         @keyframes mapTrailIn { to { stroke-dashoffset: 0; } }
         @keyframes mapTrailOut { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -100; } }
-        @keyframes mapHead { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -100; } }
-        @keyframes mapHeadFade { 0% { opacity: 0; } 4% { opacity: 1; } 94% { opacity: 1; } 100% { opacity: 0; } }
+        @keyframes mapComet { from { stroke-dashoffset: var(--l); } to { stroke-dashoffset: var(--e); } }
+        @keyframes mapCometFade { 0% { opacity: 0; } 4% { opacity: 1; } 94% { opacity: 1; } 100% { opacity: 0; } }
 
         .map-hover-zone:hover .map-container .map-yard-box, .map-container.is-animated .map-yard-box { fill: var(--map-blue); transition-delay: calc(var(--map-t) * 0.85); }
         .map-hover-zone:hover .map-container .map-yard-edge, .map-container.is-animated .map-yard-edge { opacity: 1; transition-delay: calc(var(--map-t) * 0.85); }
@@ -949,8 +959,7 @@
         .map-container.is-animated .map-hq-ring { animation: mapRing 1.3s ease-out calc(var(--map-t) * 0.9) forwards; }
         @keyframes mapRing { 0% { opacity: 0.9; transform: scale(1); } 100% { opacity: 0; transform: scale(2.3); } }
 
-        /* Финал: оранжевый ореол и вспышка рамки вокруг карточки САП, затем плавное затухание.
-           Без фильтров: градиентный прямоугольник, анимируются только opacity и transform. */
+        /* Финал: ореол и вспышка рамки вокруг карточки САП (анимируются только opacity и transform) */
         .map-yard-halo, .map-yard-flash { opacity: 0; pointer-events: none; transform-box: fill-box; transform-origin: center; }
         .map-yard-halo { fill: url(#mapHalo); }
         .map-yard-flash { fill: none; stroke: #ff9a63; stroke-width: 3; }
@@ -970,8 +979,7 @@
         /* ===== Hover-эффекты карты (без 3D и поворотов — SVG остаётся резким) =====
            1) подъём карточки + тёплая рамка и глубокая тень
            2) «фонарик»: мягкий свет и виньетка следуют за курсором (--mx/--my ставит скрипт)
-           4) фокус на маршруте: ж/д и сетка приглушаются
-           5) стеклянная плашка «Построить маршрут» (видна всегда, на время проезда подсвечивается) */
+           3) фокус на маршруте: ж/д и сетка приглушаются */
         .map-grid, .map-rail { transition: opacity 0.6s ease; }
 
         .map-spot { position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0; transition: opacity 0.5s ease; border-radius: inherit; }
@@ -986,7 +994,7 @@
             border: 1px solid rgba(255, 255, 255, 0.14); box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%);
             transition: border-color 0.3s ease, background 0.3s ease; }
-        .map-route-icon { position: relative; flex: 0 0 auto; width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center; background: var(--orange); box-shadow: 0 6px 16px rgba(234, 88, 32, 0.45); }
+        .map-route-icon { position: relative; flex: 0 0 auto; width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center; background: rgba(234, 88, 32, 0.84); box-shadow: 0 4px 10px rgba(234, 88, 32, 0.2); }
         .map-route-icon svg { width: 18px; height: 18px; display: block; }
         .map-route-text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; line-height: 1.25; }
         .map-route-text strong { font-size: 14px; font-weight: 700; letter-spacing: 0.1px; }
@@ -996,8 +1004,7 @@
         .map-route:hover .map-route-arrow, .map-route:focus-visible .map-route-arrow { transform: translateX(4px); color: var(--orange); }
         .map-route:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
 
-        /* Сияние плашки на время проезда: пик совпадает с вспышкой карточки САП, затем возврат к исходному виду.
-           Анимируется только opacity псевдоэлементов; привязка к .is-animated (не к :hover) снимает сияние, даже если курсор остался на карточке. */
+        /* Сияние плашки на время проезда; привязано к .is-animated, а не к :hover, чтобы гаснуть, даже если курсор остался на карточке */
         .map-route::before, .map-route-icon::after { content: ''; position: absolute; border-radius: inherit; opacity: 0; pointer-events: none; }
         .map-route::before { inset: -1px; z-index: -1; border: 1px solid rgba(255, 138, 76, 0.95);
             background: linear-gradient(135deg, rgba(234, 88, 32, 0.28), rgba(234, 88, 32, 0.06));
@@ -1015,14 +1022,13 @@
         .map-hover-zone:hover .map-container .map-grid, .map-container.is-animated .map-grid { opacity: 0.45; }
         .map-hover-zone:hover .map-container .map-rail, .map-container.is-animated .map-rail { opacity: 0.4; }
 
-
         @media (max-width: 600px) { .map-route { left: 10px; right: 10px; bottom: 8px; padding: 7px 11px 7px 8px; gap: 10px; border-radius: 15px; } .map-route-icon { width: 28px; height: 28px; border-radius: 9px; } .map-route-icon svg { width: 15px; height: 15px; } .map-route-text strong { font-size: 13px; } .map-route-text small { font-size: 11px; } }
         @media (prefers-reduced-motion: reduce) {
             .map-hover-zone:hover .map-container { transform: none; }
             .map-container.is-animated .map-route::before, .map-container.is-animated .map-route-icon::after { animation: none; }
             .map-container.is-animated .map-trail-halo,
             .map-container.is-animated .map-trail { animation: none; stroke-dashoffset: 0; }
-            .map-container.is-animated .map-head, .map-container.is-animated .map-hq-ring,
+            .map-container.is-animated .map-comet, .map-container.is-animated .map-comet path, .map-container.is-animated .map-hq-ring,
             .map-container.is-animated .map-train,
             .map-container.is-animated .map-yard-halo,
             .map-container.is-animated .map-yard-flash { animation: none; }
@@ -2233,7 +2239,13 @@
                                         <path d="M -140,40 L -140,60 A 20 20 0 0 0 -120,80 L 20,80" stroke="#fff" stroke-opacity="0.22" stroke-width="1.4" stroke-dasharray="7 9"/>
                                         <path class="map-trail-halo" pathLength="100" d="M -140,30 L -140,60 A 20 20 0 0 0 -120,80 L 28,80"/>
                                         <path class="map-trail" pathLength="100" d="M -140,30 L -140,60 A 20 20 0 0 0 -120,80 L 28,80"/>
-                                        <path class="map-head" pathLength="100" d="M -140,30 L -140,60 A 20 20 0 0 0 -120,80 L 28,80"/>
+                                        <g class="map-comet">
+                                            <path class="map-tail-a" pathLength="100" d="M -140,30 L -140,60 A 20 20 0 0 0 -120,80 L 28,80"/>
+                                            <path class="map-tail-b" pathLength="100" d="M -140,30 L -140,60 A 20 20 0 0 0 -120,80 L 28,80"/>
+                                            <path class="map-tail-c" pathLength="100" d="M -140,30 L -140,60 A 20 20 0 0 0 -120,80 L 28,80"/>
+                                            <path class="map-head" pathLength="100" d="M -140,30 L -140,60 A 20 20 0 0 0 -120,80 L 28,80"/>
+                                            <path class="map-core" pathLength="100" d="M -140,30 L -140,60 A 20 20 0 0 0 -120,80 L 28,80"/>
+                                        </g>
                                     </g>
                                 </g>
 
