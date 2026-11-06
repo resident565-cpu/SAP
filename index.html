@@ -890,7 +890,7 @@
         /* Наведение ловим на неподвижной обёртке: сама карта приподнимается на 4px, а обёртка остаётся на месте.
            Иначе у нижней границы карта уходила из-под курсора, :hover слетал, карта опускалась — и так по кругу (мерцание). */
         .map-hover-zone { position: relative; }
-        .map-container { border-radius: 28px; overflow: hidden; height: 380px; background-color: #161a22; position: relative; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.04); box-shadow: 0 15px 35px rgba(0,0,0,.3); --map-blue: var(--blue); --map-orange: var(--orange); --map-t: 2.2s; --map-hold: .45s; --map-out: 1.6s; --mx: 50%; --my: 50%; transition: transform .55s var(--ease), box-shadow .55s var(--ease), border-color .55s var(--ease); }
+        .map-container { border-radius: 28px; overflow: hidden; height: 380px; background-color: #161a22; position: relative; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.04); box-shadow: 0 15px 35px rgba(0,0,0,.3); --map-blue: var(--blue); --map-orange: var(--orange); --map-t: 2.2s; --map-hold: .45s; --map-out: 1.6s; --map-train: 6s; --map-train-delay: .3s; --map-glow: 3s; --mx: 50%; --my: 50%; transition: transform .55s var(--ease), box-shadow .55s var(--ease), border-color .55s var(--ease); }
 
         .css-map-scene { width: 100%; height: 100%; position: relative; }
 
@@ -948,7 +948,22 @@
         }
         .map-hover-zone:hover .map-container .map-hq-ring, .map-container.is-animated .map-hq-ring { animation: mapRing 1.3s ease-out calc(var(--map-t) * 0.9) forwards; }
         @keyframes mapRing { 0% { opacity: 0.9; transform: scale(1); } 100% { opacity: 0; transform: scale(2.3); } }
-        .map-hover-zone:hover .map-container .map-train, .map-container.is-animated .map-train { animation: mapTrain 6s linear 0.3s forwards; }
+
+        /* Финальная вспышка: когда проезд дошёл до карточки САП, вокруг неё вспыхивает яркий оранжевый ореол и плавно гаснет.
+           Без фильтров и размытия: ореол — прямоугольник с радиальным градиентом, анимируются только opacity и transform.
+           Класс .is-animated снимается скриптом лишь после конца ореола, поэтому при повторном запуске он стартует с нуля (opacity: 0 в базе). */
+        .map-yard-halo, .map-yard-flash { opacity: 0; pointer-events: none; transform-box: fill-box; transform-origin: center; }
+        .map-yard-halo { fill: url(#mapHalo); }
+        .map-yard-flash { fill: none; stroke: #ff9a63; stroke-width: 3; }
+        .map-hover-zone:hover .map-container .map-yard-halo, .map-container.is-animated .map-yard-halo {
+            animation: mapYardGlow var(--map-glow) cubic-bezier(0.2, 0.6, 0.3, 1) calc(var(--map-t) * 0.88) both;
+        }
+        .map-hover-zone:hover .map-container .map-yard-flash, .map-container.is-animated .map-yard-flash {
+            animation: mapYardFlash calc(var(--map-glow) * 0.55) ease-out calc(var(--map-t) * 0.88) both;
+        }
+        @keyframes mapYardGlow { 0% { opacity: 0; transform: scale(0.9); } 12% { opacity: 1; transform: scale(1.03); } 45% { opacity: 0.5; } 100% { opacity: 0; transform: scale(1.12); } }
+        @keyframes mapYardFlash { 0% { opacity: 0; } 10% { opacity: 1; } 100% { opacity: 0; } }
+        .map-hover-zone:hover .map-container .map-train, .map-container.is-animated .map-train { animation: mapTrain var(--map-train) linear var(--map-train-delay) forwards; }
         @keyframes mapTrain { to { transform: translateY(460px); } }
 
         @media (max-width: 600px) { .map-container { height: auto; aspect-ratio: 480 / 380; } }
@@ -1000,7 +1015,9 @@
             .map-hover-zone:hover .map-container .map-trail-halo, .map-container.is-animated .map-trail-halo,
             .map-hover-zone:hover .map-container .map-trail, .map-container.is-animated .map-trail { animation: none; stroke-dashoffset: 0; }
             .map-hover-zone:hover .map-container .map-head, .map-container.is-animated .map-head, .map-hover-zone:hover .map-container .map-hq-ring, .map-container.is-animated .map-hq-ring,
-            .map-hover-zone:hover .map-container .map-train, .map-container.is-animated .map-train { animation: none; }
+            .map-hover-zone:hover .map-container .map-train, .map-container.is-animated .map-train,
+            .map-hover-zone:hover .map-container .map-yard-halo, .map-container.is-animated .map-yard-halo,
+            .map-hover-zone:hover .map-container .map-yard-flash, .map-container.is-animated .map-yard-flash { animation: none; }
             .map-hover-zone:hover .map-container .map-yard-g, .map-container.is-animated .map-yard-g { transition-delay: 0s; }
         }
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 35px; display: flex; justify-content: space-between; color: #94a3b8; font-size: 13px; width: 100%; flex-wrap: wrap; gap: 15px; letter-spacing: -0.005em; }
@@ -2132,6 +2149,7 @@
                     <div class="css-map-scene">
                         <svg class="sap-map" viewBox="0 0 480 380" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Схема проезда: съезд с Окружной дороги (198 км) к складу по адресу Окружная дорога, д. 6">
                             <defs>
+                                <radialGradient id="mapHalo" cx="0.5" cy="0.5" r="0.5"><stop offset="0.55" stop-color="#ff7a2e" stop-opacity="0.95"/><stop offset="0.7" stop-color="#ff7a2e" stop-opacity="0.55"/><stop offset="0.85" stop-color="#ea5820" stop-opacity="0.2"/><stop offset="1" stop-color="#ea5820" stop-opacity="0"/></radialGradient>
                                 <linearGradient id="mapEdge" gradientUnits="userSpaceOnUse" x1="250" y1="146" x2="420" y2="266"><stop offset="0" stop-color="#ffffff"/><stop offset="0.5" stop-color="#ffd2bb"/><stop offset="1" stop-color="#ea5820"/></linearGradient>
                                 <pattern id="mapGrid" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="#fff" stroke-opacity="0.035"/></pattern>
                                 <symbol id="mapCrest" viewBox="0 0 1093.3 459.17">
@@ -2212,12 +2230,14 @@
                                 </g>
 
                                 <!-- территория склада -->
+                                <rect class="map-yard-halo" x="206" y="102" width="258" height="208"/>
                                 <g class="map-yard-g">
                                     <rect class="map-yard-box" x="250" y="146" width="170" height="120" rx="16"/>
                                     <rect class="map-yard-lit" x="250" y="146" width="170" height="120" rx="16"/>
                                     <rect class="map-yard-edge" x="250" y="146" width="170" height="120" rx="16"/>
                                     <text class="map-yard-brand" x="409" y="255" text-anchor="end">САП</text>
                                 </g>
+                                <rect class="map-yard-flash" x="250" y="146" width="170" height="120" rx="16"/>
                                 <!-- финиш: трактор из логотипа вместо кружка -->
                                 <g>
                                     <circle class="map-hq-ring" cx="326" cy="198" r="30"/>
@@ -3152,22 +3172,37 @@
             });
         })();
 
+        /* «Проезд» по схеме всегда доигрывается до конца.
+           Раньше анимация висела на :hover и при уходе мыши обрывалась. Теперь запуск ставит класс .is-animated
+           (CSS-правила для него те же, что и для :hover, поэтому при уходе курсора анимация не перезапускается и не сбрасывается),
+           а снимаем класс только после того, как закончились все её части: след, поезд, кольцо. Общая длительность считается из CSS-переменных. */
         document.querySelectorAll('.map-container').forEach(map => {
-            map.addEventListener('click', () => {
+            const cs = getComputedStyle(map);
+            const sec = (name, def) => { const v = parseFloat(cs.getPropertyValue(name)); return isNaN(v) ? def : v; };
+            /* проезд заканчивается, когда доиграла самая долгая часть: поезд, след (рост + пауза + затухание) или ореол; плюс небольшой запас */
+            const t = sec('--map-t', 2.2);
+            const RUN_MS = Math.max(
+                sec('--map-train-delay', .3) + sec('--map-train', 6),
+                t + sec('--map-hold', .45) + sec('--map-out', 1.6),
+                t * 0.88 + sec('--map-glow', 3)
+            ) * 1000 + 150;
+            const play = () => {
+                if (map._mapRunning) return;           /* уже едем — не перезапускаем, пусть доедет */
+                map._mapRunning = true;
                 map.classList.add('is-animated');
                 clearTimeout(map._mapTimer);
-                map._mapTimer = setTimeout(() => map.classList.remove('is-animated'), 6500);
-            });
+                map._mapTimer = setTimeout(() => { map.classList.remove('is-animated'); map._mapRunning = false; }, RUN_MS);
+            };
+            map.addEventListener('click', play);
+            /* мышь: запускаем при входе в зону карточки; уход курсора ничего не прерывает */
+            const zone = map.closest('.map-hover-zone') || map;
+            zone.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') play(); });
             /* один раз проигрываем «проезд» сами, когда схема появилась на экране (на телефоне нет наведения) */
             if ('IntersectionObserver' in window) {
                 const mapIO = new IntersectionObserver(entries => {
                     if (!entries[0].isIntersecting) return;
                     mapIO.disconnect();
-                    setTimeout(() => {
-                        map.classList.add('is-animated');
-                        clearTimeout(map._mapTimer);
-                        map._mapTimer = setTimeout(() => map.classList.remove('is-animated'), 6500);
-                    }, 500);
+                    setTimeout(play, 500);
                 }, { threshold: 0.6 });
                 mapIO.observe(map);
             }
