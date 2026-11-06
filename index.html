@@ -925,12 +925,12 @@
         .map-train-light { filter: drop-shadow(0 0 5px #ffe9a8); }
 
         /* 1) след растёт слева направо, 2) после паузы (карточка уже засветилась) гаснет слева направо */
-        .map-hover-zone:hover .map-container .map-trail-halo, .map-container.is-animated .map-trail-halo,
-        .map-hover-zone:hover .map-container .map-trail, .map-container.is-animated .map-trail {
+        .map-container.is-animated .map-trail-halo,
+        .map-container.is-animated .map-trail {
             animation: mapTrailIn var(--map-t) cubic-bezier(0.45, 0.05, 0.35, 1) forwards,
                        mapTrailOut var(--map-out) cubic-bezier(0.55, 0, 0.35, 1) calc(var(--map-t) + var(--map-hold)) forwards;
         }
-        .map-hover-zone:hover .map-container .map-head, .map-container.is-animated .map-head {
+        .map-container.is-animated .map-head {
             animation: mapHead var(--map-t) cubic-bezier(0.45, 0.05, 0.35, 1) forwards, mapHeadFade var(--map-t) linear forwards;
         }
         @keyframes mapTrailIn { to { stroke-dashoffset: 0; } }
@@ -946,24 +946,23 @@
             filter: drop-shadow(0 0 9px rgba(234, 88, 32, 0.5)) drop-shadow(-7px -5px 22px rgba(30, 47, 79, 0.95)) drop-shadow(5px 6px 24px rgba(234, 88, 32, 0.3));
             transition-delay: calc(var(--map-t) * 0.85);
         }
-        .map-hover-zone:hover .map-container .map-hq-ring, .map-container.is-animated .map-hq-ring { animation: mapRing 1.3s ease-out calc(var(--map-t) * 0.9) forwards; }
+        .map-container.is-animated .map-hq-ring { animation: mapRing 1.3s ease-out calc(var(--map-t) * 0.9) forwards; }
         @keyframes mapRing { 0% { opacity: 0.9; transform: scale(1); } 100% { opacity: 0; transform: scale(2.3); } }
 
-        /* Финальная вспышка: когда проезд дошёл до карточки САП, вокруг неё вспыхивает яркий оранжевый ореол и плавно гаснет.
-           Без фильтров и размытия: ореол — прямоугольник с радиальным градиентом, анимируются только opacity и transform.
-           Класс .is-animated снимается скриптом лишь после конца ореола, поэтому при повторном запуске он стартует с нуля (opacity: 0 в базе). */
+        /* Финал: оранжевый ореол и вспышка рамки вокруг карточки САП, затем плавное затухание.
+           Без фильтров: градиентный прямоугольник, анимируются только opacity и transform. */
         .map-yard-halo, .map-yard-flash { opacity: 0; pointer-events: none; transform-box: fill-box; transform-origin: center; }
         .map-yard-halo { fill: url(#mapHalo); }
         .map-yard-flash { fill: none; stroke: #ff9a63; stroke-width: 3; }
-        .map-hover-zone:hover .map-container .map-yard-halo, .map-container.is-animated .map-yard-halo {
+        .map-container.is-animated .map-yard-halo {
             animation: mapYardGlow var(--map-glow) cubic-bezier(0.2, 0.6, 0.3, 1) calc(var(--map-t) * 0.88) both;
         }
-        .map-hover-zone:hover .map-container .map-yard-flash, .map-container.is-animated .map-yard-flash {
+        .map-container.is-animated .map-yard-flash {
             animation: mapYardFlash calc(var(--map-glow) * 0.55) ease-out calc(var(--map-t) * 0.88) both;
         }
         @keyframes mapYardGlow { 0% { opacity: 0; transform: scale(0.9); } 12% { opacity: 1; transform: scale(1.03); } 45% { opacity: 0.5; } 100% { opacity: 0; transform: scale(1.12); } }
         @keyframes mapYardFlash { 0% { opacity: 0; } 10% { opacity: 1; } 100% { opacity: 0; } }
-        .map-hover-zone:hover .map-container .map-train, .map-container.is-animated .map-train { animation: mapTrain var(--map-train) linear var(--map-train-delay) forwards; }
+        .map-container.is-animated .map-train { animation: mapTrain var(--map-train) linear var(--map-train-delay) forwards; }
         @keyframes mapTrain { to { transform: translateY(460px); } }
 
         @media (max-width: 600px) { .map-container { height: auto; aspect-ratio: 480 / 380; } }
@@ -972,7 +971,7 @@
            1) подъём карточки + тёплая рамка и глубокая тень
            2) «фонарик»: мягкий свет и виньетка следуют за курсором (--mx/--my ставит скрипт)
            4) фокус на маршруте: ж/д и сетка приглушаются
-           5) стеклянная плашка «Построить маршрут» */
+           5) стеклянная плашка «Построить маршрут» (видна всегда, на время проезда подсвечивается) */
         .map-grid, .map-rail { transition: opacity 0.6s ease; }
 
         .map-spot { position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0; transition: opacity 0.5s ease; border-radius: inherit; }
@@ -986,9 +985,8 @@
             background: linear-gradient(135deg, rgba(30, 47, 79, 0.62), rgba(20, 28, 46, 0.62));
             border: 1px solid rgba(255, 255, 255, 0.14); box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%);
-            opacity: 0; transform: translateY(14px); pointer-events: none;
-            transition: opacity 0.45s var(--ease), transform 0.55s var(--ease), border-color 0.3s ease, background 0.3s ease; }
-        .map-route-icon { flex: 0 0 auto; width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center; background: var(--orange); box-shadow: 0 6px 16px rgba(234, 88, 32, 0.45); }
+            transition: border-color 0.3s ease, background 0.3s ease; }
+        .map-route-icon { position: relative; flex: 0 0 auto; width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center; background: var(--orange); box-shadow: 0 6px 16px rgba(234, 88, 32, 0.45); }
         .map-route-icon svg { width: 18px; height: 18px; display: block; }
         .map-route-text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; line-height: 1.25; }
         .map-route-text strong { font-size: 14px; font-weight: 700; letter-spacing: 0.1px; }
@@ -998,7 +996,17 @@
         .map-route:hover .map-route-arrow, .map-route:focus-visible .map-route-arrow { transform: translateX(4px); color: var(--orange); }
         .map-route:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
 
-        .map-hover-zone:hover .map-container .map-route, .map-hover-zone:focus-within .map-route { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        /* Сияние плашки на время проезда: пик совпадает с вспышкой карточки САП, затем возврат к исходному виду.
+           Анимируется только opacity псевдоэлементов; привязка к .is-animated (не к :hover) снимает сияние, даже если курсор остался на карточке. */
+        .map-route::before, .map-route-icon::after { content: ''; position: absolute; border-radius: inherit; opacity: 0; pointer-events: none; }
+        .map-route::before { inset: -1px; z-index: -1; border: 1px solid rgba(255, 138, 76, 0.95);
+            background: linear-gradient(135deg, rgba(234, 88, 32, 0.28), rgba(234, 88, 32, 0.06));
+            box-shadow: 0 0 22px rgba(234, 88, 32, 0.55), inset 0 0 18px rgba(255, 138, 76, 0.25); }
+        .map-route-icon::after { inset: 0; box-shadow: 0 0 0 2px rgba(255, 170, 120, 0.55), 0 0 20px 4px rgba(255, 122, 46, 0.9); }
+        .map-container.is-animated .map-route::before, .map-container.is-animated .map-route-icon::after {
+            animation: mapRouteGlow calc(var(--map-t) * 0.88 + var(--map-glow)) ease-out both;
+        }
+        @keyframes mapRouteGlow { 0% { opacity: 0; } 14% { opacity: 0.6; } 36% { opacity: 0.6; } 45% { opacity: 1; } 100% { opacity: 0; } }
 
         @media (hover: hover) and (pointer: fine) {
             .map-hover-zone:hover .map-container { transform: translateY(-4px); border-color: rgba(234, 88, 32, 0.38); box-shadow: 0 26px 52px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(234, 88, 32, 0.16); }
@@ -1008,16 +1016,16 @@
         .map-hover-zone:hover .map-container .map-rail, .map-container.is-animated .map-rail { opacity: 0.4; }
 
 
-        @media (hover: none) { .map-route { opacity: 1; transform: none; pointer-events: auto; } }
         @media (max-width: 600px) { .map-route { left: 10px; right: 10px; bottom: 8px; padding: 7px 11px 7px 8px; gap: 10px; border-radius: 15px; } .map-route-icon { width: 28px; height: 28px; border-radius: 9px; } .map-route-icon svg { width: 15px; height: 15px; } .map-route-text strong { font-size: 13px; } .map-route-text small { font-size: 11px; } }
         @media (prefers-reduced-motion: reduce) {
-            .map-hover-zone:hover .map-container { transform: none; } .map-route { transform: none; }
-            .map-hover-zone:hover .map-container .map-trail-halo, .map-container.is-animated .map-trail-halo,
-            .map-hover-zone:hover .map-container .map-trail, .map-container.is-animated .map-trail { animation: none; stroke-dashoffset: 0; }
-            .map-hover-zone:hover .map-container .map-head, .map-container.is-animated .map-head, .map-hover-zone:hover .map-container .map-hq-ring, .map-container.is-animated .map-hq-ring,
-            .map-hover-zone:hover .map-container .map-train, .map-container.is-animated .map-train,
-            .map-hover-zone:hover .map-container .map-yard-halo, .map-container.is-animated .map-yard-halo,
-            .map-hover-zone:hover .map-container .map-yard-flash, .map-container.is-animated .map-yard-flash { animation: none; }
+            .map-hover-zone:hover .map-container { transform: none; }
+            .map-container.is-animated .map-route::before, .map-container.is-animated .map-route-icon::after { animation: none; }
+            .map-container.is-animated .map-trail-halo,
+            .map-container.is-animated .map-trail { animation: none; stroke-dashoffset: 0; }
+            .map-container.is-animated .map-head, .map-container.is-animated .map-hq-ring,
+            .map-container.is-animated .map-train,
+            .map-container.is-animated .map-yard-halo,
+            .map-container.is-animated .map-yard-flash { animation: none; }
             .map-hover-zone:hover .map-container .map-yard-g, .map-container.is-animated .map-yard-g { transition-delay: 0s; }
         }
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 35px; display: flex; justify-content: space-between; color: #94a3b8; font-size: 13px; width: 100%; flex-wrap: wrap; gap: 15px; letter-spacing: -0.005em; }
@@ -3172,32 +3180,28 @@
             });
         })();
 
-        /* «Проезд» по схеме всегда доигрывается до конца.
-           Раньше анимация висела на :hover и при уходе мыши обрывалась. Теперь запуск ставит класс .is-animated
-           (CSS-правила для него те же, что и для :hover, поэтому при уходе курсора анимация не перезапускается и не сбрасывается),
-           а снимаем класс только после того, как закончились все её части: след, поезд, кольцо. Общая длительность считается из CSS-переменных. */
+        /* «Проезд» по схеме: класс .is-animated запускает анимацию и снимается только после её конца,
+           поэтому уход мыши её не обрывает. Длительности берутся из CSS-переменных .map-container. */
         document.querySelectorAll('.map-container').forEach(map => {
             const cs = getComputedStyle(map);
-            const sec = (name, def) => { const v = parseFloat(cs.getPropertyValue(name)); return isNaN(v) ? def : v; };
-            /* проезд заканчивается, когда доиграла самая долгая часть: поезд, след (рост + пауза + затухание) или ореол; плюс небольшой запас */
-            const t = sec('--map-t', 2.2);
+            const sec = name => parseFloat(cs.getPropertyValue(name)) || 0;
+            const t = sec('--map-t');
             const RUN_MS = Math.max(
-                sec('--map-train-delay', .3) + sec('--map-train', 6),
-                t + sec('--map-hold', .45) + sec('--map-out', 1.6),
-                t * 0.88 + sec('--map-glow', 3)
+                sec('--map-train-delay') + sec('--map-train'),
+                t + sec('--map-hold') + sec('--map-out'),
+                t * 0.88 + sec('--map-glow')
             ) * 1000 + 150;
             const play = () => {
-                if (map._mapRunning) return;           /* уже едем — не перезапускаем, пусть доедет */
+                if (map._mapRunning) return;
                 map._mapRunning = true;
                 map.classList.add('is-animated');
                 clearTimeout(map._mapTimer);
                 map._mapTimer = setTimeout(() => { map.classList.remove('is-animated'); map._mapRunning = false; }, RUN_MS);
             };
             map.addEventListener('click', play);
-            /* мышь: запускаем при входе в зону карточки; уход курсора ничего не прерывает */
             const zone = map.closest('.map-hover-zone') || map;
             zone.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') play(); });
-            /* один раз проигрываем «проезд» сами, когда схема появилась на экране (на телефоне нет наведения) */
+            /* один раз сами, когда схема появилась на экране (на телефоне нет наведения) */
             if ('IntersectionObserver' in window) {
                 const mapIO = new IntersectionObserver(entries => {
                     if (!entries[0].isIntersecting) return;
