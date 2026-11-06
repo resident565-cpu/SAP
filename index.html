@@ -2319,16 +2319,10 @@
             const revealItems = document.querySelectorAll('.reveal');
             revealItems.forEach(el => io.observe(el));
 
-            // Страховка: если наблюдатель не сработал, не оставляем контент скрытым.
-            const revealFallback = window.setTimeout(() => {
-                revealItems.forEach(el => {
-                    if (!el.classList.contains('visible')) el.classList.add('visible');
-                });
-                io.disconnect();
-            }, 3000);
-
-            io.takeRecords();
-            window.addEventListener('pagehide', () => window.clearTimeout(revealFallback), { once: true });
+            // Не раскрываем все блоки по таймеру: каждый элемент появляется,
+            // когда действительно приближается к области просмотра.
+            // Не вызываем io.takeRecords(): он очищает очередь начальных
+            // IntersectionObserver-записей до того, как их обработает callback.
         })();
 
         /* ===== Бургер-меню ===== */
