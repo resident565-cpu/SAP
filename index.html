@@ -318,7 +318,7 @@
             text-rendering: geometricPrecision;
         }
 
-        .icon-gear, .icon-brg-cage, .icon-seal-shaft, .icon-belt-p1, .icon-belt-p2,
+        .icon-gear, .icon-brg-cage, .icon-belt-p1, .icon-belt-p2,
         .icon-ucfl-inner, .icon-ucfl-cage, .icon-serp-p1, .icon-serp-p2, .icon-serp-p3, .icon-serp-idler,
         .tractor-wheel-r, .tractor-wheel-f, .icon-tractor, .icon-drop {
             transform-box: view-box;
@@ -330,7 +330,6 @@
         .icon-belt-p1 { animation: none; transform-origin: 9px 12px; }
         .icon-belt-p2 { animation: none; transform-origin: 24.5px 12px; }
         .card-icon-wrap svg.icon-belt-svg { width: 44px; height: 33px; }
-        .icon-seal-shaft { animation: none; transform-origin: 12px 12px; }
         .icon-tractor { animation: none !important; transform-origin: 12px 16px !important; }
         .icon-ucfl-inner, .icon-ucfl-cage { animation: none; transform-origin: 12px 12px; }
         .icon-serp-belt { animation: none; }
@@ -355,7 +354,6 @@
             html:not(.fx-js) .catalog-card:hover .icon-belt-loop   { animation: beltRun 0.5s linear infinite; }
             html:not(.fx-js) .catalog-card:hover .icon-belt-p1     { animation: spinGear 6.513s linear infinite; }
             html:not(.fx-js) .catalog-card:hover .icon-belt-p2     { animation: spinGear 4.187s linear infinite; }
-            html:not(.fx-js) .catalog-card:hover .icon-seal-shaft  { animation: spinGear 3s linear infinite; }
 
             html:not(.fx-js) .brand-group-card:hover .icon-tractor            { animation: tractorRide 0.4s linear infinite alternate !important; }
             html:not(.fx-js) .brand-group-card:hover .icon-ucfl-inner         { animation: spinGear 3s linear infinite; }
@@ -1141,13 +1139,13 @@
         }
     
         /* ===== Фото в карточках (временные иллюстрации — заменить на живые фото) ===== */
-        .card-media { position: relative; overflow: hidden; line-height: 0; margin: -32px -26px 22px; aspect-ratio: 16 / 10; background: var(--blue-dark); }
+        .card-media { position: relative; overflow: hidden; line-height: 0; margin: -32px -28px 22px; aspect-ratio: 16 / 10; background: var(--blue-dark); border-radius: 27px 27px 0 0; }
         .card-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.2s var(--ease); }
         .card-media::after { content: ''; position: absolute; inset: 0 0 -1px 0; pointer-events: none;
             background: linear-gradient(180deg, rgba(15, 30, 53, 0) 55%, rgba(15, 30, 53, 0.28) 100%); }
         .catalog-card .card-media + .card-icon-wrap { margin-top: -56px; z-index: 3; }
         .catalog-card:nth-child(1) { justify-content: flex-start; }
-        .catalog-card:nth-child(1) .card-media { flex: 1 1 auto; aspect-ratio: auto; min-height: 280px; }
+        .catalog-card:nth-child(1) .card-media { flex: 1 1 auto; aspect-ratio: auto; min-height: 280px; margin: -36px -32px 22px; }
         .catalog-card:nth-child(1) .card-media + .card-icon-wrap { margin-top: -66px; }
         /* Блок брендов: широкое фото сверху, анимированная иконка — в строке заголовка */
         .brand-group-card .card-media { margin: -35px -35px 26px; aspect-ratio: 5 / 2; }
@@ -1171,7 +1169,7 @@
         .sap-card-base:has(.card-media) { will-change: transform; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
         .card-media {
             isolation: isolate;
-            clip-path: inset(0);
+            clip-path: inset(0 round 27px 27px 0 0);
             transform: translateZ(0);
             -webkit-mask-image: -webkit-radial-gradient(white, black);
             contain: paint;
@@ -1279,9 +1277,38 @@
         .contacts-messengers a:hover::before {
             content: ''; position: absolute; left: 0; right: 0; top: 100%; height: 8px; background: transparent;
         }
+/* Объёмная манжета */
+.seal3d{position:relative;z-index:2;width:1em;height:1em;font-size:43px;flex-shrink:0;color:inherit;perspective:5.5em;perspective-origin:50% 38%}
+.seal3d-spin{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform;transform:translateY(0) rotateX(-12deg) rotateY(-24deg)}
+.seal3d-layer{position:absolute;inset:0;transform-style:preserve-3d}
+.seal3d-layer svg{display:block;width:100%;height:100%;overflow:visible}
+.seal3d-facet{position:absolute;left:50%;top:50%;display:block}
+.seal3d-shadow{position:absolute;left:50%;bottom:-.1em;width:.8em;height:.13em;margin-left:-.4em;border-radius:50%;pointer-events:none;transform:scaleX(.91);
+  background:radial-gradient(ellipse at center,rgba(30,47,79,.3),rgba(30,47,79,0) 70%);
+  background:radial-gradient(ellipse at center,color-mix(in srgb,currentColor 38%,transparent),transparent 70%)}
+.s3-t1{fill:#eef2f9;fill:color-mix(in srgb,currentColor 13%,#fff)}
+.s3-t2{fill:#c9d3e4;fill:color-mix(in srgb,currentColor 34%,#fff)}
+@keyframes sealSpin{
+  0%{transform:translateY(0) rotateX(-12deg) rotateY(-24deg)}
+  50%{transform:translateY(-.045em) rotateX(-20deg) rotateY(156deg)}
+  100%{transform:translateY(0) rotateX(-12deg) rotateY(336deg)}}
+@keyframes sealShadow{
+  0%,100%{transform:scaleX(.91);opacity:1}
+  32%,82%{transform:scaleX(.2);opacity:.6}
+  50%{transform:scaleX(.8);opacity:.7}}
+@media (hover:hover){
+  html:not(.fx-js) .catalog-card:hover .seal3d-spin{animation:sealSpin 2.4s cubic-bezier(.6,.05,.3,1) infinite}
+  html:not(.fx-js) .catalog-card:hover .seal3d-shadow{animation:sealShadow 2.4s cubic-bezier(.6,.05,.3,1) infinite}}
+@media (prefers-reduced-motion:reduce){.seal3d-spin,.seal3d-shadow{animation:none!important}}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<linearGradient id="s3-sheen" x1="0.12" y1="0.05" x2="0.88" y2="0.95">
+<stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset=".42" stop-color="#fff" stop-opacity="0"/>
+<stop offset=".7" stop-color="#0f1e35" stop-opacity="0"/><stop offset="1" stop-color="#0f1e35" stop-opacity=".16"/></linearGradient>
+</defs></svg>
+
     <a href="#catalog" class="skip-link">Перейти к каталогу</a>
     <header>
         <div class="container">
@@ -1438,7 +1465,7 @@
                 </div>
                 <div class="catalog-card sap-card-base reveal">
                     <div class="card-media"><img src="images/salniki.webp" alt="Армированные сальники, манжеты и уплотнительные кольца" width="800" height="500" loading="lazy" decoding="async"></div>
-                    <div class="card-icon-wrap"><svg class="icon-seal-svg" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20zM12 7.6a4.4 4.4 0 1 0 0 8.8 4.4 4.4 0 1 0 0-8.8z" fill="currentColor" fill-opacity=".1" fill-rule="evenodd" stroke="none"></path><circle cx="12" cy="12" r="10" stroke-width="2"></circle><circle cx="12" cy="12" r="6.5" pathLength="72" stroke-width="1" stroke-dasharray=".9 1.1"></circle><circle cx="12" cy="12" r="4.5" stroke-width="1.5"></circle><g class="icon-seal-shaft"><path d="M14.3 9.78A3.2 3.2 0 1 0 14.3 14.22z" fill="currentColor" stroke="none"></path></g></svg></div>
+                    <div class="card-icon-wrap"><div class="seal3d" aria-hidden="true"></div></div>
                     <h3>Сальники и манжеты</h3><p>Надёжные элементы уплотнения, армированные манжеты и гидравлические уплотнители для защиты систем от утечек.</p>
                     <a class="card-cta" href="#sapFormWrap" data-request="seals" aria-label="Оставить заявку: Сальники и манжеты">Оставить заявку <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
                 </div>
@@ -2297,6 +2324,49 @@
     </a>
 </div>
     <script>
+/* Манжета: два лица (SVG) и сплошной борт из граней: наружный и внутренний */
+(function(){
+  var TH=.2, R=10/24, RIN=4.5/24, M=30, MI=22, D=Math.PI/180;
+  function ann(r){return 'M12 2a10 10 0 1 0 0 20a10 10 0 1 0 0-20zM12 '+(12-r)+'a'+r+' '+r+' 0 1 0 0 '+2*r+'a'+r+' '+r+' 0 1 0 0-'+2*r+'z';}
+  function face(flip){
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"'+(flip?' style="transform:rotateY(180deg)"':'')+'>'+
+      '<path class="s3-t1" fill-rule="evenodd" d="'+ann(4.5)+'"/>'+
+      '<path class="s3-t2" fill-rule="evenodd" d="M12 6.4a5.6 5.6 0 1 0 0 11.2a5.6 5.6 0 1 0 0-11.2zM12 7.5a4.5 4.5 0 1 1 0 9a4.5 4.5 0 1 1 0-9z"/>'+
+      '<path fill="url(#s3-sheen)" fill-rule="evenodd" d="'+ann(4.5)+'"/>'+
+      '<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>'+
+      '<circle cx="12" cy="12" r="7.85" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width=".55"/>'+
+      '<circle cx="12" cy="12.32" r="6.5" pathLength="72" fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="1.1" stroke-dasharray=".9 1.1"/>'+
+      '<circle cx="12" cy="12" r="6.5" pathLength="72" fill="none" stroke="currentColor" stroke-width="1.1" stroke-dasharray=".9 1.1"/>'+
+      '<circle cx="12" cy="12" r="5.6" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width=".5"/>'+
+      '<circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.4"/>'+
+      '<path d="M5.2 8.2A7.6 7.6 0 0 1 9 4.9" fill="none" stroke="#fff" stroke-width=".9" stroke-linecap="round" opacity=".9"/></svg>';
+  }
+  function facets(sp,rad,n,inner){
+    var w=2*rad*Math.tan(Math.PI/n)*1.06;
+    for(var i=0;i<n;i++){
+      var t=i*360/n, c=(1-Math.cos((t+40)*D))/2;           /* свет сверху-слева */
+      var sh=inner?.5:(.06+.34*c);
+      var f=document.createElement('i');f.className='seal3d-facet';
+      f.style.cssText='width:'+w+'em;height:'+TH+'em;margin:'+(-TH/2)+'em 0 0 '+(-w/2)+'em;'+
+        'background:linear-gradient(rgba(11,22,38,'+sh.toFixed(2)+'),rgba(11,22,38,'+sh.toFixed(2)+')),currentColor;'+
+        'transform:rotateZ('+t+'deg) translateY('+(-rad)+'em) rotateX(90deg)';
+      sp.appendChild(f);
+    }
+  }
+  function build(root){
+    var sp=document.createElement('div');sp.className='seal3d-spin';
+    facets(sp,R,M,false);facets(sp,RIN,MI,true);
+    [[-TH/2,true],[TH/2,false]].forEach(function(a){
+      var l=document.createElement('div');l.className='seal3d-layer';
+      l.style.transform='translateZ('+a[0]+'em)';l.innerHTML=face(a[1]);sp.appendChild(l);
+    });
+    var sh=document.createElement('span');sh.className='seal3d-shadow';
+    root.appendChild(sh);root.appendChild(sp);
+  }
+  document.querySelectorAll('.seal3d').forEach(build);
+})();
+</script>
+<script>
         /* ===== Reveal-анимации =====
            Идут первыми: класс .js на <html> прячет .reveal, поэтому, если что-то ниже в скрипте упадёт,
            блоки уже будут показываться. Без IntersectionObserver просто снимаем класс .js. */
@@ -2735,10 +2805,23 @@
 
             /* hold: true  — крутится/бежит; при остановке плавно тормозит и замирает на месте.
                hold: false — цикл; при остановке доигрывает текущий проход и отключается. */
+            const sealSpin = [
+                { transform: 'translateY(0) rotateX(-12deg) rotateY(-24deg)' },
+                { transform: 'translateY(-.045em) rotateX(-20deg) rotateY(156deg)' },
+                { transform: 'translateY(0) rotateX(-12deg) rotateY(336deg)' }
+            ];
+            const sealShadow = [
+                { offset: 0,    transform: 'scaleX(.91)', opacity: 1 },
+                { offset: .32,  transform: 'scaleX(.2)',  opacity: .6 },
+                { offset: .5,   transform: 'scaleX(.8)',  opacity: .7 },
+                { offset: .82,  transform: 'scaleX(.2)',  opacity: .6 },
+                { offset: 1,    transform: 'scaleX(.91)', opacity: 1 }
+            ];
             const SPECS = [
                 { sel: '.icon-gear',               frames: spin, duration: 8000,  hold: true },
                 { sel: '.icon-brg-cage',           frames: spin, duration: 6000,  hold: true },
-                { sel: '.icon-seal-shaft',         frames: spin, duration: 3000,  hold: true },
+                { sel: '.seal3d-spin',   frames: sealSpin,   duration: 2400, hold: false, easing: 'cubic-bezier(.6,.05,.3,1)' },
+                { sel: '.seal3d-shadow', frames: sealShadow, duration: 2400, hold: false, easing: 'cubic-bezier(.6,.05,.3,1)' },
                 /* ремень и шкивы связаны без проскальзывания: окружная скорость одна (ω = v / r),
                    поэтому большой шкив (r=7) оборачивается медленнее малого (r=4.5), а все три
                    анимации разгоняются и тормозят одним профилем — зубья и спицы остаются согласованы */
@@ -2986,7 +3069,7 @@
                     if (!this.anim) {
                         this.anim = this.el.animate(s.frames, {
                             duration: s.duration, delay: s.delay || 0,
-                            iterations: Infinity, direction: s.direction || 'normal'
+                            iterations: Infinity, direction: s.direction || 'normal', easing: s.easing || 'linear'
                         });
                         this.setRate(0);
                     } else if (this.anim.playState === 'paused') {
