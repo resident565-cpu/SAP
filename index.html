@@ -530,7 +530,12 @@
         html.js .scenarios-section .draw{stroke-dashoffset:1}
         .scenarios-section .scenario-card.visible .draw{animation:sc-draw 1.4s var(--ease) forwards}
         @keyframes sc-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
-        .scenarios-section .sp{transform-origin:0 0}
+        .scenarios-section .sp,.scenarios-section .sw-hand{transform-origin:0 0}
+        .scenarios-section .sw-ring,.scenarios-section .sw-pie{fill:none;stroke:var(--orange);stroke-dasharray:100 200;stroke-dashoffset:100;opacity:0}
+        .scenarios-section .sw-ring{stroke-width:1.6;stroke-linecap:round}
+        .scenarios-section .sw-pie{stroke-width:11}
+        .scenarios-section .sw-lap{fill:#fff;stroke:#12223c;stroke-width:.5;opacity:0}
+        .scenarios-section .sw-stop{fill:none;stroke:var(--orange);stroke-width:1.2;opacity:0}
         .scenarios-section .pulse{opacity:0}
         .scenarios-section .pk{opacity:0;offset-distance:0}
         .scenarios-section .scan{opacity:0}
@@ -545,10 +550,13 @@
         .scenarios-section .okc{stroke-dasharray:1;stroke-dashoffset:0}
         .scenarios-section .br{opacity:0}
         .scenarios-section .br0{opacity:1}
-        .scenarios-section .sc-urgent{background:linear-gradient(165deg,#1e2f4f,#0f1e35);border-color:rgba(255,255,255,.08);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 22px 50px -14px rgba(15,30,53,.55)}
+        .scenarios-section .sc-urgent{background:radial-gradient(90% 60% at 8% 0%,rgba(120,150,215,.16),transparent 60%),linear-gradient(165deg,#1e2f4f,#0f1e35);border-color:rgba(255,255,255,.08);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 22px 50px -14px rgba(15,30,53,.55)}
         .scenarios-section .sc-urgent .sc-tag{background:rgba(255,255,255,.1);color:#d5deee}
         .scenarios-section .sc-urgent .sc-art{flex:1;display:flex;align-items:center;margin:8px 0 24px}
-        .scenarios-section .sc-urgent .sc-art svg{max-height:none}
+        .scenarios-section .sc-urgent .sc-art svg{max-height:none;overflow:visible}
+        .scenarios-section .sc-urgent svg .rg{fill:none;stroke:#fff;stroke-width:1;vector-effect:non-scaling-stroke;stroke-dasharray:1 6;stroke-linecap:round}
+        .scenarios-section .sc-urgent svg .ax{stroke:#fff;stroke-width:1;vector-effect:non-scaling-stroke;stroke-dasharray:2 8;opacity:.1}
+        .scenarios-section .sc-urgent svg .pulse{fill:none;stroke:#ea5820;stroke-width:1.2;vector-effect:non-scaling-stroke;opacity:0}
         .scenarios-section .sc-urgent svg .l{stroke:#fff}
         .scenarios-section .sc-urgent svg .t{stroke:#fff;opacity:.35}
         .scenarios-section .sc-urgent svg .map{fill:none;stroke:#fff;opacity:.13;stroke-width:1}
@@ -556,7 +564,6 @@
         .scenarios-section .sc-urgent svg text{fill:#c3cee3}
         .scenarios-section .sc-urgent h3{color:#fff;font-size:clamp(22px,2.2vw,28px);margin-bottom:12px}
         .scenarios-section .sc-urgent p{color:#c3cee3;font-size:16px;max-width:46ch}
-        .scenarios-section .sc-bp{position:absolute;inset:0;z-index:0;opacity:.5;pointer-events:none;background:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px) 0 0/28px 28px,linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px) 0 0/28px 28px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 70%);mask-image:linear-gradient(180deg,#000,transparent 70%)}
         .scenarios-section .sc-urgent::before{background:radial-gradient(circle,rgba(234,88,32,.5),transparent 62%)}
         .scenarios-section .sc-urgent::after{background:radial-gradient(circle,rgba(120,150,215,.4),transparent 62%)}
         @media (max-width:1000px){.scenarios-section .scenarios-grid{grid-template-columns:1fr 1fr}
@@ -1694,15 +1701,21 @@
             <div class="scenarios-grid">
             <!-- СРОЧНАЯ ПОСТАВКА -->
                <article class="scenario-card sap-card-base reveal sc-urgent">
-                <div class="sc-bp"></div>
                 <span class="sc-tag" style="align-self:flex-start"><i></i>Срочно</span>
                 <div class="sc-art">
                  <svg viewBox="0 0 360 150" role="img" aria-label="Карта: со склада выезжают две машины, на развилке одна едет на завод, другая на агропредприятие">
+                  <g aria-hidden="true"><circle class="rg" cx="44" cy="100" r="34" opacity="0.34"/><circle class="rg" cx="44" cy="100" r="78" opacity="0.27"/><circle class="rg" cx="44" cy="100" r="128" opacity="0.21"/><circle class="rg" cx="44" cy="100" r="184" opacity="0.16"/><circle class="rg" cx="44" cy="100" r="246" opacity="0.12"/><circle class="rg" cx="44" cy="100" r="314" opacity="0.08"/><circle class="rg" cx="44" cy="100" r="388" opacity="0.05"/><path class="ax" d="M44-600V700M-600 100H900"/><circle class="pulse fc" cx="44" cy="100" r="60"/></g>
                   <path class="map" d="M0 138C70 128 110 144 170 132S290 120 360 130"/><path class="map" d="M52 0C62 40 84 78 78 150"/><path class="map" d="M214 0C206 44 232 84 226 150"/>
                   <path class="map" d="M0 24H360M0 76H360" stroke-dasharray="2 6"/>
                   <rect class="map" x="96" y="108" width="22" height="14" rx="2"/><rect class="map" x="124" y="112" width="14" height="14" rx="2"/><rect class="map" x="148" y="8" width="24" height="14" rx="2"/><rect class="map" x="236" y="4" width="18" height="12" rx="2"/>
-                  <g transform="translate(36 34)"><circle class="l" r="11"/><path class="t" d="M0-11v-3M-3-14h6M9-6l2-2"/><path class="t" d="M0-8v2M8 0h-2M0 8v-2M-8 0h2"/>
-                   <g class="sp" style="--t:3s"><path class="o" d="M0 1V-7"/></g><circle class="f" r="1.6"/></g>
+                  <g transform="translate(36 34)"><circle class="l" r="11"/>
+                   <circle class="sw-pie" r="5.5" pathLength="100" transform="rotate(-90)"/>
+                   <path class="t sw-btn" d="M0-11v-3M-3-14h6"/><path class="t" d="M9-6l2-2"/>
+                   <path class="t" d="M0-8v2M8 0h-2M0 8v-2M-8 0h2"/><path class="t" d="M5.8-5.8l.7-.7M5.8 5.8l.7.7M-5.8 5.8l-.7.7M-5.8-5.8l-.7-.7" style="opacity:.25"/>
+                   <circle class="sw-ring" r="11" pathLength="100" transform="rotate(-90)"/>
+                   <circle class="sw-lap fc" cx="-7.86" cy="7.69" r="1.3"/>
+                   <g class="sw-hand"><path class="o" d="M0 2V-7.2"/></g><circle class="f" r="1.6"/>
+                   <circle class="sw-stop fc" r="11"/></g>
                   <!-- склад -->
                   <g transform="translate(24 84)"><path class="l" d="M0 14L18 0l18 14M4 12v20h28V12"/><rect class="l" x="12" y="20" width="12" height="12"/><path class="t" d="M12 24h12M12 28h12M18 20v12"/></g>
                   <text x="42" y="132" font-size="11.5" text-anchor="middle">склад</text>
@@ -2903,6 +2916,39 @@
                     if (sh) f.push({ offset: u(sh), offsetDistance: '0%', opacity: 0, easing: EIO });
                     f.push({ offset: u(sh + 240), opacity: 1, easing: EIO }, { offset: u(sh + 4640), offsetDistance: '100%', opacity: 1, easing: EIO },
                            { offset: u(sh + 4960), opacity: 0 }, { offset: 1, offsetDistance: '100%', opacity: 0 });
+                    return { duration: UR, frames: f };
+                });
+                /* секундомер: пуск 0,24 с, отсечка 4,64 с, стоп 7,34 с */
+                const sw = (val, extra) => ({ duration: UR, frames: [
+                    { offset: 0, ...val(0), easing: 'linear' },
+                    { offset: u(240), ...val(0), easing: 'ease-in' },
+                    { offset: u(700), ...val(12.45), easing: 'linear' },
+                    { offset: u(6900), ...val(347.9), easing: 'ease-out' },
+                    { offset: u(7340), ...val(360) },
+                    ...(extra || []),
+                    { offset: 1, ...val(360), ...(extra ? { opacity: 0 } : {}) }] });
+                add('.sw-hand', () => sw(d => ({ transform: 'rotate(' + d + 'deg)' })));
+                const prog = d => ({ strokeDashoffset: String(+(100 - d / 3.6).toFixed(2)) });
+                add('.sw-ring', () => sw(d => ({ ...prog(d), opacity: d ? 1 : 0 }), [{ offset: u(9000), ...prog(360), opacity: 1 }]));
+                add('.sw-pie',  () => sw(d => ({ ...prog(d), opacity: d ? .16 : 0 }), [{ offset: u(9000), ...prog(360), opacity: .16 }]));
+                add('.sw-lap', () => ({ duration: UR, frames: [
+                    { offset: 0, opacity: 0, transform: 'scale(.3)' }, { offset: u(4640), opacity: 0, transform: 'scale(.3)', easing: 'ease-out' },
+                    { offset: u(4800), opacity: 1, transform: 'scale(1.5)', easing: 'ease-in-out' }, { offset: u(4960), opacity: 1, transform: 'scale(1)' },
+                    { offset: u(9000), opacity: 1 }, { offset: 1, opacity: 0 }] }));
+                add('.sw-stop', () => ({ duration: UR, frames: [
+                    { offset: 0, opacity: 0, transform: 'scale(1)' }, { offset: u(7340), opacity: 0, transform: 'scale(1)', easing: 'ease-out' },
+                    { offset: u(7420), opacity: .7 }, { offset: u(8300), opacity: 0, transform: 'scale(1.9)' }, { offset: 1, opacity: 0, transform: 'scale(1.9)' }] }));
+                add('.sw-btn', () => ({ duration: UR, frames: [
+                    { offset: 0, transform: 'translateY(0)' }, { offset: u(200), transform: 'translateY(0)', easing: 'ease-out' },
+                    { offset: u(290), transform: 'translateY(1.3px)', easing: 'ease-in-out' }, { offset: u(460), transform: 'translateY(0)' },
+                    { offset: u(7260), transform: 'translateY(0)', easing: 'ease-out' }, { offset: u(7350), transform: 'translateY(1.3px)', easing: 'ease-in-out' },
+                    { offset: u(7520), transform: 'translateY(0)' }, { offset: 1, transform: 'translateY(0)' }] }));
+                add('.pulse', () => {
+                    const P = 'cubic-bezier(.2,.6,.3,1)', f = [{ offset: 0, opacity: 0, transform: 'scale(.15)' }];
+                    [240, 2840].forEach(t => f.push(
+                        { offset: u(t), opacity: 0, transform: 'scale(.15)', easing: P }, { offset: u(t + 260), opacity: .5, easing: P },
+                        { offset: u(t + 2200), opacity: 0, transform: 'scale(6)' }));
+                    f.push({ offset: 1, opacity: 0, transform: 'scale(6)' });
                     return { duration: UR, frames: f };
                 });
                 add('.arr', el => {
