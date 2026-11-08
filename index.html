@@ -358,7 +358,7 @@
 
         /* запасной вариант без JS; при работающем скрипте анимацией иконок управляет контроллер (см. скрипт «Плавный запуск и остановка») */
         @media (hover: hover) {
-            html:not(.fx-js) .catalog-card:hover .icon-gear        { animation: spinGear 8s linear infinite; }
+            html:not(.fx-js) .catalog-card:hover .icon-gear        { animation: spinGear 7s linear infinite; }
             html:not(.fx-js) .catalog-card:hover .icon-drop        { animation: dropAnim 2.2s ease-in-out infinite; }
             html:not(.fx-js) .catalog-card:hover .icon-brg-cage    { animation: spinGear 6s linear infinite; }
             html:not(.fx-js) .catalog-card:hover .icon-belt-loop   { animation: beltRun 0.5s linear infinite; }
@@ -1314,15 +1314,107 @@
 .s3-t2{fill:#c9d3e4;fill:color-mix(in srgb,currentColor 34%,#fff)}
 @keyframes sealSpin{
   0%{transform:translateY(0) rotateX(-12deg) rotateY(-24deg)}
-  50%{transform:translateY(-.045em) rotateX(-20deg) rotateY(156deg)}
-  100%{transform:translateY(0) rotateX(-12deg) rotateY(336deg)}}
+  2.08%{transform:translateY(-0.0017em) rotateX(-12.3deg) rotateY(-1.5deg)}
+  4.17%{transform:translateY(-0.0066em) rotateX(-13.17deg) rotateY(21deg)}
+  6.25%{transform:translateY(-0.0139em) rotateX(-14.47deg) rotateY(43.5deg)}
+  8.33%{transform:translateY(-0.0225em) rotateX(-16deg) rotateY(66deg)}
+  10.42%{transform:translateY(-0.0311em) rotateX(-17.53deg) rotateY(88.5deg)}
+  12.5%{transform:translateY(-0.0384em) rotateX(-18.83deg) rotateY(111deg)}
+  14.58%{transform:translateY(-0.0433em) rotateX(-19.7deg) rotateY(133.5deg)}
+  16.67%{transform:translateY(-0.045em) rotateX(-20deg) rotateY(156deg)}
+  18.75%{transform:translateY(-0.0433em) rotateX(-19.7deg) rotateY(178.5deg)}
+  20.83%{transform:translateY(-0.0384em) rotateX(-18.83deg) rotateY(201deg)}
+  22.92%{transform:translateY(-0.0311em) rotateX(-17.53deg) rotateY(223.5deg)}
+  25%{transform:translateY(-0.0225em) rotateX(-16deg) rotateY(246deg)}
+  27.08%{transform:translateY(-0.0139em) rotateX(-14.47deg) rotateY(268.5deg)}
+  29.17%{transform:translateY(-0.0066em) rotateX(-13.17deg) rotateY(291deg)}
+  31.25%{transform:translateY(-0.0017em) rotateX(-12.3deg) rotateY(313.5deg)}
+  33.33%{transform:translateY(0) rotateX(-12deg) rotateY(336deg)}
+  35.42%{transform:translateY(-0.0017em) rotateX(-12.3deg) rotateY(358.5deg)}
+  37.5%{transform:translateY(-0.0066em) rotateX(-13.17deg) rotateY(381deg)}
+  39.58%{transform:translateY(-0.0139em) rotateX(-14.47deg) rotateY(403.5deg)}
+  41.67%{transform:translateY(-0.0225em) rotateX(-16deg) rotateY(426deg)}
+  43.75%{transform:translateY(-0.0311em) rotateX(-17.53deg) rotateY(448.5deg)}
+  45.83%{transform:translateY(-0.0384em) rotateX(-18.83deg) rotateY(471deg)}
+  47.92%{transform:translateY(-0.0433em) rotateX(-19.7deg) rotateY(493.5deg)}
+  50%{transform:translateY(-0.045em) rotateX(-20deg) rotateY(516deg)}
+  52.08%{transform:translateY(-0.0433em) rotateX(-19.7deg) rotateY(538.5deg)}
+  54.17%{transform:translateY(-0.0384em) rotateX(-18.83deg) rotateY(561deg)}
+  56.25%{transform:translateY(-0.0311em) rotateX(-17.53deg) rotateY(583.5deg)}
+  58.33%{transform:translateY(-0.0225em) rotateX(-16deg) rotateY(606deg)}
+  60.42%{transform:translateY(-0.0139em) rotateX(-14.47deg) rotateY(628.5deg)}
+  62.5%{transform:translateY(-0.0066em) rotateX(-13.17deg) rotateY(651deg)}
+  64.58%{transform:translateY(-0.0017em) rotateX(-12.3deg) rotateY(673.5deg)}
+  66.67%{transform:translateY(0) rotateX(-12deg) rotateY(696deg)}
+  68.75%{transform:translateY(-0.0017em) rotateX(-12.3deg) rotateY(718.5deg)}
+  70.83%{transform:translateY(-0.0066em) rotateX(-13.17deg) rotateY(741deg)}
+  72.92%{transform:translateY(-0.0139em) rotateX(-14.47deg) rotateY(763.5deg)}
+  75%{transform:translateY(-0.0225em) rotateX(-16deg) rotateY(786deg)}
+  77.08%{transform:translateY(-0.0311em) rotateX(-17.53deg) rotateY(808.5deg)}
+  79.17%{transform:translateY(-0.0384em) rotateX(-18.83deg) rotateY(831deg)}
+  81.25%{transform:translateY(-0.0433em) rotateX(-19.7deg) rotateY(853.5deg)}
+  83.33%{transform:translateY(-0.045em) rotateX(-20deg) rotateY(876deg)}
+  85.42%{transform:translateY(-0.0433em) rotateX(-19.7deg) rotateY(898.5deg)}
+  87.5%{transform:translateY(-0.0384em) rotateX(-18.83deg) rotateY(921deg)}
+  89.58%{transform:translateY(-0.0311em) rotateX(-17.53deg) rotateY(943.5deg)}
+  91.67%{transform:translateY(-0.0225em) rotateX(-16deg) rotateY(966deg)}
+  93.75%{transform:translateY(-0.0139em) rotateX(-14.47deg) rotateY(988.5deg)}
+  95.83%{transform:translateY(-0.0066em) rotateX(-13.17deg) rotateY(1011deg)}
+  97.92%{transform:translateY(-0.0017em) rotateX(-12.3deg) rotateY(1033.5deg)}
+  100%{transform:translateY(0) rotateX(-12deg) rotateY(1056deg)}}
 @keyframes sealShadow{
-  0%,100%{transform:scaleX(.91);opacity:1}
-  32%,82%{transform:scaleX(.2);opacity:.6}
-  50%{transform:scaleX(.8);opacity:.7}}
+  0%{transform:scaleX(0.909);opacity:1.001}
+  2.08%{transform:scaleX(1.045);opacity:1.066}
+  4.17%{transform:scaleX(0.925);opacity:0.972}
+  6.25%{transform:scaleX(0.627);opacity:0.794}
+  8.33%{transform:scaleX(0.33);opacity:0.65}
+  10.42%{transform:scaleX(0.201);opacity:0.6}
+  12.5%{transform:scaleX(0.295);opacity:0.622}
+  14.58%{transform:scaleX(0.545);opacity:0.663}
+  16.67%{transform:scaleX(0.803);opacity:0.7}
+  18.75%{transform:scaleX(0.927);opacity:0.734}
+  20.83%{transform:scaleX(0.846);opacity:0.751}
+  22.92%{transform:scaleX(0.601);opacity:0.722}
+  25%{transform:scaleX(0.33);opacity:0.65}
+  27.08%{transform:scaleX(0.201);opacity:0.6}
+  29.17%{transform:scaleX(0.307);opacity:0.655}
+  31.25%{transform:scaleX(0.6);opacity:0.821}
+  33.33%{transform:scaleX(0.909);opacity:1.001}
+  35.42%{transform:scaleX(1.045);opacity:1.066}
+  37.5%{transform:scaleX(0.925);opacity:0.972}
+  39.58%{transform:scaleX(0.627);opacity:0.794}
+  41.67%{transform:scaleX(0.33);opacity:0.65}
+  43.75%{transform:scaleX(0.201);opacity:0.6}
+  45.83%{transform:scaleX(0.295);opacity:0.622}
+  47.92%{transform:scaleX(0.545);opacity:0.663}
+  50%{transform:scaleX(0.803);opacity:0.7}
+  52.08%{transform:scaleX(0.927);opacity:0.734}
+  54.17%{transform:scaleX(0.846);opacity:0.751}
+  56.25%{transform:scaleX(0.601);opacity:0.722}
+  58.33%{transform:scaleX(0.33);opacity:0.65}
+  60.42%{transform:scaleX(0.201);opacity:0.6}
+  62.5%{transform:scaleX(0.307);opacity:0.655}
+  64.58%{transform:scaleX(0.6);opacity:0.821}
+  66.67%{transform:scaleX(0.909);opacity:1.001}
+  68.75%{transform:scaleX(1.045);opacity:1.066}
+  70.83%{transform:scaleX(0.925);opacity:0.972}
+  72.92%{transform:scaleX(0.627);opacity:0.794}
+  75%{transform:scaleX(0.33);opacity:0.65}
+  77.08%{transform:scaleX(0.201);opacity:0.6}
+  79.17%{transform:scaleX(0.295);opacity:0.622}
+  81.25%{transform:scaleX(0.545);opacity:0.663}
+  83.33%{transform:scaleX(0.803);opacity:0.7}
+  85.42%{transform:scaleX(0.927);opacity:0.734}
+  87.5%{transform:scaleX(0.846);opacity:0.751}
+  89.58%{transform:scaleX(0.601);opacity:0.722}
+  91.67%{transform:scaleX(0.33);opacity:0.65}
+  93.75%{transform:scaleX(0.201);opacity:0.6}
+  95.83%{transform:scaleX(0.307);opacity:0.655}
+  97.92%{transform:scaleX(0.6);opacity:0.821}
+  100%{transform:scaleX(0.909);opacity:1.001}}
 @media (hover:hover){
-  html:not(.fx-js) .catalog-card:hover .seal3d-spin{animation:sealSpin 2.4s cubic-bezier(.6,.05,.3,1) infinite}
-  html:not(.fx-js) .catalog-card:hover .seal3d-shadow{animation:sealShadow 2.4s cubic-bezier(.6,.05,.3,1) infinite}}
+  html:not(.fx-js) .catalog-card:hover .seal3d-spin{animation:sealSpin 6s linear infinite}
+  html:not(.fx-js) .catalog-card:hover .seal3d-shadow{animation:sealShadow 6s linear infinite}}
 @media (prefers-reduced-motion:reduce){.seal3d-spin,.seal3d-shadow{animation:none!important}}
 </style>
 </head>
@@ -2392,6 +2484,7 @@
       var t=i*360/n, c=(1-Math.cos((t+40)*D))/2;           /* свет сверху-слева */
       var sh=inner?.5:(.06+.34*c);
       var f=document.createElement('i');f.className='seal3d-facet';
+if(!inner){f.style.webkitBackfaceVisibility='hidden';f.style.backfaceVisibility='hidden';}   /* внешний борт выпуклый: дальние грани не рисуем — без «вспышек» сортировки глубины, когда диск виден ребром */
       f.style.cssText='width:'+w+'em;height:'+TH+'em;margin:'+(-TH/2)+'em 0 0 '+(-w/2)+'em;'+
         'background:linear-gradient(rgba(11,22,38,'+sh.toFixed(2)+'),rgba(11,22,38,'+sh.toFixed(2)+')),currentColor;'+
         'transform:rotateZ('+t+'deg) translateY('+(-rad)+'em) rotateX(90deg)';
@@ -2812,7 +2905,7 @@
            • туман: плавно появляется при наведении/тапе, а при уходе каждый слой доигрывает свой цикл и растворяется сам;
            • вращающиеся иконки: скорость плавно растёт с нуля и плавно падает до нуля — иконка
              останавливается там, где остановилась, и с этого же места продолжит в следующий раз;
-           • «циклические» иконки (капля, трактор, дым): при уходе доигрывают текущий цикл и мягко гаснут. */
+           • «циклические» иконки (капля, трактор, дым, сальник): при уходе доигрывают текущий цикл и мягко гаснут. */
         (function () {
             if (typeof Element.prototype.animate !== 'function') return; /* старые браузеры: останется CSS-вариант */
             document.documentElement.classList.add('fx-js');
@@ -2849,23 +2942,23 @@
 
             /* hold: true  — крутится/бежит; при остановке плавно тормозит и замирает на месте.
                hold: false — цикл; при остановке доигрывает текущий проход и отключается. */
-            const sealSpin = [
-                { transform: 'translateY(0) rotateX(-12deg) rotateY(-24deg)' },
-                { transform: 'translateY(-.045em) rotateX(-20deg) rotateY(156deg)' },
-                { transform: 'translateY(0) rotateX(-12deg) rotateY(336deg)' }
-            ];
-            const sealShadow = [
-                { offset: 0,    transform: 'scaleX(.91)', opacity: 1 },
-                { offset: .32,  transform: 'scaleX(.2)',  opacity: .6 },
-                { offset: .5,   transform: 'scaleX(.8)',  opacity: .7 },
-                { offset: .82,  transform: 'scaleX(.2)',  opacity: .6 },
-                { offset: 1,    transform: 'scaleX(.91)', opacity: 1 }
-            ];
+            /* сальник: SEAL_TURNS оборотов за цикл. Подскок, наклон и тень считаются плавными кривыми (cos) по
+               SEAL_STEPS кадрам на оборот — без изломов скорости; тень сужается, когда диск виден ребром. */
+            const SEAL_TURNS = 3, SEAL_STEPS = 16;
+            const sealSpin = [], sealShadow = [];
+            for (let i = 0; i <= SEAL_TURNS * SEAL_STEPS; i++) {
+                const bob = (1 - Math.cos(2 * Math.PI * (i % SEAL_STEPS) / SEAL_STEPS)) / 2;
+                const ang = -24 + 360 * i / SEAL_STEPS;
+                const c2 = Math.pow(Math.cos(ang * Math.PI / 180), 2);
+                const offset = i / (SEAL_TURNS * SEAL_STEPS);
+                sealSpin.push({ offset, transform: 'translateY(' + (-.045 * bob).toFixed(4) + 'em) rotateX(' + (-12 - 8 * bob).toFixed(2) + 'deg) rotateY(' + ang.toFixed(1) + 'deg)' });
+                sealShadow.push({ offset, transform: 'scaleX(' + (.2 + .85 * c2 * (1 - .15 * bob)).toFixed(3) + ')', opacity: +(.6 + .48 * c2 * (1 - .75 * bob)).toFixed(3) });
+            }
             const SPECS = [
-                { sel: '.icon-gear',               frames: spin, duration: 8000,  hold: true },
+                { sel: '.icon-gear',               frames: spin, duration: 7000,  hold: true },
                 { sel: '.icon-brg-cage',           frames: spin, duration: 6000,  hold: true },
-                { sel: '.seal3d-spin',   frames: sealSpin,   duration: 2400, hold: false, easing: 'cubic-bezier(.6,.05,.3,1)' },
-                { sel: '.seal3d-shadow', frames: sealShadow, duration: 2400, hold: false, easing: 'cubic-bezier(.6,.05,.3,1)' },
+                { sel: '.seal3d-spin',   frames: sealSpin,   duration: 6000, hold: false, settle: true },
+                { sel: '.seal3d-shadow', frames: sealShadow, duration: 6000, hold: false, settle: true },
                 /* ремень и шкивы связаны без проскальзывания: окружная скорость одна (ω = v / r),
                    поэтому большой шкив (r=7) оборачивается медленнее малого (r=4.5), а все три
                    анимации разгоняются и тормозят одним профилем — зубья и спицы остаются согласованы */
@@ -3141,6 +3234,7 @@
                     this.phase = phase;
                     this.t0 = performance.now();
                     this.r0 = this.rate;
+                    this.tl = 0;
                     schedule(this);
                 }
                 start() {
@@ -3183,8 +3277,19 @@
                         if (p >= 1) { this.setRate(0); a.pause(); this.phase = 'held'; return false; }
 
                     } else if (this.phase === 'finish') {            /* доиграть цикл и выключиться в «нуле» */
-                        const p = Math.min(1, since / 500);
-                        this.setRate(this.r0 + ((s.slow || 1) - this.r0) * easeInOut(p));
+                        if (s.settle) {
+                            /* settle: цикл без разгона/торможения (шов бесшовный), а при уходе скорость плавно падает
+                               пропорционально оставшемуся пути и диск мягко встаёт в исходную позу в конце цикла */
+                            const pr = a.effect.getComputedTiming().progress;
+                            const rem = pr === null ? 1 : 1 - pr;
+                            const target = Math.min(1.4, Math.max(.05, 2.4 * Math.sqrt(rem)));
+                            const dt = this.tl ? now - this.tl : 16;
+                            this.setRate(this.rate + (target - this.rate) * (1 - Math.exp(-dt / 180)));
+                            this.tl = now;
+                        } else {
+                            const p = Math.min(1, since / 500);
+                            this.setRate(this.r0 + ((s.slow || 1) - this.r0) * easeInOut(p));
+                        }
                         const it = a.effect.getComputedTiming().currentIteration;
                         const every = s.direction === 'alternate' ? 2 : 1;  /* alternate: «ноль» — после чётного прохода */
                         if (it === null || (it > this.it0 && it % every === 0)) {
@@ -3207,32 +3312,32 @@
 
                 function render() {
                     const on = st.hover || st.tap;
-                    clearTimeout(st.fogTimer);
                     clearTimeout(st.liftTimer);
-                    if (st.fogLeave) st.fogLeave(false);   /* вернулись, пока туман уходил: отменяем уход */
-                    if (on) card.classList.add('is-lift');
                     if (on) {
-                        card.classList.add('fog-run', 'fog-on');
+                        if (st.fogLeave) st.fogLeave(false);   /* вернулись, пока туман уходил: отменяем уход */
+                        card.classList.add('is-lift', 'fog-run', 'fog-on');
                     } else {
                         /* Туман не гасим принудительно: каждый слой доигрывает цикл (в конце keyframes opacity 0),
                            и только потом снимается fog-run. fog-on (иконки) снимается сразу. */
                         card.classList.remove('fog-on');
-                        const d = { b: false, o: false };
-                        const end = (clean) => {
-                            card.removeEventListener('animationiteration', onIt);
-                            clearTimeout(st.fogTimer);
-                            card.classList.remove('fog-end-b', 'fog-end-o');
-                            if (clean) card.classList.remove('fog-run');
-                            st.fogLeave = null;
-                        };
-                        const onIt = e => {
-                            if (e.pseudoElement === '::before') { d.b = true; card.classList.add('fog-end-b'); }
-                            else if (e.pseudoElement === '::after') { d.o = true; card.classList.add('fog-end-o'); }
-                            if (d.b && d.o) end(true);
-                        };
-                        st.fogLeave = end;
-                        card.addEventListener('animationiteration', onIt);
-                        st.fogTimer = setTimeout(() => end(true), 6500);   /* страховка, если событие не пришло */
+                        if (!st.fogLeave && card.classList.contains('fog-run')) {
+                            const d = { b: false, o: false };
+                            const end = () => {
+                                card.removeEventListener('animationiteration', onIt);
+                                clearTimeout(st.fogTimer);
+                                card.classList.remove('fog-end-b', 'fog-end-o');
+                                st.fogLeave = null;
+                            };
+                            const onIt = e => {
+                                if (e.target !== card) return;   /* события вложенных элементов не считаем */
+                                if (e.pseudoElement === '::before') { d.b = true; card.classList.add('fog-end-b'); }
+                                else if (e.pseudoElement === '::after') { d.o = true; card.classList.add('fog-end-o'); }
+                                if (d.b && d.o) { end(); card.classList.remove('fog-run'); }
+                            };
+                            st.fogLeave = end;
+                            card.addEventListener('animationiteration', onIt);
+                            st.fogTimer = setTimeout(() => { end(); card.classList.remove('fog-run'); }, 6500);   /* страховка */
+                        }
                     }
                     clearTimeout(st.holdTimer);
                     fx.forEach(f => on ? f.start() : (f.s.hold ? 0 : f.stop()));
