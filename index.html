@@ -3157,7 +3157,9 @@ if(!inner){f.style.webkitBackfaceVisibility='hidden';f.style.backfaceVisibility=
                         this.go('down');
                     } else {
                         const it = this.anim.effect.getComputedTiming().currentIteration;
-                        this.it0 = it === null ? -1 : it;
+                        /* null означает, что анимация ещё ждёт свой delay. Считаем её первый проход
+                           текущим и не отменяем в момент выхода из задержки. */
+                        this.it0 = it === null ? 0 : it;
                         this.go('finish');
                     }
                 }
@@ -3192,7 +3194,9 @@ if(!inner){f.style.webkitBackfaceVisibility='hidden';f.style.backfaceVisibility=
                         }
                         const it = a.effect.getComputedTiming().currentIteration;
                         const every = s.direction === 'alternate' ? 2 : 1;  /* alternate: «ноль» — после чётного прохода */
-                        if (it === null || (it > this.it0 && it % every === 0)) {
+                        /* Во время delay currentIteration === null: ждём старта и полного прохода,
+                           а не отменяем эффект сразу после ухода курсора. */
+                        if (it !== null && it > this.it0 && it % every === 0) {
                             a.cancel(); this.anim = null; this.rate = 0; this.phase = 'idle';
                             return false;
                         }
@@ -3207,8 +3211,14 @@ if(!inner){f.style.webkitBackfaceVisibility='hidden';f.style.backfaceVisibility=
                 const st = { hover: false, tap: false, tapExpired: false, tapTimer: 0, fogTimer: 0, liftTimer: 0, holdTimer: 0 };
 
                 const cycling = () => fx.some(f => !f.s.hold && (f.phase === 'up' || f.phase === 'run' || f.phase === 'finish'));
-                /* вращения (дуга, шестерни, бегущий пунктир) не гасим, пока цикл не закончился — иначе они замирают раньше конца сцены */
-                const settleHold = () => { if (cycling()) st.holdTimer = setTimeout(settleHold, 100); else fx.forEach(f => f.s.hold && f.stop()); };
+                /* Вращения и связанные движения (колёса, шестерни, пунктир) продолжаются,
+                   пока одноразовые эффекты карточки не завершат сцену. Только затем плавно тормозим hold-анимации. */
+                const settleHold = () => {
+                    if (cycling()) { st.holdTimer = setTimeout(settleHold, 100); return; }
+                    fx.forEach(f => {
+                        if (f.s.hold && !(f.s.finishOnTap && st.tapExpired)) f.stop();
+                    });
+                };
 
                 function render() {
                     const on = st.hover || st.tap;
@@ -3240,8 +3250,16 @@ if(!inner){f.style.webkitBackfaceVisibility='hidden';f.style.backfaceVisibility=
                         }
                     }
                     clearTimeout(st.holdTimer);
-                    fx.forEach(f => on ? f.start() : (f.s.hold ? f.stop(!!(f.s.finishOnTap && st.tapExpired)) : f.stop()));
-                    if (!on) settleHold();
+                    if (on) {
+                        fx.forEach(f => f.start());
+                    } else {
+                        /* Одноразовые эффекты доигрывают свои проходы. Вращения не тормозим
+                           раньше времени: они должны сопровождать сцену до её завершения. */
+                        fx.forEach(f => { if (!f.s.hold) f.stop(); });
+                        /* Особое правило сальника после тапа: завершить полный цикл, как и раньше. */
+                        fx.forEach(f => { if (f.s.hold && f.s.finishOnTap && st.tapExpired) f.stop(true); });
+                        settleHold();
+                    }
                     /* карточка опускается только когда все её анимации доиграли и остановились — иначе схема «уезжает» посреди движения */
                     if (!on) {
                         const busy = () => fx.some(f => f.phase === 'up' || f.phase === 'run' || f.phase === 'down' || f.phase === 'finish') || cycling();
