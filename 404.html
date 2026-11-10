@@ -4,6 +4,10 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
 <title>404 — Страница не найдена | САП — СпецАгроПартнер</title>
+
+<!-- Кастомный 404 Favicon -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231e2f4f'/%3E%3Ctext x='50' y='55' font-family='Arial' font-size='38' font-weight='bold' fill='%23ea5820' text-anchor='middle' dominant-baseline='middle'%3E404%3C/text%3E%3C/svg%3E">
+
 <link href="images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="images/apple-touch-icon.png" rel="apple-touch-icon"/>
@@ -15,382 +19,320 @@
 <link as="font" crossorigin="" href="fonts/geologica-cyrillic-700-normal.woff2" rel="preload" type="font/woff2"/>
 
 <style>
-    @font-face { font-family: 'Geologica Local'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/geologica-cyrillic-400-normal.woff2') format('woff2'); }
-    @font-face { font-family: 'Geologica Local'; font-style: normal; font-weight: 600; font-display: swap; src: url('fonts/geologica-cyrillic-600-normal.woff2') format('woff2'); }
-    @font-face { font-family: 'Geologica Local'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/geologica-cyrillic-700-normal.woff2') format('woff2'); }
+    /* ===== Базовые настройки и шрифты ===== */
+    @font-face { font-family: 'Geologica Local'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/geologica-cyrillic-400-normal.woff2') format('woff2'); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+    @font-face { font-family: 'Geologica Local'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/geologica-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+    @font-face { font-family: 'Geologica Local'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/geologica-cyrillic-700-normal.woff2') format('woff2'); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+    @font-face { font-family: 'Geologica Local'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/geologica-latin-700-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
 
     :root {
-        --blue: #1e2f4f;
-        --blue-dark: #0f1e35;
-        --light-grey: #f5f7fa;
-        --dark: #111827;
-        --orange: #ea5820;
-        --orange-dark: #c44515;
-        --white: #ffffff;
-        --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        --ease: cubic-bezier(.16, 1, .3, 1);
+        --blue: #1e2f4f; --blue-dark: #0f1e35; --light-grey: #f5f7fa;
+        --dark: #111827; --orange: #ea5820; --orange-dark: #c44515; --white: #ffffff;
+        --transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        --ease: cubic-bezier(.16,1,.3,1);
+        --grain-card: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
     body {
         font-family: 'Geologica Local', 'Geologica', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-        background-color: var(--light-grey);
-        color: var(--dark);
-        line-height: 1.55;
-        overflow-x: hidden;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
+        background-color: var(--light-grey); color: var(--dark); line-height: 1.55; overflow-x: hidden;
+        min-height: 100vh; display: flex; flex-direction: column;
     }
 
+    /* Шум (Grain) */
     body::after {
-        content: ''; position: fixed; inset: 0; z-index: 999; pointer-events: none; opacity: 0.05;
+        content: ''; position: fixed; inset: 0; z-index: 999; pointer-events: none; opacity: 0.065;
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-        background-size: 180px 180px;
+        background-size: 180px 180px; background-repeat: repeat;
     }
 
-    .container { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 4%; }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 4%; }
 
-    /* Header */
+    /* ===== Шапка ===== */
     header {
-        position: sticky; top: 0; left: 0; width: 100%;
-        background: linear-gradient(180deg, rgba(245, 247, 250, 0.88) 0%, rgba(245, 247, 250, 0.75) 100%);
-        backdrop-filter: blur(28px) saturate(140%);
-        -webkit-backdrop-filter: blur(28px) saturate(140%);
-        z-index: 1000;
-        border-bottom: 1px solid rgba(30, 47, 79, 0.07);
+        position: fixed; top: 0; left: 0; width: 100%;
+        background: linear-gradient(180deg, rgba(245, 247, 250, 0.62) 0%, rgba(245, 247, 250, 0.44) 100%);
+        backdrop-filter: blur(28px) saturate(140%); -webkit-backdrop-filter: blur(28px) saturate(140%);
+        z-index: 1000; border-bottom: 1px solid rgba(30, 47, 79, 0.07); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
     }
-    .header-wrap { display: flex; justify-content: space-between; align-items: center; height: 90px; gap: 15px; }
-    .logo-block { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
-    .header-logo-svg { height: 50px; width: auto; transition: var(--transition); }
+    .header-wrap { display: flex; justify-content: space-between; align-items: center; height: 90px; position: relative; gap: 10px; }
+    .logo-block { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; z-index: 1001; }
+    .header-logo-svg { height: 50px; width: auto; flex-shrink: 0; transition: var(--transition); display: block; }
     .header-logo-svg svg { height: 100%; width: auto; display: block; }
-    .logo-block:hover .header-logo-svg { transform: scale(1.04); }
+    .logo-block:hover .header-logo-svg { transform: scale(1.05); }
     .logo-text .logo-title { font-size: 24px; font-weight: 700; line-height: 0.95; letter-spacing: -0.015em; display: block; }
     .logo-text .logo-subtitle { font-size: 12.5px; font-weight: 600; color: var(--blue); margin-top: 2px; display: block; }
-
-    nav { display: flex; gap: 24px; align-items: center; }
+    nav { display: flex; gap: 24px; }
     nav a { text-decoration: none; color: var(--dark); font-weight: 500; font-size: 15px; position: relative; transition: var(--transition); }
     nav a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background-color: var(--blue); transition: var(--transition); }
     nav a:hover::after { width: 100%; }
-
     .header-contacts { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
     .header-phone { font-size: 16px; font-weight: 700; color: var(--dark); text-decoration: none; transition: var(--transition); }
     .header-phone:hover { color: var(--orange); }
-    .header-email { font-size: 13px; font-weight: 600; color: var(--blue); text-decoration: none; transition: var(--transition); }
+    .header-email { font-size: 13px; font-weight: 600; color: var(--blue); text-decoration: none; }
     .header-email:hover { color: var(--orange); }
-
     .burger-btn { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 10px; z-index: 1005; }
     .burger-btn span { display: block; width: 24px; height: 2.5px; background: var(--dark); border-radius: 2px; transition: var(--transition); }
     .burger-btn.active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
     .burger-btn.active span:nth-child(2) { opacity: 0; }
     .burger-btn.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
-    /* Main 404 Hero */
-    main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+    /* ===== Основной контент ===== */
+    main { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-top: 90px; }
     .error-hero {
-        padding: 60px 0 80px;
-        background: radial-gradient(circle at 82% 25%, rgba(234, 88, 32, 0.12), transparent 45%),
-                    radial-gradient(circle at 18% 75%, rgba(30, 47, 79, 0.09), transparent 50%);
-        text-align: center;
+        padding: clamp(24px, 4vh, 44px) 0 clamp(32px, 5vh, 52px); text-align: center;
+        background: radial-gradient(circle at 50% 28%, rgba(234, 88, 32, 0.16), transparent 50%), radial-gradient(circle at 82% 18%, rgba(234, 88, 32, 0.13), transparent 45%), radial-gradient(circle at 18% 75%, rgba(30, 47, 79, 0.09), transparent 52%);
     }
-    .error-content { max-width: 840px; margin: 0 auto; }
-
-    /* 404 Visual */
-    .error-number {
-        display: inline-flex;
-        align-items: center;
+    
+    .error-content { max-width: 800px; margin: 0 auto; }
+    
+    /* Блок 404 */
+    .error-title-wrap { display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: clamp(12px, 1.8vh, 18px); }
+    .error-number { 
+        font-size: clamp(114px, 14.5vw, 192px); 
+        font-weight: 900; 
+        line-height: 0.85; 
+        letter-spacing: -0.04em; 
+        display: inline-flex; 
+        align-items: center; 
         justify-content: center;
-        gap: 10px;
-        font-size: clamp(80px, 14vw, 150px);
-        font-weight: 800;
-        line-height: 1;
-        letter-spacing: -0.04em;
-        color: var(--blue);
-        margin-bottom: 20px;
-        user-select: none;
     }
     .error-number .digit {
-        display: inline-block;
-        background: linear-gradient(180deg, var(--blue) 0%, var(--blue-dark) 100%);
-        -webkit-background-clip: text;
+        background: linear-gradient(180deg, #0e1b30 0%, #182b48 42%, #d44d18 85%, #ea5820 100%);
+        -webkit-background-clip: text; 
         -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 18px 26px rgba(15, 30, 53, 0.22)) drop-shadow(0 4px 16px rgba(234, 88, 32, 0.28));
+        transition: transform 0.4s var(--ease), filter 0.4s var(--ease);
     }
-
-    .bearing-zero {
-        width: clamp(75px, 13vw, 145px);
-        height: clamp(75px, 13vw, 145px);
-        display: inline-block;
+    .error-number:hover .digit {
+        filter: drop-shadow(0 22px 32px rgba(15, 30, 53, 0.28)) drop-shadow(0 8px 24px rgba(234, 88, 32, 0.42));
+    }
+    
+        /* Интерактивный 3D подшипник САП (увеличенный размер, читаемые надписи, монетное вращение) */
+    .bearing-container {
+        width: clamp(114px, 14.5vw, 192px);
+        height: clamp(114px, 14.5vw, 192px);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin: 0 clamp(8px, 1.4vw, 16px);
         vertical-align: middle;
+        cursor: grab;
+        user-select: none;
     }
-    .bearing-zero svg { width: 100%; height: 100%; display: block; }
-    .bearing-rotor {
-        transform-origin: 100px 100px;
-        animation: spinBearing 24s linear infinite;
+    .bearing-container:active {
+        cursor: grabbing;
     }
-    @keyframes spinBearing {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+    .bearing-container canvas {
+        width: 100% !important;
+        height: 100% !important;
+        display: block;
+        filter: drop-shadow(0 12px 18px rgba(15, 30, 53, 0.22)) drop-shadow(0 4px 10px rgba(234, 88, 32, 0.16));
+        transition: transform 0.4s var(--ease), filter 0.4s var(--ease);
+    }
+    .bearing-container:hover canvas {
+        transform: scale(1.05);
+        filter: drop-shadow(0 22px 32px rgba(15, 30, 53, 0.35)) drop-shadow(0 6px 18px rgba(234, 88, 32, 0.28));
+    }
+    .bearing-container .bearing-shadow-radial {
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 78%;
+        height: 16px;
+        background: radial-gradient(ellipse at center, rgba(15, 30, 53, 0.28) 0%, rgba(15, 30, 53, 0) 72%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
     }
 
     .error-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: rgba(234, 88, 32, 0.1);
-        color: var(--orange-dark);
-        border: 1px solid rgba(234, 88, 32, 0.22);
-        padding: 6px 16px;
-        border-radius: 20px;
-        font-size: 14px;
-        font-weight: 600;
-        margin-bottom: 18px;
+        display: inline-flex; align-items: center; gap: 8px;
+        background: rgba(234, 88, 32, 0.1); color: var(--orange-dark);
+        border: 1px solid rgba(234, 88, 32, 0.22); padding: 6px 16px; border-radius: 20px;
+        font-size: 14px; font-weight: 600; margin-bottom: 18px;
     }
-    .error-badge::before {
-        content: '';
-        width: 7px; height: 7px;
-        border-radius: 50%;
-        background-color: var(--orange);
-    }
-
-    h1 {
-        font-size: clamp(26px, 3.4vw, 42px);
-        font-weight: 700;
-        line-height: 1.2;
-        color: var(--dark);
-        margin-bottom: 14px;
-        letter-spacing: -0.025em;
-        text-wrap: balance;
-    }
-    .error-desc {
-        font-size: clamp(15px, 1.2vw, 17px);
-        color: #555;
-        line-height: 1.65;
-        max-width: 620px;
-        margin: 0 auto 36px;
-    }
-
-    .actions-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 14px;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 50px;
-    }
+    .error-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background-color: var(--orange); }
+    
+    h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 700; line-height: 1.2; color: var(--dark); margin-bottom: 16px; letter-spacing: -0.025em; text-wrap: balance; }
+    .error-desc { font-size: clamp(14px, 1.1vw, 16px); color: #555; line-height: 1.55; margin-bottom: clamp(20px, 2.5vh, 28px); max-width: 640px; margin-left: auto; margin-right: auto; }
+    
+    .actions-group { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 60px; }
     .cta-button {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        background-color: var(--blue);
-        color: var(--white);
-        padding: 16px 34px;
-        border-radius: 30px;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 15px;
-        transition: var(--transition);
-        box-shadow: 0 10px 25px rgba(30, 47, 79, 0.14);
+        display: inline-flex; align-items: center; gap: 10px; background-color: var(--blue); color: var(--white);
+        padding: 16px 34px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 15px;
+        transition: var(--transition); box-shadow: 0 10px 25px rgba(30, 47, 79, 0.14);
     }
-    .cta-button:hover {
-        background-color: var(--orange);
-        transform: translateY(-2px);
-        box-shadow: 0 12px 28px rgba(234, 88, 32, 0.24);
+    .cta-button:hover { background-color: var(--orange); transform: translateY(-2px); box-shadow: 0 12px 28px rgba(234, 88, 32, 0.24); }
+    .cta-button.secondary { background-color: transparent; color: var(--blue); border: 2px solid rgba(30, 47, 79, 0.2); box-shadow: none; }
+    .cta-button.secondary:hover { background-color: var(--blue); color: var(--white); border-color: var(--blue); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(30, 47, 79, 0.15); }
+
+    /* ===== 3D Карточки с анимациями ===== */
+    .quick-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: left; }
+    
+    .sap-card-base {
+        position: relative; isolation: isolate; overflow: hidden;
+        background: var(--grain-card) 0 0 / 180px 180px repeat, linear-gradient(180deg, #ffffff 0%, #eef1f6 100%);
+        border-radius: 28px; border: 1px solid rgba(255, 255, 255, 0.95);
+        box-shadow: inset 0 2px 0 rgba(255, 255, 255, 1), inset 1px 0 0 rgba(255, 255, 255, 0.9), inset 0 -4px 8px rgba(30, 47, 79, 0.06), 0 2px 0 rgba(30, 47, 79, 0.04), 0 8px 20px rgba(30, 47, 79, 0.08), 0 22px 40px -12px rgba(30, 47, 79, 0.14), 0 16px 32px -20px rgba(234, 88, 32, 0.12);
+        transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+        display: flex; flex-direction: column; padding: 28px; 
     }
-    .cta-button.secondary {
-        background-color: transparent;
-        color: var(--blue);
-        border: 2px solid rgba(30, 47, 79, 0.2);
-        box-shadow: none;
+    .sap-card-base > * { position: relative; z-index: 2; }
+    
+    /* Туман */
+    .sap-card-base::before, .sap-card-base::after {
+        content: ''; position: absolute; bottom: -12%; width: 64%; height: 140%; border-radius: 50%;
+        filter: blur(28px) opacity(0); opacity: 0; pointer-events: none; z-index: 0;
+        transition: filter 1.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .cta-button.secondary:hover {
-        background-color: var(--blue);
-        color: var(--white);
-        border-color: var(--blue);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(30, 47, 79, 0.15);
+    .sap-card-base::before { left: -20%; background: radial-gradient(ellipse at 48% 65%, rgba(38, 83, 143, 0.46), rgba(45, 91, 153, 0.16) 42%, transparent 72%); }
+    .sap-card-base::after { right: -20%; background: radial-gradient(ellipse at 52% 65%, rgba(245, 112, 53, 0.42), rgba(234, 88, 32, 0.14) 43%, transparent 73%); }
+    
+    .sap-card-base:hover, .sap-card-base.is-lift {
+        transform: translateY(-5px);
+        box-shadow: inset 0 2px 0 rgba(255, 255, 255, 1), inset 1px 0 0 rgba(255, 255, 255, 0.95), inset 0 -4px 8px rgba(30, 47, 79, 0.08), 0 3px 0 rgba(30, 47, 79, 0.05), 0 14px 32px rgba(30, 47, 79, 0.14), 0 34px 60px -12px rgba(38, 83, 143, 0.26), 0 20px 36px -18px rgba(234, 88, 32, 0.22);
+    }
+    
+    .sap-card-base.fog-run::before { animation: luxBlue 4.4s cubic-bezier(.35, .05, .25, 1) infinite; filter: blur(28px) opacity(1); transition-duration: 1.25s; }
+    .sap-card-base.fog-run::after { animation: luxOrange 5.1s cubic-bezier(.35, .05, .25, 1) infinite .35s; filter: blur(28px) opacity(1); transition-duration: 1.25s; }
+    @keyframes luxBlue { 0% { opacity: 0; transform: translate3d(-5%, 62%, 0) scale(.78, .86); } 24% { opacity: .82; } 55% { opacity: .66; transform: translate3d(5%, 0, 0) scale(1.08, 1.04); } 100% { opacity: 0; transform: translate3d(-2%, -52%, 0) scale(1.32, 1.2); } }
+    @keyframes luxOrange { 0% { opacity: 0; transform: translate3d(6%, 66%, 0) scale(.74, .84); } 26% { opacity: .86; } 60% { opacity: .68; transform: translate3d(-6%, -2%, 0) scale(1.08, 1.05); } 100% { opacity: 0; transform: translate3d(3%, -56%, 0) scale(1.36, 1.22); } }
+
+    /* Стеклянные плашки для иконок */
+    .card-icon-wrap {
+        width: 64px; height: 64px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center;
+        border-radius: 18px; color: var(--blue); position: relative; transition: var(--transition);
+    }
+    .card-icon-wrap svg { position: relative; z-index: 2; width: 32px; height: 32px; stroke-width: 2; }
+    
+    .card-icon-wrap::before, .card-icon-wrap::after {
+        content: ''; position: absolute; inset: -1px; border-radius: inherit; pointer-events: none;
+        transition: opacity 0.45s var(--ease), transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+    }
+    .card-icon-wrap::before {
+        z-index: 0; opacity: 1; border: 1px solid rgba(255, 255, 255, 0.92);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.14) 48%, rgba(255, 255, 255, 0) 55%), linear-gradient(160deg, rgba(246, 249, 254, 0.92) 0%, rgba(222, 232, 246, 0.80) 100%);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), inset 0 -2px 5px rgba(30, 47, 79, 0.06), inset 0 0 0 1px rgba(30, 47, 79, 0.07), 0 1px 2px rgba(30, 47, 79, 0.10), 0 8px 16px -5px rgba(30, 47, 79, 0.20);
+        -webkit-backdrop-filter: blur(14px) saturate(1.5); backdrop-filter: blur(14px) saturate(1.5);
+    }
+    .card-icon-wrap::after {
+        z-index: 1; opacity: 0; border: 1px solid rgba(255, 255, 255, 0.92);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.14) 48%, rgba(255, 255, 255, 0) 55%), linear-gradient(160deg, rgba(255, 240, 229, 0.95) 0%, rgba(255, 198, 160, 0.55) 100%);
+    }
+    .sap-card-base:hover .card-icon-wrap { color: var(--orange); transform: translateY(-2px); }
+    .sap-card-base:hover .card-icon-wrap::before { transform: rotate(-4deg); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), inset 0 -2px 5px rgba(234, 88, 32, 0.08), inset 0 0 0 1px rgba(234, 88, 32, 0.12), 0 1px 2px rgba(234, 88, 32, 0.14), 0 10px 22px -4px rgba(234, 88, 32, 0.34); }
+    .sap-card-base:hover .card-icon-wrap::after { opacity: 1; transform: rotate(-4deg); }
+
+    .quick-card-title { font-size: 18px; font-weight: 700; color: var(--dark); margin-bottom: 10px; letter-spacing: -0.01em; }
+    .quick-card-desc { font-size: 14px; color: #555; line-height: 1.6; margin-bottom: 20px; flex: 1; }
+    
+    /* Кнопка внутри карточки */
+    .card-cta {
+        position: relative; z-index: 4; align-self: flex-start; margin-top: auto;
+        display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px;
+        border-radius: 99px; font-size: 13.5px; font-weight: 600; line-height: 1.25;
+        color: var(--blue); text-decoration: none; letter-spacing: -0.005em;
+        background: linear-gradient(180deg, #ffffff 0%, #f1f4f9 100%);
+        border: 1px solid rgba(30,47,79,.12);
+        box-shadow: 0 2px 6px rgba(30,47,79,.05), inset 0 1px 0 rgba(255,255,255,.95);
+        transition: background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease), transform .35s var(--ease);
+    }
+    .card-cta svg { width: 15px; height: 15px; flex-shrink: 0; stroke: currentColor; transition: transform .35s var(--ease); }
+    .sap-card-base:hover .card-cta { background: var(--orange); color: #fff; border-color: var(--orange); box-shadow: 0 8px 20px rgba(234,88,32,.28); transform: translateY(-2px); }
+    .sap-card-base:hover .card-cta svg { transform: translateX(4px); stroke: #ffffff; }
+
+    /* ===== ИСПРАВЛЕНИЕ БАГА АНИМАЦИЙ SVG ===== */
+    .icon-gear, .icon-brg-cage { 
+        transform-box: view-box; 
+        transform-origin: 12px 12px; 
+    }
+    .icon-drop { 
+        transform-box: view-box; 
+        transform-origin: center bottom; 
     }
 
-    /* Cards */
-    .quick-nav {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        text-align: left;
-    }
-    .quick-card {
-        background: #ffffff;
-        border: 1px solid rgba(30, 47, 79, 0.08);
-        border-radius: 20px;
-        padding: 24px;
-        text-decoration: none;
-        color: inherit;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        box-shadow: 0 4px 18px rgba(30, 47, 79, 0.04);
-        transition: var(--transition);
-    }
-    .quick-card:hover {
-        transform: translateY(-4px);
-        border-color: rgba(234, 88, 32, 0.35);
-        box-shadow: 0 14px 30px rgba(30, 47, 79, 0.09);
-    }
-    .quick-card-icon {
-        width: 44px; height: 44px;
-        border-radius: 12px;
-        background: rgba(30, 47, 79, 0.05);
-        display: flex; align-items: center; justify-content: center;
-        margin-bottom: 16px;
-        color: var(--blue);
-        transition: var(--transition);
-    }
-    .quick-card:hover .quick-card-icon {
-        background: rgba(234, 88, 32, 0.1);
-        color: var(--orange);
-    }
-    .quick-card-title { font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
-    .quick-card-desc { font-size: 13.5px; color: #666; line-height: 1.5; margin-bottom: 14px; }
-    .quick-card-link { font-size: 13.5px; font-weight: 600; color: var(--blue); display: inline-flex; align-items: center; gap: 6px; transition: var(--transition); }
-    .quick-card:hover .quick-card-link { color: var(--orange); transform: translateX(3px); }
-
-    /* Footer */
-    footer {
-        background: #ffffff;
-        border-top: 1px solid rgba(30, 47, 79, 0.08);
-        padding: 26px 0;
-        margin-top: auto;
-    }
-    .footer-wrap {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 14px;
-        font-size: 13px;
-        color: #666;
-    }
-    .footer-wrap a { color: var(--blue); text-decoration: none; font-weight: 500; }
+    /* ===== Подвал ===== */
+    footer { background: var(--dark); color: var(--white); padding: 30px 0; margin-top: auto; position: relative; z-index: 10; }
+    .footer-wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; font-size: 13px; color: #94a3b8; }
+    .footer-wrap a { color: var(--white); text-decoration: none; font-weight: 500; transition: var(--transition); }
     .footer-wrap a:hover { color: var(--orange); }
 
-    /* Floating Messengers */
-    .messengers-trigger {
-        border: none; padding: 0; font: inherit;
-        position: fixed; bottom: calc(40px + env(safe-area-inset-bottom, 0px)); right: calc(30px + env(safe-area-inset-right, 0px));
-        width: 54px; height: 54px; background-color: var(--blue); border-radius: 50%;
-        display: flex; align-items: center; justify-content: center;
-        color: var(--white); cursor: pointer; z-index: 99999;
-        box-shadow: 0 8px 25px rgba(30, 47, 79, 0.35); transition: var(--transition);
-    }
-    .messengers-trigger:hover, .messengers-trigger.is-open { background-color: var(--orange); transform: scale(1.06); }
-    .messengers-trigger svg { width: 26px; height: 26px; fill: #fff; display: block; }
-    .messengers-list {
-        position: fixed; bottom: calc(105px + env(safe-area-inset-bottom, 0px)); right: calc(30px + env(safe-area-inset-right, 0px));
-        display: flex; flex-direction: column; gap: 10px; pointer-events: none; opacity: 0; transform: translateY(16px);
-        transition: var(--transition); z-index: 99998;
-    }
+    /* Мессенджеры */
+    .messengers-trigger { border: none; padding: 0; font: inherit; position: fixed; bottom: calc(40px + env(safe-area-inset-bottom, 0px)); right: calc(30px + env(safe-area-inset-right, 0px)); width: 60px; height: 60px; background-color: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); cursor: pointer; z-index: 99999; box-shadow: 0 8px 25px rgba(30, 47, 79, 0.45); transition: var(--transition); }
+    .messengers-trigger:hover, .messengers-trigger.is-open { background-color: var(--orange); transform: scale(1.05); }
+    .messengers-trigger svg { width: 28px; height: 26px; fill: #fff; display: block; }
+    .messengers-list { position: fixed; bottom: calc(112px + env(safe-area-inset-bottom, 0px)); right: calc(33px + env(safe-area-inset-right, 0px)); display: flex; flex-direction: column; gap: 12px; pointer-events: none; opacity: 0; transform: translateY(20px); transition: var(--transition); z-index: 99998; }
     .messengers-list.active { pointer-events: auto; opacity: 1; transform: translateY(0); }
-    .messenger-btn {
-        width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;
-        text-decoration: none; transition: transform 0.25s var(--ease);
-    }
-    .messenger-btn:hover { transform: scale(1.12); }
-    .messenger-btn svg { width: 34px; height: 34px; display: block; filter: drop-shadow(0 4px 8px rgba(30,47,79,.38)); }
+    .messenger-btn { width: 54px; height: 54px; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.3s var(--ease); }
+    .messenger-btn:hover { transform: scale(1.1); }
+    .messenger-btn svg { width: 34px; height: 34px; display: block; filter: drop-shadow(0 5px 8px rgba(30,47,79,.45)); }
 
-    @media (max-width: 960px) {
-        .quick-nav { grid-template-columns: 1fr; }
+    /* Адаптивность */
+    @media (max-width: 1024px) {
         nav { display: none; }
-        .burger-btn { display: flex; }
         .header-contacts { display: none; }
-        nav.open {
-            display: flex; flex-direction: column; position: absolute;
-            top: 90px; left: 0; width: 100%; background: #ffffff;
-            padding: 24px 6%; box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            border-bottom: 1px solid rgba(30, 47, 79, 0.08); gap: 16px;
-        }
+        .burger-btn { display: flex; }
+        nav.open { display: flex; flex-direction: column; position: absolute; top: 90px; left: 0; width: 100%; background: #ffffff; padding: 24px 6%; box-shadow: 0 10px 25px rgba(0,0,0,0.08); border-bottom: 1px solid rgba(30, 47, 79, 0.08); gap: 16px; z-index: 1000; }
+        .quick-nav { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
     }
-
-
-    /* Premium glass / dimensional 404 treatment; retains the original page content and layout. */
-    :root { --glass-line: rgba(255,255,255,.68); --glass-shadow: 0 24px 70px rgba(23,42,72,.11); }
-    body {
-      background:
-        radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.96) 0%, rgba(245,247,250,.88) 38%, rgba(236,241,247,.94) 100%);
-      background-attachment: fixed;
-    }
-    header {
-      background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(245,247,250,.62));
-      backdrop-filter: blur(30px) saturate(165%);
-      -webkit-backdrop-filter: blur(30px) saturate(165%);
-      border-bottom: 1px solid rgba(255,255,255,.78);
-      box-shadow: 0 8px 32px rgba(30,47,79,.07), inset 0 1px rgba(255,255,255,.9);
-    }
-    .error-hero {
-      position: relative; isolation: isolate; overflow: hidden;
-      background:
-        radial-gradient(ellipse at 50% 33%, rgba(255,255,255,.8), transparent 42%),
-        radial-gradient(circle at 84% 24%, rgba(234,88,32,.12), transparent 34%),
-        radial-gradient(circle at 14% 76%, rgba(30,47,79,.10), transparent 38%);
-    }
-    .error-hero::before, .error-hero::after {
-      content:""; position:absolute; z-index:-1; pointer-events:none; border-radius:50%;
-      filter: blur(1px);
-    }
-    .error-hero::before { width:340px;height:340px;right:-145px;top:8%;border:1px solid rgba(255,255,255,.72);box-shadow:inset 0 0 70px rgba(255,255,255,.35),0 0 90px rgba(30,47,79,.035); }
-    .error-hero::after { width:230px;height:230px;left:-100px;bottom:4%;border:1px solid rgba(255,255,255,.7);box-shadow:inset 0 0 60px rgba(255,255,255,.3); }
-    .error-content { position:relative; }
-    .error-number { filter: drop-shadow(0 10px 14px rgba(30,47,79,.10)); }
-    .error-number .digit { text-shadow: 0 1px 0 rgba(255,255,255,.9); }
-    .bearing-zero { width:clamp(106px,14vw,164px);height:clamp(106px,14vw,164px); perspective:900px; filter:drop-shadow(0 18px 20px rgba(30,47,79,.24)); }
-    .bearing-zero svg { overflow:visible; transform-style:preserve-3d; animation:bearingFloat 6s ease-in-out infinite; }
-    .bearing-rotor { transform-origin:120px 112px; animation:spinBearing 24s linear infinite; }
-    @keyframes bearingFloat { 0%,100%{transform:translateY(0) rotateX(7deg) rotateY(-8deg)} 50%{transform:translateY(-7px) rotateX(2deg) rotateY(4deg)} }
-    @keyframes spinBearing { to { transform:rotate(360deg); } }
-    .error-badge, .quick-card, .cta-button, footer {
-      -webkit-backdrop-filter: blur(22px) saturate(150%);
-      backdrop-filter: blur(22px) saturate(150%);
-    }
-    .error-badge {
-      background:linear-gradient(135deg,rgba(255,255,255,.76),rgba(255,245,240,.64));
-      border-color:rgba(234,88,32,.2); box-shadow:0 8px 24px rgba(30,47,79,.07),inset 0 1px rgba(255,255,255,.95);
-    }
-    .quick-card {
-      position:relative; overflow:hidden;
-      background:linear-gradient(145deg,rgba(255,255,255,.78),rgba(255,255,255,.42));
-      border:1px solid rgba(255,255,255,.9); border-bottom-color:rgba(30,47,79,.10);
-      box-shadow:0 18px 48px rgba(30,47,79,.08),inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(30,47,79,.035);
-      transform:translateZ(0); transition:transform .55s cubic-bezier(.16,1,.3,1),box-shadow .55s cubic-bezier(.16,1,.3,1),border-color .4s ease;
-    }
-    .quick-card::before {
-      content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
-      background:linear-gradient(122deg,rgba(255,255,255,.62),transparent 38%,rgba(255,255,255,.12) 72%,transparent);
-      opacity:.7;
-    }
-    .quick-card:hover {
-      transform:translateY(-8px) rotateX(1.2deg);
-      border-color:rgba(255,255,255,1);
-      box-shadow:0 28px 58px rgba(30,47,79,.14),0 8px 20px rgba(234,88,32,.06),inset 0 1px rgba(255,255,255,1);
-    }
-    .quick-card-icon { box-shadow:0 10px 24px rgba(30,47,79,.1),inset 0 1px rgba(255,255,255,.7); }
-    .cta-button { border:1px solid rgba(255,255,255,.26); box-shadow:0 14px 32px rgba(30,47,79,.2),inset 0 1px rgba(255,255,255,.2); }
-    .cta-button.secondary { background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.9);box-shadow:0 10px 28px rgba(30,47,79,.08),inset 0 1px rgba(255,255,255,.95); }
-    footer { background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(245,247,250,.78));border-top:1px solid rgba(255,255,255,.9);box-shadow:0 -10px 35px rgba(30,47,79,.035); }
-    @media (max-width:760px) {
-      .error-hero { background:radial-gradient(ellipse at 50% 23%,rgba(255,255,255,.8),transparent 44%),radial-gradient(circle at 86% 14%,rgba(234,88,32,.10),transparent 39%); }
-      .quick-card { box-shadow:0 12px 30px rgba(30,47,79,.08),inset 0 1px rgba(255,255,255,.95); }
-      .quick-card:hover { transform:translateY(-3px); }
+    @media (max-width: 600px) {
+        .header-wrap { height: 70px; }
+        .header-logo-svg { height: 40px; }
+        .logo-text .logo-subtitle { display: none; }
+        main { padding-top: 70px; }
+        .error-hero { padding: 40px 0 60px; }
+        .actions-group { flex-direction: column; width: 100%; max-width: 320px; margin-left: auto; margin-right: auto; }
+        .cta-button { width: 100%; justify-content: center; }
+        .error-number { font-size: clamp(90px, 20vw, 150px); }
+        .bearing-container { width: clamp(95px, 20vw, 150px); height: clamp(95px, 20vw, 150px); margin: 0 6px; }
+        .messengers-trigger { width: 54px; height: 54px; bottom: calc(60px + env(safe-area-inset-bottom, 0px)); right: calc(20px + env(safe-area-inset-right, 0px)); }
+        .messengers-list { right: calc(20px + env(safe-area-inset-right, 0px)); bottom: calc(126px + env(safe-area-inset-bottom, 0px)); }
     }
     @media (prefers-reduced-motion: reduce) {
-      .bearing-zero svg,.bearing-rotor { animation:none!important; }
-      .quick-card,.cta-button { transition:none!important; }
+        *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+        .bearing-spin { animation: none !important; }
     }
 </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
+<!-- Спрайт для логотипа -->
 <svg aria-hidden="true" focusable="false" style="display:none">
   <defs>
-    <symbol id="mapCrest" viewbox="0 0 1093.3 459.17"><path d="M189 293c-1-8-2-15-5-21c-2-4-4-7-8-7c-5-1-7 2-9 5c-5 7-7 14-10 21c-1 2-1 3-4 3s-2-2-3-4c-1-5-2-11-5-17c-1-3-3-7-8-7c-4-1-7 2-9 6c-4 6-7 12-9 18c-1 3-1 5-5 4c-3 0-2-3-2-4c-2-6-3-12-5-18c-2-4-4-7-8-8c-5 0-7 3-10 6c-4 7-7 14-10 21c0 2-1 3-3 3c-3 0-3-2-3-3c-1-7-3-14-5-20c0-2-1-3-1-4c-2-4-3-8-8-8s-7 3-9 7c-4 8-7 17-10 25c0 2 0 5-3 4c-3 0-6 2-8-3c-2-4-3-4-7-1c-6 4-13 8-19 13c-4 2-4 3 0 5c6 4 13 8 20 12c3 2 4 2 6-2c0-1 0-2 2-2c2-1 4-1 4 2c-1 6 0 11 1 16c0 3 1 5 2 7c3 4 7 5 9 0c4-5 7-12 9-19c1-5 5-3 8-3c4-1 4 2 4 4c1 6 3 12 5 17c3 6 8 7 12 1s7-12 9-19c2-5 6-3 9-3c4-1 4 2 4 4c2 6 3 12 6 17c3 6 7 7 11 1c5-6 7-12 9-19c2-5 6-3 9-3c3-1 3 2 3 3c2 6 3 12 6 18s8 7 12 1s6-13 9-19c1-3 2-4 5-3c2 0 4 0 5 0c3 0 6 0 7 3s4 4 7 4c1 0 3 0 5 0c3 0 5 0 6 3c1 5 5 7 10 7c20 0 39 0 59 0c9 0 14-4 15-13c1-5 3-6 7-6c8 1 11-4 10-11c0-3-2-5-5-5s-6 0-9 0c0 0-1 0-1-1s1-1 1-1c14-4 19-11 20-23c1-13-5-24-17-30c-6-3-12-4-17-5c-6-1-11-3-16-7c-4-4-6-8-4-14c12-31 23-63 34-95c0-1 1-2 2-4c5 9 10 18 16 27c7 11 9 23 12 36c3 21 7 42 10 63c0 1 1 3 0 4c-4 5-3 11-2 16c1 8 2 17 4 25c0 2-1 3-2 5c-7 5-9 13-6 21c2 8 9 13 18 13c2 0 3 0 5 0s3 1 3 2c1 3 3 4 5 4c8 0 15 0 22 0c2 0 4 0 4 2c6 24 19 42 40 54c1 1 2 1 3 3h-6c-54 0-107 0-161 1c-15 1-30 1-44 4c-4 1-7 2-10 3c-8 4-10 11-7 19s10 13 18 16c15 6 30 10 46 12c34 5 67 0 99-10c16-5 31-9 47-11c20-2 40 0 59 5c22 5 44 10 66 15c38 9 74 5 110-8c14-6 29-11 44-14c24-5 47-3 70 4c17 6 34 11 52 16c26 7 52 5 77-5c15-6 29-12 44-15c18-4 35-4 52 2c14 4 27 9 41 10c20 1 37-5 49-22c5-7 7-15 6-24c0-1 0-3-1-3c-1-1-1 1-2 1c-18 23-43 32-71 33c-8 1-16 0-24-2c9-2 17-4 26-6c15-4 29-9 43-16c5-2 11-5 15-10c9-8 7-20-3-27c-7-3-14-4-21-4c-3 0-4-1-4-4c0-4 0-8 0-11s1-4 3-4c16-3 31-5 46-9c7-1 8-3 3-8c-25-31-53-58-81-86c-3-3-4-7-6-11c-2-6-6-11-12-14c-13-7-26-15-40-22c-5-3-6-3-10 2c-2 3-4 6-5 9s-2 3-5 2c-13-8-27-15-40-23c-5-3-9-4-14-1c-2 0-3-1-4-1c-30-15-59-30-88-45c-2-1-5-3-7-3s-3-1-4-2c-8-10-23-8-28 4c-3 5-4 10-6 15c-1 2-2 3-4 3c-3-1-7-1-10 0c-3 0-4-1-4-4c0-17 0-33-1-49c0-5 0-9-6-10c-1 0-1-1-1-2c-1-5 0-10 4-14c3-2 4-5 4-8c0-2 0-3-3-3c-13 3-19 11-19 24c-1 14-1 29 0 43c0 7 1 14 1 22c-1 0-1-1-1-2c-7-20-14-40-20-61c-1-3 0-5 3-6c5-1 8-5 9-10c2-10-4-21-14-24c-16-6-32-12-48-18c-6-2-11-2-17-1c-41 3-81 7-121 11c-12 1-20 6-23 18c-1 2-1 3-3 3c-1 0-2 0-3 0c-11 2-16 12-11 23c2 3 5 5 9 6c2 0 4 0 5 0c9 0 7-1 6 7c-6 29-12 58-17 87c-1 2-2 3-4 4c-14 0-22 9-25 21c-1 3-2 5-3 8c-1 0-1-2-1-2c0-6 0-11-1-17c0-5-2-7-7-7c-2-1-3-1-2-4c3-7 6-15 9-22c4-12 1-20-9-26c-3-2-3-5-5-7c-12-15-25-30-37-46c-3-4-7-9-10-13c-10-11-20-22-29-33c-8-10-17-19-25-30c-13-18-41-10-48 7c-11 24-21 49-30 74c-2 4-2 8 1 12c2 1 1 3 1 4c-5 16-10 32-14 48c-1 3-2 5 0 7c1 1 0 2 0 3c-3 9-5 18-8 27c0 2-1 3-3 4c-7 5-9 12-6 21s7 18 10 27c1 1 1 3 0 5c-3 10-1 18 8 23c1 1 2 2 2 3c-1 3-2 2-3 2c-5 1-8 3-9 8c-1 3-3 4-6 4c-4 0-9-1-12 4zm639 96c4-2 5-6 9-6c25-1 50-2 75-3c27-2 54-3 82-6c15-2 30-4 45-4c6 0 11 0 16 2c7 3 8 10 2 15c-5 3-10 6-15 8c-32 12-66 17-101 20c-48 3-97 4-145 5c-37 1-74-1-110 1c-31 1-62 2-93 2c-59 1-117 2-176 1c-43 0-87 3-131 2c-19 0-39 0-58-1c-5-1-11-1-16-3c-2-1-4-3-4-5c0-3 2-4 4-5c4-1 8-2 12-2c25-3 51-4 76-4c63-1 127-1 190-2c75-1 150-3 225-2c28 0 56 0 85-2c34-1 69-3 104-5c26-2 52-4 78-9c6-1 12-2 17-4c-56 1-113 5-171 7zm-275-264c1-14 2-30 3-47c0-6 0-6 6-6c15-2 29-3 44-4c8-1 8 0 10 7c5 27 11 54 16 81c5 24 10 48 13 72c0 5 0 6-5 6c-13 0-27 0-40 0c-2 0-3-1-4-3c-4-5-7-10-11-15c-8-11-16-21-28-28c-5-4-6-7-6-12c1-16 1-32 2-51zm-257-35c-7 20-14 40-21 59c-8 21-15 42-22 62c-1 3-2 4-4 2c-3-3-6-5-9-7s-4-4-3-7c8-33 16-66 26-99c1-3 1-5-1-7c-3-3-5-7-7-10c-1-1-2-3-2-4c7-21 13-41 19-61c2-6 7-10 14-10c6 0 10 3 13 8c3 6 2 12-3 17c-2 1-3 3-3 5c0 13 0 26 0 39c0 1 0 2 0 4c3-6 5-11 7-17c1 1 2 1 2 2c24 27 48 54 72 81c2 2 3 3 5 4s2 3 1 5c-3 10-7 20-10 29c-2 7-6 14-6 21c-1 13-1 26-1 38c0 3-1 5-3 7c-2 1-3 4-3 6c0 12 0 23 0 35c0 1 0 3 0 5c-4-2-7-3-10-3c-2 0-3-1-3-3c-1-9-3-18-4-27c-1-4 0-8 4-10s5-6 4-10c-4-22-7-44-11-66c-2-11-3-22-9-32c-5-8-9-16-14-24c-6-11-12-21-18-32zm478 98h1c0 7 0 14 0 22c0 2-1 3-3 3c-7 0-13-1-19 0c-2 0-3-1-3-3c-1-7-2-13-3-20c0-2-1-4-3-4c-18-5-35-10-53-13c-2 0-4-1-5 1s2 3 4 3c15 8 30 15 45 23c2 1 3 2 3 5c0 2 1 4 1 6c1 3 0 4-3 4c-12 3-23 9-33 17c-2 1-3 2-5 2c-8 0-16 0-24 0c-3 0-4-1-4-4c2-21 4-42 5-62c0-4 2-5 5-5c21-1 41-1 61-2c3 0 5-1 5-4c2-6 4-12 6-18c1-4 5-7 9-6c5 0 7 2 9 6c1 2 1 4 1 6c1 14 2 29 3 43zm161 165c-3 0-4-1-6-3c-6-10-12-19-18-29c-2-2-3-5-2-8c8-22 15-44 22-66c5-14 9-29 14-43c2-3 3-4 6-2c12 7 24 14 36 21c4 2 6 4 7 8c2 4 3 9 7 13c15 14 29 28 43 42c11 12 22 24 33 37c2 1 4 3-1 3c-34 5-67 13-101 20c-13 2-27 5-40 7zm-43-59c-3-1-4-2-5-3c-21-14-42-28-63-43c-6-4-6-4 0-9c3-2 2-4-1-6c-9-7-19-14-29-20c-7-5-13-10-11-20c0-1 0-2 0-2c-1-6-1-12-2-19c4 2 6 4 9 6c29 20 58 40 87 60c3 1 4 3 5 7c2 9 4 18 6 28c1 6 2 13 4 21zm-312-38c-4 0-8 0-12 0c-3 0-4-1-6-3c-5-8-11-16-18-24c-12-12-27-19-45-19c-10 1-21 2-31 3c-11 1-21 3-32 5c-4 1-4 1-3-3c1-3 2-5 3-7c2-7 6-11 13-11c1 0 3-1 5-1c23-5 47-9 71-9c12 0 23 4 32 12c16 15 29 34 38 54c1 2 1 3-2 3c-4 0-9 0-13 0zm-42-131c-1 17-2 33-3 49c0 2 0 4-3 3c-13-1-27 1-40 2c-3 0-4 0-4-4c6-31 11-62 16-93c0-4 2-5 5-5c9-1 18-2 27-3c4 0 5 1 5 4c-1 16-2 32-3 47zm120 87c-2-2-2-4-2-5c-5-26-9-52-14-78c-3-17-7-33-11-50c0-2-2-5 1-7c2-2 4 0 7 1c7 3 14 6 22 9c3 1 5 3 6 6c3 9 6 17 9 25c4 12 8 23 12 35c1 3 0 5-4 5c-3 0-6 0-10 0c-6 1-9 4-10 10c-1 7-2 15-3 22c-1 9-1 18-3 27zm-137 109c1 26-20 46-47 47c-26 0-48-22-48-49s20-48 46-48c27 0 49 22 49 50zm243 45c-26 0-46-20-46-47c0-25 20-45 44-45c25 0 46 22 46 47s-19 45-44 45zm-148-329c4-1 8 0 12 1c16 6 31 12 46 17c6 2 8 6 9 12c0 4-1 4-4 3c-15-6-30-11-45-17c-7-3-14-3-21-3c-26 3-52 5-78 8c-18 1-36 2-54 6c-4 0-5-1-4-5c2-6 7-10 14-10c15-2 30-4 46-5c26-3 53-5 79-7zm287 264c-4-20-7-39-12-58c-4-14-3-30-15-42c-2-3-1-7 2-10s6-3 9-1c11 6 23 13 34 19c10 5 9 5 6 16c-1 3-2 3-4 1c-8-4-16-9-24-13c-1-1-2-3-4-1c-1 1 1 2 1 3c6 12 11 24 14 37c1 7 4 13 3 20c-2 10-6 19-10 29zm-528-62c1-21 1-42 10-63c3-8 6-16 9-23c2-6 8-8 13-6s8 7 7 13c-1 2-2 4-3 6c-11 25-19 50-21 77c0 6-1 6-7 6s-9-4-8-10zm534 97c5 7 9 14 13 20c3 5 6 6 11 6c10-1 20-3 30-5c19-3 38-7 57-11c3-1 4 0 4 3s0 6 0 9s-1 4-3 4c-9 1-19 2-28 3c-29 3-58 5-87 7c-5 1-11 1-18 1c12-10 18-22 21-37zm-426-103c-4-1-8-1-12-1c-7-1-11 3-13 9c0 0 0 0 0 0c-1 7-5 11-12 12c0 0 0 0 0 0c-2 1-3 0-3-2c-1-4 1-9 2-14c-4 2-8 4-11 6c-6 3-9 7-7 14s-2 12-6 16c-3 3-4 2-5 0c-2-4-2-9-3-13c0 0 0 0-1 0c-1 1-2 3-4 5c15-28 44-43 80-38c25 4 54 23 56 37c-6-7-13-11-21-7c-6 3-11 2-17-1c-3-2-2-3 0-5c3-4 7-5 12-7c-3-2-6-3-9-4c-9-5-11-5-18 3c-4 5-8 6-14 5c0 0 0 0 0 0c-3 0-4-2-3-5c2-4 5-7 9-10zm231 159c-58 1-117 1-176 3c2-3 4-3 7-3c16 0 32 0 48 0c5 0 10-1 14-3c17-8 28-21 35-37c2-3 3-4 6-4c9 0 17 0 26 0c7 0 8 0 10 7c7 15 17 27 30 37zm-311-135c-2 2-2 3-3 5c-12 16-18 34-18 54c0 4 2 9-1 11s-8 1-11 1s-4-1-4-4c0-5 0-10 0-15c0-16 0-32 0-47c0-3 0-5 3-5c11 0 22 0 34 0zm276 73c-5-15-1-46 8-63c11-22 28-36 51-42s46-5 67 7c0 0 0 0 0 1c-1 0-2-1-4 1c4 2 7 4 11 6c-61-32-135 7-133 90zm-425-92c7 9 16 11 26 13c3 1 6 2 8 3c7 2 11 6 14 12c5 9 2 21-7 25c-2 1-3 1-4-2c-1-5-4-8-9-10c-1-1-2-2-3-3c-1-5-4-8-10-8c-3 0-7 0-11 0c-6 0-6 0-4-5s4-10 0-15c-2-3-2-6 0-10zm-10 5c-1 0-1 0-2-1c-8-9-13-10-25-4c-1 0-1 0-2-1c-3-8-6-15-9-23c-2-4 0-8 3-11s7-3 11-1c9 7 19 13 28 20c1 1 2 2 2 4c-2 6-4 11-6 17zm330 27c6 0 10 0 15 0c4 0 6 1 6 5c-1 20 0 41 0 61c0 8 1 7-8 7c-3 0-3-1-3-4c0-8 0-16 0-24c0-15-1-31-10-45zm-110-89c0-1 1-2 1-3c5-26 10-52 15-78c1-6 2-12 4-17c0-3 3-4 5-3c3 0 1 3 1 4c-5 26-10 52-15 79c-1 5-2 11-3 17c0 3-3 3-6 3c-1 0-2-1-2-2zm188 120c0 9 0 18 0 27c0 3-1 5-4 4c-3 0-6 1-6-4c0-18 0-36 0-54c0-4 3-3 5-3c3 0 5 0 5 3c-1 9 0 18 0 27zm39-58c-6 8-10 14-14 22c-3 5-5 11-7 17c0 3-2 2-4 2s-2-1-2-3c0-11-1-23-1-35c0-1 0-3 2-3c9 0 17 0 26 0zm-65 0c8 0 16 0 23 0c3 0 4 1 4 4c0 1 0 2 0 4c1 3-1 4-4 4c-12 0-23 0-34 0c-10 0-9 0-13-9c-1-2-1-3 2-3c7 0 15 0 22 0zm157-96c0-4 1-4 4-2c13 6 25 13 38 19c14 7 28 14 42 21c2 2 2 3 1 5c-1 3-3 1-4 1c-6-3-11-6-17-9c-20-10-41-21-61-31c-1-1-3-1-3-4zm-383-10c-3 1-5 3-8 0c-14-19-29-37-44-55c-3-3 1-4 2-5c1-2 2 0 3 1c6 7 12 15 18 22c9 12 19 24 29 37zm464 168c5 6 11 9 12 16c4 14-7 33-22 38c1-3 2-7 4-10c8-10 9-22 8-34c0-3-1-6-2-9zm-608-22c-2 1-3 1-4 2c-1 4-4 4-7 4c-7 0-14 0-21 0c-1 0-3 1-4-1c0-2 1-3 3-5c0-1 2 0 3 0c9 0 18 0 26 0h17c-2 1-3 1-3 2c-2 4-5 6-9 5c-2 0-2 1-2 3c-2 10-2 20 0 30c0 2 1 3 4 2c3 0 6 2 7 5c-10 1-12 0-14-10c0-1 0-3-1-5c-1-10 0-21 5-32zm15 47c2-3 3-5 2-7s-3-2-5-2c-2 2-2 4-1 7c-2-2-2-3-3-5c-2-10-1-20 0-30c0-2 1-4 2-5c1-2 3-3 5-3c3 1 4 2 4 5c0 12 0 23 0 35c0 2-1 4-4 5zm290-36c-4-4-9-8-15-8c-6-1-10-4-13-9c0 0 0 0 0-1c-3-3-3-3 2-5c5-1 10 0 15 1c0-2-2-4-1-6c6 9 10 18 12 29zm-221-221c-1-1-2-1-2-2c-2-2-4-5-6-7c-8-9-16-18-24-27c-3-3 0-5 1-7c2-1 3 1 4 2c10 12 20 23 29 35c1 1 3 1 2 3c-2 1-3 2-4 3zm6 228c7 0 11 5 11 12c0 8-4 12-10 12c-7 0-13-6-13-12c0-7 5-12 12-12zm-124-146c0-1 0-1 0-1c5-15 9-30 13-45c1-3 2-2 4-2c1 1 2 1 2 3c-4 15-8 30-12 46c-1 1-1 2-3 1s-4 0-4-2zm608 221c1-8-1-14-4-20c-1-1-1-3 0-4c1-2 2-5 3-8c1-2 2-2 3 0c5 3 8 8 10 13c1 1 0 2 0 3c-3 6-6 11-12 16zm-266-42c-3-7-9-12-14-17c-2 0-2-2-2-3c-1-2-1-5-1-7c-1-4 0-4 3-4c6 2 11 6 15 10c0 1 1 1 1 2c0 6 0 12-2 19zm-155-86c0-1-1-2-1-2c0-14 0-28 0-42c0-2 0-4 3-4c4 0 3 2 3 4c1 11 1 22 1 32c1 6-2 9-6 12zm141 122c0-5-1-10-4-14c-4-6-4-11-1-16c0 0 0-1 0-1c1-3 2-3 4-1c5 3 8 8 10 14c1 4-2 7-4 11c-1 2-3 5-5 7zm298-66c-6-6-12-9-19-11c-1 0-2-1-3-2c-1-2-2-5-4-7c-1-2 0-3 2-3c4-2 8-1 12 1c2 0 4-1 5 1c3 6 6 13 7 21zm-311 77c1 1 1 3-1 4c-4 3-9 7-15 9c-1 0-1 1-2 0s0-2 0-2c2-5 3-9 3-14c0-2 0-2 1-3c2-3 5-5 7-7c1-2 2-2 3 0c2 4 4 8 4 13zm311-40c-3-5-5-10-9-13c-6-3-6-8-6-14c0-2 0-2 3-2c4 1 8 3 11 6c1 2 4 2 4 4c0 6-1 12-3 19zm-17-73c-6-3-12-4-17-2s-8 1-12-2c-5-5-5-5 1-9c2-1 5-2 8-3c1 0 2 0 2 0c7 4 13 9 18 16zm-594-12c0 6-5 11-11 11s-10-5-10-11s5-11 10-11c6 0 11 5 11 11zm198 123c-5 2-10 5-14 2c-7-4-13-10-17-18c4 0 8 1 12 1c1 0 3 0 3 1c5 5 10 10 16 14zm-318-38c-1-1-1-2-1-2c-1-1-1-3-1-4c-2-22 4-42 15-61c1-2 3-3 4-4s2-2 3-1c-9 10-18 41-20 72zm-40 0c-1-2-2-4-2-5c-1-9 0-17 2-26c2-12 7-24 13-35c2-3 4-6 7-7c-13 22-18 47-20 73zm178-297c0 1 0 1 0 1c-3 9-5 19-8 29c-2 5-3 10 1 15c2 3 0 7-2 9c-1 3-3 1-5 0c-1 0-2 0-3 0c-3-1-3-3-2-6c4-10 8-20 12-30c2-6 4-12 7-18zm-100 296c-1-2-2-4-2-8c0-13 2-26 6-38c3-8 6-16 11-23c2-2 3-3 5-3c-14 22-17 47-20 72zm573 39c-5 2-9 5-14 2c-7-4-12-10-16-18c3 0 6 1 9 1c2 0 4 0 5 1c5 5 10 10 16 14zm70 14c1-3 3-7 3-10c1-4 2-6 5-8c3-1 5-5 7-4c3 1 3 5 3 9c0 1 0 3 0 4s0 2-1 3c-5 3-11 6-17 6zm-406-72c4 4 7 6 10 8c1 1 2 1 2 3c1 5 2 10 4 15c0 1 0 1-1 2c-3 0-12-4-13-7c-2-6-3-13-2-21zm-352 19c-7-16 5-71 17-77c-10 24-16 50-17 77zm362-62c1 5 3 9 5 13c1 1 1 2 1 3c-2 5-3 9-4 14c0 1 0 2-2 1c-4-1-8-8-7-12c1-7 3-13 7-19zm394-35c-4 2-7 3-9 5c-5 5-11 6-17 4c-1 0-1 0-2 0c0-1-1-1-1-2c0-4 8-12 12-11c5 0 11 2 17 4zm-109 79c3 3 6 5 9 7c1 1 1 2 1 3c1 5 2 10 4 14c0 2 1 3-1 3c-4-1-9-2-11-6c-2-6-3-13-2-21zm11-12c-10-7-10-20 0-30c1 4 2 7 4 11c1 1 1 2 0 3c-2 5-3 10-4 16zm58-72c-2 4-4 7-5 11c-2 3-9 7-12 7c-1 0-1 0-1 0c-3-3 0-14 3-15c5-2 10-3 15-3zm-35 13c0 5 0 9 1 14c0 1 0 2-1 3c-2 2-4 5-6 7c-1 1-2 1-3 0c-4-5-4-12 1-17c2-2 5-5 8-7zm-102 69c-4 0-8 0-12 0c-2 0-3-1-3-3s1-3 3-3c8 0 16 0 24 0c2 0 3 1 3 3s-1 3-3 3c-4 0-8 0-12 0zm-402-128c-3 1-4 0-3-3c2-7 4-15 6-22c0-1 0-4 3-3c2 1 4 2 3 5c-2 7-4 14-6 22c0 1-1 2-3 1zm402 146c4 0 8 0 12 0c3 0 3 1 3 3s-1 3-3 3c-8-1-16-1-24 0c-2 0-3-1-3-3c0-3 1-3 3-3c4 0 8 0 12 0zm0-46c-4 0-8 0-12 1c-3 0-3-2-3-4s1-3 3-3c8 1 16 1 24 0c2 0 3 1 3 3c0 3-1 4-3 3c-4 0-8 0-12 0zm-154-211c-2 0-5 1-6-2c0-3-1-6 2-9c3-2 11 0 13 5c1 3-1 5-4 6c-2 0-3 0-5 0zm-252 247c-6-7-5-38 1-44c-3 15-2 29-1 44zm-16-34c-4 9-4 17-2 26c-6-4-6-23 2-26zm-60 8c0-3 2-4 5-4c2 0 5 0 8 0c1 0 3-1 3 1s-1 3-3 3c-5 0-9 0-13 0zm-39 0c1-2 1-4 3-4c5 0 9 0 14 0c-1 2-1 4-4 4c-4 0-9 0-13 0zm-39 0c0-3 1-4 4-4s6 0 9 0c1 0 3-1 3 1s-1 3-3 3c-4 0-9 0-13 0zm116 0c1-6 6-4 9-4c1 0 3-1 3 1c0 3-1 4-3 3c-3 0-6 0-9 0zm89-25c-3 0-5 0-7 0c-1 0-2-1-2-1c0-1 1-2 1-2c5 0 9 0 13 0c1 0 2 1 2 2c0 2-1 1-2 1c-2 0-4 0-5 0zm-235 35c0 0-1 0-1 0c-2-3-2-7-1-11c1-2 2-2 4-2c0 0 1 0 1 1s0 3-2 4c-2 0-2 2-2 3c0 2 1 3 1 5zm-18-8c4-2 8-5 12-7c-1 8-7 7-12 7z" fill="#ea5820"></path><path d="M195 431c-13-22-27-41-49-53c-7-4-14-7-22-6c-4 0-9 1-12 4c-6 5-6 12-1 18c3 4 8 7 14 7c24 3 45 14 64 27c2 1 3 2 5 2c0 1 0 1 1 1z" fill="#202020"></path><path d="M130 419c-18-10-37-17-58-18c-6 0-11 1-16 5c-8 8-7 20 3 25c6 3 13 3 18 0c16-8 33-11 51-11c1 0 2 1 2-1z" fill="#202020"></path><path d="M219 400c-2-14-7-25-16-34c-6-5-13-9-21-10c-1 0-2-1-4 0c-4 0-9 1-10 6c-2 5-1 9 3 13c2 2 4 3 7 4c14 6 27 12 39 20c0 0 1 0 2 1z" fill="#202020"></path><path d="M280 22c-1 4 2 7 6 7s7-3 7-7s-3-7-7-7c-3 0-6 3-6 7z" fill="#202020"></path><path d="M765 142c0-2-1-4-4-4s-5 2-5 5c0 2 2 4 4 4c3 1 5-2 5-4z" fill="#202020"></path><path d="M949 221c-1 8 0 15 1 22c1 5 1 9-1 14c-9 22-17 44-26 65c-1 3-1 5 0 8c3 5 6 10 9 15c2 2 3 2 6 2c21-4 42-8 63-12c4-1 4-2 3-6c-14-27-29-55-43-83c-3-7-6-14-10-21c-1-1-1-3-2-4z" fill="#202020"></path><path d="M1071 324c-9-11-19-21-29-31c-14-15-29-30-44-45c-4-4-6-9-8-14c-1-3-3-6-6-8c-9-4-18-10-27-15c-2 0-3-2-4 0c-1 1 0 2 1 3c4 10 9 20 14 30c14 28 29 55 44 82c2 3 4 4 8 4c17-3 33-6 51-6z" fill="#202020"></path><path d="M473 283c-20 0-35 16-35 37c0 19 17 36 36 36s35-16 35-35c0-21-16-38-36-38zm29 37c0 15-12 28-27 29c-17 0-30-13-30-30c0-16 12-29 28-29s29 13 29 30z" fill="#ea5820"></path><path d="M763 355c18 0 33-15 33-34s-15-35-34-35c-18 0-33 15-33 34s15 35 34 35zm0-7c-15 0-28-12-28-28c0-15 12-27 27-28c15 0 27 13 28 28c0 16-12 28-27 28z" fill="#ea5820"></path><path d="M398 157c0 3 3 5 5 5c3 0 6-2 6-5s-3-5-6-5s-5 2-5 5z" fill="#202020"></path><path d="M210 211c0 3 2 4 5 5c3 0 5-2 5-5s-3-6-5-5c-3 0-5 2-5 5z" fill="#202020"></path><path d="M266 290c1 2 2 3 4 3s3-1 3-3s-1-4-3-4c-3 0-3 2-4 4z" fill="#202020"></path><path d="M351 313c0-3-3-5-6-5s-5 2-5 5s2 6 5 5c4 0 5-2 6-5z" fill="#202020"></path><path d="M221 257c0 2 3 5 5 5c3-1 5-3 5-6c0-2-2-5-5-5s-5 3-5 6z" fill="#202020"></path><path d="M452 319c0 12 10 22 22 22c11 0 21-10 21-21c0-12-10-22-22-22c-11 0-21 9-21 21z" fill="#202020"></path><path d="M782 320c0-11-9-20-20-20s-19 9-19 20s9 20 20 20s19-9 19-20z" fill="#202020"></path><path d="M260 222c-2 5 0 9 4 13c5 4 10 6 16 7s11 2 17 5c12 6 18 17 17 30c-1 12-6 19-20 23c0 0-1 0-1 1s1 1 1 1c3 0 6 0 9 0s5 2 5 5c1 7-2 12-9 11c-5 0-7 1-8 6c-1 9-6 13-15 13c-20 0-39 0-59 0c-5 0-9-2-10-7c-1-3-3-3-6-3c-2 0-4 0-5 0c-3 0-6-1-7-4s-3-3-6-3c-2 0-4 0-6 0c-3-1-4 0-5 3c-3 6-5 13-9 19s-9 5-12-1s-4-12-6-18c0-1 0-4-3-3c-3 0-7-2-9 3c-2 7-4 13-9 19c-4 6-8 5-11-1c-3-5-4-11-6-17c0-2 0-5-4-4c-3 0-7-2-9 3c-2 7-5 13-9 19s-9 5-12-1c-2-5-3-11-5-17c0-2 0-5-4-5c-3 1-7-1-8 4c-2 7-5 14-9 19c-2 5-6 4-9 0c-1-2-2-4-2-7c-1-5-2-11-1-16c0-3-2-3-4-2c-2 0-2 1-2 2c-2 4-3 4-6 2c-7-4-13-8-20-12c-4-2-4-3 0-5c6-5 13-9 19-13c4-3 5-3 7 1c2 5 5 3 8 3c3 1 3-2 3-4c3-8 6-17 11-25c1-4 3-7 8-7s6 4 8 8c0 1 1 2 1 4c2 6 4 13 5 20c0 1 0 3 3 3c2 0 3-1 3-3c3-7 6-14 10-21c3-3 5-6 10-6c4 1 6 4 8 8c2 6 3 12 5 18c0 1-1 4 2 4c4 1 4-1 5-4c2-6 5-12 9-18c2-4 5-7 10-6c4 0 6 4 7 7c3 6 4 12 5 17c1 2 0 4 3 4s3-1 4-3c3-7 5-14 10-21c2-3 4-6 9-5c4 0 6 3 8 7c3 6 4 13 5 21c3-5 8-4 12-4c3 0 5 0 6-4s4-7 9-8c0 0 1 0 2 0l31-1c0-2 2-7 8-8c0 0 1 0 1 0c4 0 8 0 11 0c6 1 9 3 10 8c1 1 2 2 3 3c5 2 8 5 9 10c1 3 2 3 4 2c9-4 12-16 7-25c-3-6-7-10-14-12c-2-1-5-2-8-3c-10-2-19-4-26-13c0 0 0 1 0 1l6-17zm-163 46c-3 1-5 4-7 7c-6 11-10 23-13 35c-2 9-3 17-2 26c0 1 1 3 2 5c2-26 7-51 20-73zm40 1c-1 0-2 0-3 1s-3 2-4 4c-11 19-17 39-15 61c0 1 0 3 1 4c0 1 0 1 1 2c2-31 11-62 20-72zm38-1c-2 0-3 1-5 3c-5 7-8 15-11 23c-4 13-6 25-6 38c0 4 1 6 2 8c3-25 6-50 20-72zm-118-5c-12 6-24 61-17 77c1-27 7-53 17-77zm169 20c-1 0-3-1-3 0c-2 2-3 3-3 5c1 2 3 1 4 1c7 0 14 0 21 0c3 0 6 0 7-4c1-1 2-1 4-2c-5 11-6 22-5 32c1 2 1 4 1 5c2 10 4 11 14 10c-1-3-4-5-7-5c-3 1-4 0-4-2c-2-10-2-20 0-30c0-2 0-3 2-3c4 1 7-1 9-5c0-1 1-1 3-2h-17c-8 0-17 0-26 0zm45 2c-2 0-4 1-5 3c-1 1-2 3-2 5c-1 10-2 20 0 30c1 2 1 3 3 5c-1-3-1-5 2-7c1 0 3 0 4 2s1 4-2 7c3-1 4-3 4-5c0-12 0-23 0-35c0-3-1-4-4-5zm-57-1c-6 6-7 37-1 44c-1-15-2-29 1-44zm-17 10c-8 3-8 22-2 26c-2-9-2-17 2-26zm-166 5c-2 0-3 0-4 2c-1 4-1 8 1 11c0 0 1 0 1 0c0-2 0-3-1-5c0-1 0-3 2-3c2-1 2-3 2-4c1-1-1-1-1-1zm-20 5c5 0 11 1 12-7c-4 2-8 5-12 7zm176-5c0-2-2-1-3-1c-3 0-8-1-9 4c3 0 6 0 9 0c2 1 3 0 3-3zm-34 0c0-2-2-1-3-1c-3 0-6 0-8 0c-3 0-5 1-5 4c4 0 9 0 13 0c2 0 3-1 3-3zm-78 0c0-2-2-1-3-1c-3 0-6 0-9 0s-4 1-4 4c4 0 9 0 13 0c2 0 3-1 3-3zm26-1c-2 0-2 2-3 4c4 0 9 0 13 0c3 0 3-2 4-4c-5 0-9 0-14 0zm155-15c0 0 0 0 0 0s0 0 0 0zm0-9c0 0-1 1-1 2s1 1 2 1c2 0 4 0 7 0c1 0 3 0 5 0c1 0 2 1 2-1c0-1-1-2-2-2c-4 0-8 0-13 0z" fill="#202020"></path><path d="M476 219c42 0 72 29 81 43c8 13 22 48 12 85c-5 22-17 37-28 46c-1 0-2 0-2 1c-8 5-14 9-19 10h-31c-15 1-30 1-45 1c-5-2-11-5-17-9c0-1-1-1-2-2c0 0-1 0-1-1c-8-5-17-12-23-19c-7-9-12-18-15-29v-1c-1-6-4-19-4-33c1-18 7-34 18-49c1-1 1-3 3-5c0 0 0 0 0 0c1-3 3-6 7-10c2-1 3-3 4-5c13-11 33-23 62-23zm57 149c-1-2-2-2-3 0c-2 2-5 4-7 7c-1 1-1 1-1 3c0 5-1 9-3 14c0 0-1 1 0 2s1 0 2 0c6-2 11-6 15-9c2-1 2-3 1-4c0-5-2-9-4-13zm-129-5c4 8 10 14 17 19c4 2 9 0 14-3c-6-4-11-9-16-14c0-1-2-1-3-1c-4 0-8-1-12-1zm145-25c-2-2-3-2-4 1c0 0 0 1 0 1c-3 5-3 10 1 16c3 4 4 9 4 14c2-2 4-5 5-7c2-4 5-7 4-11c-2-6-5-11-10-14zm-77-67c-26 0-46 21-46 48s22 49 48 49c27-1 48-21 47-47c0-28-22-50-49-50zm-80 50c-1 8 0 15 2 21c1 3 10 7 13 7c1-1 1-1 1-2c-2-5-3-10-4-15c0-2-1-2-2-3c-3-2-6-4-10-8zm158-18c-3 0-4 0-3 4c0 2 0 5 1 7c0 1 0 3 2 3c5 5 11 10 14 17c2-7 2-13 2-19c0-1-1-1-1-2c-4-4-9-8-15-10zm-148-25c-4 6-6 12-7 19c-1 4 3 11 7 12c2 1 2 0 2-1c1-5 2-9 4-14c0-1 0-2-1-3c-2-4-4-8-5-13zm147-12c-1 2 1 4 1 6c-5-1-10-2-15-1c-5 2-5 2-2 5c0 1 0 1 0 1c3 5 7 8 13 9c6 0 11 4 15 8c-2-10-6-19-12-28zm-61-39c-36-5-65 10-80 38c2-2 3-4 4-5c1 0 1 0 1 0c1 4 1 9 3 13c1 2 2 3 5 0c4-4 8-9 6-16s1-11 7-14c3-2 7-4 11-6c-1 5-3 10-2 14c0 2 1 3 3 2c0 0 0 0 0 0c7-1 11-5 12-12c0 0 0 0 0 0c2-6 6-10 13-9c4 0 8-1 12 1c-4 3-7 6-9 10c-1 3 0 5 3 5c0 0 0 0 0 0c6 1 10 0 14-5c7-8 9-8 18-3c3 1 6 2 9 4c-5 2-9 3-12 7c-2 2-3 3 0 5c6 3 11 4 17 1c8-4 15 0 21 7c-2-14-31-33-56-37z" fill="#202020"></path><path d="M679 320c4-76 74-111 133-80c0 0 0 0-1 0c19 10 48 38 47 91c0 19-17 57-49 69c-3 0-6 0-9 0c-19 1-38 2-56 2c-10-1-27-6-42-20c-2-3-5-5-7-8c-4-6-8-13-11-21c-2-6-5-18-5-33zm134 51c-2-1-4 3-7 4c-3 2-4 4-5 8c0 3-2 7-3 10c6 0 12-3 17-6c1-1 1-2 1-2c0-2 1-4 0-5c0-4 0-8-3-9zm-115-8c4 8 10 14 16 18c5 3 9 0 14-2c-6-4-11-9-16-14c-1-1-3-1-5-1c-3 0-6-1-9-1zm134-19c-1-2-2-2-3 0c-1 3-2 6-3 8c-1 1-1 3 0 4c3 6 5 12 4 20c6-5 9-10 12-16c0-1 1-2 0-3c-2-5-5-10-10-13zm-70-70c-24 0-44 20-44 45c0 27 20 47 46 47c25 0 44-20 44-45s-21-47-46-47zm-75 48c-1 8 0 15 2 21c2 4 7 5 11 6c2 0 1-1 1-3c-2-4-3-9-4-14c0-1 0-2-1-3c-3-2-6-4-9-7zm149-10c-3 0-3 0-3 2c0 6 0 11 6 14c4 3 6 8 9 13c2-7 3-13 3-19c0-2-3-2-4-4c-3-3-7-5-11-6zm-138-32c-10 10-10 23 0 30c1-6 2-11 4-16c1-1 1-2 0-3c-2-4-3-7-4-11zm138 2c-4-2-8-3-12-1c-2 0-3 1-2 3c2 2 3 5 4 7c1 1 2 2 3 2c7 2 13 5 19 11c-1-8-4-15-7-21c-1-2-3-1-5-2zm-115-31c-3 2-6 4-8 7c-5 5-5 12-1 17c1 1 2 1 3 0c2-2 4-5 6-7c1-1 1-2 1-3c-1-5-1-9-1-14zm92 1c0 0-1 0-2 0c-3 1-6 2-8 3c-6 4-6 4-1 9c4 3 7 4 12 2c5-1 11-1 17 2c-5-7-11-12-18-16zm-57-14c-5 0-10 1-15 3c-3 1-6 12-3 15c0 0 0 0 1 0c3 0 10-4 12-7c1-4 3-7 5-11zm23 1c-4-1-12 7-12 11c0 1 1 1 1 2c1 0 1 0 2 0c6 2 12 1 17-4c2-2 5-3 9-5c-6-2-12-4-17-4z" fill="#202020"></path><path d="M644 348h-67c-5 19-21 37-28 44h49c25-5 43-31 46-44z" fill="#202020"></path><path d="M613 50c7 0 14 0 21 3c15 6 30 11 45 17c0 0 1 0 2 0c0 0 1 1 1 1c2 2 5 7-1 12c-2 1-2 3-1 5c5 19 11 37 18 56c1 2 1 5 2 7l-14 2c2-1 3-3 2-5c-4-12-8-23-12-35c-3-8-6-16-9-25c-1-3-3-5-6-6c-8-3-15-6-23-9c-2-1-4-3-6-1c-3 2-1 5-1 7c4 17 7 33 11 50c5 26 9 52 14 78c0 1 0 3 2 5c0 0 0 0 0-1v1l3 21h-17c1-1 1-2 1-5c-3-24-8-48-13-72c-5-27-11-54-16-81c-2-7-2-8-10-7c-15 1-29 2-44 4c-6 0-6 0-6 6c-1 17-2 33-3 47c-1 19-1 35-2 51c0 4 0 7 3 9c-5-3-13-6-22-8c3 1 3-1 3-3c1-16 2-32 3-49c1-15 2-31 3-47c0-3-1-4-5-4c-9 1-18 2-27 3c-3 0-5 1-5 5c-5 31-10 62-16 93c0 3 0 4 4 4l-21 3c1 0 1-1 1-2c1-6 2-12 3-17c5-27 10-53 15-79c0-1 2-4-1-4c-2-1-5 0-6 3c-1 5-2 11-3 17c-5 26-10 52-15 78c-1 1-1 2-1 3s1 2 2 2c-5 1-11 3-14 5v-1c2 0 2-1 3-3c5-29 11-58 17-87c1-8 3-7-6-7c-2 0-3 0-5 0c-4-1-7-3-9-6c-5-11 0-21 11-23c1 0 2 0 3 0c0 0 1 0 1-1c5 0 8 2 10 3c1 1 2 1 4 1c18-4 36-5 54-6c26-3 52-5 78-8zm106 12c3 0 3 1 3 3c0 3-1 6-4 9c-4 3-5 8-4 13c0 1 0 2 1 2c7 1 6 5 6 10c1 16 1 32 1 49c0 1 0 2 1 3h-22c0 0 0 0 0 0c0-8-1-15-1-22c-1-14-1-29 0-43c0-13 6-21 19-24zm-245 13c-2-5-10-7-13-5c-3 3-2 6-2 9c1 3 4 2 6 2s3 0 5 0c3-1 5-3 4-6z" fill="#202020"></path><path d="M909 336c-3 14-9 27-20 37l-1 1c-5 3-12 7-23 8c-9 0-17 1-26 1l15-24c0 0 0 0 0 0c15-5 26-24 22-38c-1-4-3-7-6-10c0 0 39 25 39 25z" fill="#202020"></path><path d="M271 3c-4 8-12 30-16 42c0 0 0 0 0-1c-3 6-5 12-7 18c-4 10-8 20-12 30c-2 3-1 5 2 6c1 0 2 0 3 0c1 1 2 1 3 1l-3 12c0 0 0 0 0 0c0-3-1-3-2-4c-2 0-3-1-4 2c-4 15-8 30-13 45c0 0 0 0 0 1c0 2 2 1 4 2s2 0 3-1c0-1 0-2 0-2l-3 13c0-2-1-2-3-3c-3-1-3 2-3 3c-2 7-4 15-6 22c-1 2-1 3 1 4c-6 0-9 2-10 4v-1c0 0 0 0 0 0c2-1 3-2 3-4c3-9 5-18 8-27c0-1 1-2 0-3c-2-2-1-4 0-7c4-16 9-32 14-48c0-1 1-3-1-4c-3-4-3-8-1-12c9-25 19-50 30-74c2-6 7-11 13-14zm-54 189c0 1 0 1 0 1s-1 0-1 0s1 0 1-1z" fill="#202020"></path><path d="M775 131c1 1 2 1 3 1c2 0 5 2 7 3c29 15 58 30 88 45c1 0 2 1 4 1c1-1 2-1 3-1c-5 2-15 10-11 22c1 2 2 4 5 8c2 2 5 18 8 33c-1-2-2-4-5-6c-29-19-58-39-87-59c-3-2-5-4-9-6c1 1 1 3 1 4l-3-33c-1-5-1-9-4-12zm12 14c-3-2-4-2-4 2c0 3 2 3 3 4c20 10 41 21 61 31c6 3 11 6 17 9c1 0 3 2 4-1c1-2 1-3-1-5c-14-7-28-14-42-21c-13-6-25-13-38-19z" fill="#202020"></path><path d="M430 459c-157 0-188-7-221-24l60 5l116-11h92l175-5h98l70 5l138-8l57 14h38c-50 25-427 24-623 24z" fill="#ea5820"></path></symbol>
+    <symbol id="mapCrest" viewBox="0 0 1093.3 459.17">
+      <path fill="#ea5820" d="M189 293c-1-8-2-15-5-21c-2-4-4-7-8-7c-5-1-7 2-9 5c-5 7-7 14-10 21c-1 2-1 3-4 3s-2-2-3-4c-1-5-2-11-5-17c-1-3-3-7-8-7c-4-1-7 2-9 6c-4 6-7 12-9 18c-1 3-1 5-5 4c-3 0-2-3-2-4c-2-6-3-12-5-18c-2-4-4-7-8-8c-5 0-7 3-10 6c-4 7-7 14-10 21c0 2-1 3-3 3c-3 0-3-2-3-3c-1-7-3-14-5-20c0-2-1-3-1-4c-2-4-3-8-8-8s-7 3-9 7c-4 8-7 17-10 25c0 2 0 5-3 4c-3 0-6 2-8-3c-2-4-3-4-7-1c-6 4-13 8-19 13c-4 2-4 3 0 5c6 4 13 8 20 12c3 2 4 2 6-2c0-1 0-2 2-2c2-1 4-1 4 2c-1 6 0 11 1 16c0 3 1 5 2 7c3 4 7 5 9 0c4-5 7-12 9-19c1-5 5-3 8-3c4-1 4 2 4 4c1 6 3 12 5 17c3 6 8 7 12 1s7-12 9-19c2-5 6-3 9-3c4-1 4 2 4 4c2 6 3 12 6 17c3 6 7 7 11 1c5-6 7-12 9-19c2-5 6-3 9-3c3-1 3 2 3 3c2 6 3 12 6 18s8 7 12 1s6-13 9-19c1-3 2-4 5-3c2 0 4 0 5 0c3 0 6 0 7 3s4 4 7 4c1 0 3 0 5 0c3 0 5 0 6 3c1 5 5 7 10 7c20 0 39 0 59 0c9 0 14-4 15-13c1-5 3-6 7-6c8 1 11-4 10-11c0-3-2-5-5-5s-6 0-9 0c0 0-1 0-1-1s1-1 1-1c14-4 19-11 20-23c1-13-5-24-17-30c-6-3-12-4-17-5c-6-1-11-3-16-7c-4-4-6-8-4-14c12-31 23-63 34-95c0-1 1-2 2-4c5 9 10 18 16 27c7 11 9 23 12 36c3 21 7 42 10 63c0 1 1 3 0 4c-4 5-3 11-2 16c1 8 2 17 4 25c0 2-1 3-2 5c-7 5-9 13-6 21c2 8 9 13 18 13c2 0 3 0 5 0s3 1 3 2c1 3 3 4 5 4c8 0 15 0 22 0c2 0 4 0 4 2c6 24 19 42 40 54c1 1 2 1 3 3h-6c-54 0-107 0-161 1c-15 1-30 1-44 4c-4 1-7 2-10 3c-8 4-10 11-7 19s10 13 18 16c15 6 30 10 46 12c34 5 67 0 99-10c16-5 31-9 47-11c20-2 40 0 59 5c22 5 44 10 66 15c38 9 74 5 110-8c14-6 29-11 44-14c24-5 47-3 70 4c17 6 34 11 52 16c26 7 52 5 77-5c15-6 29-12 44-15c18-4 35-4 52 2c14 4 27 9 41 10c20 1 37-5 49-22c5-7 7-15 6-24c0-1 0-3-1-3c-1-1-1 1-2 1c-18 23-43 32-71 33c-8 1-16 0-24-2c9-2 17-4 26-6c15-4 29-9 43-16c5-2 11-5 15-10c9-8 7-20-3-27c-7-3-14-4-21-4c-3 0-4-1-4-4c0-4 0-8 0-11s1-4 3-4c16-3 31-5 46-9c7-1 8-3 3-8c-25-31-53-58-81-86c-3-3-4-7-6-11c-2-6-6-11-12-14c-13-7-26-15-40-22c-5-3-6-3-10 2c-2 3-4 6-5 9s-2 3-5 2c-13-8-27-15-40-23c-5-3-9-4-14-1c-2 0-3-1-4-1c-30-15-59-30-88-45c-2-1-5-3-7-3s-3-1-4-2c-8-10-23-8-28 4c-3 5-4 10-6 15c-1 2-2 3-4 3c-3-1-7-1-10 0c-3 0-4-1-4-4c0-17 0-33-1-49c0-5 0-9-6-10c-1 0-1-1-1-2c-1-5 0-10 4-14c3-2 4-5 4-8c0-2 0-3-3-3c-13 3-19 11-19 24c-1 14-1 29 0 43c0 7 1 14 1 22c-1 0-1-1-1-2c-7-20-14-40-20-61c-1-3 0-5 3-6c5-1 8-5 9-10c2-10-4-21-14-24c-16-6-32-12-48-18c-6-2-11-2-17-1c-41 3-81 7-121 11c-12 1-20 6-23 18c-1 2-1 3-3 3c-1 0-2 0-3 0c-11 2-16 12-11 23c2 3 5 5 9 6c2 0 4 0 5 0c9 0 7-1 6 7c-6 29-12 58-17 87c-1 2-2 3-4 4c-14 0-22 9-25 21c-1 3-2 5-3 8c-1 0-1-2-1-2c0-6 0-11-1-17c0-5-2-7-7-7c-2-1-3-1-2-4c3-7 6-15 9-22c4-12 1-20-9-26c-3-2-3-5-5-7c-12-15-25-30-37-46c-3-4-7-9-10-13c-10-11-20-22-29-33c-8-10-17-19-25-30c-13-18-41-10-48 7c-11 24-21 49-30 74c-2 4-2 8 1 12c2 1 1 3 1 4c-5 16-10 32-14 48c-1 3-2 5 0 7c1 1 0 2 0 3c-3 9-5 18-8 27c0 2-1 3-3 4c-7 5-9 12-6 21s7 18 10 27c1 1 1 3 0 5c-3 10-1 18 8 23c1 1 2 2 2 3c-1 3-2 2-3 2c-5 1-8 3-9 8c-1 3-3 4-6 4c-4 0-9-1-12 4zm639 96c4-2 5-6 9-6c25-1 50-2 75-3c27-2 54-3 82-6c15-2 30-4 45-4c6 0 11 0 16 2c7 3 8 10 2 15c-5 3-10 6-15 8c-32 12-66 17-101 20c-48 3-97 4-145 5c-37 1-74-1-110 1c-31 1-62 2-93 2c-59 1-117 2-176 1c-43 0-87 3-131 2c-19 0-39 0-58-1c-5-1-11-1-16-3c-2-1-4-3-4-5c0-3 2-4 4-5c4-1 8-2 12-2c25-3 51-4 76-4c63-1 127-1 190-2c75-1 150-3 225-2c28 0 56 0 85-2c34-1 69-3 104-5c26-2 52-4 78-9c6-1 12-2 17-4c-56 1-113 5-171 7zm-275-264c1-14 2-30 3-47c0-6 0-6 6-6c15-2 29-3 44-4c8-1 8 0 10 7c5 27 11 54 16 81c5 24 10 48 13 72c0 5 0 6-5 6c-13 0-27 0-40 0c-2 0-3-1-4-3c-4-5-7-10-11-15c-8-11-16-21-28-28c-5-4-6-7-6-12c1-16 1-32 2-51zm-257-35c-7 20-14 40-21 59c-8 21-15 42-22 62c-1 3-2 4-4 2c-3-3-6-5-9-7s-4-4-3-7c8-33 16-66 26-99c1-3 1-5-1-7c-3-3-5-7-7-10c-1-1-2-3-2-4c7-21 13-41 19-61c2-6 7-10 14-10c6 0 10 3 13 8c3 6 2 12-3 17c-2 1-3 3-3 5c0 13 0 26 0 39c0 1 0 2 0 4c3-6 5-11 7-17c1 1 2 1 2 2c24 27 48 54 72 81c2 2 3 3 5 4s2 3 1 5c-3 10-7 20-10 29c-2 7-6 14-6 21c-1 13-1 26-1 38c0 3-1 5-3 7c-2 1-3 4-3 6c0 12 0 23 0 35c0 1 0 3 0 5c-4-2-7-3-10-3c-2 0-3-1-3-3c-1-9-3-18-4-27c-1-4 0-8 4-10s5-6 4-10c-4-22-7-44-11-66c-2-11-3-22-9-32c-5-8-9-16-14-24c-6-11-12-21-18-32zm478 98h1c0 7 0 14 0 22c0 2-1 3-3 3c-7 0-13-1-19 0c-2 0-3-1-3-3c-1-7-2-13-3-20c0-2-1-4-3-4c-18-5-35-10-53-13c-2 0-4-1-5 1s2 3 4 3c15 8 30 15 45 23c2 1 3 2 3 5c0 2 1 4 1 6c1 3 0 4-3 4c-12 3-23 9-33 17c-2 1-3 2-5 2c-8 0-16 0-24 0c-3 0-4-1-4-4c2-21 4-42 5-62c0-4 2-5 5-5c21-1 41-1 61-2c3 0 5-1 5-4c2-6 4-12 6-18c1-4 5-7 9-6c5 0 7 2 9 6c1 2 1 4 1 6c1 14 2 29 3 43zm161 165c-3 0-4-1-6-3c-6-10-12-19-18-29c-2-2-3-5-2-8c8-22 15-44 22-66c5-14 9-29 14-43c2-3 3-4 6-2c12 7 24 14 36 21c4 2 6 4 7 8c2 4 3 9 7 13c15 14 29 28 43 42c11 12 22 24 33 37c2 1 4 3-1 3c-34 5-67 13-101 20c-13 2-27 5-40 7zm-43-59c-3-1-4-2-5-3c-21-14-42-28-63-43c-6-4-6-4 0-9c3-2 2-4-1-6c-9-7-19-14-29-20c-7-5-13-10-11-20c0-1 0-2 0-2c-1-6-1-12-2-19c4 2 6 4 9 6c29 20 58 40 87 60c3 1 4 3 5 7c2 9 4 18 6 28c1 6 2 13 4 21zm-312-38c-4 0-8 0-12 0c-3 0-4-1-6-3c-5-8-11-16-18-24c-12-12-27-19-45-19c-10 1-21 2-31 3c-11 1-21 3-32 5c-4 1-4 1-3-3c1-3 2-5 3-7c2-7 6-11 13-11c1 0 3-1 5-1c23-5 47-9 71-9c12 0 23 4 32 12c16 15 29 34 38 54c1 2 1 3-2 3c-4 0-9 0-13 0zm-42-131c-1 17-2 33-3 49c0 2 0 4-3 3c-13-1-27 1-40 2c-3 0-4 0-4-4c6-31 11-62 16-93c0-4 2-5 5-5c9-1 18-2 27-3c4 0 5 1 5 4c-1 16-2 32-3 47zm120 87c-2-2-2-4-2-5c-5-26-9-52-14-78c-3-17-7-33-11-50c0-2-2-5 1-7c2-2 4 0 7 1c7 3 14 6 22 9c3 1 5 3 6 6c3 9 6 17 9 25c4 12 8 23 12 35c1 3 0 5-4 5c-3 0-6 0-10 0c-6 1-9 4-10 10c-1 7-2 15-3 22c-1 9-1 18-3 27zm-137 109c1 26-20 46-47 47c-26 0-48-22-48-49s20-48 46-48c27 0 49 22 49 50zm243 45c-26 0-46-20-46-47c0-25 20-45 44-45c25 0 46 22 46 47s-19 45-44 45zm-148-329c4-1 8 0 12 1c16 6 31 12 46 17c6 2 8 6 9 12c0 4-1 4-4 3c-15-6-30-11-45-17c-7-3-14-3-21-3c-26 3-52 5-78 8c-18 1-36 2-54 6c-4 0-5-1-4-5c2-6 7-10 14-10c15-2 30-4 46-5c26-3 53-5 79-7zm287 264c-4-20-7-39-12-58c-4-14-3-30-15-42c-2-3-1-7 2-10s6-3 9-1c11 6 23 13 34 19c10 5 9 5 6 16c-1 3-2 3-4 1c-8-4-16-9-24-13c-1-1-2-3-4-1c-1 1 1 2 1 3c6 12 11 24 14 37c1 7 4 13 3 20c-2 10-6 19-10 29zm-528-62c1-21 1-42 10-63c3-8 6-16 9-23c2-6 8-8 13-6s8 7 7 13c-1 2-2 4-3 6c-11 25-19 50-21 77c0 6-1 6-7 6s-9-4-8-10zm534 97c5 7 9 14 13 20c3 5 6 6 11 6c10-1 20-3 30-5c19-3 38-7 57-11c3-1 4 0 4 3s0 6 0 9s-1 4-3 4c-9 1-19 2-28 3c-29 3-58 5-87 7c-5 1-11 1-18 1c12-10 18-22 21-37zm-426-103c-4-1-8-1-12-1c-7-1-11 3-13 9c0 0 0 0 0 0c-1 7-5 11-12 12c0 0 0 0 0 0c-2 1-3 0-3-2c-1-4 1-9 2-14c-4 2-8 4-11 6c-6 3-9 7-7 14s-2 12-6 16c-3 3-4 2-5 0c-2-4-2-9-3-13c0 0 0 0-1 0c-1 1-2 3-4 5c15-28 44-43 80-38c25 4 54 23 56 37c-6-7-13-11-21-7c-6 3-11 2-17-1c-3-2-2-3 0-5c3-4 7-5 12-7c-3-2-6-3-9-4c-9-5-11-5-18 3c-4 5-8 6-14 5c0 0 0 0 0 0c-3 0-4-2-3-5c2-4 5-7 9-10zm231 159c-58 1-117 1-176 3c2-3 4-3 7-3c16 0 32 0 48 0c5 0 10-1 14-3c17-8 28-21 35-37c2-3 3-4 6-4c9 0 17 0 26 0c7 0 8 0 10 7c7 15 17 27 30 37zm-311-135c-2 2-2 3-3 5c-12 16-18 34-18 54c0 4 2 9-1 11s-8 1-11 1s-4-1-4-4c0-5 0-10 0-15c0-16 0-32 0-47c0-3 0-5 3-5c11 0 22 0 34 0zm276 73c-5-15-1-46 8-63c11-22 28-36 51-42s46-5 67 7c0 0 0 0 0 1c-1 0-2-1-4 1c4 2 7 4 11 6c-61-32-135 7-133 90zm-425-92c7 9 16 11 26 13c3 1 6 2 8 3c7 2 11 6 14 12c5 9 2 21-7 25c-2 1-3 1-4-2c-1-5-4-8-9-10c-1-1-2-2-3-3c-1-5-4-8-10-8c-3 0-7 0-11 0c-6 0-6 0-4-5s4-10 0-15c-2-3-2-6 0-10zm-10 5c-1 0-1 0-2-1c-8-9-13-10-25-4c-1 0-1 0-2-1c-3-8-6-15-9-23c-2-4 0-8 3-11s7-3 11-1c9 7 19 13 28 20c1 1 2 2 2 4c-2 6-4 11-6 17zm330 27c6 0 10 0 15 0c4 0 6 1 6 5c-1 20 0 41 0 61c0 8 1 7-8 7c-3 0-3-1-3-4c0-8 0-16 0-24c0-15-1-31-10-45zm-110-89c0-1 1-2 1-3c5-26 10-52 15-78c1-6 2-12 4-17c0-3 3-4 5-3c3 0 1 3 1 4c-5 26-10 52-15 79c-1 5-2 11-3 17c0 3-3 3-6 3c-1 0-2-1-2-2zm188 120c0 9 0 18 0 27c0 3-1 5-4 4c-3 0-6 1-6-4c0-18 0-36 0-54c0-4 3-3 5-3c3 0 5 0 5 3c-1 9 0 18 0 27zm39-58c-6 8-10 14-14 22c-3 5-5 11-7 17c0 3-2 2-4 2s-2-1-2-3c0-11-1-23-1-35c0-1 0-3 2-3c9 0 17 0 26 0zm-65 0c8 0 16 0 23 0c3 0 4 1 4 4c0 1 0 2 0 4c1 3-1 4-4 4c-12 0-23 0-34 0c-10 0-9 0-13-9c-1-2-1-3 2-3c7 0 15 0 22 0zm157-96c0-4 1-4 4-2c13 6 25 13 38 19c14 7 28 14 42 21c2 2 2 3 1 5c-1 3-3 1-4 1c-6-3-11-6-17-9c-20-10-41-21-61-31c-1-1-3-1-3-4zm-383-10c-3 1-5 3-8 0c-14-19-29-37-44-55c-3-3 1-4 2-5c1-2 2 0 3 1c6 7 12 15 18 22c9 12 19 24 29 37zm464 168c5 6 11 9 12 16c4 14-7 33-22 38c1-3 2-7 4-10c8-10 9-22 8-34c0-3-1-6-2-9zm-608-22c-2 1-3 1-4 2c-1 4-4 4-7 4c-7 0-14 0-21 0c-1 0-3 1-4-1c0-2 1-3 3-5c0-1 2 0 3 0c9 0 18 0 26 0h17c-2 1-3 1-3 2c-2 4-5 6-9 5c-2 0-2 1-2 3c-2 10-2 20 0 30c0 2 1 3 4 2c3 0 6 2 7 5c-10 1-12 0-14-10c0-1 0-3-1-5c-1-10 0-21 5-32zm15 47c2-3 3-5 2-7s-3-2-5-2c-2 2-2 4-1 7c-2-2-2-3-3-5c-2-10-1-20 0-30c0-2 1-4 2-5c1-2 3-3 5-3c3 1 4 2 4 5c0 12 0 23 0 35c0 2-1 4-4 5zm290-36c-4-4-9-8-15-8c-6-1-10-4-13-9c0 0 0 0 0-1c-3-3-3-3 2-5c5-1 10 0 15 1c0-2-2-4-1-6c6 9 10 18 12 29zm-221-221c-1-1-2-1-2-2c-2-2-4-5-6-7c-8-9-16-18-24-27c-3-3 0-5 1-7c2-1 3 1 4 2c10 12 20 23 29 35c1 1 3 1 2 3c-2 1-3 2-4 3zm6 228c7 0 11 5 11 12c0 8-4 12-10 12c-7 0-13-6-13-12c0-7 5-12 12-12zm-124-146c0-1 0-1 0-1c5-15 9-30 13-45c1-3 2-2 4-2c1 1 2 1 2 3c-4 15-8 30-12 46c-1 1-1 2-3 1s-4 0-4-2zm608 221c1-8-1-14-4-20c-1-1-1-3 0-4c1-2 2-5 3-8c1-2 2-2 3 0c5 3 8 8 10 13c1 1 0 2 0 3c-3 6-6 11-12 16zm-266-42c-3-7-9-12-14-17c-2 0-2-2-2-3c-1-2-1-5-1-7c-1-4 0-4 3-4c6 2 11 6 15 10c0 1 1 1 1 2c0 6 0 12-2 19zm-155-86c0-1-1-2-1-2c0-14 0-28 0-42c0-2 0-4 3-4c4 0 3 2 3 4c1 11 1 22 1 32c1 6-2 9-6 12zm141 122c0-5-1-10-4-14c-4-6-4-11-1-16c0 0 0-1 0-1c1-3 2-3 4-1c5 3 8 8 10 14c1 4-2 7-4 11c-1 2-3 5-5 7zm298-66c-6-6-12-9-19-11c-1 0-2-1-3-2c-1-2-2-5-4-7c-1-2 0-3 2-3c4-2 8-1 12 1c2 0 4-1 5 1c3 6 6 13 7 21zm-311 77c1 1 1 3-1 4c-4 3-9 7-15 9c-1 0-1 1-2 0s0-2 0-2c2-5 3-9 3-14c0-2 0-2 1-3c2-3 5-5 7-7c1-2 2-2 3 0c2 4 4 8 4 13zm311-40c-3-5-5-10-9-13c-6-3-6-8-6-14c0-2 0-2 3-2c4 1 8 3 11 6c1 2 4 2 4 4c0 6-1 12-3 19zm-17-73c-6-3-12-4-17-2s-8 1-12-2c-5-5-5-5 1-9c2-1 5-2 8-3c1 0 2 0 2 0c7 4 13 9 18 16zm-594-12c0 6-5 11-11 11s-10-5-10-11s5-11 10-11c6 0 11 5 11 11zm198 123c-5 2-10 5-14 2c-7-4-13-10-17-18c4 0 8 1 12 1c1 0 3 0 3 1c5 5 10 10 16 14zm-318-38c-1-1-1-2-1-2c-1-1-1-3-1-4c-2-22 4-42 15-61c1-2 3-3 4-4s2-2 3-1c-9 10-18 41-20 72zm-40 0c-1-2-2-4-2-5c-1-9 0-17 2-26c2-12 7-24 13-35c2-3 4-6 7-7c-13 22-18 47-20 73zm178-297c0 1 0 1 0 1c-3 9-5 19-8 29c-2 5-3 10 1 15c2 3 0 7-2 9c-1 3-3 1-5 0c-1 0-2 0-3 0c-3-1-3-3-2-6c4-10 8-20 12-30c2-6 4-12 7-18zm-100 296c-1-2-2-4-2-8c0-13 2-26 6-38c3-8 6-16 11-23c2-2 3-3 5-3c-14 22-17 47-20 72zm573 39c-5 2-9 5-14 2c-7-4-12-10-16-18c3 0 6 1 9 1c2 0 4 0 5 1c5 5 10 10 16 14zm70 14c1-3 3-7 3-10c1-4 2-6 5-8c3-1 5-5 7-4c3 1 3 5 3 9c0 1 0 3 0 4s0 2-1 3c-5 3-11 6-17 6zm-406-72c4 4 7 6 10 8c1 1 2 1 2 3c1 5 2 10 4 15c0 1 0 1-1 2c-3 0-12-4-13-7c-2-6-3-13-2-21zm-352 19c-7-16 5-71 17-77c-10 24-16 50-17 77zm362-62c1 5 3 9 5 13c1 1 1 2 1 3c-2 5-3 9-4 14c0 1 0 2-2 1c-4-1-8-8-7-12c1-7 3-13 7-19zm394-35c-4 2-7 3-9 5c-5 5-11 6-17 4c-1 0-1 0-2 0c0-1-1-1-1-2c0-4 8-12 12-11c5 0 11 2 17 4zm-109 79c3 3 6 5 9 7c1 1 1 2 1 3c1 5 2 10 4 14c0 2 1 3-1 3c-4-1-9-2-11-6c-2-6-3-13-2-21zm11-12c-10-7-10-20 0-30c1 4 2 7 4 11c1 1 1 2 0 3c-2 5-3 10-4 16zm58-72c-2 4-4 7-5 11c-2 3-9 7-12 7c-1 0-1 0-1 0c-3-3 0-14 3-15c5-2 10-3 15-3zm-35 13c0 5 0 9 1 14c0 1 0 2-1 3c-2 2-4 5-6 7c-1 1-2 1-3 0c-4-5-4-12 1-17c2-2 5-5 8-7zm-102 69c-4 0-8 0-12 0c-2 0-3-1-3-3s1-3 3-3c8 0 16 0 24 0c2 0 3 1 3 3s-1 3-3 3c-4 0-8 0-12 0zm-402-128c-3 1-4 0-3-3c2-7 4-15 6-22c0-1 0-4 3-3c2 1 4 2 3 5c-2 7-4 14-6 22c0 1-1 2-3 1zm402 146c4 0 8 0 12 0c3 0 3 1 3 3s-1 3-3 3c-8-1-16-1-24 0c-2 0-3-1-3-3c0-3 1-3 3-3c4 0 8 0 12 0zm0-46c-4 0-8 0-12 1c-3 0-3-2-3-4s1-3 3-3c8 1 16 1 24 0c2 0 3 1 3 3c0 3-1 4-3 3c-4 0-8 0-12 0zm-154-211c-2 0-5 1-6-2c0-3-1-6 2-9c3-2 11 0 13 5c1 3-1 5-4 6c-2 0-3 0-5 0zm-252 247c-6-7-5-38 1-44c-3 15-2 29-1 44zm-16-34c-4 9-4 17-2 26c-6-4-6-23 2-26zm-60 8c0-3 2-4 5-4c2 0 5 0 8 0c1 0 3-1 3 1s-1 3-3 3c-5 0-9 0-13 0zm-39 0c1-2 1-4 3-4c5 0 9 0 14 0c-1 2-1 4-4 4c-4 0-9 0-13 0zm-39 0c0-3 1-4 4-4s6 0 9 0c1 0 3-1 3 1s-1 3-3 3c-4 0-9 0-13 0zm116 0c1-6 6-4 9-4c1 0 3-1 3 1c0 3-1 4-3 3c-3 0-6 0-9 0zm89-25c-3 0-5 0-7 0c-1 0-2-1-2-1c0-1 1-2 1-2c5 0 9 0 13 0c1 0 2 1 2 2c0 2-1 1-2 1c-2 0-4 0-5 0zm-235 35c0 0-1 0-1 0c-2-3-2-7-1-11c1-2 2-2 4-2c0 0 1 0 1 1s0 3-2 4c-2 0-2 2-2 3c0 2 1 3 1 5zm-18-8c4-2 8-5 12-7c-1 8-7 7-12 7z"/>
+      <path fill="#202020" d="M195 431c-13-22-27-41-49-53c-7-4-14-7-22-6c-4 0-9 1-12 4c-6 5-6 12-1 18c3 4 8 7 14 7c24 3 45 14 64 27c2 1 3 2 5 2c0 1 0 1 1 1z"/>
+      <path fill="#202020" d="M130 419c-18-10-37-17-58-18c-6 0-11 1-16 5c-8 8-7 20 3 25c6 3 13 3 18 0c16-8 33-11 51-11c1 0 2 1 2-1z"/>
+      <path fill="#202020" d="M219 400c-2-14-7-25-16-34c-6-5-13-9-21-10c-1 0-2-1-4 0c-4 0-9 1-10 6c-2 5-1 9 3 13c2 2 4 3 7 4c14 6 27 12 39 20c0 0 1 0 2 1z"/>
+      <path fill="#202020" d="M280 22c-1 4 2 7 6 7s7-3 7-7s-3-7-7-7c-3 0-6 3-6 7z"/>
+      <path fill="#202020" d="M765 142c0-2-1-4-4-4s-5 2-5 5c0 2 2 4 4 4c3 1 5-2 5-4z"/>
+      <path fill="#202020" d="M949 221c-1 8 0 15 1 22c1 5 1 9-1 14c-9 22-17 44-26 65c-1 3-1 5 0 8c3 5 6 10 9 15c2 2 3 2 6 2c21-4 42-8 63-12c4-1 4-2 3-6c-14-27-29-55-43-83c-3-7-6-14-10-21c-1-1-1-3-2-4z"/>
+      <path fill="#202020" d="M1071 324c-9-11-19-21-29-31c-14-15-29-30-44-45c-4-4-6-9-8-14c-1-3-3-6-6-8c-9-4-18-10-27-15c-2 0-3-2-4 0c-1 1 0 2 1 3c4 10 9 20 14 30c14 28 29 55 44 82c2 3 4 4 8 4c17-3 33-6 51-6z"/>
+      <path fill="#ea5820" d="M473 283c-20 0-35 16-35 37c0 19 17 36 36 36s35-16 35-35c0-21-16-38-36-38zm29 37c0 15-12 28-27 29c-17 0-30-13-30-30c0-16 12-29 28-29s29 13 29 30z"/>
+      <path fill="#ea5820" d="M763 355c18 0 33-15 33-34s-15-35-34-35c-18 0-33 15-33 34s15 35 34 35zm0-7c-15 0-28-12-28-28c0-15 12-27 27-28c15 0 27 13 28 28c0 16-12 28-27 28z"/>
+      <path fill="#202020" d="M398 157c0 3 3 5 5 5c3 0 6-2 6-5s-3-5-6-5s-5 2-5 5z"/>
+      <path fill="#202020" d="M210 211c0 3 2 4 5 5c3 0 5-2 5-5s-3-6-5-5c-3 0-5 2-5 5z"/>
+      <path fill="#202020" d="M266 290c1 2 2 3 4 3s3-1 3-3s-1-4-3-4c-3 0-3 2-4 4z"/>
+      <path fill="#202020" d="M351 313c0-3-3-5-6-5s-5 2-5 5s2 6 5 5c4 0 5-2 6-5z"/>
+      <path fill="#202020" d="M221 257c0 2 3 5 5 5c3-1 5-3 5-6c0-2-2-5-5-5s-5 3-5 6z"/>
+      <path fill="#202020" d="M452 319c0 12 10 22 22 22c11 0 21-10 21-21c0-12-10-22-22-22c-11 0-21 9-21 21z"/>
+      <path fill="#202020" d="M782 320c0-11-9-20-20-20s-19 9-19 20s9 20 20 20s19-9 19-20z"/>
+      <path fill="#202020" d="M260 222c-2 5 0 9 4 13c5 4 10 6 16 7s11 2 17 5c12 6 18 17 17 30c-1 12-6 19-20 23c0 0-1 0-1 1s1 1 1 1c3 0 6 0 9 0s5 2 5 5c1 7-2 12-9 11c-5 0-7 1-8 6c-1 9-6 13-15 13c-20 0-39 0-59 0c-5 0-9-2-10-7c-1-3-3-3-6-3c-2 0-4 0-5 0c-3 0-6-1-7-4s-3-3-6-3c-2 0-4 0-6 0c-3-1-4 0-5 3c-3 6-5 13-9 19s-9 5-12-1s-4-12-6-18c0-1 0-4-3-3c-3 0-7-2-9 3c-2 7-4 13-9 19c-4 6-8 5-11-1c-3-5-4-11-6-17c0-2 0-5-4-4c-3 0-7-2-9 3c-2 7-5 13-9 19s-9 5-12-1c-2-5-3-11-5-17c0-2 0-5-4-5c-3 1-7-1-8 4c-2 7-5 14-9 19c-2 5-6 4-9 0c-1-2-2-4-2-7c-1-5-2-11-1-16c0-3-2-3-4-2c-2 0-2 1-2 2c-2 4-3 4-6 2c-7-4-13-8-20-12c-4-2-4-3 0-5c6-5 13-9 19-13c4-3 5-3 7 1c2 5 5 3 8 3c3 1 3-2 3-4c3-8 6-17 11-25c1-4 3-7 8-7s6 4 8 8c0 1 1 2 1 4c2 6 4 13 5 20c0 1 0 3 3 3c2 0 3-1 3-3c3-7 6-14 10-21c3-3 5-6 10-6c4 1 6 4 8 8c2 6 3 12 5 18c0 1-1 4 2 4c4 1 4-1 5-4c2-6 5-12 9-18c2-4 5-7 10-6c4 0 6 4 7 7c3 6 4 12 5 17c1 2 0 4 3 4s3-1 4-3c3-7 5-14 10-21c2-3 4-6 9-5c4 0 6 3 8 7c3 6 4 13 5 21c3-5 8-4 12-4c3 0 5 0 6-4s4-7 9-8c0 0 1 0 2 0l31-1c0-2 2-7 8-8c0 0 1 0 1 0c4 0 8 0 11 0c6 1 9 3 10 8c1 1 2 2 3 3c5 2 8 5 9 10c1 3 2 3 4 2c9-4 12-16 7-25c-3-6-7-10-14-12c-2-1-5-2-8-3c-10-2-19-4-26-13c0 0 0 1 0 1l6-17zm-163 46c-3 1-5 4-7 7c-6 11-10 23-13 35c-2 9-3 17-2 26c0 1 1 3 2 5c2-26 7-51 20-73zm40 1c-1 0-2 0-3 1s-3 2-4 4c-11 19-17 39-15 61c0 1 0 3 1 4c0 1 0 1 1 2c2-31 11-62 20-72zm38-1c-2 0-3 1-5 3c-5 7-8 15-11 23c-4 13-6 25-6 38c0 4 1 6 2 8c3-25 6-50 20-72zm-118-5c-12 6-24 61-17 77c1-27 7-53 17-77zm169 20c-1 0-3-1-3 0c-2 2-3 3-3 5c1 2 3 1 4 1c7 0 14 0 21 0c3 0 6 0 7-4c1-1 2-1 4-2c-5 11-6 22-5 32c1 2 1 4 1 5c2 10 4 11 14 10c-1-3-4-5-7-5c-3 1-4 0-4-2c-2-10-2-20 0-30c0-2 0-3 2-3c4 1 7-1 9-5c0-1 1-1 3-2h-17c-8 0-17 0-26 0zm45 2c-2 0-4 1-5 3c-1 1-2 3-2 5c-1 10-2 20 0 30c1 2 1 3 3 5c-1-3-1-5 2-7c1 0 3 0 4 2s1 4-2 7c3-1 4-3 4-5c0-12 0-23 0-35c0-3-1-4-4-5zm-57-1c-6 6-7 37-1 44c-1-15-2-29 1-44zm-17 10c-8 3-8 22-2 26c-2-9-2-17 2-26zm-166 5c-2 0-3 0-4 2c-1 4-1 8 1 11c0 0 1 0 1 0c0-2 0-3-1-5c0-1 0-3 2-3c2-1 2-3 2-4c1-1-1-1-1-1zm-20 5c5 0 11 1 12-7c-4 2-8 5-12 7zm176-5c0-2-2-1-3-1c-3 0-8-1-9 4c3 0 6 0 9 0c2 1 3 0 3-3zm-34 0c0-2-2-1-3-1c-3 0-6 0-8 0c-3 0-5 1-5 4c4 0 9 0 13 0c2 0 3-1 3-3zm-78 0c0-2-2-1-3-1c-3 0-6 0-9 0s-4 1-4 4c4 0 9 0 13 0c2 0 3-1 3-3zm26-1c-2 0-2 2-3 4c4 0 9 0 13 0c3 0 3-2 4-4c-5 0-9 0-14 0zm155-15c0 0 0 0 0 0s0 0 0 0zm0-9c0 0-1 1-1 2s1 1 2 1c2 0 4 0 7 0c1 0 3 0 5 0c1 0 2 1 2-1c0-1-1-2-2-2c-4 0-8 0-13 0z"/>
+      <path fill="#202020" d="M476 219c42 0 72 29 81 43c8 13 22 48 12 85c-5 22-17 37-28 46c-1 0-2 0-2 1c-8 5-14 9-19 10h-31c-15 1-30 1-45 1c-5-2-11-5-17-9c0-1-1-1-2-2c0 0-1 0-1-1c-8-5-17-12-23-19c-7-9-12-18-15-29v-1c-1-6-4-19-4-33c1-18 7-34 18-49c1-1 1-3 3-5c0 0 0 0 0 0c1-3 3-6 7-10c2-1 3-3 4-5c13-11 33-23 62-23zm57 149c-1-2-2-2-3 0c-2 2-5 4-7 7c-1 1-1 1-1 3c0 5-1 9-3 14c0 0-1 1 0 2s1 0 2 0c6-2 11-6 15-9c2-1 2-3 1-4c0-5-2-9-4-13zm-129-5c4 8 10 14 17 19c4 2 9 0 14-3c-6-4-11-9-16-14c0-1-2-1-3-1c-4 0-8-1-12-1zm145-25c-2-2-3-2-4 1c0 0 0 1 0 1c-3 5-3 10 1 16c3 4 4 9 4 14c2-2 4-5 5-7c2-4 5-7 4-11c-2-6-5-11-10-14zm-77-67c-26 0-46 21-46 48s22 49 48 49c27-1 48-21 47-47c0-28-22-50-49-50zm-80 50c-1 8 0 15 2 21c1 3 10 7 13 7c1-1 1-1 1-2c-2-5-3-10-4-15c0-2-1-2-2-3c-3-2-6-4-10-8zm158-18c-3 0-4 0-3 4c0 2 0 5 1 7c0 1 0 3 2 3c5 5 11 10 14 17c2-7 2-13 2-19c0-1-1-1-1-2c-4-4-9-8-15-10zm-148-25c-4 6-6 12-7 19c-1 4 3 11 7 12c2 1 2 0 2-1c1-5 2-9 4-14c0-1 0-2-1-3c-2-4-4-8-5-13zm147-12c-1 2 1 4 1 6c-5-1-10-2-15-1c-5 2-5 2-2 5c0 1 0 1 0 1c3 5 7 8 13 9c6 0 11 4 15 8c-2-10-6-19-12-28zm-61-39c-36-5-65 10-80 38c2-2 3-4 4-5c1 0 1 0 1 0c1 4 1 9 3 13c1 2 2 3 5 0c4-4 8-9 6-16s1-11 7-14c3-2 7-4 11-6c-1 5-3 10-2 14c0 2 1 3 3 2c0 0 0 0 0 0c7-1 11-5 12-12c0 0 0 0 0 0c2-6 6-10 13-9c4 0 8-1 12 1c-4 3-7 6-9 10c-1 3 0 5 3 5c0 0 0 0 0 0c6 1 10 0 14-5c7-8 9-8 18-3c3 1 6 2 9 4c-5 2-9 3-12 7c-2 2-3 3 0 5c6 3 11 4 17 1c8-4 15 0 21 7c-2-14-31-33-56-37z"/>
+      <path fill="#202020" d="M679 320c4-76 74-111 133-80c0 0 0 0-1 0c19 10 48 38 47 91c0 19-17 57-49 69c-3 0-6 0-9 0c-19 1-38 2-56 2c-10-1-27-6-42-20c-2-3-5-5-7-8c-4-6-8-13-11-21c-2-6-5-18-5-33zm134 51c-2-1-4 3-7 4c-3 2-4 4-5 8c0 3-2 7-3 10c6 0 12-3 17-6c1-1 1-2 1-2c0-2 1-4 0-5c0-4 0-8-3-9zm-115-8c4 8 10 14 16 18c5 3 9 0 14-2c-6-4-11-9-16-14c-1-1-3-1-5-1c-3 0-6-1-9-1zm134-19c-1-2-2-2-3 0c-1 3-2 6-3 8c-1 1-1 3 0 4c3 6 5 12 4 20c6-5 9-10 12-16c0-1 1-2 0-3c-2-5-5-10-10-13zm-70-70c-24 0-44 20-44 45c0 27 20 47 46 47c25 0 44-20 44-45s-21-47-46-47zm-75 48c-1 8 0 15 2 21c2 4 7 5 11 6c2 0 1-1 1-3c-2-4-3-9-4-14c0-1 0-2-1-3c-3-2-6-4-9-7zm149-10c-3 0-3 0-3 2c0 6 0 11 6 14c4 3 6 8 9 13c2-7 3-13 3-19c0-2-3-2-4-4c-3-3-7-5-11-6zm-138-32c-10 10-10 23 0 30c1-6 2-11 4-16c1-1 1-2 0-3c-2-4-3-7-4-11zm138 2c-4-2-8-3-12-1c-2 0-3 1-2 3c2 2 3 5 4 7c1 1 2 2 3 2c7 2 13 5 19 11c-1-8-4-15-7-21c-1-2-3-1-5-2zm-115-31c-3 2-6 4-8 7c-5 5-5 12-1 17c1 1 2 1 3 0c2-2 4-5 6-7c1-1 1-2 1-3c-1-5-1-9-1-14zm92 1c0 0-1 0-2 0c-3 1-6 2-8 3c-6 4-6 4-1 9c4 3 7 4 12 2c5-1 11-1 17 2c-5-7-11-12-18-16zm-57-14c-5 0-10 1-15 3c-3 1-6 12-3 15c0 0 0 0 1 0c3 0 10-4 12-7c1-4 3-7 5-11zm23 1c-4-1-12 7-12 11c0 1 1 1 1 2c1 0 1 0 2 0c6 2 12 1 17-4c2-2 5-3 9-5c-6-2-12-4-17-4z"/>
+      <path fill="#202020" d="M644 348h-67c-5 19-21 37-28 44h49c25-5 43-31 46-44z"/>
+      <path fill="#202020" d="M613 50c7 0 14 0 21 3c15 6 30 11 45 17c0 0 1 0 2 0c0 0 1 1 1 1c2 2 5 7-1 12c-2 1-2 3-1 5c5 19 11 37 18 56c1 2 1 5 2 7l-14 2c2-1 3-3 2-5c-4-12-8-23-12-35c-3-8-6-16-9-25c-1-3-3-5-6-6c-8-3-15-6-23-9c-2-1-4-3-6-1c-3 2-1 5-1 7c4 17 7 33 11 50c5 26 9 52 14 78c0 1 0 3 2 5c0 0 0 0 0-1v1l3 21h-17c1-1 1-2 1-5c-3-24-8-48-13-72c-5-27-11-54-16-81c-2-7-2-8-10-7c-15 1-29 2-44 4c-6 0-6 0-6 6c-1 17-2 33-3 47c-1 19-1 35-2 51c0 4 0 7 3 9c-5-3-13-6-22-8c3 1 3-1 3-3c1-16 2-32 3-49c1-15 2-31 3-47c0-3-1-4-5-4c-9 1-18 2-27 3c-3 0-5 1-5 5c-5 31-10 62-16 93c0 3 0 4 4 4l-21 3c1 0 1-1 1-2c1-6 2-12 3-17c5-27 10-53 15-79c0-1 2-4-1-4c-2-1-5 0-6 3c-1 5-2 11-3 17c-5 26-10 52-15 78c-1 1-1 2-1 3s1 2 2 2c-5 1-11 3-14 5v-1c2 0 2-1 3-3c5-29 11-58 17-87c1-8 3-7-6-7c-2 0-3 0-5 0c-4-1-7-3-9-6c-5-11 0-21 11-23c1 0 2 0 3 0c0 0 1 0 1-1c5 0 8 2 10 3c1 1 2 1 4 1c18-4 36-5 54-6c26-3 52-5 78-8zm106 12c3 0 3 1 3 3c0 3-1 6-4 9c-4 3-5 8-4 13c0 1 0 2 1 2c7 1 6 5 6 10c1 16 1 32 1 49c0 1 0 2 1 3h-22c0 0 0 0 0 0c0-8-1-15-1-22c-1-14-1-29 0-43c0-13 6-21 19-24zm-245 13c-2-5-10-7-13-5c-3 3-2 6-2 9c1 3 4 2 6 2s3 0 5 0c3-1 5-3 4-6z"/>
+      <path fill="#202020" d="M909 336c-3 14-9 27-20 37l-1 1c-5 3-12 7-23 8c-9 0-17 1-26 1l15-24c0 0 0 0 0 0c15-5 26-24 22-38c-1-4-3-7-6-10c0 0 39 25 39 25z"/>
+      <path fill="#202020" d="M271 3c-4 8-12 30-16 42c0 0 0 0 0-1c-3 6-5 12-7 18c-4 10-8 20-12 30c-2 3-1 5 2 6c1 0 2 0 3 0c1 1 2 1 3 1l-3 12c0 0 0 0 0 0c0-3-1-3-2-4c-2 0-3-1-4 2c-4 15-8 30-13 45c0 0 0 0 0 1c0 2 2 1 4 2s2 0 3-1c0-1 0-2 0-2l-3 13c0-2-1-2-3-3c-3-1-3 2-3 3c-2 7-4 15-6 22c-1 2-1 3 1 4c-6 0-9 2-10 4v-1c0 0 0 0 0 0c2-1 3-2 3-4c3-9 5-18 8-27c0-1 1-2 0-3c-2-2-1-4 0-7c4-16 9-32 14-48c0-1 1-3-1-4c-3-4-3-8-1-12c9-25 19-50 30-74c2-6 7-11 13-14zm-54 189c0 1 0 1 0 1s-1 0-1 0s1 0 1-1z"/>
+      <path fill="#202020" d="M775 131c1 1 2 1 3 1c2 0 5 2 7 3c29 15 58 30 88 45c1 0 2 1 4 1c1-1 2-1 3-1c-5 2-15 10-11 22c1 2 2 4 5 8c2 2 5 18 8 33c-1-2-2-4-5-6c-29-19-58-39-87-59c-3-2-5-4-9-6c1 1 1 3 1 4l-3-33c-1-5-1-9-4-12zm12 14c-3-2-4-2-4 2c0 3 2 3 3 4c20 10 41 21 61 31c6 3 11 6 17 9c1 0 3 2 4-1c1-2 1-3-1-5c-14-7-28-14-42-21c-13-6-25-13-38-19z"/>
+      <path fill="#ea5820" d="M430 459c-157 0-188-7-221-24l60 5l116-11h92l175-5h98l70 5l138-8l57 14h38c-50 25-427 24-623 24z"/>
+    </symbol>
   </defs>
 </svg>
 
@@ -432,80 +374,16 @@
   <section class="error-hero">
     <div class="container">
       <div class="error-content">
-        <div class="error-number">
-          <span class="digit">4</span>
-          
-          <div aria-hidden="true" class="bearing-zero">
-            <svg class="bearing-art" viewBox="0 0 240 240" role="img" aria-label="Детализированный вращающийся шарикоподшипник" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="bearingOuter" x1="22" y1="24" x2="208" y2="220" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#7186aa"/><stop offset=".2" stop-color="#243b63"/><stop offset=".48" stop-color="#0d1b32"/><stop offset=".72" stop-color="#30496f"/><stop offset="1" stop-color="#0b172b"/>
-                </linearGradient>
-                <linearGradient id="bearingOuterFace" x1="47" y1="38" x2="193" y2="203" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#f9fbff" stop-opacity=".92"/><stop offset=".22" stop-color="#c9d5e5" stop-opacity=".74"/><stop offset=".48" stop-color="#536783" stop-opacity=".92"/><stop offset=".78" stop-color="#172941"/><stop offset="1" stop-color="#607693"/>
-                </linearGradient>
-                <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1">
-                  <stop stop-color="#fff"/><stop offset=".18" stop-color="#e8eef5"/><stop offset=".44" stop-color="#8fa1b7"/><stop offset=".68" stop-color="#f4f7fb"/><stop offset="1" stop-color="#72859d"/>
-                </linearGradient>
-                <linearGradient id="raceway" x1="44" y1="42" x2="194" y2="202" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#314969"/><stop offset=".45" stop-color="#0c1a30"/><stop offset=".72" stop-color="#243b5c"/><stop offset="1" stop-color="#0a172b"/>
-                </linearGradient>
-                <radialGradient id="bearingCore" cx="0" cy="0" r="1" gradientTransform="matrix(0 63 -63 0 120 112)" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#263e61"/><stop offset=".7" stop-color="#142742"/><stop offset="1" stop-color="#09172b"/>
-                </radialGradient>
-                <radialGradient id="ballShine" cx="0" cy="0" r="1" gradientTransform="matrix(10 14 -14 10 0 0)" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#fff"/><stop offset=".2" stop-color="#f5f8fc"/><stop offset=".55" stop-color="#9eafc3"/><stop offset=".82" stop-color="#e7edf4"/><stop offset="1" stop-color="#657992"/>
-                </radialGradient>
-                <filter id="bearingShadow" x="4" y="8" width="238" height="238" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
-                  <feGaussianBlur in="SourceAlpha" stdDeviation="7"/><feOffset dy="8"/><feComponentTransfer><feFuncA type="linear" slope=".32"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-                <filter id="ballShadow" x="-30%" y="-30%" width="160%" height="170%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceAlpha" stdDeviation="2.2"/><feOffset dy="2"/><feComponentTransfer><feFuncA type="linear" slope=".55"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                <pattern id="microGrooves" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0v4" stroke="#fff" stroke-opacity=".13" stroke-width="1"/></pattern>
-              </defs>
-              <ellipse cx="120" cy="216" rx="76" ry="12" fill="#1e2f4f" opacity=".14"/>
-              <g filter="url(#bearingShadow)">
-                <!-- Outer housing: layered chamfered steel races -->
-                <circle cx="120" cy="112" r="96" fill="url(#bearingOuter)"/>
-                <circle cx="120" cy="112" r="89" fill="url(#bearingOuterFace)" stroke="#fff" stroke-opacity=".55" stroke-width="1.5"/>
-                <circle cx="120" cy="112" r="80" fill="url(#raceway)" stroke="#071326" stroke-width="2"/>
-                <circle cx="120" cy="112" r="76" fill="none" stroke="#9eafc4" stroke-opacity=".45" stroke-width="1.4"/>
-                <circle cx="120" cy="112" r="71" fill="none" stroke="#ea5820" stroke-opacity=".92" stroke-width="2"/>
-                <circle cx="120" cy="112" r="94" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="1.2"/>
-                <circle cx="120" cy="112" r="85" fill="none" stroke="url(#microGrooves)" stroke-width="11" opacity=".52"/>
-                <!-- Inner raceway and precision ball cage -->
-                <circle cx="120" cy="112" r="56" fill="url(#bearingCore)" stroke="#8ea1b9" stroke-opacity=".72" stroke-width="2"/>
-                <circle cx="120" cy="112" r="50" fill="none" stroke="#050f20" stroke-width="5"/>
-                <circle cx="120" cy="112" r="44" fill="url(#steel)" stroke="#f8fbff" stroke-opacity=".8" stroke-width="1.5"/>
-                <circle cx="120" cy="112" r="37" fill="#132844" stroke="#07172c" stroke-width="3"/>
-                <circle cx="120" cy="112" r="32" fill="none" stroke="#ea5820" stroke-opacity=".85" stroke-width="1.5"/>
-                <circle cx="120" cy="112" r="26" fill="url(#bearingCore)" stroke="#607692" stroke-width="1.5"/>
-                <circle cx="120" cy="112" r="19" fill="#0a192d" stroke="#aebdd0" stroke-opacity=".75" stroke-width="3"/>
-                <circle cx="120" cy="112" r="12" fill="#f5f7fa" stroke="#71839b" stroke-width="2"/>
-                <circle cx="120" cy="112" r="6" fill="#233b5d"/>
-                <!-- Rolling elements, individually shaded -->
-                <g class="bearing-rotor" filter="url(#ballShadow)">
-                  <g fill="url(#ballShine)" stroke="#526780" stroke-width="1.2">
-                    <circle cx="120" cy="42" r="11"/><circle cx="169.5" cy="62.5" r="11"/>
-                    <circle cx="190" cy="112" r="11"/><circle cx="169.5" cy="161.5" r="11"/>
-                    <circle cx="120" cy="182" r="11"/><circle cx="70.5" cy="161.5" r="11"/>
-                    <circle cx="50" cy="112" r="11"/><circle cx="70.5" cy="62.5" r="11"/>
-                  </g>
-                  <g fill="#fff" opacity=".92">
-                    <ellipse cx="116.5" cy="38.5" rx="3.4" ry="2.2"/><ellipse cx="166" cy="59" rx="3.4" ry="2.2"/>
-                    <ellipse cx="186.5" cy="108.5" rx="3.4" ry="2.2"/><ellipse cx="166" cy="158" rx="3.4" ry="2.2"/>
-                    <ellipse cx="116.5" cy="178.5" rx="3.4" ry="2.2"/><ellipse cx="67" cy="158" rx="3.4" ry="2.2"/>
-                    <ellipse cx="46.5" cy="108.5" rx="3.4" ry="2.2"/><ellipse cx="67" cy="59" rx="3.4" ry="2.2"/>
-                  </g>
-                </g>
-                <!-- Fine engineering marks and highlights -->
-                <circle cx="120" cy="112" r="66" fill="none" stroke="#dce5ef" stroke-opacity=".45" stroke-dasharray="1 5" stroke-width="1"/>
-                <path d="M58 55a88 88 0 0 1 108-17" fill="none" stroke="#fff" stroke-linecap="round" stroke-opacity=".65" stroke-width="2"/>
-                <path d="M181 168a88 88 0 0 1-108 17" fill="none" stroke="#071326" stroke-linecap="round" stroke-opacity=".55" stroke-width="2"/>
-              </g>
-            </svg>
-          </div>
+        
+        <div class="error-title-wrap">
+          <div class="error-number">
+            <span class="digit">4</span>
+            
+            <!-- 3D Подшипник с правильной структурой -->
+            <div class="bearing-container" id="bearing3d" aria-hidden="true"></div>
 
-          <span class="digit">4</span>
+            <span class="digit">4</span>
+          </div>
         </div>
 
         <div class="error-badge">Маршрут не найден</div>
@@ -526,39 +404,62 @@
           </a>
         </div>
 
+        <!-- Карточки с анимированными иконками -->
         <div class="quick-nav">
-          <a class="quick-card" href="index.html#catalog">
-            <div>
-              <div class="quick-card-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-              </div>
-              <div class="quick-card-title">Импортная сельхозтехника</div>
-              <div class="quick-card-desc">Оригиналы и проверенные аналоги для John Deere, Claas, New Holland, Case IH, JCB, Lemken.</div>
+          <!-- Карточка 1 -->
+          <div class="sap-card-base">
+            <div class="card-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <g class="icon-gear">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </g>
+              </svg>
             </div>
-            <span class="quick-card-link">Выбрать запчасти →</span>
-          </a>
+            <div class="quick-card-title">Импортная сельхозтехника</div>
+            <div class="quick-card-desc">Оригиналы и проверенные аналоги для John Deere, Claas, New Holland, Case IH, JCB, Lemken.</div>
+            <a href="index.html#catalog" class="card-cta">Выбрать запчасти <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
 
-          <a class="quick-card" href="index.html#brands">
-            <div>
-              <div class="quick-card-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"/><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"/><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"/><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"/></svg>
-              </div>
-              <div class="quick-card-title">Подшипники и узлы</div>
-              <div class="quick-card-desc">Продукция SKF, FAG, Koyo, NSK, Timken, NTN. Корпусные подшипники UCFL, UCP.</div>
+          <!-- Карточка 2 -->
+          <div class="sap-card-base">
+            <div class="card-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <rect x="1.2" y="1.2" width="21.6" height="21.6" rx="6.5" stroke-width="1.5"></rect>
+                <circle cx="4.3" cy="4.3" r="0.9" stroke-width="1.1"></circle>
+                <circle cx="19.7" cy="4.3" r="0.9" stroke-width="1.1"></circle>
+                <circle cx="4.3" cy="19.7" r="0.9" stroke-width="1.1"></circle>
+                <circle cx="19.7" cy="19.7" r="0.9" stroke-width="1.1"></circle>
+                <circle cx="12" cy="12" r="7.6" stroke-width="1.7"></circle>
+                <circle cx="12" cy="12" r="3.3" stroke-width="1.7"></circle>
+                <g class="icon-brg-cage" fill="currentColor" stroke="none">
+                  <circle cx="12.00" cy="6.55" r="1.05"></circle>
+                  <circle cx="15.85" cy="8.15" r="1.05"></circle>
+                  <circle cx="17.45" cy="12.00" r="1.05"></circle>
+                  <circle cx="15.85" cy="15.85" r="1.05"></circle>
+                  <circle cx="12.00" cy="17.45" r="1.05"></circle>
+                  <circle cx="8.15" cy="15.85" r="1.05"></circle>
+                  <circle cx="6.55" cy="12.00" r="1.05"></circle>
+                  <circle cx="8.15" cy="8.15" r="1.05"></circle>
+                </g>
+              </svg>
             </div>
-            <span class="quick-card-link">Смотреть бренды →</span>
-          </a>
+            <div class="quick-card-title">Подшипники и узлы</div>
+            <div class="quick-card-desc">Продукция SKF, FAG, Koyo, NSK, Timken, NTN. Корпусные подшипники UCFL, UCP.</div>
+            <a href="index.html#brands" class="card-cta">Смотреть бренды <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
 
-          <a class="quick-card" href="index.html#contacts">
-            <div>
-              <div class="quick-card-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              </div>
-              <div class="quick-card-title">Подбор по фото или VIN</div>
-              <div class="quick-card-desc">Отправьте фото узла, шильдика или маркировки в WhatsApp или Telegram — найдём за 60 минут.</div>
+          <!-- Карточка 3 -->
+          <div class="sap-card-base">
+            <div class="card-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path class="icon-drop" d="M12 22a7 7 0 0 0 7-7c0-4.3-7-13-7-13S5 10.7 5 15a7 7 0 0 0 7 7z" fill="rgba(30, 47, 79, 0.08)"></path>
+              </svg>
             </div>
-            <span class="quick-card-link">Связаться с нами →</span>
-          </a>
+            <div class="quick-card-title">Масла и смазки</div>
+            <div class="quick-card-desc">Моторные, трансмиссионные и гидравлические масла от ведущих производителей. Подберем нужную вязкость.</div>
+            <a href="index.html#catalog" class="card-cta">Перейти к маслам <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
         </div>
 
       </div>
@@ -605,6 +506,7 @@
 </div>
 
 <script>
+  // ===== 1. Бургер-меню =====
   const burgerBtn = document.getElementById('burgerBtn');
   const mainNav = document.getElementById('mainNav');
   if (burgerBtn && mainNav) {
@@ -614,6 +516,7 @@
     });
   }
 
+  // ===== 2. Мессенджеры =====
   const msgBtn = document.getElementById('sapMessengersBtn');
   const msgList = document.getElementById('sapMessengersList');
   if (msgBtn && msgList) {
@@ -634,6 +537,634 @@
       }
     });
   }
+
+  // ===== 3. Плавная анимация иконок =====
+  (function() {
+    if (typeof Element.prototype.animate !== 'function') return;
+
+    const spin = [{ transform: 'rotate(0deg)' }, { transform: 'rotate(360deg)' }];
+    const drop = [
+      { offset: 0,    transform: 'translateY(0) scaleY(1)',      opacity: 1, easing: 'ease-in-out' },
+      { offset: 0.4,  transform: 'translateY(2px) scaleY(0.9)',                easing: 'ease-in-out' },
+      { offset: 0.7,  transform: 'translateY(14px) scaleY(1.1)', opacity: 0, easing: 'ease-in-out' },
+      { offset: 0.71, transform: 'translateY(-10px)',            opacity: 0, easing: 'ease-in-out' },
+      { offset: 1,    transform: 'translateY(0) scaleY(1)',      opacity: 1 }
+    ];
+
+    const SPECS = [
+      { sel: '.icon-gear', frames: spin, duration: 7000, hold: true },
+      { sel: '.icon-brg-cage', frames: spin, duration: 6000, hold: true },
+      { sel: '.icon-drop', frames: drop, duration: 2200 }
+    ];
+
+    const IN_MS = 1000, OUT_MS = 1600;
+    const easeInOut = p => p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+    
+    const running = new Set();
+    let raf = 0;
+    function tick(now) {
+      raf = 0;
+      running.forEach(h => { if (h.step(now) === false) running.delete(h); });
+      if (running.size) raf = requestAnimationFrame(tick);
+    }
+    function schedule(h) {
+      running.add(h);
+      if (!raf) raf = requestAnimationFrame(tick);
+    }
+
+    class Fx {
+      constructor(el, spec) {
+        this.el = el; this.s = spec;
+        this.anim = null; this.rate = 0; this.phase = 'idle';
+        this.t0 = 0; this.r0 = 0; this.it0 = -1;
+      }
+      setRate(r) { this.rate = r; this.anim.playbackRate = r; }
+      go(phase) { this.phase = phase; this.t0 = performance.now(); this.r0 = this.rate; schedule(this); }
+      start() {
+        if (this.phase === 'up' || this.phase === 'run') return;
+        const s = this.s;
+        if (!this.anim) {
+          this.anim = this.el.animate(s.frames, {
+            duration: s.duration, iterations: Infinity, easing: 'linear'
+          });
+          this.setRate(0);
+        } else if (this.anim.playState === 'paused') {
+          this.anim.play();
+        }
+        this.go('up');
+      }
+      stop() {
+        if (!this.anim || this.phase === 'down' || this.phase === 'finish' || this.phase === 'held') return;
+        if (this.s.hold) {
+          this.go('down');
+        } else {
+          const it = this.anim.effect.getComputedTiming().currentIteration;
+          this.it0 = it === null ? 0 : it;
+          this.go('finish');
+        }
+      }
+      step(now) {
+        const a = this.anim, s = this.s;
+        if (!a) return false;
+        const since = Math.max(0, now - this.t0);
+
+        if (this.phase === 'up') {
+          const p = Math.min(1, since / IN_MS);
+          this.setRate(this.r0 + (1 - this.r0) * easeInOut(p));
+          if (p >= 1) { this.phase = 'run'; return false; }
+        } else if (this.phase === 'down') {
+          const p = Math.min(1, since / OUT_MS);
+          this.setRate(this.r0 * (1 - p) * (1 - p));
+          if (p >= 1) { this.setRate(0); a.pause(); this.phase = 'held'; return false; }
+        } else if (this.phase === 'finish') {
+          const p = Math.min(1, since / 500);
+          this.setRate(this.r0 + (1 - this.r0) * easeInOut(p));
+          const it = a.effect.getComputedTiming().currentIteration;
+          if (it !== null && it > this.it0) {
+            a.cancel(); this.anim = null; this.rate = 0; this.phase = 'idle';
+            return false;
+          }
+        }
+        return true;
+      }
+    }
+
+    document.querySelectorAll('.sap-card-base').forEach(card => {
+      const fx = [];
+      SPECS.forEach(spec => card.querySelectorAll(spec.sel).forEach(el => fx.push(new Fx(el, spec))));
+      let fogTimer = 0;
+      
+      card.addEventListener('pointerenter', () => {
+        clearTimeout(fogTimer);
+        card.classList.add('is-lift', 'fog-run');
+        fx.forEach(f => f.start());
+      });
+      
+      card.addEventListener('pointerleave', () => {
+        card.classList.remove('fog-on'); 
+        fx.forEach(f => f.stop());
+        
+        if (card.classList.contains('fog-run')) {
+          fogTimer = setTimeout(() => {
+            card.classList.remove('fog-run', 'is-lift');
+          }, 4500); 
+        } else {
+          card.classList.remove('is-lift');
+        }
+      });
+    });
+  })();
+
+  // ===== 4. Премиальный 3D-подшипник САП (увеличенный масштаб, читаемые гравировки, оранжевый акцент) =====
+  (function() {
+    const container = document.getElementById('bearing3d');
+    if (!container) return;
+
+    // Мягкая динамическая тень под подшипником с легким оранжевым отражением
+    const shadowEl = document.createElement('div');
+    shadowEl.className = 'bearing-shadow-radial';
+    container.appendChild(shadowEl);
+
+    const canvas = document.createElement('canvas');
+    canvas.setAttribute('aria-label', '3D модель шарикоподшипника САП 6208');
+    container.appendChild(canvas);
+
+    // 1. Ультрачеткая текстура лазерной маркировки на торцевых гранях (2048x2048)
+    function createFaceEngravingTexture() {
+      const size = 2048;
+      const cv = document.createElement('canvas');
+      cv.width = size; cv.height = size;
+      const ctx = cv.getContext('2d');
+
+      const cx = size / 2, cy = size / 2;
+      const r = size * 0.442;
+
+      ctx.save();
+      ctx.translate(cx, cy);
+
+      // Крупный, высококонтрастный текст гравировки
+      const text = "★ САП • СПЕЦАГРОПАРТНЕР ★ 6208-2RS / C3 ★ РЯЗАНЬ • since 2024 ★ 404 NOT FOUND ";
+      const totalChars = text.length;
+      ctx.font = '800 76px "Geologica Local", "Arial Black", Arial, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+
+      for (let i = 0; i < totalChars; i++) {
+        const char = text[i];
+        const angle = (i / totalChars) * Math.PI * 2 - Math.PI / 2;
+        ctx.save();
+        ctx.rotate(angle);
+        ctx.translate(0, -r);
+
+        // Лазерное тиснение: темная гравировка с легким оранжево-стальным свечением
+        ctx.fillStyle = '#0a1628';
+        ctx.fillText(char, 0, 0);
+
+        // Тонкий оранжевый акцент на звёздочках и артикуле
+        if (char === '★' || text.slice(Math.max(0, i-3), i+4).includes('6208')) {
+          ctx.strokeStyle = 'rgba(234, 88, 32, 0.75)';
+          ctx.lineWidth = 3;
+          ctx.strokeText(char, 0, 0);
+        } else {
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+          ctx.lineWidth = 2;
+          ctx.strokeText(char, 0, 0);
+        }
+
+        ctx.restore();
+      }
+
+      ctx.restore();
+
+      // Концентрические фасочные полосы для точности
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+      ctx.lineWidth = 6;
+      ctx.beginPath();
+      ctx.arc(cx, cy, size * 0.488, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.strokeStyle = 'rgba(234, 88, 32, 0.45)';
+      ctx.lineWidth = 5;
+      ctx.beginPath();
+      ctx.arc(cx, cy, size * 0.402, 0, Math.PI * 2);
+      ctx.stroke();
+
+      const texture = new THREE.CanvasTexture(cv);
+      texture.anisotropy = 8;
+      return texture;
+    }
+
+    // 3. Процедурная студийная карта отражений с выраженным фирменным оранжевым акцентом САП
+    function createStudioEnvMap() {
+      const cv = document.createElement('canvas');
+      cv.width = 512; cv.height = 256;
+      const ctx = cv.getContext('2d');
+
+      // Глубокий градиент окружения
+      const grad = ctx.createLinearGradient(0, 0, 0, 256);
+      grad.addColorStop(0, '#ffffff');
+      grad.addColorStop(0.28, '#dce6f2');
+      grad.addColorStop(0.5, '#6a85a4');
+      grad.addColorStop(0.72, '#182b47');
+      grad.addColorStop(1, '#091526');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 512, 256);
+
+      // Верхний яркий софтбокс (чистый белый зеркальный блик на полировке)
+      const softbox = ctx.createRadialGradient(256, 36, 10, 256, 36, 140);
+      softbox.addColorStop(0, '#ffffff');
+      softbox.addColorStop(0.6, 'rgba(255,255,255,0.9)');
+      softbox.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = softbox;
+      ctx.fillRect(0, 0, 512, 160);
+
+      // Яркий оранжевый рефлектор САП (#ea5820)
+      const orangeRef = ctx.createRadialGradient(420, 130, 10, 420, 130, 130);
+      orangeRef.addColorStop(0, 'rgba(234, 88, 32, 0.95)');
+      orangeRef.addColorStop(0.5, 'rgba(234, 88, 32, 0.5)');
+      orangeRef.addColorStop(1, 'rgba(234, 88, 32, 0)');
+      ctx.fillStyle = orangeRef;
+      ctx.fillRect(280, 20, 232, 220);
+
+      // Второй теплый контурный блик
+      const warmBack = ctx.createRadialGradient(100, 180, 5, 100, 180, 90);
+      warmBack.addColorStop(0, 'rgba(255, 130, 60, 0.65)');
+      warmBack.addColorStop(1, 'rgba(255, 130, 60, 0)');
+      ctx.fillStyle = warmBack;
+      ctx.fillRect(0, 90, 200, 160);
+
+      const texture = new THREE.CanvasTexture(cv);
+      texture.mapping = THREE.EquirectangularReflectionMapping;
+      return texture;
+    }
+
+    function initThreeBearing() {
+      const rect = container.getBoundingClientRect();
+      const width = rect.width || 180;
+      const height = rect.height || 180;
+
+      const renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        alpha: true,
+        antialias: true,
+        powerPreference: 'high-performance'
+      });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setSize(width, height, false);
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.25;
+
+      const scene = new THREE.Scene();
+
+      // Камера ближе для крупного плана деталей и читаемости гравировок
+      const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 50);
+      camera.position.set(0, 0, 7.8);
+
+      const envMap = createStudioEnvMap();
+      scene.environment = envMap;
+
+      // Источники освещения
+      const ambient = new THREE.AmbientLight(0xffffff, 0.95);
+      scene.add(ambient);
+
+      // Направленный свет
+      const keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
+      keyLight.position.set(4, 6, 6);
+      scene.add(keyLight);
+
+      // Холодный заполняющий свет
+      const fillLight = new THREE.DirectionalLight(0xaad0f5, 0.9);
+      fillLight.position.set(-5, -2, 4);
+      scene.add(fillLight);
+
+      // Фирменный оранжевый акцентный свет САП (#ea5820)
+      const orangeLight = new THREE.PointLight(0xea5820, 3.8, 16);
+      orangeLight.position.set(3.8, -2.6, 4.2);
+      scene.add(orangeLight);
+
+      const orangeBackLight = new THREE.DirectionalLight(0xea5820, 1.4);
+      orangeBackLight.position.set(-4, 3, -3);
+      scene.add(orangeBackLight);
+
+      // Материалы
+      const steelMaterial = new THREE.MeshStandardMaterial({
+        color: 0xe6eef7,
+        metalness: 0.96,
+        roughness: 0.14,
+        envMapIntensity: 1.4
+      });
+
+      // Зеркально полированные шарики
+      const ballMaterial = new THREE.MeshStandardMaterial({
+        color: 0xf8fbfe,
+        metalness: 0.99,
+        roughness: 0.03,
+        envMapIntensity: 1.8
+      });
+
+      // Латунный сепаратор
+      const brassCageMaterial = new THREE.MeshStandardMaterial({
+        color: 0xdca842,
+        metalness: 0.90,
+        roughness: 0.22,
+        envMapIntensity: 1.2
+      });
+
+      // Фирменное оранжевое уплотнительное кольцо 2RS (САП Оранжевый)
+      const orangeSealMaterial = new THREE.MeshStandardMaterial({
+        color: 0xea5820,
+        metalness: 0.35,
+        roughness: 0.38,
+        envMapIntensity: 0.9
+      });
+
+      // Лазерная гравировка на торцах
+      const engravingTexture = createFaceEngravingTexture();
+      const faceDecalMaterial = new THREE.MeshBasicMaterial({
+        map: engravingTexture,
+        transparent: true,
+        opacity: 0.92,
+        depthWrite: false
+      });
+
+      // Главный узел
+      const rootGroup = new THREE.Group();
+      scene.add(rootGroup);
+
+      // Узел наклона: перспектива для демонстрации 3D-объема
+      const tiltGroup = new THREE.Group();
+      tiltGroup.rotation.x = 0.15;
+      tiltGroup.rotation.z = -0.05;
+      tiltGroup.position.y = 0.08;
+      rootGroup.add(tiltGroup);
+
+      // Узел монетного вращения вокруг вертикальной оси Y с постоянной скоростью
+      const spinGroup = new THREE.Group();
+      tiltGroup.add(spinGroup);
+
+      // Сборка подшипника
+      const bearingAssembly = new THREE.Group();
+      bearingAssembly.rotation.x = Math.PI / 2;
+      spinGroup.add(bearingAssembly);
+
+      // --- 1. ВНЕШНЕЕ КОЛЬЦО ---
+      const outerProfile = [
+        new THREE.Vector2(1.54,  0.38),
+        new THREE.Vector2(1.94,  0.38),
+        new THREE.Vector2(2.00,  0.32),
+        new THREE.Vector2(2.00, -0.32),
+        new THREE.Vector2(1.94, -0.38),
+        new THREE.Vector2(1.54, -0.38),
+        new THREE.Vector2(1.54, -0.24),
+        new THREE.Vector2(1.42,  0.00),
+        new THREE.Vector2(1.54,  0.24),
+        new THREE.Vector2(1.54,  0.38)
+      ];
+      const outerGeo = new THREE.LatheGeometry(outerProfile, 72);
+      const outerMesh = new THREE.Mesh(outerGeo, steelMaterial);
+      bearingAssembly.add(outerMesh);
+      // Наружная обойма без надписей — шлифованная подшипниковая сталь
+
+      // --- 2. ВНУТРЕННЕЕ КОЛЬЦО ---
+      const innerProfile = [
+        new THREE.Vector2(0.80,  0.38),
+        new THREE.Vector2(0.74,  0.32),
+        new THREE.Vector2(0.74, -0.32),
+        new THREE.Vector2(0.80, -0.38),
+        new THREE.Vector2(1.18, -0.38),
+        new THREE.Vector2(1.18, -0.24),
+        new THREE.Vector2(1.30,  0.00),
+        new THREE.Vector2(1.18,  0.24),
+        new THREE.Vector2(1.18,  0.38),
+        new THREE.Vector2(0.80,  0.38)
+      ];
+      const innerGeo = new THREE.LatheGeometry(innerProfile, 72);
+      const innerMesh = new THREE.Mesh(innerGeo, steelMaterial);
+      bearingAssembly.add(innerMesh);
+
+      // Внутренняя оранжевая акцентная канавка САП
+      const orangeBoreRingGeo = new THREE.TorusGeometry(0.76, 0.035, 14, 64);
+      const orangeBoreMesh = new THREE.Mesh(orangeBoreRingGeo, orangeSealMaterial);
+      orangeBoreMesh.rotation.x = Math.PI / 2;
+      orangeBoreMesh.position.y = 0.38;
+      bearingAssembly.add(orangeBoreMesh);
+
+      // --- 3. ШАРИКИ (8 хромированных сфер) ---
+      const ballsGroup = new THREE.Group();
+      bearingAssembly.add(ballsGroup);
+
+      const NUM_BALLS = 8;
+      const BALL_RADIUS = 0.29;
+      const TRACK_RADIUS = 1.36;
+      const ballGeo = new THREE.SphereGeometry(BALL_RADIUS, 32, 24);
+
+      for (let i = 0; i < NUM_BALLS; i++) {
+        const angle = (i / NUM_BALLS) * Math.PI * 2;
+        const ball = new THREE.Mesh(ballGeo, ballMaterial);
+        ball.position.set(
+          Math.cos(angle) * TRACK_RADIUS,
+          0,
+          Math.sin(angle) * TRACK_RADIUS
+        );
+        ballsGroup.add(ball);
+      }
+
+      // --- 4. ЛАТУННЫЙ СЕПАРАТОР С ОРАНЖЕВЫМИ ЭЛЕМЕНТАМИ ЗАЩИТЫ ---
+      const cageGroup = new THREE.Group();
+      bearingAssembly.add(cageGroup);
+
+      // Латунные кольца
+      const cageRingGeo = new THREE.TorusGeometry(TRACK_RADIUS, 0.045, 16, 64);
+      const cageFront = new THREE.Mesh(cageRingGeo, brassCageMaterial);
+      cageFront.rotation.x = Math.PI / 2;
+      cageFront.position.y = 0.17;
+      cageGroup.add(cageFront);
+
+      const cageBack = new THREE.Mesh(cageRingGeo, brassCageMaterial);
+      cageBack.rotation.x = Math.PI / 2;
+      cageBack.position.y = -0.17;
+      cageGroup.add(cageBack);
+
+      // Заклёпки
+      const rivetGeo = new THREE.CylinderGeometry(0.038, 0.038, 0.36, 12);
+      for (let i = 0; i < NUM_BALLS; i++) {
+        const angle = ((i + 0.5) / NUM_BALLS) * Math.PI * 2;
+        const rivet = new THREE.Mesh(rivetGeo, brassCageMaterial);
+        rivet.position.set(
+          Math.cos(angle) * TRACK_RADIUS,
+          0,
+          Math.sin(angle) * TRACK_RADIUS
+        );
+        cageGroup.add(rivet);
+      }
+
+      // Оранжевый акцентный пыльник по внутреннему контуру обоймы
+      const orangeSealGeo = new THREE.TorusGeometry(1.49, 0.055, 16, 72);
+      const orangeSealFront = new THREE.Mesh(orangeSealGeo, orangeSealMaterial);
+      orangeSealFront.rotation.x = Math.PI / 2;
+      orangeSealFront.position.y = 0.365;
+      bearingAssembly.add(orangeSealFront);
+
+      const orangeSealBack = new THREE.Mesh(orangeSealGeo, orangeSealMaterial);
+      orangeSealBack.rotation.x = Math.PI / 2;
+      orangeSealBack.position.y = -0.365;
+      bearingAssembly.add(orangeSealBack);
+
+      // --- 5. КРУПНАЯ ЛАЗЕРНАЯ ГРАВИРОВКА НА ТОРЦАХ ---
+      const decalGeo = new THREE.RingGeometry(1.54, 1.99, 64);
+      // Передний торец
+      const decalFront = new THREE.Mesh(decalGeo, faceDecalMaterial);
+      decalFront.rotation.x = -Math.PI / 2;
+      decalFront.position.y = 0.383;
+      bearingAssembly.add(decalFront);
+
+      // Задний торец
+      const decalBack = new THREE.Mesh(decalGeo, faceDecalMaterial);
+      decalBack.rotation.x = Math.PI / 2;
+      decalBack.position.y = -0.383;
+      bearingAssembly.add(decalBack);
+
+      // --- 6. МОНЕТНОЕ ВРАЩЕНИЕ С ПОСТОЯННОЙ СКОРОСТЬЮ ---
+      const SPIN_SPEED = 0.016; // Постоянная линейная скорость
+      let targetTiltX = 0.15, targetTiltZ = -0.05;
+
+      // Мягкая реакция на перемещение курсора
+      container.addEventListener('pointermove', (e) => {
+        const b = container.getBoundingClientRect();
+        const nx = ((e.clientX - b.left) / b.width) * 2 - 1;
+        const ny = ((e.clientY - b.top) / b.height) * 2 - 1;
+        targetTiltX = 0.15 + ny * 0.24;
+        targetTiltZ = -0.05 - nx * 0.20;
+      });
+
+      container.addEventListener('pointerleave', () => {
+        targetTiltX = 0.15;
+        targetTiltZ = -0.05;
+      });
+
+      // Возможность покрутить вручную
+      let isDragging = false, prevPointerX = 0;
+      container.addEventListener('pointerdown', (e) => {
+        isDragging = true;
+        prevPointerX = e.clientX;
+        container.setPointerCapture(e.pointerId);
+      });
+      container.addEventListener('pointerup', (e) => {
+        isDragging = false;
+        try { container.releasePointerCapture(e.pointerId); } catch(err){}
+      });
+      container.addEventListener('pointercancel', () => { isDragging = false; });
+      container.addEventListener('pointermove', (e) => {
+        if (!isDragging) return;
+        const dx = e.clientX - prevPointerX;
+        spinGroup.rotation.y += dx * 0.02;
+        prevPointerX = e.clientX;
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        // Постоянное линейное монетное вращение вокруг оси Y
+        spinGroup.rotation.y += SPIN_SPEED;
+
+        // Вращение шариков и сепаратора в дорожке качения
+        ballsGroup.rotation.y += SPIN_SPEED * 0.42;
+        cageGroup.rotation.y += SPIN_SPEED * 0.42;
+
+        // Следование наклона за курсором
+        tiltGroup.rotation.x += (targetTiltX - tiltGroup.rotation.x) * 0.07;
+        tiltGroup.rotation.z += (targetTiltZ - tiltGroup.rotation.z) * 0.07;
+
+        // Динамическая тень на полу
+        const cosAngle = Math.abs(Math.cos(spinGroup.rotation.y));
+        const shadowScaleX = 0.55 + 0.45 * cosAngle;
+        const shadowOpacity = 0.24 + 0.16 * cosAngle;
+        shadowEl.style.transform = `translateX(-50%) scaleX(${shadowScaleX})`;
+        shadowEl.style.opacity = shadowOpacity;
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      const ro = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          const w = entry.contentRect.width;
+          const h = entry.contentRect.height;
+          if (w > 0 && h > 0) {
+            renderer.setSize(w, h, false);
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+          }
+        }
+      });
+      ro.observe(container);
+    }
+
+    // Резервный Canvas 2D
+    function initFallbackCanvas() {
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      let rot = 0;
+      function render() {
+        const w = container.clientWidth || 180;
+        const h = container.clientHeight || 180;
+        if (canvas.width !== w || canvas.height !== h) {
+          canvas.width = w; canvas.height = h;
+        }
+        ctx.clearRect(0, 0, w, h);
+        const cx = w / 2, cy = h / 2;
+        const R = Math.min(w, h) * 0.40;
+        const cos = Math.cos(rot);
+
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(-0.05);
+
+        // Внешнее кольцо с оранжевым контуром
+        ctx.save();
+        ctx.scale(cos, 1);
+        ctx.beginPath();
+        ctx.arc(0, 0, R, 0, Math.PI * 2);
+        const grad = ctx.createLinearGradient(-R, -R, R, R);
+        grad.addColorStop(0, '#ffffff');
+        grad.addColorStop(0.3, '#1e2f4f');
+        grad.addColorStop(0.6, '#ea5820');
+        grad.addColorStop(1, '#0f1e35');
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = R * 0.26;
+        ctx.stroke();
+
+        // Оранжевое защитное уплотнительное кольцо САП 2RS
+        ctx.beginPath();
+        ctx.arc(0, 0, R * 0.72, 0, Math.PI * 2);
+        ctx.strokeStyle = '#ea5820';
+        ctx.lineWidth = R * 0.08;
+        ctx.stroke();
+
+        // Тонкий внутренний фасочный контур
+        ctx.beginPath();
+        ctx.arc(0, 0, R * 0.82, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Внутреннее кольцо
+        ctx.beginPath();
+        ctx.arc(0, 0, R * 0.42, 0, Math.PI * 2);
+        ctx.strokeStyle = '#22385c';
+        ctx.lineWidth = R * 0.18;
+        ctx.stroke();
+
+        // Шарики
+        for (let i = 0; i < 8; i++) {
+          const a = (i / 8) * Math.PI * 2 + rot * 0.42;
+          const bx = Math.cos(a) * R * 0.68;
+          const by = Math.sin(a) * R * 0.68;
+          ctx.beginPath();
+          ctx.arc(bx, by, R * 0.11, 0, Math.PI * 2);
+          ctx.fillStyle = '#ffffff';
+          ctx.fill();
+        }
+        ctx.restore();
+        ctx.restore();
+
+        rot += 0.016;
+        requestAnimationFrame(render);
+      }
+      render();
+    }
+
+    if (typeof THREE !== 'undefined') {
+      try { initThreeBearing(); } catch(e) { initFallbackCanvas(); }
+    } else {
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+      script.onload = () => { try { initThreeBearing(); } catch(e) { initFallbackCanvas(); } };
+      script.onerror = () => initFallbackCanvas();
+      document.head.appendChild(script);
+      initFallbackCanvas();
+    }
+  })();
 </script>
 
 </body>
