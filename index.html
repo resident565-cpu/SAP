@@ -2857,8 +2857,8 @@ if(!inner){f.style.webkitBackfaceVisibility='hidden';f.style.backfaceVisibility=
             const SPECS = [
                 { sel: '.icon-gear',               frames: spin, duration: 7000,  hold: true },
                 { sel: '.icon-brg-cage',           frames: spin, duration: 6000,  hold: true },
-                { sel: '.seal3d-spin',   frames: sealSpin,   duration: 6000, hold: false, settle: true },
-                { sel: '.seal3d-shadow', frames: sealShadow, duration: 6000, hold: false, settle: true },
+                { sel: '.seal3d-spin',   frames: sealSpin,   duration: 6000, hold: true, settle: true, finishOnTap: true },
+                { sel: '.seal3d-shadow', frames: sealShadow, duration: 6000, hold: true, settle: true, finishOnTap: true },
                 /* ремень и шкивы связаны без проскальзывания: окружная скорость одна (ω = v / r),
                    поэтому большой шкив (r=7) оборачивается медленнее малого (r=4.5), а все три
                    анимации разгоняются и тормозят одним профилем — зубья и спицы остаются согласованы */
@@ -3151,9 +3151,9 @@ if(!inner){f.style.webkitBackfaceVisibility='hidden';f.style.backfaceVisibility=
                     }
                     this.go('up');
                 }
-                stop() {
+                stop(forceFinish = false) {
                     if (!this.anim || this.phase === 'down' || this.phase === 'finish' || this.phase === 'held') return;
-                    if (this.s.hold) {
+                    if (this.s.hold && !forceFinish) {
                         this.go('down');
                     } else {
                         const it = this.anim.effect.getComputedTiming().currentIteration;
@@ -3204,7 +3204,7 @@ if(!inner){f.style.webkitBackfaceVisibility='hidden';f.style.backfaceVisibility=
             document.querySelectorAll('.sap-card-base').forEach(card => {
                 const fx = [];
                 SPECS.forEach(spec => card.querySelectorAll(spec.sel).forEach(el => fx.push(new Fx(el, spec))));
-                const st = { hover: false, tap: false, tapTimer: 0, fogTimer: 0, liftTimer: 0, holdTimer: 0 };
+                const st = { hover: false, tap: false, tapExpired: false, tapTimer: 0, fogTimer: 0, liftTimer: 0, holdTimer: 0 };
 
                 const cycling = () => fx.some(f => !f.s.hold && (f.phase === 'up' || f.phase === 'run' || f.phase === 'finish'));
                 /* вращения (дуга, шестерни, бегущий пунктир) не гасим, пока цикл не закончился — иначе они замирают раньше конца сцены */
@@ -3240,7 +3240,7 @@ if(!inner){f.style.webkitBackfaceVisibility='hidden';f.style.backfaceVisibility=
                         }
                     }
                     clearTimeout(st.holdTimer);
-                    fx.forEach(f => on ? f.start() : (f.s.hold ? 0 : f.stop()));
+                    fx.forEach(f => on ? f.start() : (f.s.hold ? f.stop(!!(f.s.finishOnTap && st.tapExpired)) : f.stop()));
                     if (!on) settleHold();
                     /* карточка опускается только когда все её анимации доиграли и остановились — иначе схема «уезжает» посреди движения */
                     if (!on) {
@@ -3282,7 +3282,7 @@ if(!inner){f.style.webkitBackfaceVisibility='hidden';f.style.backfaceVisibility=
 
                 card.addEventListener('pointerenter', e => {
                     if (e.pointerType === 'touch') return;
-                    stopWatch(); st.hover = true; render();
+                    stopWatch(); st.tapExpired = false; st.hover = true; render();
                 });
                 card.addEventListener('pointerleave', e => {
                     if (e.pointerType === 'touch') return;
@@ -3293,9 +3293,9 @@ if(!inner){f.style.webkitBackfaceVisibility='hidden';f.style.backfaceVisibility=
                     stopWatch(); st.hover = false; render();
                 });
                 card.addEventListener('click', () => {
-                    st.tap = true;
+                    st.tap = true; st.tapExpired = false;
                     clearTimeout(st.tapTimer);
-                    st.tapTimer = setTimeout(() => { st.tap = false; render(); }, TAP_MS);
+                    st.tapTimer = setTimeout(() => { st.tap = false; st.tapExpired = true; render(); }, TAP_MS);
                     render();
                 });
             });
