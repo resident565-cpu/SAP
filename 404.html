@@ -30,7 +30,6 @@
         --dark: #111827; --orange: #ea5820; --orange-dark: #c44515; --white: #ffffff;
         --transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         --ease: cubic-bezier(.16,1,.3,1);
-        --grain-card: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -64,8 +63,8 @@
     .logo-block:hover .header-logo-svg { transform: scale(1.05); }
     .logo-text .logo-title { font-size: 24px; font-weight: 700; line-height: 0.95; letter-spacing: -0.015em; display: block; }
     .logo-text .logo-subtitle { font-size: 12.5px; font-weight: 600; color: var(--blue); margin-top: 2px; display: block; }
-    nav { display: flex; gap: 24px; }
-    nav a { text-decoration: none; color: var(--dark); font-weight: 500; font-size: 15px; position: relative; transition: var(--transition); }
+    nav { display: flex; gap: 20px; align-items: center; }
+    nav a { text-decoration: none; color: var(--dark); font-weight: 500; font-size: 14.5px; position: relative; transition: var(--transition); white-space: nowrap; }
     nav a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background-color: var(--blue); transition: var(--transition); }
     nav a:hover::after { width: 100%; }
     .header-contacts { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
@@ -90,8 +89,16 @@
     
     /* Блок 404 */
     .error-title-wrap { display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: clamp(12px, 1.8vh, 18px); }
+    .error-title-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(4px, 1.2vw, 12px);
+        margin-top: clamp(8px, 1.8vh, 22px);
+        margin-bottom: clamp(16px, 2.4vh, 26px);
+    }
     .error-number { 
-        font-size: clamp(114px, 14.5vw, 192px); 
+        font-size: clamp(124px, 17.5vw, 240px); 
         font-weight: 900; 
         line-height: 0.85; 
         letter-spacing: -0.04em; 
@@ -112,16 +119,17 @@
     
         /* Интерактивный 3D подшипник САП (увеличенный размер, читаемые надписи, монетное вращение) */
     .bearing-container {
-        width: clamp(114px, 14.5vw, 192px);
-        height: clamp(114px, 14.5vw, 192px);
+        width: clamp(124px, 17.5vw, 240px);
+        height: clamp(124px, 17.5vw, 240px);
         display: inline-flex;
         align-items: center;
         justify-content: center;
         position: relative;
-        margin: 0 clamp(8px, 1.4vw, 16px);
+        margin: 0 clamp(8px, 1.4vw, 18px);
         vertical-align: middle;
         cursor: grab;
         user-select: none;
+        touch-action: none;
     }
     .bearing-container:active {
         cursor: grabbing;
@@ -151,110 +159,24 @@
     }
 
     .error-badge {
-        display: inline-flex; align-items: center; gap: 8px;
+        display: inline-flex; align-items: center; justify-content: center; gap: 8px;
         background: rgba(234, 88, 32, 0.1); color: var(--orange-dark);
-        border: 1px solid rgba(234, 88, 32, 0.22); padding: 6px 16px; border-radius: 20px;
+        border: 1px solid rgba(234, 88, 32, 0.22); padding: 8px 18px; border-radius: 20px;
         font-size: 14px; font-weight: 600; margin-bottom: 18px;
+        line-height: 1.4; max-width: 100%; text-wrap: balance;
     }
-    .error-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background-color: var(--orange); }
+    .error-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background-color: var(--orange); flex-shrink: 0; }
     
     h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 700; line-height: 1.2; color: var(--dark); margin-bottom: 16px; letter-spacing: -0.025em; text-wrap: balance; }
     .error-desc { font-size: clamp(14px, 1.1vw, 16px); color: #555; line-height: 1.55; margin-bottom: clamp(20px, 2.5vh, 28px); max-width: 640px; margin-left: auto; margin-right: auto; }
     
-    .actions-group { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 60px; }
+    .actions-group { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: clamp(24px, 3.5vh, 40px); }
     .cta-button {
         display: inline-flex; align-items: center; gap: 10px; background-color: var(--blue); color: var(--white);
         padding: 16px 34px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 15px;
         transition: var(--transition); box-shadow: 0 10px 25px rgba(30, 47, 79, 0.14);
     }
     .cta-button:hover { background-color: var(--orange); transform: translateY(-2px); box-shadow: 0 12px 28px rgba(234, 88, 32, 0.24); }
-    .cta-button.secondary { background-color: transparent; color: var(--blue); border: 2px solid rgba(30, 47, 79, 0.2); box-shadow: none; }
-    .cta-button.secondary:hover { background-color: var(--blue); color: var(--white); border-color: var(--blue); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(30, 47, 79, 0.15); }
-
-    /* ===== 3D Карточки с анимациями ===== */
-    .quick-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: left; }
-    
-    .sap-card-base {
-        position: relative; isolation: isolate; overflow: hidden;
-        background: var(--grain-card) 0 0 / 180px 180px repeat, linear-gradient(180deg, #ffffff 0%, #eef1f6 100%);
-        border-radius: 28px; border: 1px solid rgba(255, 255, 255, 0.95);
-        box-shadow: inset 0 2px 0 rgba(255, 255, 255, 1), inset 1px 0 0 rgba(255, 255, 255, 0.9), inset 0 -4px 8px rgba(30, 47, 79, 0.06), 0 2px 0 rgba(30, 47, 79, 0.04), 0 8px 20px rgba(30, 47, 79, 0.08), 0 22px 40px -12px rgba(30, 47, 79, 0.14), 0 16px 32px -20px rgba(234, 88, 32, 0.12);
-        transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
-        display: flex; flex-direction: column; padding: 28px; 
-    }
-    .sap-card-base > * { position: relative; z-index: 2; }
-    
-    /* Туман */
-    .sap-card-base::before, .sap-card-base::after {
-        content: ''; position: absolute; bottom: -12%; width: 64%; height: 140%; border-radius: 50%;
-        filter: blur(28px) opacity(0); opacity: 0; pointer-events: none; z-index: 0;
-        transition: filter 1.25s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .sap-card-base::before { left: -20%; background: radial-gradient(ellipse at 48% 65%, rgba(38, 83, 143, 0.46), rgba(45, 91, 153, 0.16) 42%, transparent 72%); }
-    .sap-card-base::after { right: -20%; background: radial-gradient(ellipse at 52% 65%, rgba(245, 112, 53, 0.42), rgba(234, 88, 32, 0.14) 43%, transparent 73%); }
-    
-    .sap-card-base:hover, .sap-card-base.is-lift {
-        transform: translateY(-5px);
-        box-shadow: inset 0 2px 0 rgba(255, 255, 255, 1), inset 1px 0 0 rgba(255, 255, 255, 0.95), inset 0 -4px 8px rgba(30, 47, 79, 0.08), 0 3px 0 rgba(30, 47, 79, 0.05), 0 14px 32px rgba(30, 47, 79, 0.14), 0 34px 60px -12px rgba(38, 83, 143, 0.26), 0 20px 36px -18px rgba(234, 88, 32, 0.22);
-    }
-    
-    .sap-card-base.fog-run::before { animation: luxBlue 4.4s cubic-bezier(.35, .05, .25, 1) infinite; filter: blur(28px) opacity(1); transition-duration: 1.25s; }
-    .sap-card-base.fog-run::after { animation: luxOrange 5.1s cubic-bezier(.35, .05, .25, 1) infinite .35s; filter: blur(28px) opacity(1); transition-duration: 1.25s; }
-    @keyframes luxBlue { 0% { opacity: 0; transform: translate3d(-5%, 62%, 0) scale(.78, .86); } 24% { opacity: .82; } 55% { opacity: .66; transform: translate3d(5%, 0, 0) scale(1.08, 1.04); } 100% { opacity: 0; transform: translate3d(-2%, -52%, 0) scale(1.32, 1.2); } }
-    @keyframes luxOrange { 0% { opacity: 0; transform: translate3d(6%, 66%, 0) scale(.74, .84); } 26% { opacity: .86; } 60% { opacity: .68; transform: translate3d(-6%, -2%, 0) scale(1.08, 1.05); } 100% { opacity: 0; transform: translate3d(3%, -56%, 0) scale(1.36, 1.22); } }
-
-    /* Стеклянные плашки для иконок */
-    .card-icon-wrap {
-        width: 64px; height: 64px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center;
-        border-radius: 18px; color: var(--blue); position: relative; transition: var(--transition);
-    }
-    .card-icon-wrap svg { position: relative; z-index: 2; width: 32px; height: 32px; stroke-width: 2; }
-    
-    .card-icon-wrap::before, .card-icon-wrap::after {
-        content: ''; position: absolute; inset: -1px; border-radius: inherit; pointer-events: none;
-        transition: opacity 0.45s var(--ease), transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
-    }
-    .card-icon-wrap::before {
-        z-index: 0; opacity: 1; border: 1px solid rgba(255, 255, 255, 0.92);
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.14) 48%, rgba(255, 255, 255, 0) 55%), linear-gradient(160deg, rgba(246, 249, 254, 0.92) 0%, rgba(222, 232, 246, 0.80) 100%);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), inset 0 -2px 5px rgba(30, 47, 79, 0.06), inset 0 0 0 1px rgba(30, 47, 79, 0.07), 0 1px 2px rgba(30, 47, 79, 0.10), 0 8px 16px -5px rgba(30, 47, 79, 0.20);
-        -webkit-backdrop-filter: blur(14px) saturate(1.5); backdrop-filter: blur(14px) saturate(1.5);
-    }
-    .card-icon-wrap::after {
-        z-index: 1; opacity: 0; border: 1px solid rgba(255, 255, 255, 0.92);
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.14) 48%, rgba(255, 255, 255, 0) 55%), linear-gradient(160deg, rgba(255, 240, 229, 0.95) 0%, rgba(255, 198, 160, 0.55) 100%);
-    }
-    .sap-card-base:hover .card-icon-wrap { color: var(--orange); transform: translateY(-2px); }
-    .sap-card-base:hover .card-icon-wrap::before { transform: rotate(-4deg); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), inset 0 -2px 5px rgba(234, 88, 32, 0.08), inset 0 0 0 1px rgba(234, 88, 32, 0.12), 0 1px 2px rgba(234, 88, 32, 0.14), 0 10px 22px -4px rgba(234, 88, 32, 0.34); }
-    .sap-card-base:hover .card-icon-wrap::after { opacity: 1; transform: rotate(-4deg); }
-
-    .quick-card-title { font-size: 18px; font-weight: 700; color: var(--dark); margin-bottom: 10px; letter-spacing: -0.01em; }
-    .quick-card-desc { font-size: 14px; color: #555; line-height: 1.6; margin-bottom: 20px; flex: 1; }
-    
-    /* Кнопка внутри карточки */
-    .card-cta {
-        position: relative; z-index: 4; align-self: flex-start; margin-top: auto;
-        display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px;
-        border-radius: 99px; font-size: 13.5px; font-weight: 600; line-height: 1.25;
-        color: var(--blue); text-decoration: none; letter-spacing: -0.005em;
-        background: linear-gradient(180deg, #ffffff 0%, #f1f4f9 100%);
-        border: 1px solid rgba(30,47,79,.12);
-        box-shadow: 0 2px 6px rgba(30,47,79,.05), inset 0 1px 0 rgba(255,255,255,.95);
-        transition: background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease), transform .35s var(--ease);
-    }
-    .card-cta svg { width: 15px; height: 15px; flex-shrink: 0; stroke: currentColor; transition: transform .35s var(--ease); }
-    .sap-card-base:hover .card-cta { background: var(--orange); color: #fff; border-color: var(--orange); box-shadow: 0 8px 20px rgba(234,88,32,.28); transform: translateY(-2px); }
-    .sap-card-base:hover .card-cta svg { transform: translateX(4px); stroke: #ffffff; }
-
-    /* ===== ИСПРАВЛЕНИЕ БАГА АНИМАЦИЙ SVG ===== */
-    .icon-gear, .icon-brg-cage { 
-        transform-box: view-box; 
-        transform-origin: 12px 12px; 
-    }
-    .icon-drop { 
-        transform-box: view-box; 
-        transform-origin: center bottom; 
-    }
 
     /* ===== Подвал ===== */
     footer { background: var(--dark); color: var(--white); padding: 30px 0; margin-top: auto; position: relative; z-index: 10; }
@@ -278,8 +200,7 @@
         .header-contacts { display: none; }
         .burger-btn { display: flex; }
         nav.open { display: flex; flex-direction: column; position: absolute; top: 90px; left: 0; width: 100%; background: #ffffff; padding: 24px 6%; box-shadow: 0 10px 25px rgba(0,0,0,0.08); border-bottom: 1px solid rgba(30, 47, 79, 0.08); gap: 16px; z-index: 1000; }
-        .quick-nav { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
-    }
+            }
     @media (max-width: 600px) {
         .header-wrap { height: 70px; }
         .header-logo-svg { height: 40px; }
@@ -288,14 +209,14 @@
         .error-hero { padding: 40px 0 60px; }
         .actions-group { flex-direction: column; width: 100%; max-width: 320px; margin-left: auto; margin-right: auto; }
         .cta-button { width: 100%; justify-content: center; }
-        .error-number { font-size: clamp(90px, 20vw, 150px); }
-        .bearing-container { width: clamp(95px, 20vw, 150px); height: clamp(95px, 20vw, 150px); margin: 0 6px; }
+        .error-number { font-size: clamp(98px, 22vw, 160px); }
+        .bearing-container { width: clamp(100px, 22vw, 160px); height: clamp(100px, 22vw, 160px); margin: 0 4px; }
         .messengers-trigger { width: 54px; height: 54px; bottom: calc(60px + env(safe-area-inset-bottom, 0px)); right: calc(20px + env(safe-area-inset-right, 0px)); }
         .messengers-list { right: calc(20px + env(safe-area-inset-right, 0px)); bottom: calc(126px + env(safe-area-inset-bottom, 0px)); }
     }
     @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-        .bearing-spin { animation: none !important; }
+        
     }
 </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -351,10 +272,13 @@
         </div>
       </a>
 
-      <nav id="mainNav">
+      <nav id="mainNav" aria-label="Основная навигация">
         <a href="index.html#catalog">Продукция</a>
         <a href="index.html#brands">Бренды</a>
         <a href="index.html#about">О компании</a>
+        <a href="index.html#scenarios">Решения</a>
+        <a href="index.html#cases">Кейсы</a>
+        <a href="index.html#faq">FAQ</a>
         <a href="index.html#contacts">Контакты</a>
       </nav>
 
@@ -386,8 +310,8 @@
           </div>
         </div>
 
-        <div class="error-badge">Маршрут не найден</div>
-        <h1>Деталь с таким артикулом не найдена</h1>
+        <div class="error-badge">Что-то пошло не по плану, хотя изначально ты его придерживался</div>
+        <h1>Здесь нет ничего интересного</h1>
         <p class="error-desc">
           Возможно, ссылка устарела, страница была перемещена или в адресе опечатка. 
           Но нужные комплектующие для сельхозтехники и промышленного оборудования мы всегда подберём со склада в Рязани или под заказ.
@@ -398,70 +322,7 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             На главную страницу
           </a>
-          <a class="cta-button secondary" href="index.html#catalog">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            Перейти в каталог
-          </a>
         </div>
-
-        <!-- Карточки с анимированными иконками -->
-        <div class="quick-nav">
-          <!-- Карточка 1 -->
-          <div class="sap-card-base">
-            <div class="card-icon-wrap">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <g class="icon-gear">
-                  <circle cx="12" cy="12" r="3"></circle>
-                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                </g>
-              </svg>
-            </div>
-            <div class="quick-card-title">Импортная сельхозтехника</div>
-            <div class="quick-card-desc">Оригиналы и проверенные аналоги для John Deere, Claas, New Holland, Case IH, JCB, Lemken.</div>
-            <a href="index.html#catalog" class="card-cta">Выбрать запчасти <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </div>
-
-          <!-- Карточка 2 -->
-          <div class="sap-card-base">
-            <div class="card-icon-wrap">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <rect x="1.2" y="1.2" width="21.6" height="21.6" rx="6.5" stroke-width="1.5"></rect>
-                <circle cx="4.3" cy="4.3" r="0.9" stroke-width="1.1"></circle>
-                <circle cx="19.7" cy="4.3" r="0.9" stroke-width="1.1"></circle>
-                <circle cx="4.3" cy="19.7" r="0.9" stroke-width="1.1"></circle>
-                <circle cx="19.7" cy="19.7" r="0.9" stroke-width="1.1"></circle>
-                <circle cx="12" cy="12" r="7.6" stroke-width="1.7"></circle>
-                <circle cx="12" cy="12" r="3.3" stroke-width="1.7"></circle>
-                <g class="icon-brg-cage" fill="currentColor" stroke="none">
-                  <circle cx="12.00" cy="6.55" r="1.05"></circle>
-                  <circle cx="15.85" cy="8.15" r="1.05"></circle>
-                  <circle cx="17.45" cy="12.00" r="1.05"></circle>
-                  <circle cx="15.85" cy="15.85" r="1.05"></circle>
-                  <circle cx="12.00" cy="17.45" r="1.05"></circle>
-                  <circle cx="8.15" cy="15.85" r="1.05"></circle>
-                  <circle cx="6.55" cy="12.00" r="1.05"></circle>
-                  <circle cx="8.15" cy="8.15" r="1.05"></circle>
-                </g>
-              </svg>
-            </div>
-            <div class="quick-card-title">Подшипники и узлы</div>
-            <div class="quick-card-desc">Продукция SKF, FAG, Koyo, NSK, Timken, NTN. Корпусные подшипники UCFL, UCP.</div>
-            <a href="index.html#brands" class="card-cta">Смотреть бренды <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </div>
-
-          <!-- Карточка 3 -->
-          <div class="sap-card-base">
-            <div class="card-icon-wrap">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path class="icon-drop" d="M12 22a7 7 0 0 0 7-7c0-4.3-7-13-7-13S5 10.7 5 15a7 7 0 0 0 7 7z" fill="rgba(30, 47, 79, 0.08)"></path>
-              </svg>
-            </div>
-            <div class="quick-card-title">Масла и смазки</div>
-            <div class="quick-card-desc">Моторные, трансмиссионные и гидравлические масла от ведущих производителей. Подберем нужную вязкость.</div>
-            <a href="index.html#catalog" class="card-cta">Перейти к маслам <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
@@ -506,17 +367,31 @@
 </div>
 
 <script>
-  // ===== 1. Бургер-меню =====
+  // 1. Мобильное меню
   const burgerBtn = document.getElementById('burgerBtn');
   const mainNav = document.getElementById('mainNav');
   if (burgerBtn && mainNav) {
-    burgerBtn.addEventListener('click', () => {
-      const isOpen = burgerBtn.classList.toggle('active');
+    const toggleNav = (open) => {
+      const isOpen = open !== undefined ? open : !mainNav.classList.contains('open');
+      burgerBtn.classList.toggle('active', isOpen);
+      burgerBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       mainNav.classList.toggle('open', isOpen);
+    };
+    burgerBtn.addEventListener('click', () => toggleNav());
+    mainNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => toggleNav(false));
+    });
+    document.addEventListener('click', (e) => {
+      if (mainNav.classList.contains('open') && !burgerBtn.contains(e.target) && !mainNav.contains(e.target)) {
+        toggleNav(false);
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mainNav.classList.contains('open')) toggleNav(false);
     });
   }
 
-  // ===== 2. Мессенджеры =====
+  // 2. Мессенджеры
   const msgBtn = document.getElementById('sapMessengersBtn');
   const msgList = document.getElementById('sapMessengersList');
   if (msgBtn && msgList) {
@@ -536,126 +411,14 @@
         setMessengers(false);
       }
     });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && msgList.classList.contains('active')) {
+        setMessengers(false);
+      }
+    });
   }
 
-  // ===== 3. Плавная анимация иконок =====
-  (function() {
-    if (typeof Element.prototype.animate !== 'function') return;
-
-    const spin = [{ transform: 'rotate(0deg)' }, { transform: 'rotate(360deg)' }];
-    const drop = [
-      { offset: 0,    transform: 'translateY(0) scaleY(1)',      opacity: 1, easing: 'ease-in-out' },
-      { offset: 0.4,  transform: 'translateY(2px) scaleY(0.9)',                easing: 'ease-in-out' },
-      { offset: 0.7,  transform: 'translateY(14px) scaleY(1.1)', opacity: 0, easing: 'ease-in-out' },
-      { offset: 0.71, transform: 'translateY(-10px)',            opacity: 0, easing: 'ease-in-out' },
-      { offset: 1,    transform: 'translateY(0) scaleY(1)',      opacity: 1 }
-    ];
-
-    const SPECS = [
-      { sel: '.icon-gear', frames: spin, duration: 7000, hold: true },
-      { sel: '.icon-brg-cage', frames: spin, duration: 6000, hold: true },
-      { sel: '.icon-drop', frames: drop, duration: 2200 }
-    ];
-
-    const IN_MS = 1000, OUT_MS = 1600;
-    const easeInOut = p => p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
-    
-    const running = new Set();
-    let raf = 0;
-    function tick(now) {
-      raf = 0;
-      running.forEach(h => { if (h.step(now) === false) running.delete(h); });
-      if (running.size) raf = requestAnimationFrame(tick);
-    }
-    function schedule(h) {
-      running.add(h);
-      if (!raf) raf = requestAnimationFrame(tick);
-    }
-
-    class Fx {
-      constructor(el, spec) {
-        this.el = el; this.s = spec;
-        this.anim = null; this.rate = 0; this.phase = 'idle';
-        this.t0 = 0; this.r0 = 0; this.it0 = -1;
-      }
-      setRate(r) { this.rate = r; this.anim.playbackRate = r; }
-      go(phase) { this.phase = phase; this.t0 = performance.now(); this.r0 = this.rate; schedule(this); }
-      start() {
-        if (this.phase === 'up' || this.phase === 'run') return;
-        const s = this.s;
-        if (!this.anim) {
-          this.anim = this.el.animate(s.frames, {
-            duration: s.duration, iterations: Infinity, easing: 'linear'
-          });
-          this.setRate(0);
-        } else if (this.anim.playState === 'paused') {
-          this.anim.play();
-        }
-        this.go('up');
-      }
-      stop() {
-        if (!this.anim || this.phase === 'down' || this.phase === 'finish' || this.phase === 'held') return;
-        if (this.s.hold) {
-          this.go('down');
-        } else {
-          const it = this.anim.effect.getComputedTiming().currentIteration;
-          this.it0 = it === null ? 0 : it;
-          this.go('finish');
-        }
-      }
-      step(now) {
-        const a = this.anim, s = this.s;
-        if (!a) return false;
-        const since = Math.max(0, now - this.t0);
-
-        if (this.phase === 'up') {
-          const p = Math.min(1, since / IN_MS);
-          this.setRate(this.r0 + (1 - this.r0) * easeInOut(p));
-          if (p >= 1) { this.phase = 'run'; return false; }
-        } else if (this.phase === 'down') {
-          const p = Math.min(1, since / OUT_MS);
-          this.setRate(this.r0 * (1 - p) * (1 - p));
-          if (p >= 1) { this.setRate(0); a.pause(); this.phase = 'held'; return false; }
-        } else if (this.phase === 'finish') {
-          const p = Math.min(1, since / 500);
-          this.setRate(this.r0 + (1 - this.r0) * easeInOut(p));
-          const it = a.effect.getComputedTiming().currentIteration;
-          if (it !== null && it > this.it0) {
-            a.cancel(); this.anim = null; this.rate = 0; this.phase = 'idle';
-            return false;
-          }
-        }
-        return true;
-      }
-    }
-
-    document.querySelectorAll('.sap-card-base').forEach(card => {
-      const fx = [];
-      SPECS.forEach(spec => card.querySelectorAll(spec.sel).forEach(el => fx.push(new Fx(el, spec))));
-      let fogTimer = 0;
-      
-      card.addEventListener('pointerenter', () => {
-        clearTimeout(fogTimer);
-        card.classList.add('is-lift', 'fog-run');
-        fx.forEach(f => f.start());
-      });
-      
-      card.addEventListener('pointerleave', () => {
-        card.classList.remove('fog-on'); 
-        fx.forEach(f => f.stop());
-        
-        if (card.classList.contains('fog-run')) {
-          fogTimer = setTimeout(() => {
-            card.classList.remove('fog-run', 'is-lift');
-          }, 4500); 
-        } else {
-          card.classList.remove('is-lift');
-        }
-      });
-    });
-  })();
-
-  // ===== 4. Премиальный 3D-подшипник САП (увеличенный масштаб, читаемые гравировки, оранжевый акцент) =====
+  // 3. Интерактивная 3D-модель подшипника (Three.js + Canvas 2D fallback)
   (function() {
     const container = document.getElementById('bearing3d');
     if (!container) return;
@@ -1041,15 +804,16 @@
         prevPointerX = e.clientX;
       });
 
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
       function animate() {
         requestAnimationFrame(animate);
 
-        // Постоянное линейное монетное вращение вокруг оси Y
-        spinGroup.rotation.y += SPIN_SPEED;
-
-        // Вращение шариков и сепаратора в дорожке качения
-        ballsGroup.rotation.y += SPIN_SPEED * 0.42;
-        cageGroup.rotation.y += SPIN_SPEED * 0.42;
+        if (!reduceMotion.matches) {
+          spinGroup.rotation.y += SPIN_SPEED;
+          ballsGroup.rotation.y += SPIN_SPEED * 0.42;
+          cageGroup.rotation.y += SPIN_SPEED * 0.42;
+        }
 
         // Следование наклона за курсором
         tiltGroup.rotation.x += (targetTiltX - tiltGroup.rotation.x) * 0.07;
@@ -1148,22 +912,24 @@
         ctx.restore();
         ctx.restore();
 
-        rot += 0.016;
+        if (!reduceMotion.matches) rot += 0.016;
         requestAnimationFrame(render);
       }
       render();
     }
 
-    if (typeof THREE !== 'undefined') {
-      try { initThreeBearing(); } catch(e) { initFallbackCanvas(); }
-    } else {
-      const script = document.createElement('script');
-      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
-      script.onload = () => { try { initThreeBearing(); } catch(e) { initFallbackCanvas(); } };
-      script.onerror = () => initFallbackCanvas();
-      document.head.appendChild(script);
+    function startBearing() {
+      if (typeof THREE !== 'undefined') {
+        try {
+          initThreeBearing();
+          return;
+        } catch (e) {
+          // Fallback на 2D Canvas при сбое инициализации WebGL
+        }
+      }
       initFallbackCanvas();
     }
+    startBearing();
   })();
 </script>
 
