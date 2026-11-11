@@ -301,7 +301,7 @@
         
     }
 </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
@@ -587,7 +587,7 @@
 
     // 1. Ультрачеткая текстура лазерной маркировки на торцевых гранях (2048x2048)
     function createFaceEngravingTexture() {
-      const size = 2048;
+      const size = 1024;
       const cv = document.createElement('canvas');
       cv.width = size; cv.height = size;
       const ctx = cv.getContext('2d');
@@ -601,7 +601,7 @@
       // Крупный, высококонтрастный текст гравировки
       const text = "★ САП • СПЕЦАГРОПАРТНЕР ★ 6208-2RS / C3 ★ РЯЗАНЬ • since 2024 ★ 404 NOT FOUND ";
       const totalChars = text.length;
-      ctx.font = '800 76px "Geologica Local", "Arial Black", Arial, sans-serif';
+      ctx.font = '800 38px "Geologica Local", "Arial Black", Arial, sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
@@ -619,11 +619,11 @@
         // Тонкий оранжевый акцент на звёздочках и артикуле
         if (char === '★' || text.slice(Math.max(0, i-3), i+4).includes('6208')) {
           ctx.strokeStyle = 'rgba(234, 88, 32, 0.75)';
-          ctx.lineWidth = 3;
+          ctx.lineWidth = 1.5;
           ctx.strokeText(char, 0, 0);
         } else {
           ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
-          ctx.lineWidth = 2;
+          ctx.lineWidth = 1.2;
           ctx.strokeText(char, 0, 0);
         }
 
@@ -634,13 +634,13 @@
 
       // Концентрические фасочные полосы для точности
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
-      ctx.lineWidth = 6;
+      ctx.lineWidth = 3;
       ctx.beginPath();
       ctx.arc(cx, cy, size * 0.488, 0, Math.PI * 2);
       ctx.stroke();
 
       ctx.strokeStyle = 'rgba(234, 88, 32, 0.45)';
-      ctx.lineWidth = 5;
+      ctx.lineWidth = 2.5;
       ctx.beginPath();
       ctx.arc(cx, cy, size * 0.402, 0, Math.PI * 2);
       ctx.stroke();
@@ -653,41 +653,41 @@
     // 3. Процедурная студийная карта отражений с выраженным фирменным оранжевым акцентом САП
     function createStudioEnvMap() {
       const cv = document.createElement('canvas');
-      cv.width = 512; cv.height = 256;
+      cv.width = 256; cv.height = 128;
       const ctx = cv.getContext('2d');
 
       // Глубокий градиент окружения
-      const grad = ctx.createLinearGradient(0, 0, 0, 256);
+      const grad = ctx.createLinearGradient(0, 0, 0, 128);
       grad.addColorStop(0, '#ffffff');
       grad.addColorStop(0.28, '#dce6f2');
       grad.addColorStop(0.5, '#6a85a4');
       grad.addColorStop(0.72, '#182b47');
       grad.addColorStop(1, '#091526');
       ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, 512, 256);
+      ctx.fillRect(0, 0, 256, 128);
 
       // Верхний яркий софтбокс (чистый белый зеркальный блик на полировке)
-      const softbox = ctx.createRadialGradient(256, 36, 10, 256, 36, 140);
+      const softbox = ctx.createRadialGradient(128, 18, 5, 128, 18, 70);
       softbox.addColorStop(0, '#ffffff');
       softbox.addColorStop(0.6, 'rgba(255,255,255,0.9)');
       softbox.addColorStop(1, 'rgba(255,255,255,0)');
       ctx.fillStyle = softbox;
-      ctx.fillRect(0, 0, 512, 160);
+      ctx.fillRect(0, 0, 256, 80);
 
       // Яркий оранжевый рефлектор САП (#ea5820)
-      const orangeRef = ctx.createRadialGradient(420, 130, 10, 420, 130, 130);
+      const orangeRef = ctx.createRadialGradient(210, 65, 5, 210, 65, 65);
       orangeRef.addColorStop(0, 'rgba(234, 88, 32, 0.95)');
       orangeRef.addColorStop(0.5, 'rgba(234, 88, 32, 0.5)');
       orangeRef.addColorStop(1, 'rgba(234, 88, 32, 0)');
       ctx.fillStyle = orangeRef;
-      ctx.fillRect(280, 20, 232, 220);
+      ctx.fillRect(140, 10, 116, 110);
 
       // Второй теплый контурный блик
-      const warmBack = ctx.createRadialGradient(100, 180, 5, 100, 180, 90);
+      const warmBack = ctx.createRadialGradient(50, 90, 3, 50, 90, 45);
       warmBack.addColorStop(0, 'rgba(255, 130, 60, 0.65)');
       warmBack.addColorStop(1, 'rgba(255, 130, 60, 0)');
       ctx.fillStyle = warmBack;
-      ctx.fillRect(0, 90, 200, 160);
+      ctx.fillRect(0, 45, 100, 80);
 
       const texture = new THREE.CanvasTexture(cv);
       texture.mapping = THREE.EquirectangularReflectionMapping;
@@ -816,7 +816,7 @@
         new THREE.Vector2(1.54,  0.24),
         new THREE.Vector2(1.54,  0.38)
       ];
-      const outerGeo = new THREE.LatheGeometry(outerProfile, 72);
+      const outerGeo = new THREE.LatheGeometry(outerProfile, 48);
       const outerMesh = new THREE.Mesh(outerGeo, steelMaterial);
       bearingAssembly.add(outerMesh);
       // Наружная обойма без надписей — шлифованная подшипниковая сталь
@@ -834,12 +834,12 @@
         new THREE.Vector2(1.18,  0.38),
         new THREE.Vector2(0.80,  0.38)
       ];
-      const innerGeo = new THREE.LatheGeometry(innerProfile, 72);
+      const innerGeo = new THREE.LatheGeometry(innerProfile, 48);
       const innerMesh = new THREE.Mesh(innerGeo, steelMaterial);
       bearingAssembly.add(innerMesh);
 
       // Внутренняя оранжевая акцентная канавка САП
-      const orangeBoreRingGeo = new THREE.TorusGeometry(0.76, 0.035, 14, 64);
+      const orangeBoreRingGeo = new THREE.TorusGeometry(0.76, 0.035, 10, 42);
       const orangeBoreMesh = new THREE.Mesh(orangeBoreRingGeo, orangeSealMaterial);
       orangeBoreMesh.rotation.x = Math.PI / 2;
       orangeBoreMesh.position.y = 0.38;
@@ -852,7 +852,7 @@
       const NUM_BALLS = 8;
       const BALL_RADIUS = 0.29;
       const TRACK_RADIUS = 1.36;
-      const ballGeo = new THREE.SphereGeometry(BALL_RADIUS, 32, 24);
+      const ballGeo = new THREE.SphereGeometry(BALL_RADIUS, 20, 16);
 
       for (let i = 0; i < NUM_BALLS; i++) {
         const angle = (i / NUM_BALLS) * Math.PI * 2;
@@ -870,7 +870,7 @@
       bearingAssembly.add(cageGroup);
 
       // Латунные кольца
-      const cageRingGeo = new THREE.TorusGeometry(TRACK_RADIUS, 0.045, 16, 64);
+      const cageRingGeo = new THREE.TorusGeometry(TRACK_RADIUS, 0.045, 12, 42);
       const cageFront = new THREE.Mesh(cageRingGeo, brassCageMaterial);
       cageFront.rotation.x = Math.PI / 2;
       cageFront.position.y = 0.17;
@@ -895,7 +895,7 @@
       }
 
       // Оранжевый акцентный пыльник по внутреннему контуру обоймы
-      const orangeSealGeo = new THREE.TorusGeometry(1.49, 0.055, 16, 72);
+      const orangeSealGeo = new THREE.TorusGeometry(1.49, 0.055, 12, 42);
       const orangeSealFront = new THREE.Mesh(orangeSealGeo, orangeSealMaterial);
       orangeSealFront.rotation.x = Math.PI / 2;
       orangeSealFront.position.y = 0.365;
@@ -907,7 +907,7 @@
       bearingAssembly.add(orangeSealBack);
 
       // --- 5. КРУПНАЯ ЛАЗЕРНАЯ ГРАВИРОВКА НА ТОРЦАХ ---
-      const decalGeo = new THREE.RingGeometry(1.54, 1.99, 64);
+      const decalGeo = new THREE.RingGeometry(1.54, 1.99, 48);
       // Передний торец
       const decalFront = new THREE.Mesh(decalGeo, faceDecalMaterial);
       decalFront.rotation.x = -Math.PI / 2;
@@ -1042,7 +1042,7 @@
         ctx.beginPath();
         ctx.arc(0, 0, R * 0.82, 0, Math.PI * 2);
         ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 1.2;
         ctx.stroke();
 
         // Внутреннее кольцо
@@ -1082,7 +1082,21 @@
       }
       initFallbackCanvas();
     }
-    startBearing();
+
+    // Отложенная инициализация 3D для минимизации Total Blocking Time (TBT)
+    function scheduleBearingStart() {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => startBearing(), { timeout: 1200 });
+      } else {
+        setTimeout(startBearing, 50);
+      }
+    }
+
+    if (document.readyState === 'complete') {
+      scheduleBearingStart();
+    } else {
+      window.addEventListener('load', scheduleBearingStart);
+    }
   })();
 </script>
 
