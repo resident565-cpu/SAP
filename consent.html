@@ -22,8 +22,8 @@
             --blue-dark: #0f1e35;
             --light-grey: #f5f7fa;
             --dark: #111827;
-            --orange: #ea5820;
-            --orange-dark: #c44515;
+            --orange: #ea5820;        /* брендовый */
+            --orange-text: #c14511;   /* для текста (контраст > 4.5:1) */
             --white: #ffffff;
             --ease: cubic-bezier(.16, 1, .3, 1);
         }
@@ -42,7 +42,7 @@
             padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.25);
             transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease);
         }
-        .back-link:hover, .back-link:focus-visible { background: var(--orange); border-color: var(--orange); outline: none; }
+        .back-link:hover, .back-link:focus-visible { background: var(--orange-text); border-color: var(--orange-text); outline: none; }
 
         main { max-width: 880px; margin: 0 auto; padding: 40px 24px 64px; }
         .doc {
@@ -52,12 +52,12 @@
         h1 { font-size: clamp(24px, 4vw, 32px); line-height: 1.2; letter-spacing: -0.02em; color: var(--blue); font-weight: 700; margin-bottom: 8px; }
         .lead { color: #64748b; font-size: 14px; margin-bottom: 32px; }
         h2 { font-size: 18px; color: var(--blue); font-weight: 600; letter-spacing: -0.01em; margin: 32px 0 10px; }
-        h2 span { color: var(--orange); margin-right: 6px; }
+        h2 span { color: var(--orange-text); margin-right: 6px; }
         p { margin-bottom: 12px; }
         ul { margin: 0 0 12px 22px; }
         li { margin-bottom: 6px; }
-        li::marker { color: var(--orange); }
-        a { color: var(--orange); text-decoration: none; }
+        li::marker { color: var(--orange-text); }
+        a { color: var(--orange-text); text-decoration: none; }
         a:hover { text-decoration: underline; }
         .requisites { background: var(--light-grey); border-radius: 18px; padding: 20px 24px; margin: 8px 0 12px; font-size: 14.5px; }
         .requisites div { margin-bottom: 4px; }
