@@ -241,8 +241,8 @@
             grid-template-columns: repeat(12, minmax(0, 1fr));
             grid-template-areas:
                 "parts parts parts parts parts parts oils oils oils oils oils oils"
-                "parts parts parts parts parts parts bearings bearings bearings belts belts belts"
-                "seals seals seals seals seals seals filters filters filters filters filters filters";
+                "parts parts parts parts parts parts filters filters filters seals seals seals"
+                "belts belts belts belts belts belts bearings bearings bearings bearings bearings bearings";
             grid-auto-rows: minmax(230px, auto);
             gap: 22px;
         }
@@ -1147,9 +1147,10 @@
                 grid-template-columns: repeat(2, minmax(0, 1fr));
                 grid-template-areas:
                     "parts parts"
-                    "oils bearings"
-                    "belts seals"
-                    "filters filters";
+                    "oils filters"
+                    "seals seals"
+                    "belts belts"
+                    "bearings bearings";
                 grid-auto-rows: minmax(250px, auto);
             }
             .catalog-card:nth-child(1) { grid-area: parts; }
@@ -1178,10 +1179,10 @@
                 grid-template-areas:
                     "parts"
                     "oils"
-                    "bearings"
-                    "belts"
+                    "filters"
                     "seals"
-                    "filters";
+                    "belts"
+                    "bearings";
             }
             .catalog-card:nth-child(n) { grid-column: span 1 !important; grid-row: span 1 !important; }
 
