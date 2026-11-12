@@ -236,7 +236,22 @@
         .section-title h2 { font-size: clamp(26px, 2.8vw, 38px); font-weight: 700; letter-spacing: -0.025em; text-wrap: balance; }
         .section-title p { color: #666; margin-top: 8px; font-size: 15px; letter-spacing: -0.005em; }
 
-        .catalog-grid { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: minmax(220px, auto); gap: 22px; }
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+            grid-template-areas:
+                "parts parts parts parts parts parts oils oils oils oils oils oils"
+                "parts parts parts parts parts parts bearings bearings bearings belts belts belts"
+                "seals seals seals seals seals seals filters filters filters filters filters filters";
+            grid-auto-rows: minmax(230px, auto);
+            gap: 22px;
+        }
+        .catalog-card:nth-child(1) { grid-area: parts; }
+        .catalog-card:nth-child(2) { grid-area: oils; }
+        .catalog-card:nth-child(3) { grid-area: bearings; }
+        .catalog-card:nth-child(4) { grid-area: belts; }
+        .catalog-card:nth-child(5) { grid-area: seals; }
+        .catalog-card:nth-child(6) { grid-area: filters; }
 
         .sap-card-base {
             position: relative; isolation: isolate; overflow: hidden;
@@ -290,12 +305,12 @@
         .catalog-card { padding: 32px 28px 34px; display: flex; flex-direction: column; justify-content: flex-start; cursor: default; }
         .catalog-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 12px; line-height: 1.3; letter-spacing: -0.01em; }
         .catalog-card p { font-size: 13.5px; color: #555; font-weight: 400; line-height: 1.55; letter-spacing: -0.005em; margin-bottom: 24px; }
-        .catalog-card:nth-child(1) { grid-column: span 2; grid-row: span 2; padding: 36px 32px 38px; }
+        .catalog-card:nth-child(1) { padding: 36px 32px 38px; }
         .catalog-card:nth-child(1) h3 { font-size: 22px; }
         .catalog-card:nth-child(1) p  { font-size: 14.5px; }
         .catalog-card:nth-child(1) .card-icon-wrap { width: 88px; height: 88px; border-radius: 22px; }
         .catalog-card:nth-child(1) .card-icon-wrap svg { width: 46px; height: 46px; }
-        .catalog-card:nth-child(n+2) { grid-column: span 2; grid-row: span 1; }
+        
         .catalog-card > .card-cta {
             position: relative; z-index: 4; align-self: flex-start; margin-top: auto;
             display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px;
@@ -1128,13 +1143,20 @@
             .logo-text .logo-title { font-size: 22px; }
             .logo-text .logo-subtitle { font-size: 11px; }
 
-            .catalog-grid { grid-template-columns: repeat(2, 1fr); }
-            .catalog-card:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+            .catalog-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                grid-template-areas:
+                    "parts parts"
+                    "oils bearings"
+                    "belts seals"
+                    "filters filters";
+                grid-auto-rows: minmax(250px, auto);
+            }
+            .catalog-card:nth-child(1) { grid-area: parts; }
             .catalog-card:nth-child(1) h3 { font-size: 18px; }
             .catalog-card:nth-child(1) p  { font-size: 13.5px; }
             .catalog-card:nth-child(1) .card-icon-wrap { width: 68px; height: 68px; border-radius: 18px; }
             .catalog-card:nth-child(1) .card-icon-wrap svg { width: 36px; height: 36px; }
-            .catalog-card:nth-child(n+2) { grid-column: span 1; grid-row: span 1; }
 
             .expertise-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
             .cases-grid { grid-template-columns: 1fr 1fr; }
@@ -1151,7 +1173,16 @@
             .logo-text .logo-subtitle { display: none; }
             .hero { padding-top: 100px; }
 
-            .catalog-grid { grid-template-columns: 1fr; }
+            .catalog-grid {
+                grid-template-columns: minmax(0, 1fr);
+                grid-template-areas:
+                    "parts"
+                    "oils"
+                    "bearings"
+                    "belts"
+                    "seals"
+                    "filters";
+            }
             .catalog-card:nth-child(n) { grid-column: span 1 !important; grid-row: span 1 !important; }
 
             .expertise-grid { grid-template-columns: 1fr; margin-top: 40px; }
