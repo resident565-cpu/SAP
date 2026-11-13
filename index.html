@@ -1511,8 +1511,8 @@
 }
 
 @keyframes sealShadow{
-  0%{transform:scaleX(0.909);opacity:1.001}
-  2.08%{transform:scaleX(1.045);opacity:1.066}
+  0%{transform:scaleX(0.909);opacity:1}
+  2.08%{transform:scaleX(1.045);opacity:1}
   4.17%{transform:scaleX(0.925);opacity:0.972}
   6.25%{transform:scaleX(0.627);opacity:0.794}
   8.33%{transform:scaleX(0.33);opacity:0.65}
@@ -1527,8 +1527,8 @@
   27.08%{transform:scaleX(0.201);opacity:0.6}
   29.17%{transform:scaleX(0.307);opacity:0.655}
   31.25%{transform:scaleX(0.6);opacity:0.821}
-  33.33%{transform:scaleX(0.909);opacity:1.001}
-  35.42%{transform:scaleX(1.045);opacity:1.066}
+  33.33%{transform:scaleX(0.909);opacity:1}
+  35.42%{transform:scaleX(1.045);opacity:1}
   37.5%{transform:scaleX(0.925);opacity:0.972}
   39.58%{transform:scaleX(0.627);opacity:0.794}
   41.67%{transform:scaleX(0.33);opacity:0.65}
@@ -1543,8 +1543,8 @@
   60.42%{transform:scaleX(0.201);opacity:0.6}
   62.5%{transform:scaleX(0.307);opacity:0.655}
   64.58%{transform:scaleX(0.6);opacity:0.821}
-  66.67%{transform:scaleX(0.909);opacity:1.001}
-  68.75%{transform:scaleX(1.045);opacity:1.066}
+  66.67%{transform:scaleX(0.909);opacity:1}
+  68.75%{transform:scaleX(1.045);opacity:1}
   70.83%{transform:scaleX(0.925);opacity:0.972}
   72.92%{transform:scaleX(0.627);opacity:0.794}
   75%{transform:scaleX(0.33);opacity:0.65}
@@ -1559,7 +1559,7 @@
   93.75%{transform:scaleX(0.201);opacity:0.6}
   95.83%{transform:scaleX(0.307);opacity:0.655}
   97.92%{transform:scaleX(0.6);opacity:0.821}
-  100%{transform:scaleX(0.909);opacity:1.001}}
+  100%{transform:scaleX(0.909);opacity:1}}
 @media (hover:hover){
   html:not(.fx-js) .catalog-card:hover .seal3d-spin{animation:sealSpin 6s linear infinite}
   html:not(.fx-js) .catalog-card:hover .seal3d-shadow{animation:sealShadow 6s linear infinite}
@@ -2553,6 +2553,7 @@ if(!inner){f.style.webkitBackfaceVisibility='hidden';f.style.backfaceVisibility=
             var f = document.createElement('i'); f.className = 'filter3d-facet';
             f.style.cssText = 'width:' + w.toFixed(3) + 'em;height:' + H + 'em;' +
               'margin:' + (-H/2) + 'em 0 0 ' + (-w/2) + 'em;' +
+              'background:' + (isPeak ? '#e2eaf5' : '#b6c6dc') + ';' +
               'background:' + grad + ';' +
               'transform:rotateY(' + ang + 'deg) translateZ(' + rPleat.toFixed(3) + 'em);' +
               'border-left:.5px solid rgba(255,255,255,' + (isPeak ? '0.45' : '0.15') + ');' +
@@ -2589,10 +2590,10 @@ if(!inner){f.style.webkitBackfaceVisibility='hidden';f.style.backfaceVisibility=
             const revealItems = document.querySelectorAll('.reveal');
             revealItems.forEach(el => io.observe(el));
 
-            // Не раскрываем все блоки по таймеру: каждый элемент появляется,
-            // когда действительно приближается к области просмотра.
-            // Не вызываем io.takeRecords(): он очищает очередь начальных
-            // IntersectionObserver-записей до того, как их обработает callback.
+            // Страховка: если через 3 секунды элементы всё ещё не показались (сбой JS, блокировщик), показываем их принудительно.
+            setTimeout(() => {
+                document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
+            }, 3000);
         })();
 
         /* ===== Бургер-меню ===== */
