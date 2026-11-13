@@ -368,7 +368,6 @@
         .tractor-wheel-f { animation: none; transform-origin: 19.6px 18.6px; }
         .puff-1, .puff-2, .puff-3 { animation: none; }
 
-        @keyframes filterSpin { 0% { transform: translateX(0); } 100% { transform: translateX(-6px); } }
         @keyframes spinGear { 100% { transform: rotate(360deg); } }
         @keyframes dropAnim { 0%, 100% { transform: translateY(0) scaleY(1); opacity: 1; } 40% { transform: translateY(2px) scaleY(0.9); } 70% { transform: translateY(14px) scaleY(1.1); opacity: 0; } 71% { transform: translateY(-10px); opacity: 0; } }
         @keyframes beltRun { 100% { stroke-dashoffset: -3; } }
@@ -382,7 +381,6 @@
             html:not(.fx-js) .catalog-card:hover .icon-belt-loop   { animation: beltRun 0.5s linear infinite; }
             html:not(.fx-js) .catalog-card:hover .icon-belt-p1     { animation: spinGear 6.513s linear infinite; }
             html:not(.fx-js) .catalog-card:hover .icon-belt-p2     { animation: spinGear 4.187s linear infinite; }
-            html:not(.fx-js) .catalog-card:hover .icon-filter-spin { animation: filterSpin 1.4s linear infinite; }
 
             html:not(.fx-js) .brand-group-card:hover .icon-tractor            { animation: tractorRide 0.4s linear infinite alternate !important; }
             html:not(.fx-js) .brand-group-card:hover .icon-ucfl-inner         { animation: spinGear 3s linear infinite; }
@@ -1395,6 +1393,123 @@
   95.83%{transform:translateY(-0.0066em) rotateX(-13.17deg) rotateY(1011deg)}
   97.92%{transform:translateY(-0.0017em) rotateX(-12.3deg) rotateY(1033.5deg)}
   100%{transform:translateY(0) rotateX(-12deg) rotateY(1056deg)}}
+
+/* filter3d */
+.filter3d{position:relative;z-index:2;width:1em;height:1em;font-size:43px;flex-shrink:0;color:inherit;perspective:5.5em;perspective-origin:50% 34%}
+.filter3d-spin{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform;transform:translateY(-0.02em) rotateX(-21deg) rotateY(-26deg)}
+.filter3d-cap{position:absolute;left:50%;top:50%;width:.82em;height:.82em;margin:-.41em 0 0 -.41em;transform-style:preserve-3d}
+.filter3d-cap svg{display:block;width:100%;height:100%;overflow:visible}
+.filter3d-facet{position:absolute;left:50%;top:50%;display:block;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.filter3d-shadow{position:absolute;left:50%;bottom:-.1em;width:.82em;height:.15em;margin-left:-.41em;border-radius:50%;pointer-events:none;transform:scale(0.94,0.92);
+  background:radial-gradient(ellipse at center,rgba(30,47,79,.35),rgba(30,47,79,0) 70%);
+  background:radial-gradient(ellipse at center,color-mix(in srgb,currentColor 40%,transparent),transparent 70%)}
+.f3-t1{fill:#f2f5fb;fill:color-mix(in srgb,currentColor 10%,#fff)}
+.f3-t2{fill:#d4deec;fill:color-mix(in srgb,currentColor 28%,#fff)}
+
+@keyframes filterSpin{
+  0.00%{transform:translateY(-0.0200em) rotateX(-21.00deg) rotateY(-26.0deg) rotateZ(0.00deg)}
+  2.08%{transform:translateY(-0.0213em) rotateX(-21.19deg) rotateY(-3.5deg) rotateZ(0.96deg)}
+  4.17%{transform:translateY(-0.0251em) rotateX(-21.73deg) rotateY(19.0deg) rotateZ(1.77deg)}
+  6.25%{transform:translateY(-0.0308em) rotateX(-22.55deg) rotateY(41.5deg) rotateZ(2.31deg)}
+  8.33%{transform:translateY(-0.0375em) rotateX(-23.50deg) rotateY(64.0deg) rotateZ(2.50deg)}
+  10.42%{transform:translateY(-0.0442em) rotateX(-24.45deg) rotateY(86.5deg) rotateZ(2.31deg)}
+  12.50%{transform:translateY(-0.0499em) rotateX(-25.27deg) rotateY(109.0deg) rotateZ(1.77deg)}
+  14.58%{transform:translateY(-0.0537em) rotateX(-25.81deg) rotateY(131.5deg) rotateZ(0.96deg)}
+  16.67%{transform:translateY(-0.0550em) rotateX(-26.00deg) rotateY(154.0deg) rotateZ(0.00deg)}
+  18.75%{transform:translateY(-0.0537em) rotateX(-25.81deg) rotateY(176.5deg) rotateZ(-0.96deg)}
+  20.83%{transform:translateY(-0.0499em) rotateX(-25.27deg) rotateY(199.0deg) rotateZ(-1.77deg)}
+  22.92%{transform:translateY(-0.0442em) rotateX(-24.45deg) rotateY(221.5deg) rotateZ(-2.31deg)}
+  25.00%{transform:translateY(-0.0375em) rotateX(-23.50deg) rotateY(244.0deg) rotateZ(-2.50deg)}
+  27.08%{transform:translateY(-0.0308em) rotateX(-22.55deg) rotateY(266.5deg) rotateZ(-2.31deg)}
+  29.17%{transform:translateY(-0.0251em) rotateX(-21.73deg) rotateY(289.0deg) rotateZ(-1.77deg)}
+  31.25%{transform:translateY(-0.0213em) rotateX(-21.19deg) rotateY(311.5deg) rotateZ(-0.96deg)}
+  33.33%{transform:translateY(-0.0200em) rotateX(-21.00deg) rotateY(334.0deg) rotateZ(0.00deg)}
+  35.42%{transform:translateY(-0.0213em) rotateX(-21.19deg) rotateY(356.5deg) rotateZ(0.96deg)}
+  37.50%{transform:translateY(-0.0251em) rotateX(-21.73deg) rotateY(379.0deg) rotateZ(1.77deg)}
+  39.58%{transform:translateY(-0.0308em) rotateX(-22.55deg) rotateY(401.5deg) rotateZ(2.31deg)}
+  41.67%{transform:translateY(-0.0375em) rotateX(-23.50deg) rotateY(424.0deg) rotateZ(2.50deg)}
+  43.75%{transform:translateY(-0.0442em) rotateX(-24.45deg) rotateY(446.5deg) rotateZ(2.31deg)}
+  45.83%{transform:translateY(-0.0499em) rotateX(-25.27deg) rotateY(469.0deg) rotateZ(1.77deg)}
+  47.92%{transform:translateY(-0.0537em) rotateX(-25.81deg) rotateY(491.5deg) rotateZ(0.96deg)}
+  50.00%{transform:translateY(-0.0550em) rotateX(-26.00deg) rotateY(514.0deg) rotateZ(0.00deg)}
+  52.08%{transform:translateY(-0.0537em) rotateX(-25.81deg) rotateY(536.5deg) rotateZ(-0.96deg)}
+  54.17%{transform:translateY(-0.0499em) rotateX(-25.27deg) rotateY(559.0deg) rotateZ(-1.77deg)}
+  56.25%{transform:translateY(-0.0442em) rotateX(-24.45deg) rotateY(581.5deg) rotateZ(-2.31deg)}
+  58.33%{transform:translateY(-0.0375em) rotateX(-23.50deg) rotateY(604.0deg) rotateZ(-2.50deg)}
+  60.42%{transform:translateY(-0.0308em) rotateX(-22.55deg) rotateY(626.5deg) rotateZ(-2.31deg)}
+  62.50%{transform:translateY(-0.0251em) rotateX(-21.73deg) rotateY(649.0deg) rotateZ(-1.77deg)}
+  64.58%{transform:translateY(-0.0213em) rotateX(-21.19deg) rotateY(671.5deg) rotateZ(-0.96deg)}
+  66.67%{transform:translateY(-0.0200em) rotateX(-21.00deg) rotateY(694.0deg) rotateZ(0.00deg)}
+  68.75%{transform:translateY(-0.0213em) rotateX(-21.19deg) rotateY(716.5deg) rotateZ(0.96deg)}
+  70.83%{transform:translateY(-0.0251em) rotateX(-21.73deg) rotateY(739.0deg) rotateZ(1.77deg)}
+  72.92%{transform:translateY(-0.0308em) rotateX(-22.55deg) rotateY(761.5deg) rotateZ(2.31deg)}
+  75.00%{transform:translateY(-0.0375em) rotateX(-23.50deg) rotateY(784.0deg) rotateZ(2.50deg)}
+  77.08%{transform:translateY(-0.0442em) rotateX(-24.45deg) rotateY(806.5deg) rotateZ(2.31deg)}
+  79.17%{transform:translateY(-0.0499em) rotateX(-25.27deg) rotateY(829.0deg) rotateZ(1.77deg)}
+  81.25%{transform:translateY(-0.0537em) rotateX(-25.81deg) rotateY(851.5deg) rotateZ(0.96deg)}
+  83.33%{transform:translateY(-0.0550em) rotateX(-26.00deg) rotateY(874.0deg) rotateZ(0.00deg)}
+  85.42%{transform:translateY(-0.0537em) rotateX(-25.81deg) rotateY(896.5deg) rotateZ(-0.96deg)}
+  87.50%{transform:translateY(-0.0499em) rotateX(-25.27deg) rotateY(919.0deg) rotateZ(-1.77deg)}
+  89.58%{transform:translateY(-0.0442em) rotateX(-24.45deg) rotateY(941.5deg) rotateZ(-2.31deg)}
+  91.67%{transform:translateY(-0.0375em) rotateX(-23.50deg) rotateY(964.0deg) rotateZ(-2.50deg)}
+  93.75%{transform:translateY(-0.0308em) rotateX(-22.55deg) rotateY(986.5deg) rotateZ(-2.31deg)}
+  95.83%{transform:translateY(-0.0251em) rotateX(-21.73deg) rotateY(1009.0deg) rotateZ(-1.77deg)}
+  97.92%{transform:translateY(-0.0213em) rotateX(-21.19deg) rotateY(1031.5deg) rotateZ(-0.96deg)}
+  100.00%{transform:translateY(-0.0200em) rotateX(-21.00deg) rotateY(1054.0deg) rotateZ(0.00deg)}
+}
+
+@keyframes filterShadow{
+  0.00%{transform:scale(0.940,0.920);opacity:0.950}
+  2.08%{transform:scale(0.945,0.922);opacity:0.944}
+  4.17%{transform:scale(0.956,0.929);opacity:0.916}
+  6.25%{transform:scale(0.969,0.938);opacity:0.866}
+  8.33%{transform:scale(0.980,0.948);opacity:0.812}
+  10.42%{transform:scale(0.984,0.958);opacity:0.771}
+  12.50%{transform:scale(0.982,0.965);opacity:0.751}
+  14.58%{transform:scale(0.976,0.969);opacity:0.751}
+  16.67%{transform:scale(0.971,0.970);opacity:0.763}
+  18.75%{transform:scale(0.971,0.969);opacity:0.780}
+  20.83%{transform:scale(0.975,0.965);opacity:0.798}
+  22.92%{transform:scale(0.979,0.958);opacity:0.817}
+  25.00%{transform:scale(0.979,0.948);opacity:0.839}
+  27.08%{transform:scale(0.971,0.938);opacity:0.871}
+  29.17%{transform:scale(0.957,0.929);opacity:0.916}
+  31.25%{transform:scale(0.944,0.922);opacity:0.951}
+  33.33%{transform:scale(0.940,0.920);opacity:0.950}
+  35.42%{transform:scale(0.945,0.922);opacity:0.944}
+  37.50%{transform:scale(0.956,0.929);opacity:0.916}
+  39.58%{transform:scale(0.969,0.938);opacity:0.866}
+  41.67%{transform:scale(0.980,0.948);opacity:0.812}
+  43.75%{transform:scale(0.984,0.958);opacity:0.771}
+  45.83%{transform:scale(0.982,0.965);opacity:0.751}
+  47.92%{transform:scale(0.976,0.969);opacity:0.751}
+  50.00%{transform:scale(0.971,0.970);opacity:0.763}
+  52.08%{transform:scale(0.971,0.969);opacity:0.780}
+  54.17%{transform:scale(0.975,0.965);opacity:0.798}
+  56.25%{transform:scale(0.979,0.958);opacity:0.817}
+  58.33%{transform:scale(0.979,0.948);opacity:0.839}
+  60.42%{transform:scale(0.971,0.938);opacity:0.871}
+  62.50%{transform:scale(0.957,0.929);opacity:0.916}
+  64.58%{transform:scale(0.944,0.922);opacity:0.951}
+  66.67%{transform:scale(0.940,0.920);opacity:0.950}
+  68.75%{transform:scale(0.945,0.922);opacity:0.944}
+  70.83%{transform:scale(0.956,0.929);opacity:0.916}
+  72.92%{transform:scale(0.969,0.938);opacity:0.866}
+  75.00%{transform:scale(0.980,0.948);opacity:0.812}
+  77.08%{transform:scale(0.984,0.958);opacity:0.771}
+  79.17%{transform:scale(0.982,0.965);opacity:0.751}
+  81.25%{transform:scale(0.976,0.969);opacity:0.751}
+  83.33%{transform:scale(0.971,0.970);opacity:0.763}
+  85.42%{transform:scale(0.971,0.969);opacity:0.780}
+  87.50%{transform:scale(0.975,0.965);opacity:0.798}
+  89.58%{transform:scale(0.979,0.958);opacity:0.817}
+  91.67%{transform:scale(0.979,0.948);opacity:0.839}
+  93.75%{transform:scale(0.971,0.938);opacity:0.871}
+  95.83%{transform:scale(0.957,0.929);opacity:0.916}
+  97.92%{transform:scale(0.944,0.922);opacity:0.951}
+  100.00%{transform:scale(0.940,0.920);opacity:0.950}
+}
+
 @keyframes sealShadow{
   0%{transform:scaleX(0.909);opacity:1.001}
   2.08%{transform:scaleX(1.045);opacity:1.066}
@@ -1447,8 +1562,10 @@
   100%{transform:scaleX(0.909);opacity:1.001}}
 @media (hover:hover){
   html:not(.fx-js) .catalog-card:hover .seal3d-spin{animation:sealSpin 6s linear infinite}
-  html:not(.fx-js) .catalog-card:hover .seal3d-shadow{animation:sealShadow 6s linear infinite}}
-@media (prefers-reduced-motion:reduce){.seal3d-spin,.seal3d-shadow{animation:none!important}}
+  html:not(.fx-js) .catalog-card:hover .seal3d-shadow{animation:sealShadow 6s linear infinite}
+      html:not(.fx-js) .catalog-card:hover .filter3d-spin{animation:filterSpin 6s linear infinite}
+      html:not(.fx-js) .catalog-card:hover .filter3d-shadow{animation:filterShadow 6s linear infinite}}
+@media (prefers-reduced-motion:reduce){.seal3d-spin,.seal3d-shadow,.filter3d-spin,.filter3d-shadow{animation:none!important}}
 </style>
 </head>
 <body>
@@ -1456,6 +1573,13 @@
 <lineargradient id="s3-sheen" x1="0.12" x2="0.88" y1="0.05" y2="0.95">
 <stop offset="0" stop-color="#fff" stop-opacity=".85"></stop><stop offset=".42" stop-color="#fff" stop-opacity="0"></stop>
 <stop offset=".7" stop-color="#0f1e35" stop-opacity="0"></stop><stop offset="1" stop-color="#0f1e35" stop-opacity=".16"></stop></lineargradient>
+<lineargradient id="f3-sheen" x1="0.08" x2="0.92" y1="0.06" y2="0.94">
+<stop offset="0" stop-color="#fff" stop-opacity=".95"></stop><stop offset=".4" stop-color="#fff" stop-opacity="0"></stop>
+<stop offset=".7" stop-color="#0b1626" stop-opacity="0"></stop><stop offset="1" stop-color="#0b1626" stop-opacity=".22"></stop>
+</lineargradient>
+<radialgradient id="f3-core" cx="50%" cy="50%" r="50%">
+<stop offset="0%" stop-color="#070c14"></stop><stop offset="68%" stop-color="#141f30"></stop><stop offset="100%" stop-color="#2a3d5c"></stop>
+</radialgradient>
 </defs></svg>
 <a class="skip-link" href="#catalog">Перейти к каталогу</a>
 <header>
@@ -1582,23 +1706,7 @@
 </div>
 <div class="catalog-card sap-card-base reveal">
 <div class="card-media"><img alt="Воздушный, масляный и топливный фильтры" decoding="async" height="500" loading="lazy" src="images/filtry.webp" width="800"/></div>
-<div class="card-icon-wrap"><svg aria-hidden="true" class="icon-filter-svg" fill="none" focusable="false" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-<defs>
-<clipPath id="sapFilterClip">
-<path d="M6 5.5 C6 4.7 6.7 4 7.5 4 L16.5 4 C17.3 4 18 4.7 18 5.5 L18 16.8 C18 19 15.3 20.8 12 20.8 C8.7 20.8 6 19 6 16.8 Z"/>
-</clipPath>
-</defs>
-<ellipse cx="12" cy="4" rx="4.5" ry="1.4" stroke-width="1.6"/>
-<circle cx="12" cy="4" fill="currentColor" r="1.1" stroke="none"/>
-<path d="M6 4.5 L6 16.8 C6 19 8.7 20.8 12 20.8 C15.3 20.8 18 19 18 16.8 L18 4.5" stroke-width="1.8"/>
-<path d="M6 7.2 C8 8 16 8 18 7.2" opacity="0.5" stroke-width="1.2"/>
-<g clip-path="url(#sapFilterClip)">
-<g class="icon-filter-spin">
-<path d="M-4 8.5 L-4 15.5 M-1 8.5 L-1 16 M2 8.5 L2 16.5 M5 8.5 L5 17 M8 8.5 L8 17 M11 8.5 L11 17 M14 8.5 L14 17 M17 8.5 L17 17 M20 8.5 L20 16.5 M23 8.5 L23 16 M26 8.5 L26 15.5" opacity="0.5" stroke-width="1.3"/>
-<path d="M-4 18.2 L-4 20 M-1 18.6 L-1 20.4 M2 19.1 L2 20.8 M5 19.6 L5 21.2 M8 20 L8 21.5 M11 20.2 L11 21.6 M14 20 L14 21.5 M17 19.6 L17 21.2 M20 19.1 L20 20.8 M23 18.6 L23 20.4 M26 18.2 L26 20" opacity="0.85" stroke-width="1.5"/>
-</g>
-</g>
-</svg></div>
+<div class="card-icon-wrap"><div aria-hidden="true" class="filter3d"></div></div>
 <h3>Фильтрующие элементы</h3><p>Фильтры для двигателей, гидравлических и топливных систем спецтехники. Подбираем решения для эффективной очистки воздуха, масла и топлива, помогая защитить узлы и агрегаты от преждевременного износа.</p>
 <a aria-label="Оставить заявку: Фильтрующие элементы" class="card-cta" data-request="filters" href="#sapFormWrap">Оставить заявку <svg aria-hidden="true" fill="none" focusable="false" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
 </div>
@@ -2372,6 +2480,91 @@ if(!inner){f.style.webkitBackfaceVisibility='hidden';f.style.backfaceVisibility=
   }
   document.querySelectorAll('.seal3d').forEach(build);
 })();
+
+      /* filter3d builder */
+      (function(){
+        var H = 0.52, R = 0.38, RIN = 0.33, N = 28, D = Math.PI / 180;
+        function topFace(){
+          var holes = [0, 45, 90, 135, 180, 225, 270, 315].map(function(deg){
+            var rad = 8.5, a = deg * D;
+            var cx = (16 + rad * Math.cos(a)).toFixed(2);
+            var cy = (16 + rad * Math.sin(a)).toFixed(2);
+            return '<circle cx="' + cx + '" cy="' + cy + '" r="1.35"/>' +
+                   '<circle cx="' + cx + '" cy="' + cy + '" r="1.1" fill="none" stroke="#fff" stroke-opacity=".38" stroke-width=".3"/>';
+          }).join('');
+          return '<svg viewBox="0 0 32 32" aria-hidden="true">' +
+            '<circle cx="16" cy="16" r="15.2" class="f3-t1" stroke="currentColor" stroke-width=".75"/>' +
+            '<circle cx="16" cy="16" r="15.2" fill="url(#f3-sheen)"/>' +
+            '<circle cx="16" cy="16" r="13.1" fill="none" stroke="#121b28" stroke-width="2.1"/>' +
+            '<circle cx="16" cy="16" r="13.1" fill="none" stroke="currentColor" stroke-opacity=".3" stroke-width=".6"/>' +
+            '<circle cx="16" cy="16" r="13.95" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width=".45"/>' +
+            '<circle cx="16" cy="16" r="11.4" class="f3-t2" stroke="currentColor" stroke-opacity=".5" stroke-width=".5"/>' +
+            '<g fill="#0c1420" stroke="currentColor" stroke-opacity=".35" stroke-width=".3">' + holes + '</g>' +
+            '<circle cx="16" cy="16" r="5.4" fill="url(#f3-core)" stroke="currentColor" stroke-width=".8"/>' +
+            '<circle cx="16" cy="16" r="5.4" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width=".5"/>' +
+            '<circle cx="16" cy="16" r="4.1" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width=".6" stroke-dasharray="1.2 .8"/>' +
+            '<circle cx="16" cy="16" r="2.8" fill="none" stroke="currentColor" stroke-opacity=".8" stroke-width=".6"/>' +
+            '<circle cx="16" cy="16" r="1.8" fill="#060a10"/>' +
+            '<path d="M5.5 10A12 12 0 0 1 12 4.8" fill="none" stroke="#fff" stroke-width=".95" stroke-linecap="round" opacity=".9"/>' +
+            '</svg>';
+        }
+        function botFace(){
+          return '<svg viewBox="0 0 32 32" aria-hidden="true">' +
+            '<circle cx="16" cy="16" r="15.2" class="f3-t1" stroke="currentColor" stroke-width=".75"/>' +
+            '<circle cx="16" cy="16" r="15.2" fill="url(#f3-sheen)"/>' +
+            '<circle cx="16" cy="16" r="11" fill="none" stroke="currentColor" stroke-opacity=".4" stroke-width=".8"/>' +
+            '<circle cx="16" cy="16" r="6" fill="none" stroke="currentColor" stroke-opacity=".3" stroke-width=".6"/>' +
+            '</svg>';
+        }
+        function build(root){
+          var sp = document.createElement('div'); sp.className = 'filter3d-spin';
+          var tc = document.createElement('div'); tc.className = 'filter3d-cap';
+          tc.style.transform = 'translateY(' + (-H/2) + 'em) rotateX(90deg)';
+          tc.innerHTML = topFace();
+          sp.appendChild(tc);
+
+          var bc = document.createElement('div'); bc.className = 'filter3d-cap';
+          bc.style.transform = 'translateY(' + (H/2) + 'em) rotateX(90deg)';
+          bc.innerHTML = botFace();
+          sp.appendChild(bc);
+
+          var w = 2 * R * Math.tan(Math.PI / N) * 1.05;
+          for(var i = 0; i < N; i++){
+            var ang = i * 360 / N;
+            var cosL = Math.cos((ang + 40) * D);
+            var light = (1 - cosL) / 2;
+            var isPeak = (i % 2 === 0);
+            var rPleat = isPeak ? R : RIN;
+            var topRimHighlight = (0.75 - 0.3 * light).toFixed(2);
+            var pleatBase = isPeak ? (0.02 + 0.28 * light) : (0.18 + 0.35 * light);
+            var bottomRimHighlight = (0.55 - 0.25 * light).toFixed(2);
+            var grad = 'linear-gradient(180deg, ' +
+              'rgba(255,255,255,' + topRimHighlight + ') 0%, ' +
+              'rgba(255,255,255,0.2) 11%, ' +
+              'rgba(14,23,38,' + pleatBase.toFixed(2) + ') 14%, ' +
+              (isPeak ? 'rgba(255,255,255,0.4) 16%, rgba(255,255,255,0.05) 45%, ' : '') +
+              'rgba(255,255,255,0.3) 49%, ' +
+              'rgba(14,23,38,' + pleatBase.toFixed(2) + ') 53%, ' +
+              'rgba(14,23,38,' + (pleatBase * 1.1 > 0.9 ? 0.9 : pleatBase * 1.1).toFixed(2) + ') 84%, ' +
+              'rgba(255,255,255,' + bottomRimHighlight + ') 88%, ' +
+              'rgba(14,23,38,0.5) 100%), ' +
+              (isPeak ? 'color-mix(in srgb, currentColor 25%, #e2eaf5)' : 'color-mix(in srgb, currentColor 45%, #b6c6dc)');
+
+            var f = document.createElement('i'); f.className = 'filter3d-facet';
+            f.style.cssText = 'width:' + w.toFixed(3) + 'em;height:' + H + 'em;' +
+              'margin:' + (-H/2) + 'em 0 0 ' + (-w/2) + 'em;' +
+              'background:' + grad + ';' +
+              'transform:rotateY(' + ang + 'deg) translateZ(' + rPleat.toFixed(3) + 'em);' +
+              'border-left:.5px solid rgba(255,255,255,' + (isPeak ? '0.45' : '0.15') + ');' +
+              'border-right:.5px solid rgba(0,0,0,' + (isPeak ? '0.25' : '0.45') + ');';
+            sp.appendChild(f);
+          }
+          var sh = document.createElement('span'); sh.className = 'filter3d-shadow';
+          root.appendChild(sh); root.appendChild(sp);
+        }
+        document.querySelectorAll('.filter3d').forEach(build);
+      })();
+
 </script>
 <script>
         /* ===== Reveal-анимации =====
@@ -2788,7 +2981,23 @@ if(!inner){f.style.webkitBackfaceVisibility='hidden';f.style.backfaceVisibility=
 
             /* ---- кадры (повторяют @keyframes из CSS) ---- */
             const spin = [{ transform: 'rotate(0deg)' }, { transform: 'rotate(360deg)' }];
-            const filterSpin = [{ transform: 'translateX(0px)' }, { transform: 'translateX(-6px)' }];
+            const FILTER_TURNS = 3, FILTER_STEPS = 16;
+            const filterSpin = [], filterShadow = [];
+            for (let i = 0; i <= FILTER_TURNS * FILTER_STEPS; i++) {
+                const step = i % FILTER_STEPS;
+                const bob = (1 - Math.cos(2 * Math.PI * step / FILTER_STEPS)) / 2;
+                const ang = -26 + 360 * i / FILTER_STEPS;
+                const roll = (2.5 * Math.sin(2 * Math.PI * step / FILTER_STEPS)).toFixed(2);
+                const pitch = (-21 - 5 * bob).toFixed(2);
+                const ty = (-0.02 - 0.035 * bob).toFixed(4);
+                const c2 = Math.pow(Math.cos(ang * Math.PI / 180), 2);
+                const sx = (0.88 + 0.12 * bob + 0.06 * c2).toFixed(3);
+                const sy = (0.92 + 0.08 * bob).toFixed(3);
+                const op = (0.85 - 0.22 * bob + 0.1 * c2).toFixed(3);
+                const offset = i / (FILTER_TURNS * FILTER_STEPS);
+                filterSpin.push({ offset, transform: 'translateY(' + ty + 'em) rotateX(' + pitch + 'deg) rotateY(' + ang.toFixed(1) + 'deg) rotateZ(' + roll + 'deg)' });
+                filterShadow.push({ offset, transform: 'scale(' + sx + ', ' + sy + ')', opacity: +op });
+            }
             /* Ремень на иконке: зубья идут по часовой стрелке вдоль замкнутого контура (период узора 3 из 60) */
             const beltRun = [{ strokeDashoffset: '0px' }, { strokeDashoffset: '-3px' }];
             /* серпентинный ремень на брендах: период узора 2 из 60 */
@@ -2835,7 +3044,8 @@ if(!inner){f.style.webkitBackfaceVisibility='hidden';f.style.backfaceVisibility=
                 { sel: '.icon-belt-loop',          frames: beltRun, duration: 500, hold: true },
                 { sel: '.icon-belt-p1',            frames: spin, duration: 6513,  hold: true },
                 { sel: '.icon-belt-p2',            frames: spin, duration: 4187,  hold: true },
-                { sel: '.icon-filter-spin',        frames: filterSpin, duration: 1400, hold: true },
+                { sel: '.filter3d-spin',   frames: filterSpin,   duration: 6000, hold: true, settle: true, finishOnTap: true },
+                { sel: '.filter3d-shadow', frames: filterShadow, duration: 6000, hold: true, settle: true, finishOnTap: true },
                 /* подшипниковый узел UCFL: сепаратор крутится в 0,388 от скорости внутреннего кольца (7734 = 3000 / 0,388) */
                 { sel: '.icon-ucfl-inner',         frames: spin, duration: 3000,  hold: true },
                 { sel: '.icon-ucfl-cage',          frames: spin, duration: 7734,  hold: true },
