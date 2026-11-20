@@ -11,7 +11,6 @@
 <link href="images/apple-touch-icon.png" rel="apple-touch-icon"/>
 <link href="site.webmanifest" rel="manifest"/>
 <meta content="#1e2f4f" name="theme-color"/>
-<!-- TODO: замените https://specagropartner.ru на реальный адрес сайта (поиск и замена по всему файлу) -->
 <link href="https://specagropartner.ru/" rel="canonical"/>
 <meta content="website" property="og:type"/>
 <meta content="ru_RU" property="og:locale"/>
@@ -19,7 +18,7 @@
 <meta content="САП — СпецАгроПартнер Рязань | Комплектующие для агро и индустрии" property="og:title"/>
 <meta content="Комплектующие, подшипники, приводные ремни и масла для агробизнеса и индустрии в Рязани. Оригинальные запчасти от мировых брендов." property="og:description"/>
 <meta content="https://specagropartner.ru/" property="og:url"/>
-<meta content="https://specagropartner.ru/og-image.png" property="og:image"/><meta content="САП — СпецАгроПартнер, Рязань" property="og:image:alt"/><meta content="https://specagropartner.ru/og-image.png" name="twitter:image"/>
+<meta content="https://specagropartner.ru/og-image.jpg" property="og:image"/><meta content="САП — СпецАгроПартнер, Рязань" property="og:image:alt"/><meta content="https://specagropartner.ru/og-image.jpg" name="twitter:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="summary_large_image" name="twitter:card"/>
@@ -30,10 +29,10 @@
       "name": "ООО «СпецАгроПартнер»",
       "alternateName": "САП",
       "url": "https://specagropartner.ru/",
-      "image": "https://specagropartner.ru/og-image.png",
+      "image": "https://specagropartner.ru/og-image.jpg",
       "description": "Комплектующие, подшипники, приводные ремни и масла для агробизнеса и индустрии в Рязани.",
       "telephone": "+7-920-968-01-28",
-      "email": "ooo-sap@list.ru",
+      "email": "sales@specagropartner.ru",
       "taxID": "6200010060",
       "address": {
         "@type": "PostalAddress",
@@ -53,7 +52,7 @@
         "@type": "ContactPoint",
         "contactType": "sales",
         "telephone": "+7-920-968-01-28",
-        "email": "ooo-sap@list.ru",
+        "email": "sales@specagropartner.ru",
         "availableLanguage": "ru"
       }]
     }
@@ -130,7 +129,9 @@
         nav a:hover::after { width: 100%; }
         .nav-info { display: none; }
         .header-contacts-group { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
-        .header-email { font-size: 13.5px; font-weight: 600; color: var(--blue); text-decoration: none; transition: var(--transition); letter-spacing: -0.005em; }
+        .header-phone { font-size: 15px; font-weight: 700; color: var(--dark); text-decoration: none; transition: var(--transition); letter-spacing: -0.01em; white-space: nowrap; }
+        .header-phone:hover { color: var(--orange); }
+        .header-email { font-size: 13.5px; font-weight: 600; color: var(--blue); text-decoration: none; transition: var(--transition); letter-spacing: -0.005em; white-space: nowrap; }
         .header-email:hover { color: var(--orange); }
 
         .header-actions { display: none; }
@@ -220,15 +221,6 @@
             100% { opacity: 0;    -webkit-mask-position: 0% 0;   mask-position: 0% 0; }
         }
         @media (prefers-reduced-motion: reduce) { .sap-sheen { display: none; } .hero-logo-wrap.is-pressed .hero-logo-inner { scale: 1; } }
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                scroll-behavior: auto !important;
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-            .reveal { opacity: 1 !important; transform: none !important; }
-        }
         @keyframes heroFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
 
         .catalog { padding: 100px 0; background-color: var(--white); border-radius: 50px 50px 0 0; }
@@ -424,6 +416,7 @@
             position: relative; display: flex; align-items: center; justify-content: center; background: var(--white);
             border-radius: 14px; padding: 9px; height: 68px;
             border: 1px solid rgba(30, 47, 79, 0.06); box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            text-decoration: none; color: inherit;
             transition: all 0.4s var(--ease);
         }
         .brand-group-card:hover .brand-logo-item {
@@ -431,8 +424,6 @@
         }
         .brand-logo-item svg { --logo-scale: 1; height: calc(var(--logo-h, 30) * var(--logo-scale) * 1px); width: auto; max-width: 92%; max-height: 100%; display: block; flex-shrink: 0; transition: transform 0.4s var(--ease); }
         .brand-logo-item:hover svg { transform: scale(1.08); }
-
-        .brand-logo-item { text-decoration: none; color: inherit; }
         .brand-logo-item::after {
             content: ''; position: absolute; top: 7px; right: 7px; width: 11px; height: 11px;
             background-color: var(--blue); opacity: 0.3; pointer-events: none;
@@ -461,12 +452,13 @@
         @media (hover: none) { .brand-logo-item::after { opacity: 0.45; } }
 
         .about { padding: 100px 0; background-color: var(--white); }
-        .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: flex-start; }
+        .about-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 60px; align-items: center; }
         .about-text h2 { font-size: 34px; font-weight: 700; margin-bottom: 24px; letter-spacing: -0.025em; text-wrap: balance; }
         .about-text p { color: #444; font-weight: 400; font-size: 15px; margin-bottom: 18px; line-height: 1.65; letter-spacing: -0.005em; }
-        .about-media { display: flex; flex-direction: column; gap: 20px; }
-        .about-image-card { padding: 0; overflow: hidden; display: block; line-height: 0; }
-        .about-image-card img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; display: block; }
+        .about-media { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; }
+        .about-image-card { position: relative; width: 100%; aspect-ratio: 1 / 1; padding: 0; overflow: hidden; display: block; line-height: 0; border-radius: 28px; }
+        .about-image-card picture { display: block; width: 100%; height: 100%; }
+        .about-image-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
         .expertise-grid {
             display: grid;
@@ -1092,7 +1084,7 @@
         @keyframes sapReveal { from { opacity: 0; translate: 0 26px; } to { opacity: 1; translate: 0 0; } }
 
         @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
+            html { scroll-behavior: auto !important; }
             *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
             html.js .reveal { opacity: 1; translate: 0 0; }
             html.js .reveal.visible { animation: none; }
@@ -1127,6 +1119,10 @@
             .header-phone-btn svg { width: 20px; height: 20px; display: block; }
 
             .hero-grid, .about-grid, .contacts-grid { grid-template-columns: 1fr; gap: 35px; }
+            .about-media { position: static; width: 100%; height: auto; min-height: unset; display: block; }
+            .about-image-card { position: static; inset: auto; width: 100%; height: auto; aspect-ratio: 21 / 9; }
+            .about-image-card picture { display: block; width: 100%; height: 100%; }
+            .about-image-card img { width: 100%; height: 100%; aspect-ratio: unset; object-fit: cover; display: block; }
             .hero { padding-top: 115px; text-align: center; }
             .hero-text p { margin-left: auto; margin-right: auto; }
             .hero-visual { order: -1; }
@@ -1193,8 +1189,9 @@
             .brand-logo-item svg { --logo-scale: 0.85; }
         }
     
-        /* ===== Фото в карточках (временные иллюстрации — заменить на живые фото) ===== */
+        /* ===== Фото в карточках ===== */
         .card-media { position: relative; overflow: hidden; line-height: 0; margin: -32px -28px 22px; aspect-ratio: 16 / 10; background: var(--blue-dark); border-radius: 27px 27px 0 0; }
+        .card-media picture { display: block; width: 100%; height: 100%; }
         .card-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.2s var(--ease); }
         .card-media::after { content: ''; position: absolute; inset: 0 0 -1px 0; pointer-events: none;
             background: linear-gradient(180deg, rgba(15, 30, 53, 0) 55%, rgba(15, 30, 53, 0.28) 100%); }
@@ -1254,6 +1251,8 @@
             .logo-text { transition: transform 0.5s var(--ease); }
             body.nav-open .logo-text { transform: translateX(var(--logo-shift, 0px)); }
 
+            nav a[href*="blog"] { margin-top: 10px; background: linear-gradient(180deg, #fff9f5 0%, #fef1e8 100%); border: 1px solid rgba(234, 88, 32, 0.18); }
+            nav a[href*="blog"]::before { content: ""; position: absolute; left: 10px; right: 10px; top: -9px; height: 1px; background: linear-gradient(90deg, transparent, rgba(30, 47, 79, 0.14), transparent); pointer-events: none; }
             /* Адрес и режим работы: тихая подпись внизу шторки, без плитки — не спорит с пунктами меню */
             nav a:last-of-type { margin-bottom: 10px; }
             .nav-info { display: flex; flex-direction: column; gap: 9px; margin-top: auto; padding: 14px 14px 0; border-top: 1px solid rgba(30, 47, 79, 0.10); font-style: normal; font-size: 12.5px; line-height: 1.45; letter-spacing: -0.005em; color: #64748b; }
@@ -1277,10 +1276,7 @@
                 0 10px 22px -4px rgba(234, 88, 32, 0.34);
         }
         .card-icon-wrap, .promo-3d-stage, .expertise-icon { position: relative; }
-        .card-icon-wrap::after, .promo-3d-stage::after, .expertise-icon::after {
-            opacity: 0;
-            transition: opacity 0.45s var(--ease);
-        }
+        .card-icon-wrap::after, .promo-3d-stage::after, .expertise-icon::after { opacity: 0; }
 
         .card-icon-wrap > svg, .promo-3d-stage > svg, .expertise-icon > svg { position: relative; z-index: 2; }
         .promo-3d-stage .smoke-puff { z-index: 3; }
@@ -1290,10 +1286,6 @@
         .expertise-card:hover .expertise-icon::after { opacity: 1; }
 
         /* Наклоняется фон плашки; SVG-иконка остаётся неподвижной. */
-        .card-icon-wrap, .promo-3d-stage, .expertise-icon, .hero-badge-icon {
-            background: none !important; border-color: transparent !important; box-shadow: none !important;
-            -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
-        }
         .card-icon-wrap::before, .promo-3d-stage::before, .expertise-icon::before, .hero-badge-icon::before {
             content: ''; position: absolute; inset: -1px; border-radius: inherit; z-index: 0; pointer-events: none; opacity: 1;
             background:
@@ -1566,7 +1558,99 @@
       html:not(.fx-js) .catalog-card:hover .filter3d-spin{animation:filterSpin 6s linear infinite}
       html:not(.fx-js) .catalog-card:hover .filter3d-shadow{animation:filterShadow 6s linear infinite}}
 @media (prefers-reduced-motion:reduce){.seal3d-spin,.seal3d-shadow,.filter3d-spin,.filter3d-shadow{animation:none!important}}
+
+/* ===== Ссылка на полезные материалы в блоке о компании (глассморфизм + туман .sap-card-base) ===== */
+        .about-blog-link {
+            display: flex; align-items: center; gap: 16px; margin-top: 26px; padding: 17px 19px 17px 17px;
+            border-radius: 24px; text-decoration: none; color: inherit;
+            background: var(--grain-card) 0 0 / 180px 180px repeat, linear-gradient(180deg, rgba(255, 255, 255, 0.84) 0%, rgba(238, 241, 246, 0.70) 100%);
+            -webkit-backdrop-filter: blur(18px) saturate(140%); backdrop-filter: blur(18px) saturate(140%);
+        }
+        .about-blog-link__icon {
+            position: relative; width: 48px; height: 48px; flex: 0 0 auto; border-radius: 15px;
+            display: flex; align-items: center; justify-content: center; color: var(--blue);
+            transition: transform 0.5s var(--ease), color 0.35s var(--ease);
+        }
+        .about-blog-link__icon::before {
+            content: ""; position: absolute; inset: -1px; border-radius: inherit; z-index: 0; pointer-events: none;
+            background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.14) 48%, rgba(255,255,255,0) 55%),
+                        linear-gradient(160deg, rgba(246,249,254,0.92) 0%, rgba(222,232,246,0.80) 100%);
+            border: 1px solid rgba(255,255,255,0.92); box-shadow: var(--glass-shadow);
+            transform: rotate(0deg); transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+        }
+        .about-blog-link__icon::after {
+            content: ""; position: absolute; inset: -1px; border-radius: inherit; z-index: 1; pointer-events: none; opacity: 0;
+            background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.14) 48%, rgba(255,255,255,0) 55%),
+                        linear-gradient(160deg, rgba(255,240,229,0.95) 0%, rgba(255,198,160,0.55) 100%);
+            border: 1px solid rgba(255,255,255,0.92);
+            transform: rotate(0deg); transition: opacity 0.45s var(--ease), transform 0.5s var(--ease);
+        }
+        .about-blog-link__icon svg { position: relative; z-index: 2; width: 22px; height: 22px; }
+        .about-blog-link__text { flex: 1 1 auto; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+        .about-blog-link__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); }
+        .about-blog-link__text strong { font-size: 16px; font-weight: 700; line-height: 1.3; color: var(--blue); letter-spacing: -0.01em; transition: color 0.35s var(--ease); }
+        .about-blog-link__text > span:last-child { font-size: 13.5px; line-height: 1.48; color: #555; letter-spacing: -0.005em; }
+        .about-blog-link__cta {
+            flex: 0 0 auto; display: inline-flex; align-items: center; gap: 7px; padding: 10px 18px; border-radius: 99px;
+            font-size: 13px; font-weight: 600; line-height: 1.25; color: var(--blue); white-space: nowrap;
+            background-color: rgba(244, 247, 251, 0.85); background-image: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 100%);
+            border: 1px solid rgba(30, 47, 79, 0.12);
+            box-shadow: 0 2px 6px rgba(30, 47, 79, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+            transition: background-color 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
+        }
+        .about-blog-link__cta svg { width: 15px; height: 15px; flex: 0 0 auto; transition: transform 0.35s var(--ease); }
+        @media (hover: hover) {
+            .about-blog-link:hover .about-blog-link__icon,
+            .about-blog-link.fog-on .about-blog-link__icon { color: var(--orange); transform: translateY(-2px); }
+            .about-blog-link:hover .about-blog-link__icon::before,
+            .about-blog-link.fog-on .about-blog-link__icon::before { transform: rotate(-4deg); box-shadow: var(--glass-shadow-hot); }
+            .about-blog-link:hover .about-blog-link__icon::after,
+            .about-blog-link.fog-on .about-blog-link__icon::after { opacity: 1; transform: rotate(-4deg); }
+            .about-blog-link:hover .about-blog-link__text strong,
+            .about-blog-link.fog-on .about-blog-link__text strong { color: var(--orange); }
+            .about-blog-link:hover .about-blog-link__cta,
+            .about-blog-link.fog-on .about-blog-link__cta {
+                background-color: var(--orange); background-image: linear-gradient(180deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 100%);
+                color: #fff; border-color: var(--orange); box-shadow: 0 8px 20px rgba(234, 88, 32, 0.28);
+            }
+            .about-blog-link:hover .about-blog-link__cta svg,
+            .about-blog-link.fog-on .about-blog-link__cta svg { transform: translateX(4px); }
+        }
+        .about-blog-link.fog-on .about-blog-link__icon { color: var(--orange); }
+        .about-blog-link.fog-on .about-blog-link__icon::before { transform: rotate(-4deg); box-shadow: var(--glass-shadow-hot); }
+        .about-blog-link.fog-on .about-blog-link__icon::after { opacity: 1; transform: rotate(-4deg); }
+        .about-blog-link.fog-on .about-blog-link__text strong { color: var(--orange); }
+        .about-blog-link.fog-on .about-blog-link__cta {
+            background-color: var(--orange); background-image: linear-gradient(180deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 100%);
+            color: #fff; border-color: var(--orange); box-shadow: 0 8px 20px rgba(234, 88, 32, 0.28);
+        }
+        .about-blog-link:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+        @media (prefers-reduced-motion: reduce) {
+            .about-blog-link, .about-blog-link__icon, .about-blog-link__icon::before, .about-blog-link__icon::after, .about-blog-link__cta, .about-blog-link__cta svg { transition: none; }
+        }
+        @media (max-width: 680px) {
+            .about-blog-link { flex-wrap: wrap; padding: 16px; gap: 12px 14px; border-radius: 22px; }
+            .about-blog-link__text { flex: 1 1 calc(100% - 64px); }
+            .about-blog-link__text strong { font-size: 15px; }
+            .about-blog-link__text > span:last-child { font-size: 12.5px; }
+            .about-blog-link__cta { margin-left: auto; }
+        }
+        @media (min-width:1025px) and (max-width:1200px){nav{gap:20px}nav a{font-size:14px}}
 </style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=114277704', 'ym');
+
+    ym(114277704, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/114277704" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
 </head>
 <body>
 <svg aria-hidden="true" focusable="false" height="0" style="position:absolute" width="0"><defs>
@@ -1603,6 +1687,7 @@
 <a href="#cases">Кейсы</a>
 <a href="#faq">FAQ</a>
 <a href="#contacts">Контакты</a>
+<a href="blog/">Блог</a>
 <address class="nav-info">
 <div class="nav-info-row">
 <svg aria-hidden="true" fill="none" focusable="false" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
@@ -1615,8 +1700,8 @@
 </address>
 </nav>
 <div class="header-contacts-group">
-<a class="header-email" href="mailto:ooo-sap@list.ru">ooo-sap@list.ru</a>
-<a class="header-email" href="mailto:sap_parts@mail.ru">sap_parts@mail.ru</a>
+<a class="header-phone" href="tel:+79209680128">+7-920-968-01-28</a>
+<a class="header-email" href="mailto:sales@specagropartner.ru">sales@specagropartner.ru</a>
 </div>
 <div class="header-actions">
 <a aria-label="Позвонить: +7-920-968-01-28" class="header-phone-btn" href="tel:+79209680128">
@@ -1675,7 +1760,7 @@
 <div class="section-title reveal"><h2>Категории комплектующих</h2><p>Проверенные опытом решения для стабильной работы узлов и агрегатов</p></div>
 <div class="catalog-grid">
 <div class="catalog-card sap-card-base reveal">
-<div class="card-media"><img alt="Запчасти для тракторов и комбайнов на верстаке склада" decoding="async" height="800" loading="lazy" src="images/zapchasti-sklad.webp" width="800"/></div>
+<div class="card-media"><picture><source media="(min-width: 1025px)" srcset="images/zapchasti-pc.webp" type="image/webp"/><img alt="Запчасти для спецтехники, тракторов и комбайнов" decoding="async" height="800" loading="lazy" src="images/zapchasti-mob.webp" width="1280"/></picture></div>
 <div class="card-icon-wrap"><svg aria-hidden="true" fill="none" focusable="false" stroke="currentColor" viewbox="0 0 24 24"><g class="icon-gear"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></g></svg></div>
 <h3>Запчасти для спецтехники</h3><p>Оригинальные комплектующие и проверенные аналоги OEM-качества для двигателей, трансмиссий, ходовой и рабочих органов импортной спецтехники, тракторов, комбайнов и автомобилей.</p>
 <a aria-label="Оставить заявку: Запчасти для спецтехники" class="card-cta" data-request="parts" href="#sapFormWrap">Оставить заявку <svg aria-hidden="true" fill="none" focusable="false" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
@@ -1823,10 +1908,15 @@
 <p>Ключевое направление нашего ассортимента — надёжная подшипниковая продукция, рассчитанная на экстремальные механические нагрузки.</p>
 <p>Склад компании расположен непосредственно на Окружной дороге Рязани. Такое размещение гарантирует удобный подъезд для любого грузового транспорта и исключает потерю времени в городских пробках.</p>
 <p>Команда «СпецАгроПартнер» объединяет опытных специалистов по промышленному снабжению и экспертов в сфере агротехники. Синергия глубоких практических знаний и современных подходов позволяет нам выходить за рамки стандартных решений и эффективно закрывать самые сложные, нетиповые запросы вашего бизнеса.</p>
+<a class="about-blog-link sap-card-base" href="blog/" aria-label="Перейти к полезным материалам и статьям">
+  <span class="about-blog-link__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+  <span class="about-blog-link__text"><span class="about-blog-link__eyebrow">База знаний</span><strong>Полезные материалы</strong><span>Практические статьи о комплектующих, обслуживании и снабжении</span></span>
+  <span class="about-blog-link__cta">Читать <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+</a>
 </div>
 <div class="about-media">
 <div class="about-image-card sap-card-base reveal">
-<img alt="Промышленное предприятие и комбайн в пшеничном поле — САП работает и для индустрии, и для аграрного сектора" decoding="async" height="640" loading="lazy" src="images/o-kompanii.webp" width="960"/>
+<picture><source media="(min-width: 1025px)" srcset="images/snabzhenie-pc.webp" type="image/webp"/><img alt="Комплексное снабжение агробизнеса и индустриального сектора — СпецАгроПартнер" decoding="async" height="656" loading="lazy" src="images/snabzhenie-mob.webp" width="1536"/></picture>
 </div>
 </div>
 </div>
@@ -2196,7 +2286,7 @@
 <div class="contacts-grid">
 <div class="contacts-info reveal">
 <h2>Контакты компании</h2>
-<div class="info-item"><div class="info-label">Email для спецификаций и заявок</div><a href="mailto:ooo-sap@list.ru">ooo-sap@list.ru</a><br/><a href="mailto:sap_parts@mail.ru" style="display:inline-block; margin-top:5px;">sap_parts@mail.ru</a></div>
+<div class="info-item"><div class="info-label">Email для спецификаций и заявок</div><a href="mailto:sales@specagropartner.ru">sales@specagropartner.ru</a></div>
 <div class="info-item"><div class="info-label">Отдел продаж и снабжения</div><div class="contacts-phones"><a href="tel:+79209680128">+7-920-968-01-28</a><a href="tel:+79106336705">+7-910-633-67-05</a><a href="tel:+79209552711">+7-920-955-27-11</a></div></div>
 <div class="info-item"><div class="info-label">Мессенджеры</div>
 <div class="contacts-messengers">
@@ -2215,7 +2305,7 @@
 </svg>
 <span>Telegram</span>
 </a>
-<a class="contact-messenger-link" href="https://max.ru/+79209680128" rel="noopener" target="_blank" title="MAX">
+<a class="contact-messenger-link" href="https://max.ru/u/f9LHodD0cOIFg0Z35pAziaBil0a1scTG7ALcWfxM8-Tg6RpfFzn9GLHy6mg" rel="noopener" target="_blank" title="MAX">
 <svg height="24" viewbox="0 0 1000 1000" width="24" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <lineargradient id="max-b-contacts">
@@ -2342,15 +2432,14 @@
 <div class="sap-form-wrap reveal" id="sapFormWrap">
 <h3>Быстрая заявка на комплектующие</h3>
 <form action="https://api.web3forms.com/submit" id="sapOrderForm" method="POST">
-<!-- Публичный ключ Web3Forms (виден в коде страницы по замыслу сервиса; ограничьте его доменом в кабинете Web3Forms) -->
-<input name="access_key" type="hidden" value="5a6aa010-7579-48d2-868b-90cb9150bf06"/>
+<input name="access_key" type="hidden" value="68def66e-e11c-4039-8b6b-1634d0aed4b9"/>
 <input name="subject" type="hidden" value="Новая заявка с сайта САП"/>
 <input name="from_name" type="hidden" value="Сайт САП"/>
 <!-- Ловушка для ботов (Web3Forms отбрасывает заявки, где это поле отмечено) -->
 <input aria-hidden="true" autocomplete="off" class="hp-field" name="botcheck" tabindex="-1" type="checkbox"/>
 <div class="form-row">
-<div class="form-group"><label for="sapPhone">Телефон</label><input autocomplete="tel" id="sapPhone" name="phone" placeholder="+7 (___) ___-__-__" type="tel"/></div>
-<div class="form-group"><label for="sapEmail">Email</label><input autocomplete="email" id="sapEmail" name="email" placeholder="example@mail.ru" type="email"/></div>
+<div class="form-group"><label for="sapPhone">Телефон</label><input autocomplete="tel" id="sapPhone" name="phone" class="ym-disable-keys" placeholder="+7 (___) ___-__-__" type="tel"/></div>
+<div class="form-group"><label for="sapEmail">Email</label><input autocomplete="email" id="sapEmail" name="email" class="ym-disable-keys" placeholder="example@mail.ru" type="email"/></div>
 </div>
 <div class="form-group" style="margin-bottom: 15px;">
 <label for="sapCategory">Категория запроса</label>
@@ -2366,16 +2455,16 @@
 </div>
 <div class="form-group" style="margin-bottom: 15px;">
 <label for="sapMessage">Ваш запрос (перечень деталей / масел / подшипников) *</label>
-<textarea id="sapMessage" name="message" placeholder="Введите наименования, артикулы или необходимый объём поставки..." required=""></textarea>
+<textarea id="sapMessage" name="message" class="ym-disable-keys" placeholder="Введите наименования, артикулы или необходимый объём поставки..." required=""></textarea>
 </div>
 <div class="form-consent">
 <input id="sapConsent" name="consent" required="" type="checkbox"/>
-<label for="sapConsent">Я даю согласие на обработку моих персональных данных в соответствии с <a href="policy.html" rel="noopener" target="_blank">Политикой конфиденциальности</a></label>
+<label for="sapConsent">Я даю согласие на обработку персональных данных на условиях <a href="consent.html" rel="noopener" target="_blank">Согласия</a> и ознакомлен(а) с <a href="policy.html" rel="noopener" target="_blank">Политикой обработки персональных данных</a>.</label>
 </div>
 <p aria-live="polite" class="form-hint" id="sapFormHint" role="status">Заполните запрос, укажите телефон или email и примите согласие.</p>
-<a class="form-fallback-btn" hidden="" href="mailto:ooo-sap@list.ru" id="sapMailFallback">Отправить запрос письмом</a>
+<a class="form-fallback-btn" hidden="" href="mailto:sales@specagropartner.ru" id="sapMailFallback">Отправить запрос письмом</a>
 <button class="form-submit-btn" disabled="" id="sapSubmitBtn" type="submit">Отправить запрос</button>
-<p class="form-tip">Резервный канал: <a href="mailto:ooo-sap@list.ru">ooo-sap@list.ru</a> или <a href="tel:+79209680128">+7-920-968-01-28</a>.</p>
+<p class="form-tip">Резервный канал: <a href="mailto:sales@specagropartner.ru">sales@specagropartner.ru</a> или <a href="tel:+79209680128">+7-920-968-01-28</a>.</p>
 </form>
 <div aria-live="polite" class="form-success" id="sapFormSuccess" role="status" style="display:none">
 <svg aria-hidden="true" fill="none" focusable="false" stroke="#4ade80" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 12l3 3 5-6"></path></svg>
@@ -2394,10 +2483,11 @@
 <p>© 2026 ООО «СпецАгроПартнер» (САП). Все права защищены.</p>
 <p class="footer-requisites">ИНН 6200010060 · КПП 620001001 · ОГРН 1246200008911</p>
 <p class="footer-address">Юридический адрес: 390011, Рязанская область, г. Рязань, 198 км (Окружная дорога), д. 6</p>
-<p><a class="footer-policy-link" href="policy.html">Политика конфиденциальности</a></p>
+<p><a class="footer-policy-link" href="blog/">Полезные материалы</a> · <a class="footer-policy-link" href="policy.html">Политика обработки персональных данных</a></p>
+<p class="developer-credit"><a href="https://t.me/resident565" target="_blank" rel="noopener noreferrer" aria-label="Разработчик сайта — created by nikolai medvedev">created by nikolai medvedev</a></p></div>
 </div>
 </div>
-</div>
+
 </footer>
 <button aria-controls="sapMessengersList" aria-expanded="false" aria-label="Открыть мессенджеры" class="messengers-trigger" id="sapMessengersBtn" type="button">
 <svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"></path></svg>
@@ -2416,7 +2506,7 @@
 <path d="M54.3,118.8c35-15.2,58.3-25.3,70-30.2 c33.3-13.9,40.3-16.3,44.8-16.4c1,0,3.2,0.2,4.7,1.4c1.2,1,1.5,2.3,1.7,3.3s0.4,3.1,0.2,4.7c-1.8,19-9.6,65.1-13.6,86.3 c-1.7,9-5,12-8.2,12.3c-7,0.6-12.3-4.6-19-9c-10.6-6.9-16.5-11.2-26.8-18c-11.9-7.8-4.2-12.1,2.6-19.1c1.8-1.8,32.5-29.8,33.1-32.3 c0.1-0.3,0.1-1.5-0.6-2.1c-0.7-0.6-1.7-0.4-2.5-0.2c-1.1,0.2-17.9,11.4-50.6,33.5c-4.8,3.3-9.1,4.9-13,4.8 c-4.3-0.1-12.5-2.4-18.7-4.4c-7.5-2.4-13.5-3.7-13-7.9C45.7,123.3,48.7,121.1,54.3,118.8z" fill="#FFFFFF"></path>
 </svg>
 </a>
-<a class="messenger-btn" href="https://max.ru/+79209680128" rel="noopener" target="_blank" title="MAX отдела продаж (+7-920-968-01-28)">
+<a class="messenger-btn" href="https://max.ru/u/f9LHodD0cOIFg0Z35pAziaBil0a1scTG7ALcWfxM8-Tg6RpfFzn9GLHy6mg" rel="noopener" target="_blank" title="MAX отдела продаж (+7-920-968-01-28)">
 <svg height="32" viewbox="0 0 1000 1000" width="32" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <lineargradient id="max-b-float">
@@ -2895,7 +2985,7 @@ if(!inner){f.style.webkitBackfaceVisibility='hidden';f.style.backfaceVisibility=
                 cut = true;
             }
             const body = head + msg + (cut ? '\n\n[текст сокращён — полный перечень пришлю отдельным сообщением]' : '');
-            mailFallback.href = 'mailto:ooo-sap@list.ru?subject=' + encodeURIComponent('Заявка с сайта САП' + (cat ? ' — ' + cat : '')) +
+            mailFallback.href = 'mailto:sales@specagropartner.ru?subject=' + encodeURIComponent('Заявка с сайта САП' + (cat ? ' — ' + cat : '')) +
                                 '&body=' + encodeURIComponent(body);
         });
 
@@ -2927,6 +3017,9 @@ if(!inner){f.style.webkitBackfaceVisibility='hidden';f.style.backfaceVisibility=
                 if (res.ok && data.success) {
                     form.style.display = 'none';
                     formSuccess.style.display = 'flex';
+                    if (typeof ym === 'function') {
+                        ym(114277704, 'reachGoal', 'form_submit');
+                    }
                 } else {
                     throw new Error('Ошибка отправки');
                 }
@@ -2959,6 +3052,24 @@ if(!inner){f.style.webkitBackfaceVisibility='hidden';f.style.backfaceVisibility=
             validateSapForm();
             phoneInput.focus();
         });
+        /* ===== Цели Яндекс.Метрики: клики по контактам и мессенджерам ===== */
+        document.addEventListener('click', function (e) {
+            const link = e.target.closest('a');
+            if (!link || typeof ym !== 'function') return;
+            const href = link.getAttribute('href') || '';
+            if (href.startsWith('tel:')) {
+                ym(114277704, 'reachGoal', 'click_phone');
+            } else if (href.startsWith('mailto:')) {
+                ym(114277704, 'reachGoal', 'click_email');
+            } else if (href.includes('t.me')) {
+                ym(114277704, 'reachGoal', 'click_telegram');
+            } else if (href.includes('wa.me') || href.includes('whatsapp.com')) {
+                ym(114277704, 'reachGoal', 'click_whatsapp');
+            } else if (href.includes('max.ru')) {
+                ym(114277704, 'reachGoal', 'click_max');
+            }
+        });
+
 
 
         /* ===== Плавный запуск и остановка hover-эффектов (туман + иконки) =====
@@ -3660,7 +3771,7 @@ if(!inner){f.style.webkitBackfaceVisibility='hidden';f.style.backfaceVisibility=
            выбирают категорию в форме, подстраивают подсказку в поле «Ваш запрос», добавляют название категории
            в тему письма и плавно ведут к форме; для бренда в запрос добавляется строка «Бренд: …».
            Без JS это обычные якорные ссылки на форму.
-           Ссылка вида  /?request=bearings#contacts  тоже выбирает категорию (ключи: parts, oils, bearings, belts, seals). */
+           Ссылка вида  /?request=bearings#contacts  тоже выбирает категорию (ключи: parts, oils, bearings, belts, seals, filters). */
         (function () {
             const form = document.getElementById('sapOrderForm');
             const wrap = document.getElementById('sapFormWrap');

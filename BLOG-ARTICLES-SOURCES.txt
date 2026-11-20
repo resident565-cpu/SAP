@@ -1,0 +1,103 @@
+ТЕХНИЧЕСКИЙ АУДИТ И НОВЫЕ СТАТЬИ — 18.11.2026
+
+Созданы/обновлены три полноценные статьи:
+- oem-analog-zapchasti.html
+- zapchasti-spectehnika-podbor.html
+- kompleksnoe-snabzhenie.html
+
+Материалы используют осторожные формулировки: OEM, genuine/original и aftermarket не считаются гарантией качества или идентичности без подтверждения; подбор по модели дополняется серийным номером/PIN и проверкой каталожной применяемости; комплексное снабжение не обещает автоматическое сокращение сроков или отсутствие простоев.
+
+В каждой статье есть SEO-метаданные, canonical, JSON-LD BlogPosting, внутренняя перелинковка и блок источников. Страницы открыты для индексации; ссылки добавлены в sitemap.
+
+Источники: JLG (parts categories), ACEA (terminology), Case IH (part number search), John Deere (PIN-specific catalogs), IEC EN 62550:2017 (spare-parts provisioning), Aviva (spares strategy).
+
+Иллюстрации не добавлялись и существующие изображения не изменялись.
+
+Дополнительно: восстановлены брендовый SVG-спрайт и спрайт мессенджеров из исходного архивного сайта, так как текущий рабочий архив ссылался на них, но не содержал файлов.
+
+
+БРЕНДОВЫЕ СТАТЬИ — ПЕРВАЯ ВОЛНА (18.11.2026)
+
+Подшипники SKF для сельхозтехники: особенности и подбор — blog/articles/skf-podshipniki-agrotehnika.html
+- SKF Bearing Maintenance Handbook: https://www.skf.com/binaries/pub12/Images/0901d1968013be94-SKF-bearing-maintenance-handbook---10001_1-EN%281%29_tcm_12-463040.pdf
+- SKF Bearings — agricultural bearings catalog: https://cdn.skfmediahub.skf.com/api/public/0941c5affd030090/pdf_preview_medium/0941c5affd030090_pdf_preview_medium.pdf
+
+Ремни Gates для сельхозтехники: серии, особенности и подбор — blog/articles/gates-remni-agrotehnika.html
+- Gates — Agriculture: https://www.gates.com/gb/en/markets/industrial-and-off-highway/agriculture.html
+- Gates — Agricultural Belt Programme Catalogue: https://www.gates.com/gb/en/knowledge-centre/media-library/product-catalogues.html
+
+Фильтры Donaldson для сельхозтехники: системы фильтрации и подбор — blog/articles/donaldson-filtry-agrotehnika.html
+- Donaldson — Agriculture: https://www.donaldson.com/en/industries/agriculture/
+- Donaldson — Product and filtration information: https://www.donaldson.com/
+
+NOK и Corteco: бренды уплотнений, технологии и подбор манжет — blog/articles/nok-corteco-simrit-seals.html
+- Corteco — Company and brands: https://www.corteco.com/company/
+- Corteco — Asian Range and partnership with NOK: https://www.corteco.com/markets/asian-range/
+- Corteco — Sealing products: https://www.corteco.com/products/sealing/
+- Freudenberg Sealing Technologies — Our Brands: https://www.fst.com/company/organization/brands/
+- NOK Corporation: https://nok.nokgrp.com/en/
+
+Запчасти JCB: как правильно подобрать комплектующие по модели и серийному номеру — blog/articles/jcb-zapchasti-podbor.html
+- JCB Parts Diagram — serial number search: https://parts.jcb.com/uk/parts-diagram-overview
+- JCB Machine Parts: https://parts.jcb.com/uk/machine-parts
+- JCB Maintenance — obtaining spare parts: https://www.jcb.com/globalassets/digizuite/75571-aj48d-om/
+
+Запчасти John Deere: подбор по модели, PIN и каталожному номеру — blog/articles/john-deere-zapchasti-podbor.html
+- John Deere Parts Support Centre: https://www.deere.co.uk/en-gb/parts-owner-support/parts/
+- John Deere parts guide — model/serial search: https://partscatalog.deere.com/
+- John Deere parts ordering reference: https://techpubs.deere.com/api/preview/get/PC155
+
+
+ВТОРАЯ ВОЛНА БРЕНДОВЫХ МАТЕРИАЛОВ — официальные источники
+
+FAG и INA: подшипники Schaeffler для сельхозтехники и промышленного оборудования
+- Schaeffler — официальный сайт: https://www.schaeffler.com/
+- Schaeffler Industrial: https://www.schaeffler.com/en/products-and-solutions/industrial/
+
+Подшипники NSK для сельхозтехники: серии, обозначения и подбор
+- NSK — официальный сайт: https://www.nsk.com/
+- NSK — продукция: https://www.nsk.com/products/
+
+Подшипники SNR для сельхозтехники: Agrihub, уплотнения и подбор
+- NTN Europe — решения для сельского хозяйства: https://www.ntn-snr.com/agriculture
+- NTN Europe — документация и каталоги: https://www.ntn-snr.com/documents/agr
+
+Подшипники NACHI для сельхозтехники: типы, маркировка и проверка аналога
+- NACHI-FUJIKOSHI — официальный сайт: https://www.nachi-fujikoshi.co.jp/eng/
+- NACHI America — продукция и техническая информация: https://www.nachi.com/
+
+Ремни Optibelt для сельхозтехники: серии, профили и подбор
+- Optibelt — официальный сайт: https://www.optibelt.com/
+- Optibelt — продукция: https://www.optibelt.com/en/products/
+
+Ремни ContiTech для сельхозтехники: типы приводов и подбор
+- Continental Industry — официальный сайт: https://www.continental-industry.com/
+- Каталоги ContiTech Drive Belts: https://www.tyma.eu/downloads/product-catalogs/
+
+Фильтры MANN-FILTER для сельхозтехники: ассортимент и подбор
+- MANN-FILTER — Agriculture filters: https://www.mann-filter.com/en/applications/agriculture-filters.html
+- MANN-FILTER — официальный каталог: https://www.mann-filter.com/
+
+Фильтры MAHLE для сельхозтехники: типы, каталоги и подбор
+- MAHLE — официальный сайт: https://www.mahle.com/
+- MAHLE Aftermarket — каталог и продукция: https://www.mahle-aftermarket.com/
+
+Фильтры Hengst для сельхозтехники: фильтрация и точный подбор
+- Hengst — официальные каталоги: https://www.hengst.com/en/products/catalogs
+- Hengst — официальный сайт: https://www.hengst.com/
+
+Уплотнения Trelleborg для сельхозтехники: типы, материалы и подбор
+- Trelleborg — Oil Seals: https://www.trelleborg.com/en/seals/products-and-solutions/oil-seals
+- Trelleborg — Agriculture Equipment: https://www.trelleborg.com/en/seals/your-industry/agriculture
+
+Запчасти Pöttinger: подбор по номеру машины и каталогу PÖTPRO
+- Pöttinger — официальный сайт: https://www.poettinger.at/
+- Pöttinger — сервис и поддержка: https://www.poettinger.at/en/service/
+
+Запчасти New Holland: поиск по модели, серийному номеру и каталогу
+- MyCNH Store — New Holland Agriculture Parts Catalog: https://www.mycnhstore.com/eu/en/newhollandag/eu/cn/EU
+- New Holland Agriculture — официальный сайт: https://agriculture.newholland.com/
+
+Запчасти CLAAS: подбор по Parts Doc, модели и серийному номеру
+- CLAAS ORIGINAL — запчасти и расходные материалы: https://www.claas.com/en-us/services/spare-parts-accessories/claas-original-parts
+- CLAAS — официальный сайт: https://www.claas.com/

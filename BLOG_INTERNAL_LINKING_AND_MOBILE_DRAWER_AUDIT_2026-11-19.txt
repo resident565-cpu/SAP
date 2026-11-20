@@ -1,0 +1,86 @@
+АУДИТ ВНУТРЕННЕЙ ПЕРЕЛИНКОВКИ И МОБИЛЬНОЙ ШТОРКИ — SpecAgroPartner
+Дата: 19.11.2026
+
+ОБЪЁМ И МЕТОД
+Проверены все 43 HTML-статей в blog/articles. Проверялись относительные ссылки на другие статьи, существование целевых файлов, число исходящих и входящих связей, наличие изолированных материалов.
+
+ИТОГИ ПЕРЕЛИНКОВКИ
+- Статей проверено: 43
+- Всего ссылок между статьями: 366
+- Уникальных целей ссылок по статьям (сумма без повторов внутри одной статьи): 207
+- Статей без исходящих ссылок на другие статьи: 0
+- Статей без входящих ссылок от других статей: 0
+- Неразрешённых локальных ссылок на статьи: 0
+- Минимум исходящих уникальных ссылок с одной статьи: 3
+- Минимум входящих ссылок на одну статью: 2
+
+ВЫВОД
+Все 43 статьи включены во внутреннюю сеть перелинковки: каждая ссылается минимум на 3 другие статьи и получает минимум 2 входящие ссылки. Изолированных статей и битых относительных ссылок на статьи в локальном архиве не найдено. Тематические кластеры уже сформированы (подшипники, фильтры, ремни, уплотнения, масла/смазки, подбор запчастей и снабжение). Поэтому массово добавлять ссылки не требуется: это создало бы избыточную перелинковку. Лучше сохранять контекстные ссылки рядом с соответствующими объяснениями и 3–5 наиболее полезных материалов в блоке «Читайте также».
+
+ПЕРСОНАЛЬНОЕ ВНИМАНИЕ
+1. Страницы брендов CLAAS, JCB, John Deere, New Holland и Pöttinger имеют по 2 входящие ссылки: от общего руководства по подбору запчастей и статьи о подготовке к сезону. Это не orphan pages; такой уровень приемлем, но можно добавить по одной контекстной ссылке из тематического материала только если она естественно упоминается в тексте.
+2. Повторяющиеся назначения ссылок на одной странице встречаются в нескольких местах (контекстный блок «Читайте по теме» и карточки «Читайте также»). Само по себе это не ошибка и не битая перелинковка; поисковую ценность лучше повышать релевантностью анкора и контекста, а не количеством повторов. Не удалял эти ссылки автоматически, чтобы не ухудшить удобство навигации.
+3. Статьи о сальниках связаны между собой и с брендовой статьёй: размеры/маркировка, подбор, причины течи, Trelleborg, Corteco/Freudenberg/NOK/Simrit. Смысловые роли остаются разными: справочник размеров, алгоритм выбора, диагностика, брендовые решения.
+
+ПОДРОБНО ПО КАЖДОЙ СТАТЬЕ
+Файл | Исходящие уникальные ссылки | Входящие ссылки | Цели
+claas-zapchasti-podbor.html | 3 | 2 | kak-zakazat-zapchasti-bez-oshibki.html, podgotovka-k-sezonu.html, zapchasti-spectehnika-podbor.html
+contitech-remni-agrotehnika.html | 4 | 4 | gates-remni-agrotehnika.html, iznos-remnya-prichiny.html, natyazhenie-remnya-proverka.html, remen-privodnoy-vybor.html
+donaldson-filtry-agrotehnika.html | 6 | 6 | filtry-tehnika-zachem-nuzhny.html, hengst-filtry-agrotehnika.html, interval-zameny-filtr.html, kak-vybrat-filtr.html, mahle-filtry-agrotehnika.html, mann-filter-filtry-agrotehnika.html
+fag-ina-podshipniki-schaeffler.html | 5 | 4 | kak-podobrat-podshipnik.html, nachi-podshipniki.html, podshipnik-analog.html, priznaki-iznosa-podshipnika.html, skf-podshipniki-agrotehnika.html
+filtry-tehnika-zachem-nuzhny.html | 6 | 7 | donaldson-filtry-agrotehnika.html, hengst-filtry-agrotehnika.html, interval-zameny-filtr.html, kak-vybrat-filtr.html, mahle-filtry-agrotehnika.html, mann-filter-filtry-agrotehnika.html
+gates-remni-agrotehnika.html | 4 | 4 | iznos-remnya-prichiny.html, natyazhenie-remnya-proverka.html, optibelt-remni-agrotehnika.html, remen-privodnoy-vybor.html
+grease-temperature-extremes.html | 4 | 3 | grease-types-thickeners.html, motor-oils-selection.html, priznaki-iznosa-podshipnika.html, transmission-hydraulic-oils.html
+grease-types-thickeners.html | 4 | 3 | grease-temperature-extremes.html, motor-oils-selection.html, priznaki-iznosa-podshipnika.html, transmission-hydraulic-oils.html
+hengst-filtry-agrotehnika.html | 6 | 6 | donaldson-filtry-agrotehnika.html, filtry-tehnika-zachem-nuzhny.html, interval-zameny-filtr.html, kak-vybrat-filtr.html, mahle-filtry-agrotehnika.html, mann-filter-filtry-agrotehnika.html
+interval-zameny-filtr.html | 7 | 7 | donaldson-filtry-agrotehnika.html, filtry-tehnika-zachem-nuzhny.html, hengst-filtry-agrotehnika.html, kak-vybrat-filtr.html, mahle-filtry-agrotehnika.html, mann-filter-filtry-agrotehnika.html, podgotovka-k-sezonu.html
+iznos-remnya-prichiny.html | 5 | 5 | contitech-remni-agrotehnika.html, gates-remni-agrotehnika.html, natyazhenie-remnya-proverka.html, optibelt-remni-agrotehnika.html, remen-privodnoy-vybor.html
+jcb-zapchasti-podbor.html | 3 | 2 | kak-zakazat-zapchasti-bez-oshibki.html, oem-analog-zapchasti.html, zapchasti-spectehnika-podbor.html
+john-deere-zapchasti-podbor.html | 4 | 2 | kak-zakazat-zapchasti-bez-oshibki.html, oem-analog-zapchasti.html, podgotovka-k-sezonu.html, zapchasti-spectehnika-podbor.html
+kak-podobrat-podshipnik.html | 8 | 8 | fag-ina-podshipniki-schaeffler.html, nachi-podshipniki.html, nsk-podshipniki-agrotehnika.html, podshipnik-analog.html, podshipniki-vidy-i-primenenie.html, priznaki-iznosa-podshipnika.html, skf-podshipniki-agrotehnika.html, snr-podshipniki-agri.html
+kak-vybrat-filtr.html | 6 | 6 | donaldson-filtry-agrotehnika.html, filtry-tehnika-zachem-nuzhny.html, hengst-filtry-agrotehnika.html, interval-zameny-filtr.html, mahle-filtry-agrotehnika.html, mann-filter-filtry-agrotehnika.html
+kak-vybrat-salnik.html | 4 | 4 | nok-corteco-simrit-seals.html, prichiny-techi-salnika.html, salniki-razmery-markirovka.html, trelleborg-uplotneniya-agrotehnika.html
+kak-zakazat-zapchasti-bez-oshibki.html | 4 | 11 | kompleksnoe-snabzhenie.html, oem-analog-zapchasti.html, podgotovka-k-sezonu.html, zapchasti-spectehnika-podbor.html
+kompleksnoe-snabzhenie.html | 5 | 5 | kak-zakazat-zapchasti-bez-oshibki.html, oem-analog-zapchasti.html, prosto-techniki-kak-snizit.html, sklad-zapchasti-zapas.html, zapchasti-spectehnika-podbor.html
+mahle-filtry-agrotehnika.html | 6 | 6 | donaldson-filtry-agrotehnika.html, filtry-tehnika-zachem-nuzhny.html, hengst-filtry-agrotehnika.html, interval-zameny-filtr.html, kak-vybrat-filtr.html, mann-filter-filtry-agrotehnika.html
+mann-filter-filtry-agrotehnika.html | 6 | 6 | donaldson-filtry-agrotehnika.html, filtry-tehnika-zachem-nuzhny.html, hengst-filtry-agrotehnika.html, interval-zameny-filtr.html, kak-vybrat-filtr.html, mahle-filtry-agrotehnika.html
+motor-oils-selection.html | 5 | 3 | filtry-tehnika-zachem-nuzhny.html, grease-temperature-extremes.html, grease-types-thickeners.html, interval-zameny-filtr.html, transmission-hydraulic-oils.html
+nachi-podshipniki.html | 5 | 4 | fag-ina-podshipniki-schaeffler.html, kak-podobrat-podshipnik.html, nsk-podshipniki-agrotehnika.html, podshipnik-analog.html, priznaki-iznosa-podshipnika.html
+natyazhenie-remnya-proverka.html | 3 | 5 | contitech-remni-agrotehnika.html, iznos-remnya-prichiny.html, remen-privodnoy-vybor.html
+new-holland-zapchasti-podbor.html | 4 | 2 | kak-zakazat-zapchasti-bez-oshibki.html, oem-analog-zapchasti.html, podgotovka-k-sezonu.html, zapchasti-spectehnika-podbor.html
+nok-corteco-simrit-seals.html | 4 | 4 | kak-vybrat-salnik.html, prichiny-techi-salnika.html, salniki-razmery-markirovka.html, trelleborg-uplotneniya-agrotehnika.html
+nsk-podshipniki-agrotehnika.html | 6 | 4 | kak-podobrat-podshipnik.html, nachi-podshipniki.html, podshipnik-analog.html, priznaki-iznosa-podshipnika.html, skf-podshipniki-agrotehnika.html, snr-podshipniki-agri.html
+oem-analog-zapchasti.html | 3 | 6 | kak-zakazat-zapchasti-bez-oshibki.html, kompleksnoe-snabzhenie.html, zapchasti-spectehnika-podbor.html
+optibelt-remni-agrotehnika.html | 5 | 3 | contitech-remni-agrotehnika.html, gates-remni-agrotehnika.html, iznos-remnya-prichiny.html, natyazhenie-remnya-proverka.html, remen-privodnoy-vybor.html
+podgotovka-k-sezonu.html | 8 | 8 | claas-zapchasti-podbor.html, jcb-zapchasti-podbor.html, john-deere-zapchasti-podbor.html, kak-zakazat-zapchasti-bez-oshibki.html, new-holland-zapchasti-podbor.html, pottinger-zapchasti-podbor.html, prosto-techniki-kak-snizit.html, sklad-zapchasti-zapas.html
+podshipnik-analog.html | 5 | 8 | fag-ina-podshipniki-schaeffler.html, kak-podobrat-podshipnik.html, nsk-podshipniki-agrotehnika.html, podshipniki-vidy-i-primenenie.html, snr-podshipniki-agri.html
+podshipniki-vidy-i-primenenie.html | 5 | 3 | kak-podobrat-podshipnik.html, nachi-podshipniki.html, podshipnik-analog.html, priznaki-iznosa-podshipnika.html, skf-podshipniki-agrotehnika.html
+pottinger-zapchasti-podbor.html | 3 | 2 | kak-zakazat-zapchasti-bez-oshibki.html, podgotovka-k-sezonu.html, zapchasti-spectehnika-podbor.html
+prichiny-techi-salnika.html | 4 | 4 | kak-vybrat-salnik.html, nok-corteco-simrit-seals.html, salniki-razmery-markirovka.html, trelleborg-uplotneniya-agrotehnika.html
+priznaki-iznosa-podshipnika.html | 5 | 9 | kak-podobrat-podshipnik.html, podshipnik-analog.html, podshipniki-vidy-i-primenenie.html, skf-podshipniki-agrotehnika.html, snr-podshipniki-agri.html
+prosto-techniki-kak-snizit.html | 4 | 3 | kak-zakazat-zapchasti-bez-oshibki.html, kompleksnoe-snabzhenie.html, podgotovka-k-sezonu.html, sklad-zapchasti-zapas.html
+remen-privodnoy-vybor.html | 5 | 5 | contitech-remni-agrotehnika.html, gates-remni-agrotehnika.html, iznos-remnya-prichiny.html, natyazhenie-remnya-proverka.html, optibelt-remni-agrotehnika.html
+salniki-razmery-markirovka.html | 4 | 4 | kak-vybrat-salnik.html, nok-corteco-simrit-seals.html, prichiny-techi-salnika.html, trelleborg-uplotneniya-agrotehnika.html
+skf-podshipniki-agrotehnika.html | 5 | 6 | fag-ina-podshipniki-schaeffler.html, kak-podobrat-podshipnik.html, podshipnik-analog.html, priznaki-iznosa-podshipnika.html, snr-podshipniki-agri.html
+sklad-zapchasti-zapas.html | 4 | 3 | kak-zakazat-zapchasti-bez-oshibki.html, kompleksnoe-snabzhenie.html, podgotovka-k-sezonu.html, prosto-techniki-kak-snizit.html
+snr-podshipniki-agri.html | 5 | 5 | kak-podobrat-podshipnik.html, nsk-podshipniki-agrotehnika.html, podshipnik-analog.html, priznaki-iznosa-podshipnika.html, skf-podshipniki-agrotehnika.html
+transmission-hydraulic-oils.html | 3 | 3 | grease-temperature-extremes.html, grease-types-thickeners.html, motor-oils-selection.html
+trelleborg-uplotneniya-agrotehnika.html | 4 | 4 | kak-vybrat-salnik.html, nok-corteco-simrit-seals.html, prichiny-techi-salnika.html, salniki-razmery-markirovka.html
+zapchasti-spectehnika-podbor.html | 8 | 8 | claas-zapchasti-podbor.html, jcb-zapchasti-podbor.html, john-deere-zapchasti-podbor.html, kak-zakazat-zapchasti-bez-oshibki.html, kompleksnoe-snabzhenie.html, new-holland-zapchasti-podbor.html, oem-analog-zapchasti.html, pottinger-zapchasti-podbor.html
+
+МОБИЛЬНАЯ ШТОРКА — ЧТО ИЗМЕНЕНО
+- В assets/sap-glass.js и в скрипте главной index.html заменён расчёт ширины панели.
+- Левая кромка шторки теперь рассчитывается как середина фактического промежутка между правым краем эмблемы и началом надписи «САП».
+- Убрано ограничение минимальной ширины 224 px, которое могло сдвигать левую кромку поверх эмблемы на узком экране.
+- При повторном расчёте учитывается фактический CSS translateX надписи, в том числе во время анимации открытия.
+- После установки отступ между панелью и надписью сохраняется 18 px.
+- Изменение применено и к главной странице, и к общему JS внутренних страниц/блога.
+
+ПРОВЕРКИ
+- Node.js syntax check: assets/sap-glass.js — OK.
+- Скрипты главной страницы: 4 обычных inline JS-блока прошли синтаксическую проверку; JSON-LD корректно пропущен через JS-проверку, так как это JSON, а не JavaScript.
+- Относительные ссылки на статьи: 0 неразрешённых.
+- Все целевые файлы существуют в архиве.
+
+ОГРАНИЧЕНИЯ
+Это аудит предоставленной локальной сборки архива, а не подтверждённая проверка текущей выдачи поисковиков. Прямой запрос к http://sappartsma.temp.swtest.ru/index.html из среды проверки вернул 502 Bad Gateway, поэтому не подтверждено, что на тестовом хостинге лежит именно эта сборка. Исправления в этом архиве не меняют файлы на сервере автоматически.

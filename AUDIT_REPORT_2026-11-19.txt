@@ -1,0 +1,79 @@
+SPECAGROPARTNER — РЕЗУЛЬТАТ ПОВТОРНОЙ ТЕХНИЧЕСКОЙ ПРОВЕРКИ
+Дата: 19.11.2026
+Исходный архив: specagropartner-blog-drawer-only-fix-2026-11-19.zip
+
+ПРОВЕРЕНО
+- HTML-страниц: 48 (включая 43 статей блога).
+- Статей в sitemap.xml: 45.
+- JSON-LD блоков успешно разобрано: 46.
+- Inline JS-блоков проверено Node.js: 51.
+- Подключённых локальных JS-файлов проверено Node.js: 44.
+- Ошибок синтаксиса JS: 0.
+- Ошибок разбора CSS: 0.
+- Дублирующихся id: 0.
+- Ошибок HTML-парсера lxml: 0.
+
+РЕЗУЛЬТАТЫ
+- Синтаксических ошибок JS/CSS в проверенном наборе не обнаружено.
+- JSON-LD блоки разбираются корректно.
+- Дублирующихся HTML id не обнаружено.
+- В архиве сохранены текущие HTML/CSS/JS без массового рефакторинга.
+- Изменения мобильной шторки из исходного архива не переписывались.
+
+ВАЖНОЕ ОГРАНИЧЕНИЕ АРХИВА
+Архив является сборкой HTML/CSS/JS для изменения мобильной шторки, а не полным зеркалом сайта. В нём отсутствует каталог images/ и часть других графических файлов. Проверка обнаружила 45 уникальных отсутствующих локальных путей (171 ссылок на них). Это в основном изображения главной страницы, превью/иллюстрации статей и favicon/apple-touch icon.
+
+Примеры отсутствующих ресурсов:
+- ../../images/favicon-32x32.png (43 ссылок)
+- ../../images/apple-touch-icon.png (43 ссылок)
+- ../../images/article-belts-selection.webp (7 ссылок)
+- ../../images/article-bearing-selection.webp (6 ссылок)
+- ../../images/article-filter-selection.webp (6 ссылок)
+- ../images/article-bearing-selection.webp (5 ссылок)
+- ../../images/article-filters-types.webp (5 ссылок)
+- ../images/article-filter-selection.webp (4 ссылок)
+- images/favicon-32x32.png (3 ссылок)
+- images/favicon-16x16.png (3 ссылок)
+- images/apple-touch-icon.png (3 ссылок)
+- ../images/tehnika-posevnaya.webp (3 ссылок)
+- ../images/article-belts-selection.webp (3 ссылок)
+- ../../images/tehnika-posevnaya.webp (3 ссылок)
+- ../../images/article-bearing-wear.webp (3 ссылок)
+- ../../images/salniki.webp (2 ссылок)
+- images/zapchasti-mob.webp (1 ссылок)
+- images/masla-katana.webp (1 ссылок)
+- images/podshipniki.webp (1 ссылок)
+- images/remni.webp (1 ссылок)
+- images/salniki.webp (1 ссылок)
+- images/filtry.webp (1 ссылок)
+- images/kombain-noch.webp (1 ссылок)
+- images/podshipnik-val.webp (1 ссылок)
+- images/remen-natyazhitel.webp (1 ссылок)
+- images/snabzhenie-mob.webp (1 ссылок)
+- images/spetsialist-traktor.webp (1 ссылок)
+- images/inzhener-podshipnik.webp (1 ссылок)
+- images/komanda-snabzhenie.webp (1 ссылок)
+- images/mekhanik-reduktor.webp (1 ссылок)
+- images/sferich-podshipnik.webp (1 ссылок)
+- images/tehnika-posevnaya.webp (1 ссылок)
+- ../images/favicon-32x32.png (1 ссылок)
+- ../images/apple-touch-icon.png (1 ссылок)
+- ../images/blog-hero.webp (1 ссылок)
+- ../images/article-filters-types.webp (1 ссылок)
+- ../images/article-bearing-analog.webp (1 ссылок)
+- ../images/salniki.webp (1 ссылок)
+- ../images/article-bearings-types.webp (1 ссылок)
+- ../images/article-bearing-wear.webp (1 ссылок)
+- ../../images/article-bearings-types.webp (1 ссылок)
+- ../../images/article-filter-when-to-change.webp (1 ссылок)
+- ../../images/zapchasti-pc.webp (1 ссылок)
+- ../../images/article-bearing-analog.webp (1 ссылок)
+- ../../images/zapchasti-mob.webp (1 ссылок)
+
+РЕКОМЕНДАЦИЯ ПО РАЗВЁРТЫВАНИЮ
+Не загружать этот архив поверх полного рабочего сайта с удалением существующих файлов и не считать его автономной полной копией сайта: в нём нет каталога изображений. Для обновления мобильной шторки переносить только соответствующие файлы из assets/ и скрипт главной страницы index.html, либо собрать полный архив вместе с исходным каталогом images/ и остальными ресурсами хостинга.
+
+ЧТО НЕ ДЕЛАЛОСЬ
+- Не удалялись комментарии и блоки кода, назначение которых не доказано.
+- Не менялись CSS-правила, HTML-разметка и логика JS: подтверждённых ошибок, требующих безопасной правки в рамках этого частичного архива, не выявлено.
+- Не выполнялся визуальный кроссбраузерный тест в реальном браузере; поэтому pixel-perfect и фактическая работа анимаций на устройствах не подтверждаются этим статическим аудитом.
